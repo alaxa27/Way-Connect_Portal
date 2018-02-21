@@ -1,0 +1,44 @@
+page-form {
+
+  text-align: center;
+
+  ion-navbar.toolbar {
+    // height: 1000px !important;
+  }
+
+  .toolbar-background {
+    background: color($colors, way-dark);
+  }
+
+  img.header {
+    height: 30px;
+  }
+
+  .range-pin {
+    color: color($colors, way-dark) !important;
+    font-weight: 900;
+  }
+
+  .range-bar-active {
+    background: linear-gradient(to right, color($colors, way-red) , color($colors, way-yellow)) !important;
+  }
+
+  .segment {
+    font-weight: 900;
+  }
+
+  .segment-button {
+    background-color: color($colors, way-gray) !important;
+    border-style: none !important;
+    border-radius: 5px;
+  }
+
+  .segment-activated {
+      background: linear-gradient(to bottom right, color($colors, way-red) , color($colors, way-yellow));
+  }
+
+  .scroll-content {
+    padding: 40px !important;
+  }
+
+}

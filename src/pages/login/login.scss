@@ -1,0 +1,23 @@
+page-login {
+  text-align: center;
+  .logo {
+    margin-top: 60px;
+    max-width: 200px;
+    height: 200px;
+  }
+
+  .connect-buttons {
+    position: relative;
+    top: 150px;
+
+    .facebook {
+      text-transform: none;
+    }
+
+    .no-facebook {
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+}

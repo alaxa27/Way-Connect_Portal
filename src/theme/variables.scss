@@ -38,7 +38,13 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  way-dark:   #1a1a1a,
+  way-red:    #EF4136,
+  way-yellow: #FFDD00,
+  way-gray:   #4d4d4d,
+  way-gray-dark:#333333,
+  white:      #ffffff,
 );
 
 
@@ -86,3 +92,14 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+$background-color: color($colors, way-dark);
+
+
+.way-background {
+  background: url(/assets/imgs/background.svg) no-repeat bottom left;
+  background-size: 500px;
+  background-position-x: calc(100vw - 285px);
+  background-position-y: calc(100vh - 260px);
+}

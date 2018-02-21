@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <img src="assets/imgs/header.png" class="header" />
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="way-background" padding>
+
+  <ion-segment [(ngModel)]="gender" color="white">
+    <ion-segment-button value="male">
+      Male
+    </ion-segment-button>
+    <ion-segment-button value="female">
+      Female
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-range min="0" max="60" pin="true" [(ngModel)]="age" color="way-yellow">
+  </ion-range>
+  <button ion-button round block color="way-gray-dark" class="submit" (click)="formLogin()">
+    Submit
+  </button>
+</ion-content>
