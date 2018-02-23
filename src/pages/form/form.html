@@ -8,7 +8,9 @@
 
 
 <ion-content class="way-background" padding>
-
+  <h2>
+    Gender:
+  </h2>
   <ion-segment [(ngModel)]="gender" color="white">
     <ion-segment-button value="male">
       Male
@@ -18,8 +20,33 @@
     </ion-segment-button>
   </ion-segment>
 
+  <h2>
+    Age:
+  </h2>
   <ion-range min="0" max="60" pin="true" [(ngModel)]="age" color="way-yellow">
   </ion-range>
+  <h2>
+    Relationship Status
+  </h2>
+  <div class="item">
+    <ion-select [(ngModel)]="relationship">
+      <ion-option value="single">Single</ion-option>
+      <ion-option value="married">Married</ion-option>
+      <ion-option value="engaged">Engaged</ion-option>
+      <ion-option value="divorced">Divorced</ion-option>
+      <ion-option value="foreveralone">Forever Alone</ion-option>
+    </ion-select>
+  </div>
+  <h2>
+    Profession
+  </h2>
+  <div class="item">
+    <ion-select [(ngModel)]="profession">
+      <ion-option value="lesdihar">Lesdiar</ion-option>
+      <ion-option value="rich">Rich</ion-option>
+      <ion-option value="poor">Poor</ion-option>
+    </ion-select>
+  </div>
   <button ion-button round block color="way-gray-dark" class="submit" (click)="formLogin()">
     Submit
   </button>

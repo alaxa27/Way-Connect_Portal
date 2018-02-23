@@ -1,12 +1,23 @@
 <ion-content class="way-background" padding>
   <img src="assets/imgs/logo.png" class="logo" />
-  <div class="connect-buttons">
-    <button ion-button block round class="facebook" (click)="facebookLogin()">
+  <ion-row>
+    <ion-col>
+      <span class="flag-icon flag-icon-us"></span>
+    </ion-col>
+    <ion-col>
+      <span class="flag-icon flag-icon-tn"></span>
+    </ion-col>
+    <ion-col>
+      <span class="flag-icon flag-icon-fr"></span>
+    </ion-col>
+  </ion-row>
+    <div class="connect-buttons">
+      <button ion-button block round class="facebook" (click)="facebookLogin()">
       <i class="icon ion-social-facebook"></i>
-      Sign In with Facebook
+      Continue with Facebook
     </button>
-    <a class="no-facebook" (click)="goToForm()">
+      <a class="no-facebook" (click)="goToForm()">
       I don't have Facebook
     </a>
-  </div>
+    </div>
 </ion-content>

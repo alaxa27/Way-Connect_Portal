@@ -1,6 +1,6 @@
 page-form {
-
   text-align: center;
+  color: white;
 
   ion-navbar.toolbar {
     // height: 1000px !important;
@@ -34,11 +34,30 @@ page-form {
   }
 
   .segment-activated {
-      background: linear-gradient(to bottom right, color($colors, way-red) , color($colors, way-yellow));
+    background: linear-gradient(to bottom right, color($colors, way-red) , color($colors, way-yellow));
   }
 
   .scroll-content {
     padding: 40px !important;
   }
 
+  h2 {
+    color: white;
+    text-align: left;
+  }
+
+  ion-select {
+    border-radius: 5px;
+    background-color: color($colors, way-gray);
+    max-width: 100%;
+    height: 20px;
+  }
+
+  .select-icon {
+    height: 1px !important;
+  }
+
+  .submit{
+    margin-top: 50px;
+  }
 }
