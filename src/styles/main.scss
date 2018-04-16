@@ -1,0 +1,150 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+$colors: (
+  primary: #488aff,
+  secondary: #32db64,
+  danger: #f53d3d,
+  light: #f4f4f4,
+  dark: #222,
+  way-dark: #1a1a1a,
+  way-red: #EF4136,
+  way-yellow: #FFDD00,
+  way-gray: #4d4d4d,
+  way-gray-dark: #333333,
+  white: #ffffff,
+  facebook-blue: #3b5998
+);
+$background-color: map-get($colors, way-dark);
+$way-connect-gradient: linear-gradient(to right, map-get($colors, way-red), map-get($colors, way-yellow));
+// Import bootstrap styles
+@import "bootstrap/bootstrap"; //Import react-input-range style
+@import "input-range";
+
+#root,
+body,
+html {
+  background-color: $background-color;
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+}
+
+.app {
+  text-align: center;
+  height: 100%;
+  padding: 50px;
+  background: url("/assets/background.svg") no-repeat bottom left;
+  background-size: 500px;
+  background-position-x: calc(100vw - 285px);
+  background-position-y: calc(100vh - 260px);
+
+  button {
+    background-color: map-get($colors, way-gray);
+    border-width: 0;
+    border-radius: 1rem;
+  }
+
+  h2 {
+    margin-top: 15px;
+    color: map-get($colors, light)
+  }
+
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.login {
+  height: 100%;
+
+  .logo {
+    margin-top: 60px;
+    max-width: 200px;
+    height: 200px;
+  }
+
+  .btn-facebook {
+    border-radius: 1rem;
+    font-weight: bold;
+    border: 0;
+    background-color: map-get($colors, facebook-blue);
+    padding: 0.5rem 1.5rem;
+  }
+
+  .no-facebook {
+    color: white !important;
+    text-decoration: none !important;
+  }
+
+  .buttons {
+    margin-top: 250px;
+    bottom: 100px;
+  }
+}
+
+.register {
+  max-width: 500px;
+  margin: auto;
+
+  .gender-radio-buttons {
+    input {
+      display: none;
+    }
+
+    input:checked + label {
+      font-weight: bold;
+      background: $way-connect-gradient;
+    }
+
+    label {
+      width: 48%;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      text-transform: lowercase;
+      text-align: center;
+      padding: 5px;
+      border-radius: 10px;
+      background: #dbdbdb;
+    }
+  }
+
+  .pull-right {
+    float: left;
+  }
+
+  .select-box {
+    width: 100%;
+    background-color: map-get($colors, way-gray);
+    border-radius: 10px;
+    position: relative;
+    height: 30px;
+
+    .input {
+      width: 100%;
+      border: none;
+      background-color: transparent;
+      padding: 3px 10px;
+      -moz-appearance: window;
+      -webkit-appearance: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      color: map-get($colors, way-gray-dark);
+      font-size: 20px;
+    }
+  }
+  .submit {
+    margin-top: 150px;
+  }
+}
