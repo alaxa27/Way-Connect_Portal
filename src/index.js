@@ -12,6 +12,7 @@ import store from "./store";
 // import 'flag-icon-css/css/flag-icon.min.css';
 // Import Font Awesome Icons Set
 import 'font-awesome/scss/font-awesome.scss';
+import 'react-select/dist/react-select.css';
 
 // By using <Provider />, the store will be made available for all the components in your application.
 

@@ -1,8 +1,13 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col, Input, Label} from "reactstrap";
 import InputRange from "react-input-range";
+
+import { postRegisterForm } from "../actions/registerActions";
+
+@connect(() => {})
 
 class Register extends Component {
   constructor(props) {
@@ -10,7 +15,9 @@ class Register extends Component {
 
     this.state = {
       age: 5,
-      gender: "male"
+      gender: "male",
+      professional: "",
+      relationship: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -20,9 +27,18 @@ class Register extends Component {
     this.setState({gender: event.target.value});
   }
 
+  postForm() {
+    this.props.dispatch(postRegisterForm({...state}));
+  }
+
   render() {
 
     return (<div className="register">
+      <Row>
+        <Label>
+          Gender
+        </Label>
+      </Row>
       <Row>
         <Col>
           <div className="gender-radio-buttons">
@@ -35,20 +51,28 @@ class Register extends Component {
         </Col>
       </Row>
       <Row>
-        <h2>
-          Age
-        </h2>
+        <Col>
+          <Label className="pull-left">
+            Age
+          </Label>
+        </Col>
+        <Col>
+          <Label className="age-title">{this.state.age}yo</Label>
+        </Col>
       </Row>
       <Row>
         <InputRange maxValue={100} minValue={0} value={this.state.age} onChange={age => this.setState({age})}/>
       </Row>
       <Row>
-        <h2>
+        <Label>
           Relationship
-        </h2>
+        </Label>
       </Row>
       <Row className="select-box">
-        <Input type="select" name="select" id="exampleSelect" className="input">
+        <Input type="select" name="select" id="relationship" className="input" value={this.state.relationship} onChange={e => {
+            this.setState({relationship: e.target.value})
+          }}>
+          <option value="" disabled="disabled" selected="selected">Select your option</option>
           <option value="valeur1">Valeur 1</option>
           <option value="valeur2">Valeur 2</option>
           <option value="valeur3">Valeur 3</option>
@@ -57,12 +81,15 @@ class Register extends Component {
       </Row>
 
       <Row>
-        <h2>
+        <Label>
           Professional
-        </h2>
+        </Label>
       </Row>
       <Row className="select-box">
-        <Input type="select" name="select" id="exampleSelect" className="input">
+        <Input type="select" name="select" id="exampleSelect" className="input" value={this.state.professional} onChange={e => {
+            this.setState({professional: e.target.value})
+          }}>
+          <option value="" disabled="disabled" selected="selected">Select your option</option>
           <option value="valeur1">Valeur 1</option>
           <option value="valeur2">Valeur 2</option>
           <option value="valeur3">Valeur 3</option>
@@ -70,7 +97,7 @@ class Register extends Component {
         <i className="fa fa-arrow-circle-down arrow"></i>
       </Row>
       <Row>
-        <Button size="lg" block="block" className="submit">Submit</Button>
+        <Button size="lg" block="block" className="submit" onClick={this.postForm.bind(this)}>Submit</Button>
       </Row>
     </div>);
   }

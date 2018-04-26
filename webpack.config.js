@@ -15,6 +15,10 @@ module.exports = {
         loader: ExtractTextPlugin.extract(["css-loader", "sass-loader"])
       },
       {
+        test: /\.css/,
+        loader: ExtractTextPlugin.extract(["css-loader"])
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: "eslint-loader",

@@ -17,8 +17,7 @@ $colors: (
   facebook-blue: #3b5998
 );
 $background-color: map-get($colors, way-dark);
-$way-connect-gradient: linear-gradient(to right, map-get($colors, way-red), map-get($colors, way-yellow));
-// Import bootstrap styles
+$way-connect-gradient: linear-gradient(to right, map-get($colors, way-red), map-get($colors, way-yellow)); // Import bootstrap styles
 @import "bootstrap/bootstrap"; //Import react-input-range style
 @import "input-range";
 
@@ -29,6 +28,7 @@ html {
   height: 100%;
   width: 100%;
   font-weight: bold;
+  color: #ffffff;
 }
 
 .app {
@@ -44,11 +44,6 @@ html {
     background-color: map-get($colors, way-gray);
     border-width: 0;
     border-radius: 1rem;
-  }
-
-  h2 {
-    margin-top: 15px;
-    color: map-get($colors, light)
   }
 
   .row {
@@ -89,6 +84,12 @@ html {
   max-width: 500px;
   margin: auto;
 
+  label {
+    font-size: 2rem;
+    margin-top: 25px;
+    color: map-get($colors, light);
+  }
+
   .gender-radio-buttons {
     input {
       display: none;
@@ -112,8 +113,32 @@ html {
     }
   }
 
-  .pull-right {
+  .pull-left {
     float: left;
+  }
+
+  .input-range__label--max,
+  .input-range__label--min,
+  .input-range__label--value {
+    display: none;
+  }
+
+  .input-range__track {
+    background: #999 !important;
+  }
+
+  .input-range__track--active {
+    background: $way-connect-gradient !important;
+  }
+
+  .input-range__slider {
+    background: #333 !important;
+    border: 1px solid #333 !important;
+  }
+
+  .age-title {
+    font-size: 24px;
+    float: right;
   }
 
   .select-box {
@@ -134,6 +159,7 @@ html {
       top: 0;
       left: 0;
       z-index: 1;
+      color: map-get($colors, light);
     }
 
     .arrow {
@@ -144,7 +170,8 @@ html {
       font-size: 20px;
     }
   }
+
   .submit {
-    margin-top: 150px;
+    margin-top: 50px;
   }
 }
