@@ -10,7 +10,7 @@ import {
 } from "../constants/ActionTypes";
 
 export function postRegisterForm(payload) {
-  console.log(payload);
+  console.log(payload.userData);
   return {
     type: POST_REGISTER_FORM,
     payload: payload

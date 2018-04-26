@@ -1,38 +1,96 @@
 import React, {Component} from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col, Input, Label} from "reactstrap";
 import InputRange from "react-input-range";
+import Select from "react-select";
 
-import { postRegisterForm } from "../actions/registerActions";
+import {postRegisterForm} from "../actions/registerActions";
 
-@connect(() => {})
+const STATUS = require("../data/status");
+
+@connect((store) => {
+  let registerState = store.register
+  return {userData: registerState.userData, posting: registerState.posting, posted: registerState.posted}
+})
 
 class Register extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      age: 5,
-      gender: "male",
-      professional: "",
-      relationship: ""
+      userData: this.props.userData
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.updateGender = this.updateGender.bind(this);
+    this.updateAge = this.updateAge.bind(this);
+    this.updateNationality = this.updateNationality.bind(this);
+    this.updateProfessionalStatus = this.updateProfessionalStatus.bind(this);
+    this.updateRelationshipStatus = this.updateRelationshipStatus.bind(this);
+    this.updateHobbies = this.updateHobbies.bind(this);
+    this.postForm = this.postForm.bind(this);
   }
 
-  handleInputChange(event) {
-    this.setState({gender: event.target.value});
+  updateGender(event) {
+    let userData = {
+      ...this.state.userData
+    }
+    userData.gender = event.target.value
+    this.setState({userData});
+  }
+
+  updateAge(val) {
+    let userData = {
+      ...this.state.userData
+    }
+    userData.age = val
+    this.setState({userData})
+  }
+
+  updateNationality(val) {
+    let userData = {
+      ...this.state.userData
+    }
+    userData.nationality = val
+    this.setState({userData})
+  }
+
+  updateRelationshipStatus(val) {
+    let userData = {
+      ...this.state.userData
+    }
+    userData.relationshipStatus = val
+    this.setState({userData})
+  }
+
+  updateProfessionalStatus(val) {
+    let userData = {
+      ...this.state.userData
+    }
+    userData.professionalStatus = val
+    this.setState({userData})
+  }
+
+  updateHobbies(val) {
+    let userData = {
+      ...this.state.userData
+    }
+    userData.hobbies = val
+    this.setState({userData})
   }
 
   postForm() {
-    this.props.dispatch(postRegisterForm({...state}));
+    this.props.dispatch(postRegisterForm({
+      ...this.state
+    }))
   }
 
   render() {
-
+    let nationality = STATUS["NATIONALITY"]
+    let professionalStatus = STATUS["PROFESSIONAL"]
+    let relationshipStatus = STATUS["RELATIONSHIP"]
+    let hobbies = STATUS["HOBBIES"]
     return (<div className="register">
       <Row>
         <Label>
@@ -42,9 +100,9 @@ class Register extends Component {
       <Row>
         <Col>
           <div className="gender-radio-buttons">
-            <Input type="radio" id="male" name="gender" value="male" checked={this.state.gender === "male"} onChange={this.handleInputChange}/>
+            <Input type="radio" id="male" name="gender" value="male" checked={this.state.userData.gender === "male"} onChange={this.updateGender}/>
             <Label htmlFor="male" className="pull-left">Male</Label>
-            <Input type="radio" id="female" name="gender" value="female" checked={this.state.gender === "female"} onChange={this.handleInputChange}/>
+            <Input type="radio" id="female" name="gender" value="female" checked={this.state.userData.gender === "female"} onChange={this.updateGender}/>
             <Label htmlFor="female" className="pull-right">Female</Label>
             <div className="clearfix"></div>
           </div>
@@ -57,27 +115,28 @@ class Register extends Component {
           </Label>
         </Col>
         <Col>
-          <Label className="age-title">{this.state.age}yo</Label>
+          <Label className="age-title">{this.state.userData.age}yo</Label>
         </Col>
       </Row>
       <Row>
-        <InputRange maxValue={100} minValue={0} value={this.state.age} onChange={age => this.setState({age})}/>
+        <InputRange maxValue={100} minValue={0} value={this.state.userData.age} onChange={this.updateAge}/>
       </Row>
+      <Row>
+        <Label>
+          Nationality
+        </Label>
+      </Row>
+      <Row className="select-box">
+        <Select id="nationality-select" ref="nationalitySelect" options={nationality} simpleValue="simpleValue" name="selected-nationality" value={this.state.userData.nationality} onChange={this.updateNationality}/>
+      </Row>
+
       <Row>
         <Label>
           Relationship
         </Label>
       </Row>
       <Row className="select-box">
-        <Input type="select" name="select" id="relationship" className="input" value={this.state.relationship} onChange={e => {
-            this.setState({relationship: e.target.value})
-          }}>
-          <option value="" disabled="disabled" selected="selected">Select your option</option>
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
-        </Input>
-        <i className="fa fa-arrow-circle-down arrow"></i>
+        <Select id="relationship-select" ref="relationshipSelect" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationshipStatus} onChange={this.updateRelationshipStatus}/>
       </Row>
 
       <Row>
@@ -86,18 +145,22 @@ class Register extends Component {
         </Label>
       </Row>
       <Row className="select-box">
-        <Input type="select" name="select" id="exampleSelect" className="input" value={this.state.professional} onChange={e => {
-            this.setState({professional: e.target.value})
-          }}>
-          <option value="" disabled="disabled" selected="selected">Select your option</option>
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
-        </Input>
-        <i className="fa fa-arrow-circle-down arrow"></i>
+
+        <Select id="professional-select" ref="professionalSelect" options={professionalStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.professionalStatus} onChange={this.updateProfessionalStatus}/>
+      </Row>
+
+      <Row>
+        <Label>
+          Hobbies
+        </Label>
+      </Row>
+      <Row className="select-box">
+
+        <Select id="hobbies-select" ref="hobbiesSelect" options={hobbies} multi="multi" name="selected-hobbies" value={this.state.userData.hobbies} onChange={this.updateHobbies
+}/>
       </Row>
       <Row>
-        <Button size="lg" block="block" className="submit" onClick={this.postForm.bind(this)}>Submit</Button>
+        <Button size="lg" block="block" className="submit" onClick={this.postForm}>Submit</Button>
       </Row>
     </div>);
   }

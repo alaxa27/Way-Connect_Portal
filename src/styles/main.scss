@@ -141,34 +141,39 @@ html {
     float: right;
   }
 
-  .select-box {
+  // .select-box {
+  //   width: 100%;
+  //   background-color: map-get($colors, way-gray);
+  //   border-radius: 10px;
+  //   position: relative;
+  //   height: 30px;
+  //
+  //   .input {
+  //     width: 100%;
+  //     border: none;
+  //     background-color: transparent;
+  //     padding: 3px 10px;
+  //     -moz-appearance: window;
+  //     -webkit-appearance: none;
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     z-index: 1;
+  //     color: map-get($colors, light);
+  //   }
+  //
+  //   .arrow {
+  //     position: absolute;
+  //     top: 5px;
+  //     right: 10px;
+  //     color: map-get($colors, way-gray-dark);
+  //     font-size: 20px;
+  //   }
+  // }
+  .Select {
     width: 100%;
-    background-color: map-get($colors, way-gray);
-    border-radius: 10px;
-    position: relative;
-    height: 30px;
-
-    .input {
-      width: 100%;
-      border: none;
-      background-color: transparent;
-      padding: 3px 10px;
-      -moz-appearance: window;
-      -webkit-appearance: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      color: map-get($colors, light);
-    }
-
-    .arrow {
-      position: absolute;
-      top: 5px;
-      right: 10px;
-      color: map-get($colors, way-gray-dark);
-      font-size: 20px;
-    }
+    text-align: left;
+    font-weight: normal;
   }
 
   .submit {

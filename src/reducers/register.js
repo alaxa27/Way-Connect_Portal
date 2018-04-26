@@ -6,18 +6,30 @@
 
 // Read more on Reducers - https://redux.js.org/docs/basics/Reducers.html
 
-import { POST_REGISTER_FORM } from "../constants/ActionTypes";
+import { POST_REGISTER_FORM, POST_REGISTER_FORM_FULFILLED, POST_REGISTER_FORM_REJECTED } from "../constants/ActionTypes";
+
+const userData = {
+  age: 5,
+  gender: "male",
+  nationality: "",
+  professionalStatus: "",
+  relationshipStatus: "",
+  hobbies: []
+}
 
 export default function reducer(state = {
-age: 5,
-gender: 'male',
-professional: '',
-relationship: ''
+  posting: false,
+  posted: false,
+  userData: userData
 }, action) {
   switch (action.type) {
   case POST_REGISTER_FORM:
-    return {...state, action.payload};
-  case default:
+    return {...state, posting: true};
+  case POST_REGISTER_FORM_FULFILLED:
+    return {...state, posting: false, posted: true};
+  case POST_REGISTER_FORM_REJECTED:
+    return {...state, posting: false, posted: false};
+  default:
     return {...state};
   }
 
