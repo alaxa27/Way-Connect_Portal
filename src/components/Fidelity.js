@@ -13,14 +13,14 @@ class Dashboard extends Component {
   }
 
   render() {
-    let fidelity_rate = 0.64;
+    let fidelity_rate = 0.54;
     return (<div className="fidelity">
       <div className="logo">
         <div className="logo-white">
           <img src="assets/logo-white.png"></img>
         </div>
         <div className="logo-black" style={{height: this.calcHeight(fidelity_rate) + "px"}}>
-          <img src="assets/background.svg"></img>
+          <img src="assets/logo-black.png"></img>
         </div>
       </div>
     </div>);
