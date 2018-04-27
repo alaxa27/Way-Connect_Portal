@@ -1,20 +1,24 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import React, {Component} from "react";
+import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
 
 import Login from "./components/Login";
 import Register from "./components/Register"
+import Dashboard from "./components/Dashboard"
+import Claim from "./components/Claim"
 
 class App extends Component {
   render() {
-    return (
-      <Router>
-        <div className="app">
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Redirect from="/" to="/login" />
-        </div>
-      </Router>
-    );
+    return (<div>
+      <div className="background"></div>
+      <div className="app">
+        <Route exact="exact" path="/" name="Login" component={Login}/>
+        <Route path="/login" name="Login" component={Login}/>
+        <Route path="/register" name="Register" component={Register}/>
+        <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+        <Route path="/claim" name="Claim" component={Claim}/>
+        <Route path="/fidelity" name="Fidelity" component={Fidelity}/>
+      </div>
+    </div>);
   }
 }
 

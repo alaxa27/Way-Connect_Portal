@@ -11,8 +11,8 @@ import {postRegisterForm} from "../actions/registerActions";
 const STATUS = require("../data/status");
 
 @connect((store) => {
-  let registerState = store.register
-  return {userData: registerState.userData, posting: registerState.posting, posted: registerState.posted}
+  let registerStore = store.register
+  return {userData: registerStore.userData, posting: registerStore.posting, posted: registerStore.posted}
 })
 
 class Register extends Component {

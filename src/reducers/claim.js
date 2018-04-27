@@ -6,29 +6,26 @@
 
 // Read more on Reducers - https://redux.js.org/docs/basics/Reducers.html
 
-import { POST_REGISTER_FORM, POST_REGISTER_FORM_FULFILLED, POST_REGISTER_FORM_REJECTED } from "../constants/ActionTypes";
+import { POST_CLAIM, POST_CLAIM_FULFILLED, POST_CLAIM_REJECTED } from "../constants/ActionTypes";
 
-const userData = {
+const claim = {
   mac: "01:00:5E:1A:2F:0E",
-  age: 5,
-  gender: "male",
-  nationality: "",
-  professionalStatus: "",
-  relationshipStatus: "",
-  hobbies: []
+  email: "",
+  name: "",
+  text: ""
 }
 
 export default function reducer(state = {
   posting: false,
   posted: false,
-  userData: userData
+  claimData: claim
 }, action) {
   switch (action.type) {
-  case POST_REGISTER_FORM:
+  case POST_CLAIM:
     return {...state, posting: true};
-  case POST_REGISTER_FORM_FULFILLED:
+  case POST_CLAIM_FULFILLED:
     return {...state, posting: false, posted: true};
-  case POST_REGISTER_FORM_REJECTED:
+  case POST_CLAIM_REJECTED:
     return {...state, posting: false, posted: false};
   default:
     return {...state};

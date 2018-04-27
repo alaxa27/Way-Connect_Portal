@@ -28,22 +28,31 @@ html {
   height: 100%;
   width: 100%;
   font-weight: bold;
-  color: #ffffff;
+  color: map-get($colors, light);
+
+  .background {
+    background: url("/assets/background.svg") no-repeat bottom left;
+    background-size: 500px;
+    background-position-x: calc(100vw - 285px);
+    background-position-y: calc(100vh - 260px);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+  }
 }
 
 .app {
   text-align: center;
   height: 100%;
   padding: 50px;
-  background: url("/assets/background.svg") no-repeat bottom left;
-  background-size: 500px;
-  background-position-x: calc(100vw - 285px);
-  background-position-y: calc(100vh - 260px);
+  position: relative;
+
 
   button {
     background-color: map-get($colors, way-gray);
     border-width: 0;
     border-radius: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
   }
 
   .row {
@@ -80,9 +89,18 @@ html {
   }
 }
 
+.claim,
 .register {
   max-width: 500px;
   margin: auto;
+
+  .form-control {
+    background-color: rgba(map-get($colors, way-gray), 0.5);
+    color: map-get($colors, light);
+    border: 0;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
 
   label {
     font-size: 2rem;
@@ -140,7 +158,6 @@ html {
     font-size: 24px;
     float: right;
   }
-
   // .select-box {
   //   width: 100%;
   //   background-color: map-get($colors, way-gray);
@@ -178,5 +195,18 @@ html {
 
   .submit {
     margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
+.dashboard {
+  margin-top: 10%;
+  margin-bottom: 10%;
+
+  .btn {
+    font-size: 5rem;
+    border-radius: 8rem;
+    width: 200px;
+    height: 200px;
+    margin: 20px;
   }
 }

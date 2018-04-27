@@ -6145,20 +6145,28 @@ html {
   height: 100%;
   width: 100%;
   font-weight: bold;
-  color: #ffffff; }
+  color: #f4f4f4; }
+  #root .background,
+  body .background,
+  html .background {
+    background: url("/assets/background.svg") no-repeat bottom left;
+    background-size: 500px;
+    background-position-x: calc(100vw - 285px);
+    background-position-y: calc(100vh - 260px);
+    height: 100%;
+    width: 100%;
+    position: fixed; }
 
 .app {
   text-align: center;
   height: 100%;
   padding: 50px;
-  background: url("/assets/background.svg") no-repeat bottom left;
-  background-size: 500px;
-  background-position-x: calc(100vw - 285px);
-  background-position-y: calc(100vh - 260px); }
+  position: relative; }
   .app button {
     background-color: #4d4d4d;
     border-width: 0;
-    border-radius: 1rem; }
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); }
   .app .row {
     margin-right: 0;
     margin-left: 0; }
@@ -6182,18 +6190,30 @@ html {
     margin-top: 250px;
     bottom: 100px; }
 
+.claim,
 .register {
   max-width: 500px;
   margin: auto; }
+  .claim .form-control,
+  .register .form-control {
+    background-color: rgba(77, 77, 77, 0.5);
+    color: #f4f4f4;
+    border: 0;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); }
+  .claim label,
   .register label {
     font-size: 2rem;
     margin-top: 25px;
     color: #f4f4f4; }
+  .claim .gender-radio-buttons input,
   .register .gender-radio-buttons input {
     display: none; }
+  .claim .gender-radio-buttons input:checked + label,
   .register .gender-radio-buttons input:checked + label {
     font-weight: bold;
     background: linear-gradient(to right, #EF4136, #FFDD00); }
+  .claim .gender-radio-buttons label,
   .register .gender-radio-buttons label {
     width: 48%;
     color: #fff;
@@ -6204,28 +6224,49 @@ html {
     padding: 5px;
     border-radius: 10px;
     background: #dbdbdb; }
+  .claim .pull-left,
   .register .pull-left {
     float: left; }
+  .claim .input-range__label--max,
+  .claim .input-range__label--min,
+  .claim .input-range__label--value,
   .register .input-range__label--max,
   .register .input-range__label--min,
   .register .input-range__label--value {
     display: none; }
+  .claim .input-range__track,
   .register .input-range__track {
     background: #999 !important; }
+  .claim .input-range__track--active,
   .register .input-range__track--active {
     background: linear-gradient(to right, #EF4136, #FFDD00) !important; }
+  .claim .input-range__slider,
   .register .input-range__slider {
     background: #333 !important;
     border: 1px solid #333 !important; }
+  .claim .age-title,
   .register .age-title {
     font-size: 24px;
     float: right; }
+  .claim .Select,
   .register .Select {
     width: 100%;
     text-align: left;
     font-weight: normal; }
+  .claim .submit,
   .register .submit {
-    margin-top: 50px; }
+    margin-top: 50px;
+    margin-bottom: 50px; }
+
+.dashboard {
+  margin-top: 10%;
+  margin-bottom: 10%; }
+  .dashboard .btn {
+    font-size: 5rem;
+    border-radius: 8rem;
+    width: 200px;
+    height: 200px;
+    margin: 20px; }
 @charset "UTF-8";
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
