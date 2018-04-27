@@ -6267,6 +6267,21 @@ html {
     width: 200px;
     height: 200px;
     margin: 20px; }
+
+.fidelity .logo {
+  margin-left: calc(50vw - 200px); }
+  .fidelity .logo img {
+    width: 100%; }
+  .fidelity .logo .logo-black {
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    overflow-y: hidden; }
+  .fidelity .logo .logo-white {
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    overflow-y: hidden; }
 @charset "UTF-8";
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome

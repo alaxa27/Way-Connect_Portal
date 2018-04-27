@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Register from "./components/Register"
 import Dashboard from "./components/Dashboard"
 import Claim from "./components/Claim"
+import Fidelity from "./components/Fidelity"
 
 class App extends Component {
   render() {

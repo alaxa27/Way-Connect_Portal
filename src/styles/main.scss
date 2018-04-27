@@ -47,7 +47,6 @@ html {
   padding: 50px;
   position: relative;
 
-
   button {
     background-color: map-get($colors, way-gray);
     border-width: 0;
@@ -198,6 +197,7 @@ html {
     margin-bottom: 50px;
   }
 }
+
 .dashboard {
   margin-top: 10%;
   margin-bottom: 10%;
@@ -208,5 +208,32 @@ html {
     width: 200px;
     height: 200px;
     margin: 20px;
+  }
+}
+
+.fidelity {
+  $fidelity_logo_size: 300px;
+
+  .logo {
+    margin-left: calc(50vw - 200px);
+    // margin-right: calc(100vw - 150px);
+
+    img {
+      width: 100%;
+    }
+
+    .logo-black {
+      width: $fidelity_logo_size;
+      height: $fidelity_logo_size;
+      position: fixed;
+      overflow-y: hidden;
+    }
+
+    .logo-white {
+      width: $fidelity_logo_size;
+      height: $fidelity_logo_size;
+      position: fixed;
+      overflow-y: hidden;
+    }
   }
 }
