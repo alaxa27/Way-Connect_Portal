@@ -6268,20 +6268,53 @@ html {
     height: 200px;
     margin: 20px; }
 
-.fidelity .logo {
-  margin-left: calc(50vw - 200px); }
-  .fidelity .logo img {
-    width: 100%; }
-  .fidelity .logo .logo-black {
-    width: 300px;
-    height: 300px;
-    position: fixed;
-    overflow-y: hidden; }
-  .fidelity .logo .logo-white {
-    width: 300px;
-    height: 300px;
-    position: fixed;
-    overflow-y: hidden; }
+.fidelity {
+  max-width: 500px;
+  margin: auto; }
+  .fidelity h2,
+  .fidelity h4 {
+    font-size: 3.5rem;
+    font-weight: 900; }
+  .fidelity h4 {
+    font-size: 2.5rem; }
+  .fidelity .logo {
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 200px; }
+    .fidelity .logo img {
+      width: 100%; }
+    .fidelity .logo .logo-black {
+      width: 200px;
+      height: 200px;
+      position: fixed;
+      overflow-y: hidden;
+      transition: height 2s ease; }
+    .fidelity .logo .logo-white {
+      width: 200px;
+      height: 200px;
+      position: fixed;
+      overflow-y: hidden; }
+  .fidelity .bonus-max {
+    width: 50%;
+    height: 3rem;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    padding: 0.25rem;
+    background-color: rgba(77, 77, 77, 0.5);
+    margin: 15% auto; }
+  .fidelity .fa:before {
+    background: linear-gradient(to right, #EF4136, #FFDD00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: initial; }
+  .fidelity .activate {
+    font-size: 3rem;
+    width: 100px;
+    height: 100px;
+    background-color: #4d4d4d;
+    border-radius: 100px; }
 @charset "UTF-8";
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
@@ -8611,6 +8644,13 @@ html {
   margin: 0;
   overflow: visible;
   clip: auto; }
+/**
+ * React Select
+ * ============
+ * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/
+ * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs
+ * MIT License: https://github.com/JedWatson/react-select
+*/
 .Select {
   position: relative;
 }
