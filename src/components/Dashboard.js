@@ -1,11 +1,17 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col} from "reactstrap";
 
+@connect((store) => {
+  let informationStore = store.information
+  return {isHotel: informationStore.isHotel}
+})
+
 class Dashboard extends Component {
   render() {
-
+    const isHotel = false;
     return (<div className="dashboard">
       <Button>
         <i className="fa fa-wifi"></i>
@@ -13,13 +19,13 @@ class Dashboard extends Component {
       <h4>
         Join the WiFi Network
       </h4>
-      <Link to="/claim">
+      <Link to={"/" + (this.props.isHotel ? "claim" : "fidelity")}>
         <Button>
-          <i className="fa fa-exclamation-triangle"></i>
+          <i className={"fa fa-" + (this.props.isHotel ? "exclamation-triangle" : "balance-scale")}></i>
         </Button>
       </Link>
       <h4>
-        Make a Claim
+        {this.props.isHotel ? "Make a Claim" : "Fidelity Bonus"}
       </h4>
     </div>);
   }

@@ -6259,8 +6259,7 @@ html {
     margin-bottom: 50px; }
 
 .dashboard {
-  margin-top: 10%;
-  margin-bottom: 10%; }
+  margin: 10% auto; }
   .dashboard .btn {
     font-size: 5rem;
     border-radius: 8rem;

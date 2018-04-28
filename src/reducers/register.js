@@ -9,7 +9,6 @@
 import { POST_REGISTER_FORM, POST_REGISTER_FORM_FULFILLED, POST_REGISTER_FORM_REJECTED } from "../constants/ActionTypes";
 
 const userData = {
-  mac: "01:00:5E:1A:2F:0E",
   age: 5,
   gender: "male",
   nationality: "",
