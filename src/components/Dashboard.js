@@ -6,7 +6,7 @@ import {Button, Row, Col} from "reactstrap";
 
 @connect((store) => {
   let informationStore = store.information
-  return {isHotel: informationStore.isHotel}
+  return {isHotel: informationStore.informationData.isHotel}
 })
 
 class Dashboard extends Component {

@@ -16,8 +16,8 @@ import {
 } from "../constants/ActionTypes";
 
 const fidelity = {
-  mac: "01:00:5E:1A:2F:0E",
   rate: 0,
+  amount: 10
 }
 
 export default function reducer(state = {
@@ -33,6 +33,7 @@ export default function reducer(state = {
         fetching: true
       };
     case FETCH_FIDELITY_FULFILLED:
+      console.log("payload: ", action.payload)
       return { ...state,
         fetching: false,
         fetched: true,

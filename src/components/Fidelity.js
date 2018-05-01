@@ -8,27 +8,16 @@ import {fetchFidelity, fetchDiscount} from "../actions/fidelityActions";
 
 @connect((store) => {
   let fidelityStore = store.fidelity
-  return {fidelityData: fidelityStore.fidelityData, fetching: fidelityStore.posting, fetched: fidelityStore.posted}
+  return {fidelityData: fidelityStore.fidelityData, fetching: fidelityStore.fetching, fetched: fidelityStore.fetched}
 })
 
-class Dashboard extends Component {
+class Fidelity extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fidelityRate: "200",
-      amount: 10
     }
-    this.props.dispatch(fetchFidelity({
-      ...this.props.fidelityData
-    }))
-
+    this.props.dispatch(fetchFidelity())
     this.fetchDiscount = this.fetchDiscount.bind(this)
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      fidelityRate: this.calcHeight(props.fidelityData.rate)
-    })
   }
 
   calcHeight(fidelity) {
@@ -37,12 +26,11 @@ class Dashboard extends Component {
   }
 
   fetchDiscount() {
-    this.props.dispatch(fetchDiscount({
-      ...this.props.fidelityData
-    }))
+    this.props.dispatch(fetchDiscount())
   }
 
   render() {
+    let fidelityRate = this.calcHeight(this.props.fidelityData.rate)
     return (<div className="fidelity">
       <h4>Fidelity</h4>
       <div className="logo">
@@ -50,7 +38,7 @@ class Dashboard extends Component {
           <img src="assets/logo-white.png"></img>
         </div>
         <div className="logo-black" style={{
-            height: this.state.fidelityRate + "px"
+            height: fidelityRate + "px"
           }}>
           <img src="assets/logo-black.png"></img>
         </div>
@@ -58,15 +46,14 @@ class Dashboard extends Component {
       <h2>{this.props.fidelityData.rate * 100}{" "}%</h2>
       <div className="bonus-max">
         <i className="fa fa-star"></i>
-        {" " + this.state.amount + " DT"}
-        </div>
+        {" " + this.props.fidelityData.amount + " DT"}
+      </div>
       <Button className="activate" onClick={this.fetchDiscount}>
         <i className="fa fa-bolt"></i>
       </Button>
-
 
     </div>);
   }
 }
 
-export default Dashboard;
+export default Fidelity;

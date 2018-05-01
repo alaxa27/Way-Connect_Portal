@@ -9,7 +9,6 @@
 import { POST_CLAIM, POST_CLAIM_FULFILLED, POST_CLAIM_REJECTED } from "../constants/ActionTypes";
 
 const claim = {
-  mac: "01:00:5E:1A:2F:0E",
   email: "",
   name: "",
   text: ""

@@ -15,30 +15,32 @@ import {
 } from "../constants/ActionTypes";
 
 export function fetchFidelity(payload) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: FETCH_FIDELITY,
     })
-    payload.rate = 0.8
     setTimeout(function() {
+      let data = getState().fidelity.fidelityData
+      data.rate = 0.8
       dispatch({
         type: FETCH_FIDELITY_FULFILLED,
-        payload: payload
+        payload: data
       });
     }, 2000);
   }
 }
 
 export function fetchDiscount(payload) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: FETCH_DISCOUNT
     })
-    payload.rate = 0;
     setTimeout(function() {
+      let data = getState().fidelity.fidelityData
+      data.rate = 0;
       dispatch({
         type: FETCH_DISCOUNT_FULFILLED,
-        payload: payload
+        payload: data
       });
     }, 1000);
   }

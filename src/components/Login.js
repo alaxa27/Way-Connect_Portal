@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col} from "reactstrap";
 
@@ -23,9 +23,9 @@ class Login extends Component {
         </Row>
         <Row>
           <Col>
-            <Link to="/register" className="no-facebook">
+            <NavLink to="/register" className="no-facebook">
               I don't have Facebook
-            </Link>
+            </NavLink>
           </Col>
         </Row>
       </div>

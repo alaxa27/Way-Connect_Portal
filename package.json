@@ -4,6 +4,7 @@
   "description": "Everything you need to get started with a basic React application",
   "watch": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "flag-icon-css": "^3.0.0",
     "font-awesome": "^4.7.0",
@@ -27,6 +28,7 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",

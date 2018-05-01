@@ -6,15 +6,40 @@
 
 // Read more on Reducers - https://redux.js.org/docs/basics/Reducers.html
 
-// import {} from "../constants/ActionTypes";
+import {
 
-const information = {
-  mac: "01:00:5E:1A:2F:0E",
-  isHotel: false
+  FETCH_INFORMATION,
+  FETCH_INFORMATION_FULFILLED,
+  FETCH_INFORMATION_REJECTED
+} from "../constants/ActionTypes";
+
+// mac_address: "01:00:5E:1A:2F:0E",
+const informationData = {
+  mac_address: "00:DF:1D:E2:8A:1D",
+  isHotel: true,
+  isKnown: false
 }
 
-export default function reducer(state = information, action) {
+export default function reducer(state = {
+  informationData: informationData,
+  fetching: false,
+  fetched: false
+}, action) {
   switch (action.type) {
+    case FETCH_INFORMATION:
+      return { ...state
+      }
+    case FETCH_INFORMATION_FULFILLED:
+      state.informationData.isKnown = action.payload
+      return { ...state,
+        fetching: false,
+        fetched: true
+      }
+    case FETCH_INFORMATION_REJECTED:
+      return { ...state,
+        fetching: false,
+        fetched: false
+      }
     default:
       return { ...state
       }
