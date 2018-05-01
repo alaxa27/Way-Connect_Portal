@@ -1,81 +1,85 @@
 exports.PROFESSIONAL = [{
-    value: "entrepreneur",
+    value: "EN",
     label: "Entrepreneur"
   },
   {
-    value: "employee",
+    value: "EM",
     label: "Employee"
   },
   {
-    value: "manager",
+    value: "UN",
+    label: "Unemployed"
+  },
+  {
+    value: "MA",
     label: "Manager"
   },
   {
-    value: "boss",
-    label: "Boss"
+    value: "ST",
+    label: "Student"
   },
   {
-    value: "official",
+    value: "OF",
     label: "Official"
   }
 ]
 
 exports.RELATIONSHIP = [{
-    value: "single",
+    value: "SI",
     label: "Single"
   },
   {
-    value: "couple",
+    value: "CO",
     label: "In a Relationship"
   },
   {
-    value: "engaged",
+    value: "EN",
     label: "Engaged"
   },
   {
-    value: "married",
+    value: "MA",
     label: "Married"
   }
 ]
 
 exports.HOBBIES = [{
-    value: "out",
+    value: "OU",
     label: "Going Out"
   },
   {
-    value: "sport",
+    value: "SP",
     label: "Sport"
   },
   {
-    value: "art",
+    value: "AR",
     label: "Art"
   },
   {
-    value: "games",
+    value: "GA",
     label: "Games"
   },
   {
-    value: "indoor",
+    value: "IN",
     label: "Indoor Activities"
   },
   {
-    value: "read",
+    value: "RE",
     label: "Read"
   },
   {
-    value: "clothes",
+    value: "CL",
     label: "Clothes"
   },
   {
-    value: "charity",
+    value: "CH",
     label: "Charity"
   },
   {
-    value: "travel",
+    value: "TR",
     label: "Travel"
   },
   {
-    value: "food",
+    value: "FO",
     label: "Food"
   }
 ]

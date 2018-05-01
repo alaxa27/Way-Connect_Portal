@@ -16,7 +16,7 @@ import {
 // mac_address: "01:00:5E:1A:2F:0E",
 const informationData = {
   mac_address: "00:DF:1D:E2:8A:1D",
-  isHotel: true,
+  isHotel: false,
   isKnown: false
 }
 
