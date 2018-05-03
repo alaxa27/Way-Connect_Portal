@@ -1,10 +1,13 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col, Input, Label} from "reactstrap";
 import InputRange from "react-input-range";
 import Select from "react-select";
+
+import Navbar from "./Navbar";
+import Loader from "./Loader";
 
 import {postRegisterForm} from "../actions/registerActions";
 
@@ -26,7 +29,7 @@ class Register extends Component {
     this.updateGender = this.updateGender.bind(this);
     this.updateAge = this.updateAge.bind(this);
     this.updateNationality = this.updateNationality.bind(this);
-    this.updateProfessionalStatus = this.updateProfessionalStatus.bind(this);
+    this.updateWorkStatus = this.updateWorkStatus.bind(this);
     this.updateRelationshipStatus = this.updateRelationshipStatus.bind(this);
     this.updateHobbies = this.updateHobbies.bind(this);
     this.postForm = this.postForm.bind(this);
@@ -60,15 +63,15 @@ class Register extends Component {
     let userData = {
       ...this.state.userData
     }
-    userData.relationshipStatus = val
+    userData.relationship_status = val
     this.setState({userData})
   }
 
-  updateProfessionalStatus(val) {
+  updateWorkStatus(val) {
     let userData = {
       ...this.state.userData
     }
-    userData.professionalStatus = val
+    userData.work_status = val
     this.setState({userData})
   }
 
@@ -88,10 +91,19 @@ class Register extends Component {
 
   render() {
     let nationality = STATUS["NATIONALITY"]
-    let professionalStatus = STATUS["PROFESSIONAL"]
+    let workStatus = STATUS["PROFESSIONAL"]
     let relationshipStatus = STATUS["RELATIONSHIP"]
     let hobbies = STATUS["HOBBIES"]
+
     return (<div className="register">
+      {
+        (
+          this.props.posted
+          ? <Redirect to="/dashboard"></Redirect>
+          : null)
+      }
+      <Navbar title="Register" goBack={this.props.history.goBack}/>
+
       <Row>
         <Label>
           Gender
@@ -100,9 +112,9 @@ class Register extends Component {
       <Row>
         <Col>
           <div className="gender-radio-buttons">
-            <Input type="radio" id="male" name="gender" value="male" checked={this.state.userData.gender === "male"} onChange={this.updateGender}/>
+            <Input type="radio" id="male" name="gender" value="M" checked={this.state.userData.gender === "M"} onChange={this.updateGender}/>
             <Label htmlFor="male" className="pull-left">Male</Label>
-            <Input type="radio" id="female" name="gender" value="female" checked={this.state.userData.gender === "female"} onChange={this.updateGender}/>
+            <Input type="radio" id="female" name="gender" value="F" checked={this.state.userData.gender === "F"} onChange={this.updateGender}/>
             <Label htmlFor="female" className="pull-right">Female</Label>
             <div className="clearfix"></div>
           </div>
@@ -136,7 +148,7 @@ class Register extends Component {
         </Label>
       </Row>
       <Row className="select-box">
-        <Select id="relationship-select" ref="relationshipSelect" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationshipStatus} onChange={this.updateRelationshipStatus}/>
+        <Select id="relationship-select" ref="relationshipSelect" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationship_status} onChange={this.updateRelationshipStatus}/>
       </Row>
 
       <Row>
@@ -146,7 +158,7 @@ class Register extends Component {
       </Row>
       <Row className="select-box">
 
-        <Select id="professional-select" ref="professionalSelect" options={professionalStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.professionalStatus} onChange={this.updateProfessionalStatus}/>
+        <Select id="professional-select" ref="professionalSelect" options={workStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.work_status} onChange={this.updateWorkStatus}/>
       </Row>
 
       <Row>
@@ -160,7 +172,11 @@ class Register extends Component {
 }/>
       </Row>
       <Row>
-        <Button size="lg" block="block" className="submit" onClick={this.postForm}>Submit</Button>
+        <Button size="lg" block="block" className="submit" onClick={this.postForm}>
+          <Loader spinning={this.props.posting} height="22" width="22">
+            Submit
+          </Loader>
+        </Button>
       </Row>
     </div>);
   }

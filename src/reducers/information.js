@@ -7,17 +7,22 @@
 // Read more on Reducers - https://redux.js.org/docs/basics/Reducers.html
 
 import {
-
   FETCH_INFORMATION,
   FETCH_INFORMATION_FULFILLED,
-  FETCH_INFORMATION_REJECTED
+  FETCH_INFORMATION_REJECTED,
+  POST_CONNECT,
+  POST_CONNECT_FULFILLED,
+  POST_CONNECT_REJECTED
 } from "../constants/ActionTypes";
-
+//c3bfc75db5134267956a673b65a7ad15
+// 899f49e5e44d41a3ad8fe1a7368fd189
 // mac_address: "01:00:5E:1A:2F:0E",
 const informationData = {
-  mac_address: "00:DF:1D:E2:8A:1D",
+  mac_address: "11:BB:1D:F2:1B:1D",
+  API_Key: "c3bfc75db5134267956a673b65a7ad15",
   isHotel: false,
-  isKnown: false
+  isKnown: false,
+  communicationURL: ""
 }
 
 export default function reducer(state = {
@@ -30,7 +35,8 @@ export default function reducer(state = {
       return { ...state
       }
     case FETCH_INFORMATION_FULFILLED:
-      state.informationData.isKnown = action.payload
+      state.informationData.isKnown = action.payload.known
+      state.informationData.isHotel = (action.payload.establishment_type === "hotel")
       return { ...state,
         fetching: false,
         fetched: true
@@ -40,6 +46,15 @@ export default function reducer(state = {
         fetching: false,
         fetched: false
       }
+    case POST_CONNECT:
+      return { ...state
+      }
+    case POST_CONNECT_FULFILLED:
+      state.informationData.communicationURL = action.payload
+      return { ...state
+      }
+    case POST_CONNECT_REJECTED:
+      break
     default:
       return { ...state
       }

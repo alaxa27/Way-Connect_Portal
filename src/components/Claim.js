@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Row, Input, Label, Button} from "reactstrap";
 
+import Navbar from "./Navbar";
+
 import {postClaim} from "../actions/claimActions";
 
 @connect((store) => {
@@ -50,6 +52,7 @@ class Claim extends Component {
 
   render() {
     return (<div className="claim">
+      <Navbar title="Make a Claim" goBack={this.props.history.goBack}/>
       <Row>
         <Label>
           Your Email

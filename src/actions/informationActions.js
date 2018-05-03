@@ -10,6 +10,9 @@ import {
   FETCH_INFORMATION,
   FETCH_INFORMATION_FULFILLED,
   FETCH_INFORMATION_REJECTED,
+  POST_CONNECT,
+  POST_CONNECT_FULFILLED,
+  POST_CONNECT_REJECTED
 } from "../constants/ActionTypes";
 
 export function fetchInformation(payload) {
@@ -18,21 +21,61 @@ export function fetchInformation(payload) {
       type: FETCH_INFORMATION,
     })
     try {
-      const mac_address = getState().information.informationData.mac_address;
-      const response = await axios.get("http://localhost:8000/customers/known", {
+      const informationData = getState().information.informationData;
+
+      const response = await axios({
+        method: "get",
+        url: "http://localhost:8000/customers/known/",
+        headers: {
+          "X-API-Key": informationData.API_Key
+        },
         params: {
-          mac_address: mac_address
+          mac_address: informationData.mac_address
         }
-      });
+      })
       dispatch({
         type: FETCH_INFORMATION_FULFILLED,
-        payload: response.data.result
+        payload: response.data
       })
+      if (response.data.known) {
+        dispatch(fetchCommunication())
+      }
     } catch (error) {
       dispatch({
         type: FETCH_INFORMATION_REJECTED,
       })
       console.error(error);
+    }
+  }
+}
+
+function fetchCommunication(payload) {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: POST_CONNECT
+    })
+    try {
+      const informationData = getState().information.informationData;
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:8000/customers/connect/",
+        headers: {
+          "X-API-Key": informationData.API_Key
+        },
+        data: {
+          mac_address: informationData.mac_address
+        }
+      })
+
+      dispatch({
+        type: POST_CONNECT_FULFILLED,
+        payload: response.data.video
+      })
+    } catch (error) {
+      dispatch({
+        type: POST_CONNECT_REJECTED
+      })
+      console.error(error)
     }
   }
 }

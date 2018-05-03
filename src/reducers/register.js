@@ -10,10 +10,10 @@ import { POST_REGISTER_FORM, POST_REGISTER_FORM_FULFILLED, POST_REGISTER_FORM_RE
 
 const userData = {
   age: 5,
-  gender: "male",
+  gender: "M",
   nationality: "",
-  professionalStatus: "",
-  relationshipStatus: "",
+  work_status: "",
+  relationship_status: "",
   hobbies: []
 }
 

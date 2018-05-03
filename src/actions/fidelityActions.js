@@ -32,16 +32,18 @@ export function fetchFidelity(payload) {
 
 export function fetchDiscount(payload) {
   return (dispatch, getState) => {
-    dispatch({
-      type: FETCH_DISCOUNT
-    })
-    setTimeout(function() {
-      let data = getState().fidelity.fidelityData
-      data.rate = 0;
+    if (!getState().fidelity.fetching && !getState().fidelity.fetched) {
       dispatch({
-        type: FETCH_DISCOUNT_FULFILLED,
-        payload: data
-      });
-    }, 1000);
+        type: FETCH_DISCOUNT
+      })
+      setTimeout(function() {
+        let data = getState().fidelity.fidelityData
+        data.rate = 0;
+        dispatch({
+          type: FETCH_DISCOUNT_FULFILLED,
+          payload: data
+        });
+      }, 1000);
+    }
   }
 }

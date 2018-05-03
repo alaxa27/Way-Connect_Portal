@@ -37,7 +37,7 @@ class App extends Component {
           ((isHotel) => {
             if (isHotel) {
               return (<Route path="/claim" name="Claim" component={Claim}/>)
-            } else if(!isHotel){
+            } else if (!isHotel) {
               return (<Route path="/fidelity" name="Fidelity" component={Fidelity}/>)
             }
           })(isHotel)

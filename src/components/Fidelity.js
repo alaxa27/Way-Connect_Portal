@@ -4,6 +4,9 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col} from "reactstrap";
 
+import Navbar from "./Navbar";
+import Loader from "./Loader";
+
 import {fetchFidelity, fetchDiscount} from "../actions/fidelityActions";
 
 @connect((store) => {
@@ -14,8 +17,7 @@ import {fetchFidelity, fetchDiscount} from "../actions/fidelityActions";
 class Fidelity extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
     this.props.dispatch(fetchFidelity())
     this.fetchDiscount = this.fetchDiscount.bind(this)
   }
@@ -32,7 +34,8 @@ class Fidelity extends Component {
   render() {
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate)
     return (<div className="fidelity">
-      <h4>Fidelity</h4>
+      <Navbar title="Fidelity" goBack={this.props.history.goBack}/>
+
       <div className="logo">
         <div className="logo-white">
           <img src="assets/logo-white.png"></img>
@@ -49,7 +52,9 @@ class Fidelity extends Component {
         {" " + this.props.fidelityData.amount + " DT"}
       </div>
       <Button className="activate" onClick={this.fetchDiscount}>
-        <i className="fa fa-bolt"></i>
+        <Loader spinning={this.props.fetching}>
+          <i className="fa fa-bolt"></i>
+        </Loader>
       </Button>
 
     </div>);
