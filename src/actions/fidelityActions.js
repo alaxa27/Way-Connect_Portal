@@ -20,7 +20,8 @@ export function fetchFidelity(payload) {
       type: FETCH_FIDELITY,
     })
     setTimeout(function() {
-      let data = getState().fidelity.fidelityData
+      let data = { ...getState().fidelity.fidelityData
+      }
       data.rate = 0.8
       dispatch({
         type: FETCH_FIDELITY_FULFILLED,
@@ -32,16 +33,23 @@ export function fetchFidelity(payload) {
 
 export function fetchDiscount(payload) {
   return (dispatch, getState) => {
-    if (!getState().fidelity.fetching && !getState().fidelity.fetched) {
+    if (!getState().fidelity.fidelityData.fetching && !getState().fidelity.discountData.fetching) {
       dispatch({
         type: FETCH_DISCOUNT
       })
       setTimeout(function() {
-        let data = getState().fidelity.fidelityData
+        let data = { ...getState().fidelity.fidelityData
+        }
+        let discountData = { ...getState().fidelity.discountData
+        }
+        discountData.code = "DZ8HG9"
         data.rate = 0;
         dispatch({
           type: FETCH_DISCOUNT_FULFILLED,
-          payload: data
+          payload: {
+            fidelityData: data,
+            discountData: discountData
+          }
         });
       }, 1000);
     }

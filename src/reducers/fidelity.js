@@ -15,49 +15,66 @@ import {
   FETCH_DISCOUNT_REJECTED
 } from "../constants/ActionTypes";
 
-const fidelity = {
+const fidelityData = {
+  fetching: false,
+  fetched: false,
   rate: 0,
-  amount: 10
+  amount: 10,
+}
+
+const discountData = {
+  fetching: false,
+  fetched: false,
+  code: "",
 }
 
 export default function reducer(state = {
   posting: false,
   posted: false,
-  fetching: false,
-  fetched: false,
-  fidelityData: fidelity
+  fidelityData: fidelityData,
+  discountData: discountData
 }, action) {
   switch (action.type) {
     case FETCH_FIDELITY:
       return { ...state,
-        fetching: true
+        fidelityData: { ...state.fidelityData,
+          fetching: true,
+        }
       };
     case FETCH_FIDELITY_FULFILLED:
-      console.log("payload: ", action.payload)
       return { ...state,
-        fetching: false,
-        fetched: true,
-        fidelityData: action.payload
+        fidelityData: { ...action.payload,
+          fetching: false,
+          fetched: true,
+        }
       };
     case FETCH_FIDELITY_REJECTED:
       return { ...state,
-        fetching: false,
-        fetched: false
+        fidelityData: { ...state.fidelityData,
+          fetching: false,
+          fetched: false,
+        }
       };
     case FETCH_DISCOUNT:
       return { ...state,
-        fetching: true
+        discountData: { ...state.discountData,
+          fetching: true
+        }
       };
     case FETCH_DISCOUNT_FULFILLED:
       return { ...state,
-        fetching: false,
-        fetched: true,
-        fidelityData: action.payload
+        fidelityData: action.payload.fidelityData,
+        discountData: { ...action.payload.discountData,
+          fetching: false,
+          fetched: true,
+        }
       };
     case FETCH_DISCOUNT_REJECTED:
       return { ...state,
-        fetching: false,
-        fetched: false
+        discountData: { ...state.discountData,
+          fetching: false,
+          fetched: false
+        }
       };
     default:
       return { ...state

@@ -2,7 +2,15 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import {Button, Row, Col} from "reactstrap";
+import {
+  Button,
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "reactstrap";
 
 import Navbar from "./Navbar";
 import Loader from "./Loader";
@@ -11,15 +19,24 @@ import {fetchFidelity, fetchDiscount} from "../actions/fidelityActions";
 
 @connect((store) => {
   let fidelityStore = store.fidelity
-  return {fidelityData: fidelityStore.fidelityData, fetching: fidelityStore.fetching, fetched: fidelityStore.fetched}
+  return {fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData}
 })
 
 class Fidelity extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      discountModal: false
+    }
     this.props.dispatch(fetchFidelity())
     this.fetchDiscount = this.fetchDiscount.bind(this)
+    this.toggleDiscountModal = this.toggleDiscountModal.bind(this);
+  }
+
+  toggleDiscountModal() {
+    this.setState({
+      discountModal: !this.state.discountModal
+    });
   }
 
   calcHeight(fidelity) {
@@ -52,11 +69,20 @@ class Fidelity extends Component {
         {" " + this.props.fidelityData.amount + " DT"}
       </div>
       <Button className="activate" onClick={this.fetchDiscount}>
-        <Loader spinning={this.props.fetching}>
+        <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching}>
           <i className="fa fa-bolt"></i>
         </Loader>
       </Button>
-
+      <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>
+        <ModalHeader toggle={this.toggleDiscountModal}>Modal title</ModalHeader>
+        <ModalBody>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={this.toggleDiscountModal}>Do Something</Button>{" "}
+          <Button color="secondary" onClick={this.toggleDiscountModal}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
     </div>);
   }
 }
