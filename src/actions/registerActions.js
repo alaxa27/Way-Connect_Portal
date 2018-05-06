@@ -5,12 +5,50 @@
 
 // Read more on Actions - https://redux.js.org/docs/basics/Actions.html
 import axios from "axios";
-import {fetchInformation} from "./informationActions";
 import {
+  FETCH_REGISTER_DATA,
+  FETCH_REGISTER_DATA_FULFILLED,
+  FETCH_REGISTER_DATA_REJECTED,
   POST_REGISTER_FORM,
-  POST_REGISTER_FORM_REJECTED,
-  POST_REGISTER_FORM_FULFILLED
+  POST_REGISTER_FORM_FULFILLED,
+  POST_REGISTER_FORM_REJECTED
 } from "../constants/ActionTypes";
+
+import {
+  fetchInformation
+} from "./informationActions";
+
+export function fetchRegisterData(payload) {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: FETCH_REGISTER_DATA
+    })
+    try {
+      const registerData = { ...getState().register.registerData
+      };
+      const response = await axios({
+        method: "get",
+        url: "http://localhost:8000/customers/hobbies/",
+      })
+      // registerData.hobbies = response.data
+      registerData.hobbies = response.data.map((item) => {
+        return {
+          "label": item.name,
+          "value": item.id
+        }
+      })
+      dispatch({
+        type: FETCH_REGISTER_DATA_FULFILLED,
+        payload: registerData
+      })
+    } catch (error) {
+      dispatch({
+        type: FETCH_REGISTER_DATA_REJECTED
+      })
+      console.error(error)
+    }
+  }
+}
 
 export function postRegisterForm(payload) {
   return async (dispatch, getState) => {
@@ -18,20 +56,21 @@ export function postRegisterForm(payload) {
       dispatch({
         type: POST_REGISTER_FORM,
       })
-      let userData = Object.assign({}, payload.userData);
-      const informationData = getState().information.informationData
+      let userData = { ...payload.userData
+      };
+      const informationData = { ...getState().information.informationData
+      }
       userData.hobbies = userData.hobbies.map((item) => {
-        return {
-          "value": item.value
-        }
+        return item.value
       });
-
-      delete userData.nationality;
+      
+      userData.country = userData.nationality
+      delete userData.nationality
 
       try {
         const response = await axios({
           method: "post",
-          url: "http://localhost:8000/customers/",
+          url: "http://localhost:8000/customers/register/",
           headers: {
             "X-API-Key": informationData.API_Key
           },

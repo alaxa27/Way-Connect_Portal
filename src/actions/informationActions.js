@@ -21,7 +21,7 @@ export function fetchInformation(payload) {
       type: FETCH_INFORMATION,
     })
     try {
-      const informationData = getState().information.informationData;
+      const informationData = {...getState().information.informationData};
 
       const response = await axios({
         method: "get",
@@ -55,7 +55,7 @@ function fetchCommunication(payload) {
       type: POST_CONNECT
     })
     try {
-      const informationData = getState().information.informationData;
+      const informationData = {...getState().information.informationData};
       const response = await axios({
         method: "post",
         url: "http://localhost:8000/customers/connect/",

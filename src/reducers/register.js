@@ -6,7 +6,14 @@
 
 // Read more on Reducers - https://redux.js.org/docs/basics/Reducers.html
 
-import { POST_REGISTER_FORM, POST_REGISTER_FORM_FULFILLED, POST_REGISTER_FORM_REJECTED } from "../constants/ActionTypes";
+import {
+  FETCH_REGISTER_DATA,
+  FETCH_REGISTER_DATA_FULFILLED,
+  FETCH_REGISTER_DATA_REJECTED,
+  POST_REGISTER_FORM,
+  POST_REGISTER_FORM_FULFILLED,
+  POST_REGISTER_FORM_REJECTED
+} from "../constants/ActionTypes";
 
 const userData = {
   age: 5,
@@ -17,20 +24,42 @@ const userData = {
   hobbies: []
 }
 
+const registerData = {
+  hobbies: []
+}
+
 export default function reducer(state = {
   posting: false,
   posted: false,
-  userData: userData
+  fetching: false,
+  fetched: false,
+  userData: userData,
+  registerData: registerData
 }, action) {
   switch (action.type) {
-  case POST_REGISTER_FORM:
-    return {...state, posting: true};
-  case POST_REGISTER_FORM_FULFILLED:
-    return {...state, posting: false, posted: true};
-  case POST_REGISTER_FORM_REJECTED:
-    return {...state, posting: false, posted: false};
-  default:
-    return {...state};
+    case FETCH_REGISTER_DATA:
+      return {...state, fetching: true}
+    case FETCH_REGISTER_DATA_FULFILLED:
+      return {...state, fetching: false, fetched: true, registerData: action.payload}
+    case FETCH_REGISTER_DATA_REJECTED:
+      return {...state, fetching: false, fetched: false}
+    case POST_REGISTER_FORM:
+      return { ...state,
+        posting: true
+      };
+    case POST_REGISTER_FORM_FULFILLED:
+      return { ...state,
+        posting: false,
+        posted: true
+      };
+    case POST_REGISTER_FORM_REJECTED:
+      return { ...state,
+        posting: false,
+        posted: false
+      };
+    default:
+      return { ...state
+      };
   }
 
   return state;

@@ -9,13 +9,20 @@ import Select from "react-select";
 import Navbar from "./Navbar";
 import Loader from "./Loader";
 
-import {postRegisterForm} from "../actions/registerActions";
+import {postRegisterForm, fetchRegisterData} from "../actions/registerActions";
 
 const STATUS = require("../data/status");
 
 @connect((store) => {
   let registerStore = store.register
-  return {userData: registerStore.userData, posting: registerStore.posting, posted: registerStore.posted}
+  return {
+    userData: registerStore.userData,
+    posting: registerStore.posting,
+    posted: registerStore.posted,
+    fetching: registerStore.fetching,
+    fetched: registerStore.fetched,
+    registerData: registerStore.registerData
+  }
 })
 
 class Register extends Component {
@@ -33,6 +40,8 @@ class Register extends Component {
     this.updateRelationshipStatus = this.updateRelationshipStatus.bind(this);
     this.updateHobbies = this.updateHobbies.bind(this);
     this.postForm = this.postForm.bind(this);
+
+    this.props.dispatch(fetchRegisterData())
   }
 
   updateGender(event) {
@@ -93,7 +102,7 @@ class Register extends Component {
     let nationality = STATUS["NATIONALITY"]
     let workStatus = STATUS["PROFESSIONAL"]
     let relationshipStatus = STATUS["RELATIONSHIP"]
-    let hobbies = STATUS["HOBBIES"]
+    let hobbies = this.props.registerData.hobbies
 
     return (<div className="register">
       {
