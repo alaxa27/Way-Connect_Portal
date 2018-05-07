@@ -12,20 +12,15 @@ import {Button, Row, Col} from "reactstrap";
 class Dashboard extends Component {
   constructor(props) {
     super(props)
-
-    this.goToCommunication = this.goToCommunication.bind(this)
-  }
-
-  goToCommunication() {
-    window.location = this.props.communicationURL
   }
 
   render() {
-    console.log(this.props);
     return (<div className="dashboard">
-      <Button onClick={this.goToCommunication}>
-        <i className="fa fa-wifi"></i>
-      </Button>
+      <Link to="/video">
+        <Button>
+          <i className="fa fa-wifi"></i>
+        </Button>
+      </Link>
       <h4>
         Join the WiFi Network
       </h4>

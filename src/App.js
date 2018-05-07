@@ -10,6 +10,7 @@ import Register from "./components/Register"
 import Dashboard from "./components/Dashboard"
 import Claim from "./components/Claim"
 import Fidelity from "./components/Fidelity"
+import Video from "./components/Video"
 
 // @connect((store) => {
 //   let informationStore = store.information
@@ -33,7 +34,8 @@ class App extends Component {
     } else if (isKnown && fetched) {
       return (<div>
         <Route exact="exact" path="/" name="Dashboard" component={Dashboard}/>
-        <Route path="/dashboard" name="Dashboard" component={Dashboard}/> {
+        <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+        <Route path="/video" name="Video" component={Video}/>{
           ((isHotel) => {
             if (isHotel) {
               return (<Route path="/claim" name="Claim" component={Claim}/>)

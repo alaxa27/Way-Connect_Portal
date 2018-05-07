@@ -6156,6 +6156,11 @@ html {
     height: 100%;
     width: 100%;
     position: fixed; }
+  #root .modal-content,
+  body .modal-content,
+  html .modal-content {
+    background-color: #1a1a1a;
+    text-align: center; }
 
 .app {
   text-align: center;
@@ -6342,6 +6347,14 @@ html {
     position: relative;
     left: -13px;
     top: -8px; }
+
+.video {
+  height: 100%;
+  margin: auto; }
+  .video video {
+    width: 100%;
+    height: auto;
+    max-height: 100%; }
 @charset "UTF-8";
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome

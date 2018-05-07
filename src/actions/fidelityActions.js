@@ -51,6 +51,7 @@ export function fetchDiscount(payload) {
             discountData: discountData
           }
         });
+        payload.toggleDiscountModal()
       }, 1000);
     }
   }

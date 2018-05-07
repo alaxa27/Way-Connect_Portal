@@ -40,6 +40,10 @@ html {
     position: fixed;
   }
 
+  .modal-content {
+    background-color: $background-color;
+    text-align: center;
+  }
 }
 
 .app {
@@ -317,5 +321,14 @@ html {
     left: -13px;
     top: -8px;
   }
+}
 
+.video {
+  height: 100%;
+  margin: auto;
+  video {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
 }

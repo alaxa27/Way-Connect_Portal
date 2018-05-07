@@ -45,7 +45,9 @@ class Fidelity extends Component {
   }
 
   fetchDiscount() {
-    this.props.dispatch(fetchDiscount())
+    this.props.dispatch(fetchDiscount({
+      toggleDiscountModal: this.toggleDiscountModal
+    }))
   }
 
   render() {
@@ -74,13 +76,14 @@ class Fidelity extends Component {
         </Loader>
       </Button>
       <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>
-        <ModalHeader toggle={this.toggleDiscountModal}>Modal title</ModalHeader>
+        <ModalHeader toggle={this.toggleDiscountModal}>Discount Code</ModalHeader>
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <h4>
+            {this.props.discountData.code}
+          </h4>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.toggleDiscountModal}>Do Something</Button>{" "}
-          <Button color="secondary" onClick={this.toggleDiscountModal}>Cancel</Button>
+          <Button color="primary" onClick={this.toggleDiscountModal}>Ok</Button>
         </ModalFooter>
       </Modal>
     </div>);

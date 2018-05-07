@@ -35,11 +35,14 @@ export default function reducer(state = {
       return { ...state
       }
     case FETCH_INFORMATION_FULFILLED:
-      state.informationData.isKnown = action.payload.known
-      state.informationData.isHotel = (action.payload.establishment_type === "hotel")
       return { ...state,
         fetching: false,
-        fetched: true
+        fetched: true,
+        informationData: {
+          ...informationData,
+          isKnown: action.payload.known,
+          isHotel: (action.payload.establishment_type === "hotel")
+        }
       }
     case FETCH_INFORMATION_REJECTED:
       return { ...state,
@@ -50,8 +53,10 @@ export default function reducer(state = {
       return { ...state
       }
     case POST_CONNECT_FULFILLED:
-      state.informationData.communicationURL = action.payload
-      return { ...state
+      return { ...state,
+        informationData: { ...state.informationData,
+          communicationURL: action.payload
+        }
       }
     case POST_CONNECT_REJECTED:
       break

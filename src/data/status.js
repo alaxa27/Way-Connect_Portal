@@ -42,48 +42,6 @@ exports.RELATIONSHIP = [{
   }
 ]
 
-exports.HOBBIES = [{
-    value: "OU",
-    label: "Going Out"
-  },
-  {
-    value: "SP",
-    label: "Sport"
-  },
-  {
-    value: "AR",
-    label: "Art"
-  },
-  {
-    value: "GA",
-    label: "Games"
-  },
-  {
-    value: "IN",
-    label: "Indoor Activities"
-  },
-  {
-    value: "RE",
-    label: "Read"
-  },
-  {
-    value: "CL",
-    label: "Clothes"
-  },
-  {
-    value: "CH",
-    label: "Charity"
-  },
-  {
-    value: "TR",
-    label: "Travel"
-  },
-  {
-    value: "FO",
-    label: "Food"
-  }
-]
-
 exports.NATIONALITY = [
 {label: "Afghanistan", value: "AF"},
 {label: "Åland Islands", value: "AX"},
