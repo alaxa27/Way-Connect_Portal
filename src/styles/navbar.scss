@@ -1,0 +1,31 @@
+.navbar {
+  height: 50px;
+  width: 100%;
+  background: $background-color;
+  border-width: 0;
+  border-radius: 0.5rem;
+  // border-radius: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+
+  .back-button {
+    cursor: pointer;
+    width: 30px;
+
+    .fa:before {
+      font-weight: bold;
+      font-size: 1.75rem;
+      background: map-get($colors, way-gray);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: initial;
+    }
+  }
+
+  h4 {
+    margin: 0 auto;
+  }
+}

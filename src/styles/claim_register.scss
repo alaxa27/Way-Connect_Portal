@@ -1,0 +1,109 @@
+.claim,
+.register {
+  max-width: 500px;
+  margin: auto;
+
+  .form-control {
+    background-color: rgba(map-get($colors, way-gray), 0.5);
+    color: map-get($colors, light);
+    border: 0;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  label {
+    font-size: 2rem;
+    margin-top: 25px;
+    color: map-get($colors, light);
+  }
+
+  .gender-radio-buttons {
+    input {
+      display: none;
+    }
+
+    input:checked + label {
+      font-weight: bold;
+      background: $way-connect-gradient;
+    }
+
+    label {
+      width: 48%;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      text-transform: lowercase;
+      text-align: center;
+      padding: 5px;
+      border-radius: 10px;
+      background: #dbdbdb;
+    }
+  }
+
+  .pull-left {
+    float: left;
+  }
+
+  .input-range__label--max,
+  .input-range__label--min,
+  .input-range__label--value {
+    display: none;
+  }
+
+  .input-range__track {
+    background: #999 !important;
+  }
+
+  .input-range__track--active {
+    background: $way-connect-gradient !important;
+  }
+
+  .input-range__slider {
+    background: #333 !important;
+    border: 1px solid #333 !important;
+  }
+
+  .age-title {
+    font-size: 24px;
+    float: right;
+  }
+  // .select-box {
+  //   width: 100%;
+  //   background-color: map-get($colors, way-gray);
+  //   border-radius: 10px;
+  //   position: relative;
+  //   height: 30px;
+  //
+  //   .input {
+  //     width: 100%;
+  //     border: none;
+  //     background-color: transparent;
+  //     padding: 3px 10px;
+  //     -moz-appearance: window;
+  //     -webkit-appearance: none;
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     z-index: 1;
+  //     color: map-get($colors, light);
+  //   }
+  //
+  //   .arrow {
+  //     position: absolute;
+  //     top: 5px;
+  //     right: 10px;
+  //     color: map-get($colors, way-gray-dark);
+  //     font-size: 20px;
+  //   }
+  // }
+  .Select {
+    width: 100%;
+    text-align: left;
+    font-weight: normal;
+  }
+
+  .submit {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}

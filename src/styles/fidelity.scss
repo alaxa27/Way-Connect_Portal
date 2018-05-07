@@ -1,0 +1,75 @@
+.fidelity {
+  max-width: 500px;
+  margin: auto;
+  $fidelity_logo_size: 200px;
+  $fidelity_logo_size_half: ($fidelity_logo_size);
+
+  h2,
+  h4 {
+    font-size: 3.5rem;
+    font-weight: 900;
+  }
+
+  h4 {
+    font-size: 2.5rem;
+  }
+
+  .logo {
+    margin: 50px auto 10px;
+    width: $fidelity_logo_size;
+    height: $fidelity_logo_size;
+    // margin-right: calc(100vw - 150px);
+    img {
+      width: 100%;
+    }
+
+    .logo-black {
+      width: $fidelity_logo_size;
+      height: $fidelity_logo_size;
+      position: fixed;
+      overflow-y: hidden;
+      transition: height 2s ease;
+    }
+
+    .logo-white {
+      width: $fidelity_logo_size;
+      height: $fidelity_logo_size;
+      position: fixed;
+      overflow-y: hidden;
+    }
+  }
+
+  .bonus-max {
+    width: 50%;
+    height: 3rem;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    padding: 0.25rem;
+    background-color: rgba(map-get($colors, way-gray), 0.5);
+    margin: 15% auto;
+  }
+
+  .fa:before {
+    // color: $way-connect-gradient;
+    background: $way-connect-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: initial;
+  }
+
+  .activate {
+    font-size: 3rem;
+    width: 100px;
+    height: 100px;
+    background-color: map-get($colors, way-gray);
+    border-radius: 100px;
+  }
+
+  .loader {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: -13px;
+    top: -8px;
+  }
+}

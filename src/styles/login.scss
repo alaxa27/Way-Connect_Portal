@@ -1,0 +1,27 @@
+.login {
+  height: 100%;
+
+  .logo {
+    margin-top: 60px;
+    max-width: 200px;
+    height: 200px;
+  }
+
+  .btn-facebook {
+    border-radius: 1rem;
+    font-weight: bold;
+    border: 0;
+    background-color: map-get($colors, facebook-blue);
+    padding: 0.5rem 1.5rem;
+  }
+
+  .no-facebook {
+    color: white !important;
+    text-decoration: none !important;
+  }
+
+  .buttons {
+    margin-top: 250px;
+    bottom: 100px;
+  }
+}

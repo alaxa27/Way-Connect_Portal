@@ -1,0 +1,16 @@
+$colors: (
+  primary: #488aff,
+  secondary: #32db64,
+  danger: #f53d3d,
+  light: #f4f4f4,
+  dark: #222,
+  way-dark: #1a1a1a,
+  way-red: #EF4136,
+  way-yellow: #FFDD00,
+  way-gray: #4d4d4d,
+  way-gray-dark: #333333,
+  white: #ffffff,
+  facebook-blue: #3b5998
+);
+$background-color: map-get($colors, way-dark);
+$way-connect-gradient: linear-gradient(to right, map-get($colors, way-red), map-get($colors, way-yellow)); // Import bootstrap styles
