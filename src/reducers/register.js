@@ -33,8 +33,8 @@ export default function reducer(state = {
   posted: false,
   fetching: false,
   fetched: false,
-  userData: userData,
-  registerData: registerData
+  userData: {...userData},
+  registerData: {...registerData}
 }, action) {
   switch (action.type) {
     case FETCH_REGISTER_DATA:

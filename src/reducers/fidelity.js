@@ -31,8 +31,8 @@ const discountData = {
 export default function reducer(state = {
   posting: false,
   posted: false,
-  fidelityData: fidelityData,
-  discountData: discountData
+  fidelityData: {...fidelityData},
+  discountData: {...discountData}
 }, action) {
   switch (action.type) {
     case FETCH_FIDELITY:

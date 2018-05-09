@@ -1,12 +1,15 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Row, Input, Label, Button} from "reactstrap";
 
 import Navbar from "./Navbar";
+import Loader from "./Loader";
 
 import {postClaim} from "../actions/claimActions";
+
+import {POST_CLAIM_REDIRECTED} from "../constants/ActionTypes"
 
 @connect((store) => {
   let claimStore = store.claim
@@ -23,7 +26,7 @@ class Claim extends Component {
     this.postClaim = this.postClaim.bind(this);
     this.updateEmail = this.updateEmail.bind(this);
     this.updateName = this.updateName.bind(this);
-    this.updateText = this.updateText.bind(this);
+    this.updateContent = this.updateContent.bind(this);
   }
 
   updateEmail(e) {
@@ -38,9 +41,9 @@ class Claim extends Component {
     this.setState({claimData})
   }
 
-  updateText(e) {
+  updateContent(e) {
     let claimData = this.state.claimData;
-    claimData.text = e.target.value
+    claimData.content = e.target.value
     this.setState({claimData})
   }
 
@@ -50,8 +53,17 @@ class Claim extends Component {
     }))
   }
 
+  renderRedirect() {
+    if (this.props.posted) {
+      this.props.dispatch({type: POST_CLAIM_REDIRECTED})
+      return (<Redirect to="/dashboard"></Redirect>)
+    }
+  }
+
   render() {
     return (<div className="claim">
+      {this.renderRedirect()}
+
       <Navbar title="Make a Claim" goBack={this.props.history.goBack}/>
       <Row>
         <Label>
@@ -75,10 +87,14 @@ class Claim extends Component {
         </Label>
       </Row>
       <Row>
-        <Input type="textarea" name="text" id="exampleText" rows="10" value={this.state.claimData.text} onChange={this.updateText}/>
+        <Input type="textarea" name="content" id="content" rows="10" value={this.state.claimData.content} onChange={this.updateContent}/>
       </Row>
       <Row>
-        <Button size="lg" block="block" className="submit" onClick={this.postClaim}>Submit</Button>
+        <Button size="lg" block="block" className="submit" onClick={this.postClaim}>
+          <Loader spinning={this.props.posting} height="22" width="22">
+            Submit
+          </Loader>
+        </Button>
       </Row>
     </div>);
   }

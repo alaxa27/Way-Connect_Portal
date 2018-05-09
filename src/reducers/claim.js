@@ -6,28 +6,47 @@
 
 // Read more on Reducers - https://redux.js.org/docs/basics/Reducers.html
 
-import { POST_CLAIM, POST_CLAIM_FULFILLED, POST_CLAIM_REJECTED } from "../constants/ActionTypes";
+import {
+  POST_CLAIM,
+  POST_CLAIM_FULFILLED,
+  POST_CLAIM_REJECTED,
+  POST_CLAIM_REDIRECTED
+} from "../constants/ActionTypes";
 
 const claim = {
   email: "",
   name: "",
-  text: ""
+  content: ""
 }
 
 export default function reducer(state = {
   posting: false,
   posted: false,
-  claimData: claim
+  claimData: {...claim}
 }, action) {
   switch (action.type) {
-  case POST_CLAIM:
-    return {...state, posting: true};
-  case POST_CLAIM_FULFILLED:
-    return {...state, posting: false, posted: true};
-  case POST_CLAIM_REJECTED:
-    return {...state, posting: false, posted: false};
-  default:
-    return {...state};
+    case POST_CLAIM:
+      return { ...state,
+        posting: true
+      };
+    case POST_CLAIM_FULFILLED:
+      return { ...state,
+        claimData: { ...claim
+        },
+        posting: false,
+        posted: true
+      };
+    case POST_CLAIM_REJECTED:
+      return { ...state,
+        posting: false,
+        posted: false
+      };
+    case POST_CLAIM_REDIRECTED:
+      return { ...state,
+        posted: false}
+    default:
+      return { ...state
+      };
   }
 
   return state;

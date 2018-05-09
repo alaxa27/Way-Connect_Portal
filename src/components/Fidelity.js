@@ -70,7 +70,7 @@ class Fidelity extends Component {
         <i className="fa fa-star"></i>
         {" " + this.props.fidelityData.amount + " DT"}
       </div>
-      <Button className="activate" onClick={this.fetchDiscount}>
+      <Button className={"activate" + (this.props.fidelityData.rate > 0 ? "" : " disabled")} onClick={this.fetchDiscount}>
         <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching}>
           <i className="fa fa-bolt"></i>
         </Loader>

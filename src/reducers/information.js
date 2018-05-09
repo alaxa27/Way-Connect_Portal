@@ -18,7 +18,7 @@ import {
 // 899f49e5e44d41a3ad8fe1a7368fd189
 // mac_address: "01:00:5E:1A:2F:0E",
 const informationData = {
-  mac_address: "22:DD:1D:F2:1B:1D",
+  mac_address: "22:ED:1D:F2:1B:1D",
   API_Key: "899f49e5e44d41a3ad8fe1a7368fd189",
   isHotel: false,
   isKnown: false,
@@ -26,7 +26,7 @@ const informationData = {
 }
 
 export default function reducer(state = {
-  informationData: informationData,
+  informationData: {...informationData},
   fetching: false,
   fetched: false
 }, action) {

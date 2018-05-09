@@ -33,7 +33,7 @@ export function fetchFidelity(payload) {
 
 export function fetchDiscount(payload) {
   return (dispatch, getState) => {
-    if (!getState().fidelity.fidelityData.fetching && !getState().fidelity.discountData.fetching) {
+    if (!getState().fidelity.fidelityData.fetching && !getState().fidelity.discountData.fetched && getState().fidelity.fidelityData.rate > 0) {
       dispatch({
         type: FETCH_DISCOUNT
       })
