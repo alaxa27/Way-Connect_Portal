@@ -113,80 +113,61 @@ class Register extends Component {
       }
       <Navbar title="Register" goBack={this.props.history.goBack}/>
 
-      <Row>
-        <Label>
-          Gender
-        </Label>
-      </Row>
-      <Row>
-        <Col>
-          <div className="gender-radio-buttons">
+      <div>
+        <Row>
+          <Label>
+            Gender
+          </Label>
+        </Row>
+        <div className="gender-radio-buttons">
+          <div>
             <Input type="radio" id="male" name="gender" value="M" checked={this.state.userData.gender === "M"} onChange={this.updateGender}/>
             <Label htmlFor="male" className="pull-left">Male</Label>
+          </div>
+          <div>
             <Input type="radio" id="female" name="gender" value="F" checked={this.state.userData.gender === "F"} onChange={this.updateGender}/>
             <Label htmlFor="female" className="pull-right">Female</Label>
-            <div className="clearfix"></div>
           </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Label className="pull-left">
-            Age
-          </Label>
-        </Col>
-        <Col>
-          <Label className="age-title">{this.state.userData.age}yo</Label>
-        </Col>
-      </Row>
-      <Row>
+          <div className="clearfix"></div>
+        </div>
+      </div>
+      <div>
+        <Label className="pull-left">
+          Age
+        </Label>
+        <Label className="age-title">{this.state.userData.age}yo</Label>
         <InputRange maxValue={100} minValue={0} value={this.state.userData.age} onChange={this.updateAge}/>
-      </Row>
-      <Row>
+      </div>
+      <div>
         <Label>
           Nationality
         </Label>
-      </Row>
-      <Row className="select-box">
         <Select id="nationality-select" ref="nationalitySelect" options={nationality} simpleValue="simpleValue" name="selected-nationality" value={this.state.userData.nationality} onChange={this.updateNationality}/>
-      </Row>
-
-      <Row>
+      </div>
+      <div>
         <Label>
           Relationship
         </Label>
-      </Row>
-      <Row className="select-box">
         <Select id="relationship-select" ref="relationshipSelect" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationship_status} onChange={this.updateRelationshipStatus}/>
-      </Row>
-
-      <Row>
+      </div>
+      <div>
         <Label>
           Professional
         </Label>
-      </Row>
-      <Row className="select-box">
-
         <Select id="professional-select" ref="professionalSelect" options={workStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.work_status} onChange={this.updateWorkStatus}/>
-      </Row>
-
-      <Row>
+      </div>
+      <div>
         <Label>
           Hobbies
         </Label>
-      </Row>
-      <Row className="select-box">
-
         <Select id="hobbies-select" ref="hobbiesSelect" options={hobbies} multi="multi" name="selected-hobbies" value={this.state.userData.hobbies} onChange={this.updateHobbies
 }/>
-      </Row>
-      <Row>
-        <Button size="lg" block="block" className="submit" onClick={this.postForm}>
-          <Loader spinning={this.props.posting} height="22" width="22">
-            Submit
-          </Loader>
-        </Button>
-      </Row>
+      </div>
+      <Button size="lg" block="block" className="submit" onClick={this.postForm}>
+        <Loader spinning={this.props.posting} height="22" width="22">
+          Submit
+        </Loader>
+      </Button>
     </div>);
   }
 }

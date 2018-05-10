@@ -65,37 +65,29 @@ class Claim extends Component {
       {this.renderRedirect()}
 
       <Navbar title="Make a Claim" goBack={this.props.history.goBack}/>
-      <Row>
+      <div>
         <Label>
           Your Email
         </Label>
-      </Row>
-      <Row>
         <Input type="email" name="email" id="exampleEmail" placeholder="mail@mail.com" value={this.state.claimData.email} onChange={this.updateEmail}/>
-      </Row>
-      <Row>
+      </div>
+      <div>
         <Label>
           Your Name
         </Label>
-      </Row>
-      <Row>
         <Input type="text" name="name" placeholder="name" value={this.state.claimData.name} onChange={this.updateName}/>
-      </Row>
-      <Row>
+      </div>
+      <div>
         <Label>
           Your Claim
         </Label>
-      </Row>
-      <Row>
-        <Input type="textarea" name="content" id="content" rows="10" value={this.state.claimData.content} onChange={this.updateContent}/>
-      </Row>
-      <Row>
-        <Button size="lg" block="block" className="submit" onClick={this.postClaim}>
-          <Loader spinning={this.props.posting} height="22" width="22">
-            Submit
-          </Loader>
-        </Button>
-      </Row>
+        <Input type="textarea" name="content" id="content" value={this.state.claimData.content} onChange={this.updateContent} rows="7"/>
+      </div>
+      <Button size="lg" block="block" className="submit" onClick={this.postClaim}>
+        <Loader spinning={this.props.posting} height="22" width="22">
+          Submit
+        </Loader>
+      </Button>
     </div>);
   }
 }

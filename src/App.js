@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {BrowserRouter as Router, Route, Redirect, withRouter} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect, withRouter} from "react-router-dom";
 
 import {fetchInformation} from "./actions/informationActions";
 
@@ -26,13 +26,13 @@ class App extends Component {
 
   renderKnownRoutes(isKnown, isHotel, fetched) {
     if (!isKnown && fetched) {
-      return (<div>
+      return (<Switch>
         <Route exact="exact" path="/" name="Login" component={Login}/>
         <Route path="/login" name="Login" component={Login}/>
         <Route path="/register" name="Register" component={Register}/>
-      </div>)
+      </Switch>)
     } else if (isKnown && fetched) {
-      return (<div>
+      return (<Switch>
         <Route exact="exact" path="/" name="Dashboard" component={Dashboard}/>
         <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
         <Route path="/video" name="Video" component={Video}/>{
@@ -44,7 +44,7 @@ class App extends Component {
             }
           })(isHotel)
         }
-      </div>)
+      </Switch>)
     } else {
       return (<div></div>)
     }

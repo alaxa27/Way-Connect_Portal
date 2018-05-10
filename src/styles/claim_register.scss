@@ -1,5 +1,9 @@
 .claim,
 .register {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
   max-width: 500px;
   margin: auto;
 
@@ -12,6 +16,7 @@
   }
 
   label {
+    float: left;
     font-size: 2rem;
     margin-top: 25px;
     color: map-get($colors, light);

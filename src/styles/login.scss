@@ -1,13 +1,18 @@
 .login {
   height: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
   .logo {
-    margin-top: 60px;
     max-width: 200px;
     height: 200px;
   }
 
   .btn-facebook {
+    display: flex;
+    flex-wrap: wrap;
     border-radius: 1rem;
     font-weight: bold;
     border: 0;
