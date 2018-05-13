@@ -14,37 +14,29 @@ class Dashboard extends Component {
     super(props)
   }
 
+  renderButton(link, icon, text, is) {
+    if (is) {
+      return (<div>
+        <Link to={"/" + link}>
+          <Button>
+            <i className={"fa fa-" + icon}></i>
+          </Button>
+        </Link>
+        <h4>
+          {text}
+        </h4>
+      </div>)
+    } else {
+      return null;
+    }
+
+  }
+
   render() {
     return (<div className="dashboard">
-      <div>
-        <Link to="/video">
-          <Button>
-            <i className="fa fa-wifi"></i>
-          </Button>
-        </Link>
-        <h4>
-          Join the WiFi Network
-        </h4>
-      </div>
-      <div>
-        <Link to={"/" + (
-            this.props.isHotel
-            ? "claim"
-            : "fidelity")}>
-          <Button>
-            <i className={"fa fa-" + (
-                this.props.isHotel
-                ? "exclamation-triangle"
-                : "balance-scale")}></i>
-          </Button>
-        </Link>
-        <h4>
-          {
-            this.props.isHotel
-              ? "Make a Claim"
-              : "Fidelity Bonus"
-          }</h4>
-      </div>
+      {this.renderButton("video", "wifi", "Join the WiFi Network", true)}
+      {this.renderButton("claim", "exclamation-triangle", "Make a Claim", this.props.isHotel)}
+      {this.renderButton("fidelity", "hand-holding-usd", "Fidelity Bonus", !this.props.isHotel)}
     </div>);
   }
 }
