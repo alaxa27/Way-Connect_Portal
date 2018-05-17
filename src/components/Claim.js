@@ -92,4 +92,12 @@ class Claim extends Component {
   }
 }
 
+Claim.propTypes = {
+  dispatch: PropTypes.func,
+  posted: PropTypes.bool,
+  posting: PropTypes.bool,
+  claimData: PropTypes.object,
+  history: PropTypes.shape({goBack: PropTypes.func})
+};
+
 export default Claim;

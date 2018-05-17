@@ -14,4 +14,9 @@ class Navbar extends Component {
   }
 }
 
+Navbar.propTypes = {
+  goBack: PropTypes.func,
+  title: PropTypes.string
+};
+
 export default Navbar;

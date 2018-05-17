@@ -45,9 +45,7 @@ class Fidelity extends Component {
   }
 
   fetchDiscount() {
-    this.props.dispatch(fetchDiscount({
-      toggleDiscountModal: this.toggleDiscountModal
-    }));
+    this.props.dispatch(fetchDiscount({toggleDiscountModal: this.toggleDiscountModal}));
   }
 
   render() {
@@ -70,7 +68,10 @@ class Fidelity extends Component {
         <i className="fa fa-star"></i>
         {" " + this.props.fidelityData.amount + " DT"}
       </div>
-      <Button className={"activate" + (this.props.fidelityData.rate > 0 ? "" : " disabled")} onClick={this.fetchDiscount}>
+      <Button className={"activate" + (
+          this.props.fidelityData.rate > 0
+          ? ""
+          : " disabled")} onClick={this.fetchDiscount}>
         <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching}>
           <i className="fa fa-bolt"></i>
         </Loader>
@@ -89,5 +90,13 @@ class Fidelity extends Component {
     </div>);
   }
 }
+
+Fidelity.propTypes = {
+  dispatch: PropTypes.func,
+  fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, fetching: PropTypes.bool, fetched: PropTypes.bool}),
+  discountData: PropTypes.shape({code: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
+  className: PropTypes.string,
+  history: PropTypes.shape({goBack: PropTypes.func})
+};
 
 export default Fidelity;

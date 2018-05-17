@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {BrowserRouter as Router, Route, Switch, Redirect, withRouter} from "react-router-dom";
+import PropTypes from "prop-types";
 
 import {fetchInformation} from "./actions/informationActions";
 
@@ -59,6 +60,14 @@ class App extends Component {
     </div>);
   }
 }
+
+App.propTypes = {
+  dispatch: PropTypes.func,
+  isKnown: PropTypes.bool,
+  isHotel: PropTypes.bool,
+  fetched: PropTypes.bool
+};
+
 const mapStateToProps = (store) => {
   let informationStore = store.information;
   return {isKnown: informationStore.informationData.isKnown, isHotel: informationStore.informationData.isHotel, fetched: informationStore.fetched};

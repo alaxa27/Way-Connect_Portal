@@ -31,4 +31,8 @@ class Video extends Component {
   }
 }
 
+Video.propTypes = {
+  communicationURL: PropTypes.string
+};
+
 export default Video;

@@ -1,13 +1,13 @@
 import React, {Component} from "react";
-import Loader from "react-loader-spinner";
+import LoaderSpinner from "react-loader-spinner";
 import PropTypes from "prop-types";
 
-class Navbar extends Component {
+class Loader extends Component {
 
   renderLoader(spinning, children) {
     if (spinning) {
       return (<div className="loader">
-        <Loader type="Rings" color={this.props.color} height={this.props.height} width={this.props.width}/>
+        <LoaderSpinner type="Rings" color={this.props.color} height={this.props.height} width={this.props.width}/>
       </div>);
     } else {
       return (children);
@@ -21,11 +21,19 @@ class Navbar extends Component {
   }
 }
 
-Navbar.defaultProps = {
+Loader.propTypes = {
+  color: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  spinning: PropTypes.bool,
+  children: PropTypes.element
+};
+
+Loader.defaultProps = {
   color: "#333333",
   height: 100,
   width: 100,
   spinning: true
 };
 
-export default Navbar;
+export default Loader;

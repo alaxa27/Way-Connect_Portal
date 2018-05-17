@@ -172,4 +172,13 @@ class Register extends Component {
   }
 }
 
+Register.propTypes = {
+  dispatch: PropTypes.func,
+  userData: PropTypes.object,
+  registerData: PropTypes.shape({hobbies: PropTypes.array}),
+  posting: PropTypes.bool,
+  posted: PropTypes.bool,
+  history: PropTypes.shape({goBack: PropTypes.func})
+};
+
 export default Register;

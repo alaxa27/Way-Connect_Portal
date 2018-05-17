@@ -41,4 +41,8 @@ class Dashboard extends Component {
   }
 }
 
+Dashboard.propTypes = {
+  isHotel: PropTypes.bool
+};
+
 export default Dashboard;
