@@ -15,7 +15,7 @@ class Login extends Component {
           Continue with facebook
         </Button>
         <NavLink to="/register" className="no-facebook">
-          I don't have Facebook
+          {"I don't have Facebook"}
         </NavLink>
       </div>
     </div>);

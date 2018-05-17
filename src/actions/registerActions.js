@@ -22,32 +22,32 @@ export function fetchRegisterData(payload) {
   return async (dispatch, getState) => {
     dispatch({
       type: FETCH_REGISTER_DATA
-    })
+    });
     try {
       const registerData = { ...getState().register.registerData
       };
       const response = await axios({
         method: "get",
         url: "http://localhost:8000/customers/hobbies/",
-      })
+      });
       // registerData.hobbies = response.data
       registerData.hobbies = response.data.map((item) => {
         return {
           "label": item.name,
           "value": item.id
-        }
-      })
+        };
+      });
       dispatch({
         type: FETCH_REGISTER_DATA_FULFILLED,
         payload: registerData
-      })
+      });
     } catch (error) {
       dispatch({
         type: FETCH_REGISTER_DATA_REJECTED
-      })
-      console.error(error)
+      });
+      console.error(error);
     }
-  }
+  };
 }
 
 export function postRegisterForm(payload) {
@@ -55,17 +55,17 @@ export function postRegisterForm(payload) {
     if (!getState().register.posting && !getState().register.posted) {
       dispatch({
         type: POST_REGISTER_FORM,
-      })
+      });
       let userData = { ...payload.userData
       };
       const informationData = { ...getState().information.informationData
-      }
+      };
       userData.hobbies = userData.hobbies.map((item) => {
-        return item.value
+        return item.value;
       });
       
-      userData.country = userData.nationality
-      delete userData.nationality
+      userData.country = userData.nationality;
+      delete userData.nationality;
 
       try {
         const response = await axios({
@@ -78,17 +78,17 @@ export function postRegisterForm(payload) {
             ...userData,
             mac_address: informationData.mac_address
           }
-        })
+        });
         dispatch({
           type: POST_REGISTER_FORM_FULFILLED
-        })
-        dispatch(fetchInformation())
+        });
+        dispatch(fetchInformation());
       } catch (error) {
         dispatch({
           type: POST_REGISTER_FORM_REJECTED,
-        })
+        });
         console.error(error);
       }
     }
-  }
+  };
 }

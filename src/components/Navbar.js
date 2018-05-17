@@ -5,7 +5,7 @@ class Navbar extends Component {
   render() {
     return (<div className="navbar">
       <div className="back-button" onClick={(() => {
-          this.props.goBack()
+          this.props.goBack();
         }).bind(this)}>
         <i className="fa fa-angle-left"></i>
       </div>

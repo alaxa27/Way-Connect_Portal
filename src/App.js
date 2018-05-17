@@ -6,11 +6,11 @@ import {fetchInformation} from "./actions/informationActions";
 
 import Loading from "./components/Loading";
 import Login from "./components/Login";
-import Register from "./components/Register"
-import Dashboard from "./components/Dashboard"
-import Claim from "./components/Claim"
-import Fidelity from "./components/Fidelity"
-import Video from "./components/Video"
+import Register from "./components/Register";
+import Dashboard from "./components/Dashboard";
+import Claim from "./components/Claim";
+import Fidelity from "./components/Fidelity";
+import Video from "./components/Video";
 
 // @connect((store) => {
 //   let informationStore = store.information
@@ -19,9 +19,9 @@ import Video from "./components/Video"
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.props.dispatch(fetchInformation())
+    this.props.dispatch(fetchInformation());
   }
 
   renderKnownRoutes(isKnown, isHotel, fetched) {
@@ -30,7 +30,7 @@ class App extends Component {
         <Route exact="exact" path="/" name="Login" component={Login}/>
         <Route path="/login" name="Login" component={Login}/>
         <Route path="/register" name="Register" component={Register}/>
-      </Switch>)
+      </Switch>);
     } else if (isKnown && fetched) {
       return (<Switch>
         <Route exact="exact" path="/" name="Dashboard" component={Dashboard}/>
@@ -38,15 +38,15 @@ class App extends Component {
         <Route path="/video" name="Video" component={Video}/>{
           ((isHotel) => {
             if (isHotel) {
-              return (<Route path="/claim" name="Claim" component={Claim}/>)
+              return (<Route path="/claim" name="Claim" component={Claim}/>);
             } else if (!isHotel) {
-              return (<Route path="/fidelity" name="Fidelity" component={Fidelity}/>)
+              return (<Route path="/fidelity" name="Fidelity" component={Fidelity}/>);
             }
           })(isHotel)
         }
-      </Switch>)
+      </Switch>);
     } else {
-      return (<div></div>)
+      return (<div></div>);
     }
   }
 
@@ -60,9 +60,9 @@ class App extends Component {
   }
 }
 const mapStateToProps = (store) => {
-  let informationStore = store.information
-  return {isKnown: informationStore.informationData.isKnown, isHotel: informationStore.informationData.isHotel, fetched: informationStore.fetched}
-}
+  let informationStore = store.information;
+  return {isKnown: informationStore.informationData.isKnown, isHotel: informationStore.informationData.isHotel, fetched: informationStore.fetched};
+};
 // <Route exact="exact" path="/" name="Login" component={Login}/>
 
 export default withRouter(connect(mapStateToProps)(App));

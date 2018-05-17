@@ -20,13 +20,13 @@ const fidelityData = {
   fetched: false,
   rate: 0,
   amount: 10,
-}
+};
 
 const discountData = {
   fetching: false,
   fetched: false,
   code: "",
-}
+};
 
 export default function reducer(state = {
   posting: false,

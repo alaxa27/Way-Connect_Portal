@@ -17,7 +17,7 @@ const claim = {
   email: "",
   name: "",
   content: ""
-}
+};
 
 export default function reducer(state = {
   posting: false,
@@ -43,7 +43,7 @@ export default function reducer(state = {
       };
     case POST_CLAIM_REDIRECTED:
       return { ...state,
-        posted: false}
+        posted: false};
     default:
       return { ...state
       };

@@ -22,7 +22,7 @@ exports.PROFESSIONAL = [{
     value: "OF",
     label: "Official"
   }
-]
+];
 
 exports.RELATIONSHIP = [{
     value: "SI",
@@ -40,7 +40,7 @@ exports.RELATIONSHIP = [{
     value: "MA",
     label: "Married"
   }
-]
+];
 
 exports.NATIONALITY = [
 {label: "Afghanistan", value: "AF"},
@@ -286,4 +286,4 @@ exports.NATIONALITY = [
 {label: "Yemen", value: "YE"},
 {label: "Zambia", value: "ZM"},
 {label: "Zimbabwe", value: "ZW"}
-]
+];

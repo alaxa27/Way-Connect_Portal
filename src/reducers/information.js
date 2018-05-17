@@ -23,7 +23,7 @@ const informationData = {
   isHotel: false,
   isKnown: false,
   communicationURL: ""
-}
+};
 
 export default function reducer(state = {
   informationData: {...informationData},
@@ -33,7 +33,7 @@ export default function reducer(state = {
   switch (action.type) {
     case FETCH_INFORMATION:
       return { ...state
-      }
+      };
     case FETCH_INFORMATION_FULFILLED:
       return { ...state,
         fetching: false,
@@ -43,26 +43,26 @@ export default function reducer(state = {
           isKnown: action.payload.known,
           isHotel: (action.payload.establishment_type === "hotel")
         }
-      }
+      };
     case FETCH_INFORMATION_REJECTED:
       return { ...state,
         fetching: false,
         fetched: false
-      }
+      };
     case POST_CONNECT:
       return { ...state
-      }
+      };
     case POST_CONNECT_FULFILLED:
       return { ...state,
         informationData: { ...state.informationData,
           communicationURL: action.payload
         }
-      }
+      };
     case POST_CONNECT_REJECTED:
-      break
+      break;
     default:
       return { ...state
-      }
+      };
   }
 
   return state;

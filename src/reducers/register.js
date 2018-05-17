@@ -22,11 +22,11 @@ const userData = {
   work_status: "",
   relationship_status: "",
   hobbies: []
-}
+};
 
 const registerData = {
   hobbies: []
-}
+};
 
 export default function reducer(state = {
   posting: false,
@@ -38,11 +38,11 @@ export default function reducer(state = {
 }, action) {
   switch (action.type) {
     case FETCH_REGISTER_DATA:
-      return {...state, fetching: true}
+      return {...state, fetching: true};
     case FETCH_REGISTER_DATA_FULFILLED:
-      return {...state, fetching: false, fetched: true, registerData: action.payload}
+      return {...state, fetching: false, fetched: true, registerData: action.payload};
     case FETCH_REGISTER_DATA_REJECTED:
-      return {...state, fetching: false, fetched: false}
+      return {...state, fetching: false, fetched: false};
     case POST_REGISTER_FORM:
       return { ...state,
         posting: true

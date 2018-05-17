@@ -8,8 +8,8 @@ import Navbar from "./Navbar";
 import {postClaim} from "../actions/claimActions";
 
 @connect((store) => {
-  let informationStore = store.information
-  return {communicationURL: informationStore.informationData.communicationURL}
+  let informationStore = store.information;
+  return {communicationURL: informationStore.informationData.communicationURL};
 })
 
 class Video extends Component {

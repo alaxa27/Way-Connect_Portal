@@ -19,7 +19,7 @@ export function fetchInformation(payload) {
   return async (dispatch, getState) => {
     dispatch({
       type: FETCH_INFORMATION,
-    })
+    });
     try {
       const informationData = {...getState().information.informationData};
 
@@ -32,28 +32,28 @@ export function fetchInformation(payload) {
         params: {
           mac_address: informationData.mac_address
         }
-      })
+      });
       dispatch({
         type: FETCH_INFORMATION_FULFILLED,
         payload: response.data
-      })
+      });
       if (response.data.known) {
-        dispatch(fetchCommunication())
+        dispatch(fetchCommunication());
       }
     } catch (error) {
       dispatch({
         type: FETCH_INFORMATION_REJECTED,
-      })
+      });
       console.error(error);
     }
-  }
+  };
 }
 
 function fetchCommunication(payload) {
   return async (dispatch, getState) => {
     dispatch({
       type: POST_CONNECT
-    })
+    });
     try {
       const informationData = {...getState().information.informationData};
       const response = await axios({
@@ -65,17 +65,17 @@ function fetchCommunication(payload) {
         data: {
           mac_address: informationData.mac_address
         }
-      })
+      });
 
       dispatch({
         type: POST_CONNECT_FULFILLED,
         payload: response.data.video
-      })
+      });
     } catch (error) {
       dispatch({
         type: POST_CONNECT_REJECTED
-      })
-      console.error(error)
+      });
+      console.error(error);
     }
-  }
+  };
 }

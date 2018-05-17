@@ -18,17 +18,17 @@ export function fetchFidelity(payload) {
   return (dispatch, getState) => {
     dispatch({
       type: FETCH_FIDELITY,
-    })
+    });
     setTimeout(function() {
       let data = { ...getState().fidelity.fidelityData
-      }
-      data.rate = 0.8
+      };
+      data.rate = 0.8;
       dispatch({
         type: FETCH_FIDELITY_FULFILLED,
         payload: data
       });
     }, 2000);
-  }
+  };
 }
 
 export function fetchDiscount(payload) {
@@ -36,13 +36,13 @@ export function fetchDiscount(payload) {
     if (!getState().fidelity.fidelityData.fetching && !getState().fidelity.discountData.fetched && getState().fidelity.fidelityData.rate > 0) {
       dispatch({
         type: FETCH_DISCOUNT
-      })
+      });
       setTimeout(function() {
         let data = { ...getState().fidelity.fidelityData
-        }
+        };
         let discountData = { ...getState().fidelity.discountData
-        }
-        discountData.code = "DZ8HG9"
+        };
+        discountData.code = "DZ8HG9";
         data.rate = 0;
         dispatch({
           type: FETCH_DISCOUNT_FULFILLED,
@@ -51,8 +51,8 @@ export function fetchDiscount(payload) {
             discountData: discountData
           }
         });
-        payload.toggleDiscountModal()
+        payload.toggleDiscountModal();
       }, 1000);
     }
-  }
+  };
 }

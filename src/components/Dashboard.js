@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 import {Button, Row, Col} from "reactstrap";
 
 @connect((store) => {
-  let informationStore = store.information
-  return {isHotel: informationStore.informationData.isHotel, communicationURL: informationStore.informationData.communicationURL}
+  let informationStore = store.information;
+  return {isHotel: informationStore.informationData.isHotel, communicationURL: informationStore.informationData.communicationURL};
 })
 
 class Dashboard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   renderButton(link, icon, text, is) {
@@ -25,7 +25,7 @@ class Dashboard extends Component {
         <h4>
           {text}
         </h4>
-      </div>)
+      </div>);
     } else {
       return null;
     }

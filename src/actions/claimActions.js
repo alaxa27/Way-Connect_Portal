@@ -16,14 +16,14 @@ export function postClaim(payload) {
     if (!getState().claim.posting) {
       dispatch({
         type: POST_CLAIM
-      })
+      });
       try {
         const informationData = {
           ...getState().information.informationData
-        }
+        };
         const claimData = {
           ...getState().claim.claimData
-        }
+        };
         const response = await axios({
           method: "post",
           url: "http://localhost:8000/customers/claim/",
@@ -34,19 +34,19 @@ export function postClaim(payload) {
             ...claimData,
             mac_address: informationData.mac_address
           }
-        })
+        });
 
         dispatch({
           type: POST_CLAIM_FULFILLED,
           payload: response.data.video
-        })
+        });
 
       } catch (error) {
         dispatch({
           type: POST_CLAIM_REJECTED
-        })
-        console.error(error)
+        });
+        console.error(error);
       }
     }
-  }
+  };
 }

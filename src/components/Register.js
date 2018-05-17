@@ -14,7 +14,7 @@ import {postRegisterForm, fetchRegisterData} from "../actions/registerActions";
 const STATUS = require("../data/status");
 
 @connect((store) => {
-  let registerStore = store.register
+  let registerStore = store.register;
   return {
     userData: registerStore.userData,
     posting: registerStore.posting,
@@ -22,7 +22,7 @@ const STATUS = require("../data/status");
     fetching: registerStore.fetching,
     fetched: registerStore.fetched,
     registerData: registerStore.registerData
-  }
+  };
 })
 
 class Register extends Component {
@@ -41,68 +41,68 @@ class Register extends Component {
     this.updateHobbies = this.updateHobbies.bind(this);
     this.postForm = this.postForm.bind(this);
 
-    this.props.dispatch(fetchRegisterData())
+    this.props.dispatch(fetchRegisterData());
   }
 
   updateGender(event) {
     let userData = {
       ...this.state.userData
-    }
-    userData.gender = event.target.value
+    };
+    userData.gender = event.target.value;
     this.setState({userData});
   }
 
   updateAge(val) {
     let userData = {
       ...this.state.userData
-    }
-    userData.age = val
-    this.setState({userData})
+    };
+    userData.age = val;
+    this.setState({userData});
   }
 
   updateNationality(val) {
     let userData = {
       ...this.state.userData
-    }
-    userData.nationality = val
-    this.setState({userData})
+    };
+    userData.nationality = val;
+    this.setState({userData});
   }
 
   updateRelationshipStatus(val) {
     let userData = {
       ...this.state.userData
-    }
-    userData.relationship_status = val
-    this.setState({userData})
+    };
+    userData.relationship_status = val;
+    this.setState({userData});
   }
 
   updateWorkStatus(val) {
     let userData = {
       ...this.state.userData
-    }
-    userData.work_status = val
-    this.setState({userData})
+    };
+    userData.work_status = val;
+    this.setState({userData});
   }
 
   updateHobbies(val) {
     let userData = {
       ...this.state.userData
-    }
-    userData.hobbies = val
-    this.setState({userData})
+    };
+    userData.hobbies = val;
+    this.setState({userData});
   }
 
   postForm() {
     this.props.dispatch(postRegisterForm({
       ...this.state
-    }))
+    }));
   }
 
   render() {
-    let nationality = STATUS["NATIONALITY"]
-    let workStatus = STATUS["PROFESSIONAL"]
-    let relationshipStatus = STATUS["RELATIONSHIP"]
-    let hobbies = this.props.registerData.hobbies
+    let nationality = STATUS["NATIONALITY"];
+    let workStatus = STATUS["PROFESSIONAL"];
+    let relationshipStatus = STATUS["RELATIONSHIP"];
+    let hobbies = this.props.registerData.hobbies;
 
     return (<div className="register">
       {
@@ -142,25 +142,25 @@ class Register extends Component {
         <Label>
           Nationality
         </Label>
-        <Select id="nationality-select" ref="nationalitySelect" options={nationality} simpleValue="simpleValue" name="selected-nationality" value={this.state.userData.nationality} onChange={this.updateNationality}/>
+        <Select id="nationality-select" options={nationality} simpleValue="simpleValue" name="selected-nationality" value={this.state.userData.nationality} onChange={this.updateNationality}/>
       </div>
       <div>
         <Label>
           Relationship
         </Label>
-        <Select id="relationship-select" ref="relationshipSelect" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationship_status} onChange={this.updateRelationshipStatus}/>
+        <Select id="relationship-select" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationship_status} onChange={this.updateRelationshipStatus}/>
       </div>
       <div>
         <Label>
           Professional
         </Label>
-        <Select id="professional-select" ref="professionalSelect" options={workStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.work_status} onChange={this.updateWorkStatus}/>
+        <Select id="professional-select" options={workStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.work_status} onChange={this.updateWorkStatus}/>
       </div>
       <div>
         <Label>
           Hobbies
         </Label>
-        <Select id="hobbies-select" ref="hobbiesSelect" options={hobbies} multi="multi" name="selected-hobbies" value={this.state.userData.hobbies} onChange={this.updateHobbies
+        <Select id="hobbies-select" options={hobbies} multi="multi" name="selected-hobbies" value={this.state.userData.hobbies} onChange={this.updateHobbies
 }/>
       </div>
       <Button size="lg" block="block" className="submit" onClick={this.postForm}>

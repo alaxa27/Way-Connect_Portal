@@ -9,11 +9,11 @@ import Loader from "./Loader";
 
 import {postClaim} from "../actions/claimActions";
 
-import {POST_CLAIM_REDIRECTED} from "../constants/ActionTypes"
+import {POST_CLAIM_REDIRECTED} from "../constants/ActionTypes";
 
 @connect((store) => {
-  let claimStore = store.claim
-  return {claimData: claimStore.claimData, posting: claimStore.posting, posted: claimStore.posted}
+  let claimStore = store.claim;
+  return {claimData: claimStore.claimData, posting: claimStore.posting, posted: claimStore.posted};
 })
 
 class Claim extends Component {
@@ -31,32 +31,32 @@ class Claim extends Component {
 
   updateEmail(e) {
     let claimData = this.state.claimData;
-    claimData.email = e.target.value
-    this.setState({claimData})
+    claimData.email = e.target.value;
+    this.setState({claimData});
   }
 
   updateName(e) {
     let claimData = this.state.claimData;
-    claimData.name = e.target.value
-    this.setState({claimData})
+    claimData.name = e.target.value;
+    this.setState({claimData});
   }
 
   updateContent(e) {
     let claimData = this.state.claimData;
-    claimData.content = e.target.value
-    this.setState({claimData})
+    claimData.content = e.target.value;
+    this.setState({claimData});
   }
 
   postClaim() {
     this.props.dispatch(postClaim({
       ...this.state
-    }))
+    }));
   }
 
   renderRedirect() {
     if (this.props.posted) {
-      this.props.dispatch({type: POST_CLAIM_REDIRECTED})
-      return (<Redirect to="/dashboard"></Redirect>)
+      this.props.dispatch({type: POST_CLAIM_REDIRECTED});
+      return (<Redirect to="/dashboard"></Redirect>);
     }
   }
 

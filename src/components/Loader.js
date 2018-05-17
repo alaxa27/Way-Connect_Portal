@@ -8,9 +8,9 @@ class Navbar extends Component {
     if (spinning) {
       return (<div className="loader">
         <Loader type="Rings" color={this.props.color} height={this.props.height} width={this.props.width}/>
-      </div>)
+      </div>);
     } else {
-      return (children)
+      return (children);
     }
   }
 

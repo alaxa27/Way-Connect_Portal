@@ -18,18 +18,18 @@ import Loader from "./Loader";
 import {fetchFidelity, fetchDiscount} from "../actions/fidelityActions";
 
 @connect((store) => {
-  let fidelityStore = store.fidelity
-  return {fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData}
+  let fidelityStore = store.fidelity;
+  return {fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData};
 })
 
 class Fidelity extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       discountModal: false
-    }
-    this.props.dispatch(fetchFidelity())
-    this.fetchDiscount = this.fetchDiscount.bind(this)
+    };
+    this.props.dispatch(fetchFidelity());
+    this.fetchDiscount = this.fetchDiscount.bind(this);
     this.toggleDiscountModal = this.toggleDiscountModal.bind(this);
   }
 
@@ -47,11 +47,11 @@ class Fidelity extends Component {
   fetchDiscount() {
     this.props.dispatch(fetchDiscount({
       toggleDiscountModal: this.toggleDiscountModal
-    }))
+    }));
   }
 
   render() {
-    let fidelityRate = this.calcHeight(this.props.fidelityData.rate)
+    let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
     return (<div className="fidelity">
       <Navbar title="Fidelity" goBack={this.props.history.goBack}/>
 
