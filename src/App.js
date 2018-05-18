@@ -30,13 +30,13 @@ class App extends Component {
   renderKnownRoutes(isKnown, isHotel, fetched) {
     if (!isKnown && fetched) {
       return (<Switch>
-        <Route exact="exact" path="/" name="Login" component={Login}/>
+        <Route exact path="/" name="Login" component={Login}/>
         <Route path="/login" name="Login" component={Login}/>
         <Route path="/register" name="Register" component={Register}/>
       </Switch>);
     } else if (isKnown && fetched) {
       return (<Switch>
-        <Route exact="exact" path="/" name="Dashboard" component={Dashboard}/>
+        <Route exact path="/" name="Dashboard" component={Dashboard}/>
         <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
         <Route path="/video" name="Video" component={Video}/>{
           ((isHotel) => {

@@ -10,6 +10,7 @@ import store from "./store";
 
 // Import Flag Icons Set
 // import 'flag-icon-css/css/flag-icon.min.css';
+import '../scss/main.scss'
 import "react-select/dist/react-select.css";
 
 // By using <Provider />, the store will be made available for all the components in your application.
