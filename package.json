@@ -1,7 +1,7 @@
 {
   "name": "wayconnect-portal",
   "version": "1.0.0",
-  "description": "The portal used by the Waybox",
+  "description": "The portal code used by the Waybox",
   "watch": true,
   "dependencies": {
     "axios": "^0.18.0",
