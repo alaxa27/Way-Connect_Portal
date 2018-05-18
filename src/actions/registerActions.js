@@ -30,7 +30,7 @@ export function fetchRegisterData(payload) {
       };
       const response = await axiosInstance({
         method: "get",
-        url: `/customers/hobbies/`,
+        url: "/customers/hobbies/",
       });
       // registerData.hobbies = response.data
       registerData.hobbies = response.data.map((item) => {
@@ -72,7 +72,7 @@ export function postRegisterForm(payload) {
       try {
         const response = await axiosInstance({
           method: "post",
-          url: `/customers/register/`,
+          url: "/customers/register/",
           data: {
             ...userData,
             mac_address: informationData.mac_address

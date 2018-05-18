@@ -26,7 +26,7 @@ export function fetchInformation(payload) {
 
       const response = await axiosInstance({
         method: "get",
-        url: `/customers/known/`,
+        url: "/customers/known/",
         headers: {
           "X-API-Key": informationData.API_Key
         },
@@ -59,7 +59,7 @@ function fetchCommunication(payload) {
       const informationData = {...getState().information.informationData};
       const response = await axiosInstance({
         method: "post",
-        url: `/customers/connect/`,
+        url: "/customers/connect/",
         data: {
           mac_address: informationData.mac_address
         }

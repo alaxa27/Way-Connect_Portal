@@ -28,7 +28,7 @@ export function postClaim(payload) {
         };
         const response = await axiosInstance({
           method: "post",
-          url: `/customers/claim/`,
+          url: "/customers/claim/",
           data: {
             ...claimData,
             mac_address: informationData.mac_address

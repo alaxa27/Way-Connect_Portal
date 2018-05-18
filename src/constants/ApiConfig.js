@@ -15,7 +15,7 @@ if (hostname === "way-connect.com") {
 
 export const axiosInstance = axios.create({
   baseURL: backendHost,
-})
+});
 
 // export const API_ROOT = `${backendHost}/api/${apiVersion}`;
 export const API_ROOT = backendHost;

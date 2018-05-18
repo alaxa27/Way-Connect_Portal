@@ -23,7 +23,7 @@ import Video from "./components/Video";
 class App extends Component {
   constructor(props) {
     super(props);
-    axiosInstance.defaults.headers.common["X-API-Key"] = "899f49e5e44d41a3ad8fe1a7368fd189"
+    axiosInstance.defaults.headers.common["X-API-Key"] = "899f49e5e44d41a3ad8fe1a7368fd189";
     this.props.dispatch(fetchInformation());
   }
 
