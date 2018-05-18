@@ -5,6 +5,8 @@
 
 // Read more on Actions - https://redux.js.org/docs/basics/Actions.html
 import axios from "axios";
+
+import { axiosInstance } from "../constants/ApiConfig.js";
 import {
   FETCH_REGISTER_DATA,
   FETCH_REGISTER_DATA_FULFILLED,
@@ -26,9 +28,9 @@ export function fetchRegisterData(payload) {
     try {
       const registerData = { ...getState().register.registerData
       };
-      const response = await axios({
+      const response = await axiosInstance({
         method: "get",
-        url: "http://localhost:8000/customers/hobbies/",
+        url: `/customers/hobbies/`,
       });
       // registerData.hobbies = response.data
       registerData.hobbies = response.data.map((item) => {
@@ -63,17 +65,14 @@ export function postRegisterForm(payload) {
       userData.hobbies = userData.hobbies.map((item) => {
         return item.value;
       });
-      
+
       userData.country = userData.nationality;
       delete userData.nationality;
 
       try {
-        const response = await axios({
+        const response = await axiosInstance({
           method: "post",
-          url: "http://localhost:8000/customers/register/",
-          headers: {
-            "X-API-Key": informationData.API_Key
-          },
+          url: `/customers/register/`,
           data: {
             ...userData,
             mac_address: informationData.mac_address

@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {BrowserRouter as Router, Route, Switch, Redirect, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 
+import { axiosInstance } from "./constants/ApiConfig";
+
 import {fetchInformation} from "./actions/informationActions";
 
 import Loading from "./components/Loading";
@@ -21,7 +23,7 @@ import Video from "./components/Video";
 class App extends Component {
   constructor(props) {
     super(props);
-
+    axiosInstance.defaults.headers.common["X-API-Key"] = "899f49e5e44d41a3ad8fe1a7368fd189"
     this.props.dispatch(fetchInformation());
   }
 

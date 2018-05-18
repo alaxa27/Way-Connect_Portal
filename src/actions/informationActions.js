@@ -6,6 +6,7 @@
 // Read more on Actions - https://redux.js.org/docs/basics/Actions.html
 import axios from "axios";
 
+import { axiosInstance } from "../constants/ApiConfig.js";
 import {
   FETCH_INFORMATION,
   FETCH_INFORMATION_FULFILLED,
@@ -23,9 +24,9 @@ export function fetchInformation(payload) {
     try {
       const informationData = {...getState().information.informationData};
 
-      const response = await axios({
+      const response = await axiosInstance({
         method: "get",
-        url: "http://localhost:8000/customers/known/",
+        url: `/customers/known/`,
         headers: {
           "X-API-Key": informationData.API_Key
         },
@@ -56,12 +57,9 @@ function fetchCommunication(payload) {
     });
     try {
       const informationData = {...getState().information.informationData};
-      const response = await axios({
+      const response = await axiosInstance({
         method: "post",
-        url: "http://localhost:8000/customers/connect/",
-        headers: {
-          "X-API-Key": informationData.API_Key
-        },
+        url: `/customers/connect/`,
         data: {
           mac_address: informationData.mac_address
         }
