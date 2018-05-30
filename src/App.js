@@ -39,38 +39,12 @@ PrivateRoute.propTypes = {
   component: PropTypes.func,
   location: PropTypes.object,
   to: PropTypes.string,
-  display: PropTypes.bool,
+  display: PropTypes.bool
 };
 
 class App extends Component {
   constructor(props) {
     super(props);
-  }
-
-  renderKnownRoutes(isKnown, isHotel, fetched) {
-    if (!isKnown && fetched) {
-      return (<Switch>
-        <Route path="/" name="Login" component={Login}/>
-        <Route path="/login" name="Login" component={Login}/>
-        <Route path="/register" name="Register" component={Register}/>
-      </Switch>);
-    } else if (isKnown && fetched) {
-      return (<Switch>
-        <Route path="/" name="Dashboard" component={Dashboard}/>
-        <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-        <Route path="/video" name="Video" component={Video}/>{
-          ((isHotel) => {
-            if (isHotel) {
-              return (<Route path="/claim" name="Claim" component={Claim}/>);
-            } else if (!isHotel) {
-              return (<Route path="/fidelity" name="Fidelity" component={Fidelity}/>);
-            }
-          })(isHotel)
-        }
-      </Switch>);
-    } else {
-      return (<div></div>);
-    }
   }
 
   render() {
