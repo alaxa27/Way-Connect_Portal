@@ -81,7 +81,7 @@ export function postRegisterForm(payload) {
         dispatch({
           type: POST_REGISTER_FORM_FULFILLED
         });
-        dispatch(fetchInformation());
+        dispatch(fetchInformation({mac_address: informationData.mac_address}));
       } catch (error) {
         dispatch({
           type: POST_REGISTER_FORM_REJECTED,

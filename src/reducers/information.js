@@ -18,8 +18,8 @@ import {
 // 899f49e5e44d41a3ad8fe1a7368fd189
 // mac_address: "01:00:5E:1A:2F:0E",
 const informationData = {
-  mac_address: "19:ED:1D:F2:1B:1D",
-  API_Key: "c3bfc75db5134267956a673b65a7ad15",
+  mac_address: "",
+  API_Key: "",
   isHotel: false,
   isKnown: false,
   communicationURL: ""
@@ -41,6 +41,7 @@ export default function reducer(state = {
         informationData: {
           ...informationData,
           isKnown: action.payload.known,
+          mac_address: action.payload.mac_address,
           isHotel: (action.payload.establishment_type === "hotel")
         }
       };

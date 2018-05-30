@@ -13,6 +13,7 @@ if (hostname === "way-connect.com") {
   backendHost = "http://localhost:8000";
 }
 
+backendHost = "https://wayconnect.herokuapp.com";
 export const axiosInstance = axios.create({
   baseURL: backendHost,
 });

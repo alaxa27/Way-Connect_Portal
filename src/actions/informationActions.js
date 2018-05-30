@@ -22,21 +22,16 @@ export function fetchInformation(payload) {
       type: FETCH_INFORMATION,
     });
     try {
-      const informationData = {...getState().information.informationData};
-
       const response = await axiosInstance({
         method: "get",
         url: "/customers/known/",
-        headers: {
-          "X-API-Key": informationData.API_Key
-        },
         params: {
-          mac_address: informationData.mac_address
+          mac_address: payload.mac_address
         }
       });
       dispatch({
         type: FETCH_INFORMATION_FULFILLED,
-        payload: response.data
+        payload: {...response.data, mac_address: payload.mac_address}
       });
       if (response.data.known) {
         dispatch(fetchCommunication());
