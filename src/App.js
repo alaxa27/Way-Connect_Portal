@@ -7,7 +7,6 @@ import {axiosInstance} from "./constants/ApiConfig";
 
 import {fetchInformation} from "./actions/informationActions";
 
-import Loading from "./components/Loading";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";

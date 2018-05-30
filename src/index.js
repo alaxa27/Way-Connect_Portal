@@ -6,7 +6,7 @@ import { HashRouter as Router, Route, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
 
 import App from "./App";
-import Portal from "./components/Loading";
+import Portal from "./components/Portal";
 import store from "./store";
 
 // Import Flag Icons Set
