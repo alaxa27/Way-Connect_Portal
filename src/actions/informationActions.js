@@ -4,8 +4,6 @@
 // Actions are triggered either by user through interactions or by an events, such as successful AJAX call.
 
 // Read more on Actions - https://redux.js.org/docs/basics/Actions.html
-import axios from "axios";
-
 import { axiosInstance } from "../constants/ApiConfig.js";
 import {
   FETCH_INFORMATION,

@@ -82,6 +82,9 @@ class Fidelity extends Component {
           <h4>
             {this.props.discountData.code}
           </h4>
+          <h4>
+            {this.props.discountData.reward}
+          </h4>
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.toggleDiscountModal}>Ok</Button>
@@ -94,7 +97,7 @@ class Fidelity extends Component {
 Fidelity.propTypes = {
   dispatch: PropTypes.func,
   fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, fetching: PropTypes.bool, fetched: PropTypes.bool}),
-  discountData: PropTypes.shape({code: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
+  discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   className: PropTypes.string,
   history: PropTypes.shape({goBack: PropTypes.func})
 };

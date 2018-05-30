@@ -10,6 +10,7 @@ import {
   FETCH_FIDELITY,
   FETCH_FIDELITY_FULFILLED,
   FETCH_FIDELITY_REJECTED,
+
   FETCH_DISCOUNT,
   FETCH_DISCOUNT_FULFILLED,
   FETCH_DISCOUNT_REJECTED
@@ -26,6 +27,7 @@ const discountData = {
   fetching: false,
   fetched: false,
   code: "",
+  reward: ""
 };
 
 export default function reducer(state = {
@@ -43,7 +45,8 @@ export default function reducer(state = {
       };
     case FETCH_FIDELITY_FULFILLED:
       return { ...state,
-        fidelityData: { ...action.payload,
+        fidelityData: { ...state.fidelityData,
+          rate: action.payload.rate,
           fetching: false,
           fetched: true,
         }
@@ -63,8 +66,11 @@ export default function reducer(state = {
       };
     case FETCH_DISCOUNT_FULFILLED:
       return { ...state,
-        fidelityData: action.payload.fidelityData,
-        discountData: { ...action.payload.discountData,
+        fidelityData: {...state.fidelityData,
+          rate: action.payload.rate},
+        discountData: { ...state.discountData,
+          code: action.payload.code,
+          reward: action.payload.reward,
           fetching: false,
           fetched: true,
         }

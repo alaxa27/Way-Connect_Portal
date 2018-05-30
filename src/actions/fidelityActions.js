@@ -4,6 +4,9 @@
 // Actions are triggered either by user through interactions or by an events, such as successful AJAX call.
 
 // Read more on Actions - https://redux.js.org/docs/basics/Actions.html
+import {
+  axiosInstance
+} from "../constants/ApiConfig.js";
 
 import {
   FETCH_FIDELITY,
@@ -20,39 +23,42 @@ export function fetchFidelity(payload) {
       type: FETCH_FIDELITY,
     });
     setTimeout(function() {
-      let data = { ...getState().fidelity.fidelityData
-      };
-      data.rate = 0.8;
       dispatch({
         type: FETCH_FIDELITY_FULFILLED,
-        payload: data
+        payload: {
+          rate: 0.8
+        }
       });
     }, 2000);
   };
 }
 
 export function fetchDiscount(payload) {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     if (!getState().fidelity.fidelityData.fetching && !getState().fidelity.discountData.fetched && getState().fidelity.fidelityData.rate > 0) {
       dispatch({
         type: FETCH_DISCOUNT
       });
-      setTimeout(function() {
-        let data = { ...getState().fidelity.fidelityData
-        };
-        let discountData = { ...getState().fidelity.discountData
-        };
-        discountData.code = "DZ8HG9";
-        data.rate = 0;
-        dispatch({
-          type: FETCH_DISCOUNT_FULFILLED,
-          payload: {
-            fidelityData: data,
-            discountData: discountData
-          }
-        });
-        payload.toggleDiscountModal();
-      }, 1000);
+      const informationData = { ...getState().information.informationData
+      };
+      const response = await axiosInstance({
+        method: "post",
+        url: "/customers/activate_discount/",
+        data: {
+          mac_address: informationData.mac_address
+        }
+      });
+      let discountData = { ...getState().fidelity.discountData
+      };
+      dispatch({
+        type: FETCH_DISCOUNT_FULFILLED,
+        payload: {
+          rate: 0,
+          code: response.data.code,
+          reward: `${response.data.reward} ${response.data.reward_currency}`
+        }
+      });
+      payload.toggleDiscountModal();
     }
   };
 }
