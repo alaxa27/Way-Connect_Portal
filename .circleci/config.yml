@@ -14,7 +14,7 @@ jobs:
           key:        dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run:          # run lint verification
+      - run:          #  lint verification
           name:       Lint code
           command:    npm run lint
       - run:          #run tests
