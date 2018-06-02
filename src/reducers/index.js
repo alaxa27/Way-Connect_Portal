@@ -6,9 +6,6 @@ import register from "./register";
 import claim from "./claim";
 import fidelity from "./fidelity";
 import information from "./information";
-// import secondCounter from './exampleReducer';
+import dashboard from "./dashboard";
 
-export default combineReducers({ count, register, claim, fidelity, information });
-
-// Example for combining multiple reducers:
-// export default combineReducers({ count, secondCounter });
+export default combineReducers({ count, register, claim, fidelity, information, dashboard });

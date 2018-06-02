@@ -2,6 +2,10 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {Button} from "reactstrap";
+
+import {Player} from "video-react";
+import "video-react/dist/video-react.css"; // import css
 
 import Navbar from "./Navbar";
 
@@ -23,10 +27,7 @@ class Video extends Component {
   render() {
     console.log(this.props.communicationURL);
     return (<div className="video">
-      <video>
-        <source src={this.state.communicationURL} type="video/mp4"/>
-        Your browser does not support the video tag.
-      </video>
+      <h1>WiFi is granted</h1>
     </div>);
   }
 }

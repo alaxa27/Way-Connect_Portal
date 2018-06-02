@@ -10,6 +10,7 @@ import {
   FETCH_INFORMATION,
   FETCH_INFORMATION_FULFILLED,
   FETCH_INFORMATION_REJECTED,
+
   POST_CONNECT,
   POST_CONNECT_FULFILLED,
   POST_CONNECT_REJECTED
@@ -26,7 +27,8 @@ const informationData = {
 };
 
 export default function reducer(state = {
-  informationData: {...informationData},
+  informationData: { ...informationData
+  },
   fetching: false,
   fetched: false
 }, action) {
@@ -51,16 +53,23 @@ export default function reducer(state = {
         fetched: false
       };
     case POST_CONNECT:
-      return { ...state
+      return { ...state,
+        fetching: true,
+        fetched: true
       };
     case POST_CONNECT_FULFILLED:
       return { ...state,
+        fetching: false,
+        fetched: true,
         informationData: { ...state.informationData,
           communicationURL: action.payload
         }
       };
     case POST_CONNECT_REJECTED:
-      break;
+      return { ...state,
+        fetching: false,
+        fetched: false
+      };
     default:
       return { ...state
       };

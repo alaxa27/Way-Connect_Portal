@@ -55,7 +55,7 @@ class App extends Component {
           <PrivateRoute path="/login" name="Login" component={Login} to="/dashboard" display={!isKnown}/>
           <PrivateRoute path="/register" name="Register" component={Register} to="/dashboard" display={!isKnown}/>
           <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/login" display={isKnown}/>
-          <PrivateRoute path="/video" name="Video" component={Video} to="/login" display={isKnown}/>
+          <Route path="/video" name="Video" component={Video} to="/login" display={isKnown}/>
           <PrivateRoute hotel="hotel" path="/claim" name="Claim" component={Claim} to="/login" display={isKnown && isHotel}/>
           <PrivateRoute path="/fidelity" name="Fidelity" component={Fidelity} to="/login" display={isKnown && !isHotel}/>
         </Switch>

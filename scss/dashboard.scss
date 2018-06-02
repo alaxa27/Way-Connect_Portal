@@ -15,4 +15,26 @@
   h4 {
     margin-top: 10px;
   }
+
+  .loader {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    left: -13px;
+    top: -8px;
+  }
+
+  .video-playing {
+    .video-react {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .video-not-playing {
+    display: none;
+  }
 }
