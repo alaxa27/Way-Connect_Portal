@@ -4,7 +4,9 @@
 // Actions are triggered either by user through interactions or by an events, such as successful AJAX call.
 
 // Read more on Actions - https://redux.js.org/docs/basics/Actions.html
-import { axiosInstance } from "../constants/ApiConfig.js";
+import {
+  axiosInstance
+} from "../constants/ApiConfig.js";
 import {
   FETCH_INFORMATION,
   FETCH_INFORMATION_FULFILLED,
@@ -29,7 +31,9 @@ export function fetchInformation(payload) {
       });
       dispatch({
         type: FETCH_INFORMATION_FULFILLED,
-        payload: {...response.data, mac_address: payload.mac_address}
+        payload: { ...response.data,
+          mac_address: payload.mac_address
+        }
       });
       if (response.data.known) {
         dispatch(fetchCommunication());
@@ -43,13 +47,15 @@ export function fetchInformation(payload) {
   };
 }
 
+
 function fetchCommunication(payload) {
   return async (dispatch, getState) => {
     dispatch({
       type: POST_CONNECT
     });
     try {
-      const informationData = {...getState().information.informationData};
+      const informationData = { ...getState().information.informationData
+      };
       const response = await axiosInstance({
         method: "post",
         url: "/customers/connect/",

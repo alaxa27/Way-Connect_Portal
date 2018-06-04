@@ -29,11 +29,14 @@ export function acknowledgeCommunication(payload) {
           mac_address: informationData.mac_address
         }
       });
-      
-      payload.history.push("/video");
+
+      //payload.history.push("/video");
       dispatch({
         type: ACKNOWLEDGE_COMMUNICATION_FULFILLED,
       });
+
+      window.location.href = `${informationData.auth_action}?tok=${informationData.token}`;
+
     } catch (error) {
       dispatch({
         type: ACKNOWLEDGE_COMMUNICATION_REJECTED

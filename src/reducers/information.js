@@ -21,6 +21,8 @@ import {
 const informationData = {
   mac_address: "",
   API_Key: "",
+  token: "",
+  auth_action: "",
   isHotel: false,
   isKnown: false,
   communicationURL: ""

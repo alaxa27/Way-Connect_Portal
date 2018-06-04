@@ -22,7 +22,9 @@ import {fetchInformation} from "../actions/informationActions";
     match: PropTypes.shape({
       params: PropTypes.shape({
         token: PropTypes.string,
-        mac_address: PropTypes.string
+        mac_address: PropTypes.string,
+        API_Key: PropTypes.string,
+        auth_action: PropTypes.string,
       })
     })
   }
@@ -30,8 +32,8 @@ import {fetchInformation} from "../actions/informationActions";
   constructor(props) {
     super(props);
     console.log(props);
-    axiosInstance.defaults.headers.common["X-API-Key"] = this.props.match.params.token;
-    this.props.dispatch(fetchInformation({mac_address: this.props.match.params.mac_address}));
+    axiosInstance.defaults.headers.common["X-API-Key"] = this.props.match.params.API_Key;
+    this.props.dispatch(fetchInformation({...this.props.match.params}));
 
   }
   render() {
