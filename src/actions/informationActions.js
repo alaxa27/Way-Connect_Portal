@@ -32,7 +32,9 @@ export function fetchInformation(payload) {
       dispatch({
         type: FETCH_INFORMATION_FULFILLED,
         payload: { ...response.data,
-          mac_address: payload.mac_address
+          mac_address: payload.mac_address,
+          API_Key: payload.API_Key,
+          token: payload.token
         }
       });
       if (response.data.known) {

@@ -46,6 +46,8 @@ export default function reducer(state = {
           ...informationData,
           isKnown: action.payload.known,
           mac_address: action.payload.mac_address,
+          API_Key: action.payload.API_Key,
+          token: action.payload.token,
           isHotel: (action.payload.establishment_type === "hotel")
         }
       };
