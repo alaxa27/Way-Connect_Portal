@@ -35,15 +35,7 @@ export function acknowledgeCommunication(payload) {
         type: ACKNOWLEDGE_COMMUNICATION_FULFILLED,
       });
 
-      const response1 = await axios.get({
-        method: "get",
-        url: "http://192.168.220.2:2050/nodogsplash_auth/",
-        params: {
-          tok: informationData.token
-        }
-      });
-
-      // window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}`;
+      window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}`;
 
     } catch (error) {
       dispatch({
