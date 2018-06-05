@@ -18,18 +18,29 @@ import {
 } from "../constants/ActionTypes";
 
 export function fetchFidelity(payload) {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     dispatch({
       type: FETCH_FIDELITY,
     });
-    setTimeout(function() {
-      dispatch({
-        type: FETCH_FIDELITY_FULFILLED,
-        payload: {
-          rate: 0.8
-        }
-      });
-    }, 2000);
+    const informationData = { ...getState().information.informationData
+    };
+    const response = await axiosInstance({
+      method: "get",
+      url: "/customers/retrieve_discount/",
+      params: {
+        mac_address: informationData.mac_address
+      }
+    });
+    const rate = Math.round(100 * response.data.current_views / response.data.promotion.max_views) / 100;
+    const rewardString = `${response.data.promotion.reward} ${response.data.promotion.reward_currency}`;
+
+    dispatch({
+      type: FETCH_FIDELITY_FULFILLED,
+      payload: {
+        rate: rate,
+        reward: rewardString
+      }
+    });
   };
 }
 

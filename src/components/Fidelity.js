@@ -66,7 +66,7 @@ class Fidelity extends Component {
       <h2>{this.props.fidelityData.rate * 100}{" "}%</h2>
       <div className="bonus-max">
         <i className="fa fa-star"></i>
-        {" " + this.props.fidelityData.amount + " DT"}
+        {" " + this.props.fidelityData.reward}
       </div>
       <Button className={"activate" + (
           this.props.fidelityData.rate > 0
@@ -96,7 +96,7 @@ class Fidelity extends Component {
 
 Fidelity.propTypes = {
   dispatch: PropTypes.func,
-  fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, fetching: PropTypes.bool, fetched: PropTypes.bool}),
+  fidelityData: PropTypes.shape({rate: PropTypes.number, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   className: PropTypes.string,
   history: PropTypes.shape({goBack: PropTypes.func})
