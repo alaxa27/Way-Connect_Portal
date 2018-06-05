@@ -111,7 +111,7 @@ class Register extends Component {
           ? <Redirect to="/dashboard"></Redirect>
           : null)
       }
-      <Navbar title="Register" goBack={this.props.history.goBack}/>
+      <Navbar title="Register" goBack="/login" history={this.props.history}/>
 
       <div>
         <Row>

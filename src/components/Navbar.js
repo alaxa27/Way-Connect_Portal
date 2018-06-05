@@ -5,7 +5,7 @@ class Navbar extends Component {
   render() {
     return (<div className="navbar">
       <div className="back-button" onClick={(() => {
-          this.props.goBack();
+          this.props.history.push(this.props.goBack);
         }).bind(this)}>
         <i className="fa fa-angle-left"></i>
       </div>
@@ -15,8 +15,11 @@ class Navbar extends Component {
 }
 
 Navbar.propTypes = {
-  goBack: PropTypes.func,
-  title: PropTypes.string
+  goBack: PropTypes.string,
+  title: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
 };
 
 export default Navbar;

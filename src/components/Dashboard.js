@@ -85,7 +85,7 @@ class Dashboard extends Component {
           ? "video-playing"
           : "video-not-playing")}>
         <Player ref={(c) => { this.player = c; }}>
-          <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"/>
+          <source src="/assets/trailer_hd.mp4"/>
           <ControlBar disabled={true}/>
         </Player>
       </div>

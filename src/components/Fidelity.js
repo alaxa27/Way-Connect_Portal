@@ -51,7 +51,7 @@ class Fidelity extends Component {
   render() {
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
     return (<div className="fidelity">
-      <Navbar title="Fidelity" goBack={this.props.history.goBack}/>
+      <Navbar title="Fidelity" goBack="/dashboard" history={this.props.history}/>
 
       <div className="logo">
         <div className="logo-white">
