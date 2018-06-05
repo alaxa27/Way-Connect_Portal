@@ -23,6 +23,7 @@ const informationData = {
   API_Key: "",
   token: "",
   auth_action: "",
+  redir: "http://taqiyeddine.sakme.ch/Way-Connect_Landing",
   isHotel: false,
   isKnown: false,
   communicationURL: ""

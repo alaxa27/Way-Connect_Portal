@@ -35,7 +35,7 @@ export function acknowledgeCommunication(payload) {
         type: ACKNOWLEDGE_COMMUNICATION_FULFILLED,
       });
 
-      window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}`;
+      window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}&redir=${informationData.redir}`;
 
     } catch (error) {
       dispatch({
