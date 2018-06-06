@@ -6,7 +6,9 @@
 // Read more on Actions - https://redux.js.org/docs/basics/Actions.html
 import axios from "axios";
 
-import { axiosInstance } from "../constants/ApiConfig.js";
+import {
+  axiosInstance
+} from "../constants/ApiConfig.js";
 import {
   FETCH_REGISTER_DATA,
   FETCH_REGISTER_DATA_FULFILLED,
@@ -58,8 +60,9 @@ export function postRegisterForm(payload) {
       dispatch({
         type: POST_REGISTER_FORM,
       });
-      let userData = { ...payload.userData
+      let userData = { ...payload
       };
+      console.log("USERDATA", userData);
       const informationData = { ...getState().information.informationData
       };
       userData.hobbies = userData.hobbies.map((item) => {
@@ -81,7 +84,9 @@ export function postRegisterForm(payload) {
         dispatch({
           type: POST_REGISTER_FORM_FULFILLED
         });
-        dispatch(fetchInformation({mac_address: informationData.mac_address}));
+        dispatch(fetchInformation({
+          mac_address: informationData.mac_address
+        }));
       } catch (error) {
         dispatch({
           type: POST_REGISTER_FORM_REJECTED,

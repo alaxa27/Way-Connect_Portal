@@ -24,7 +24,7 @@ const PrivateRoute = ({
   to: toComponent,
   display: display,
   ...rest
-}) => (<Route exact="exact" {...rest} render={(props) => (
+}) => (<Route exact={true} {...rest} render={(props) => (
     display
     ? <Component {...props}/>
     : <Redirect to={{

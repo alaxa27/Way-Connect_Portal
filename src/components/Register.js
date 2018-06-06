@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import ReduxBlockUi from "react-block-ui/redux";
 import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col, Input, Label} from "reactstrap";
@@ -94,7 +95,7 @@ class Register extends Component {
 
   postForm() {
     this.props.dispatch(postRegisterForm({
-      ...this.state
+      ...this.state.userData
     }));
   }
 
@@ -112,57 +113,58 @@ class Register extends Component {
           : null)
       }
       <Navbar title="Register" goBack="/login" history={this.props.history}/>
-
-      <div>
-        <Row>
-          <Label>
+      <ReduxBlockUi tag="div" block="POST_REGISTER_FORM" unblock={["POST_REGISTER_FORM_FULFILLED", "POST_REGISTER_FORM_REJECTED"]}>
+        <div>
+          <Row>
+            <Label>
             Gender
-          </Label>
-        </Row>
-        <div className="gender-radio-buttons">
-          <div>
-            <Input type="radio" id="male" name="gender" value="M" checked={this.state.userData.gender === "M"} onChange={this.updateGender}/>
-            <Label htmlFor="male" className="pull-left">Male</Label>
+            </Label>
+          </Row>
+          <div className="gender-radio-buttons">
+            <div>
+              <Input type="radio" id="male" name="gender" value="M" checked={this.state.userData.gender === "M"} onChange={this.updateGender}/>
+              <Label htmlFor="male" className="pull-left">Male</Label>
+            </div>
+            <div>
+              <Input type="radio" id="female" name="gender" value="F" checked={this.state.userData.gender === "F"} onChange={this.updateGender}/>
+              <Label htmlFor="female" className="pull-right">Female</Label>
+            </div>
+            <div className="clearfix"></div>
           </div>
-          <div>
-            <Input type="radio" id="female" name="gender" value="F" checked={this.state.userData.gender === "F"} onChange={this.updateGender}/>
-            <Label htmlFor="female" className="pull-right">Female</Label>
-          </div>
-          <div className="clearfix"></div>
         </div>
-      </div>
-      <div>
-        <Label className="pull-left">
+        <div>
+          <Label className="pull-left">
           Age
-        </Label>
-        <Label className="age-title">{this.state.userData.age}yo</Label>
-        <InputRange maxValue={100} minValue={0} value={this.state.userData.age} onChange={this.updateAge}/>
-      </div>
-      <div>
-        <Label>
+          </Label>
+          <Label className="age-title">{this.state.userData.age}yo</Label>
+          <InputRange maxValue={100} minValue={0} value={this.state.userData.age} onChange={this.updateAge}/>
+        </div>
+        <div>
+          <Label>
           Nationality
-        </Label>
-        <Select id="nationality-select" options={nationality} simpleValue="simpleValue" name="selected-nationality" value={this.state.userData.nationality} onChange={this.updateNationality}/>
-      </div>
-      <div>
-        <Label>
+          </Label>
+          <Select id="nationality-select" options={nationality} simpleValue="simpleValue" name="selected-nationality" value={this.state.userData.nationality} onChange={this.updateNationality}/>
+        </div>
+        <div>
+          <Label>
           Relationship
-        </Label>
-        <Select id="relationship-select" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationship_status} onChange={this.updateRelationshipStatus}/>
-      </div>
-      <div>
-        <Label>
+          </Label>
+          <Select id="relationship-select" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationship_status} onChange={this.updateRelationshipStatus}/>
+        </div>
+        <div>
+          <Label>
           Professional
-        </Label>
-        <Select id="professional-select" options={workStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.work_status} onChange={this.updateWorkStatus}/>
-      </div>
-      <div>
-        <Label>
+          </Label>
+          <Select id="professional-select" options={workStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.work_status} onChange={this.updateWorkStatus}/>
+        </div>
+        <div>
+          <Label>
           Hobbies
-        </Label>
-        <Select id="hobbies-select" options={hobbies} multi="multi" name="selected-hobbies" value={this.state.userData.hobbies} onChange={this.updateHobbies
+          </Label>
+          <Select id="hobbies-select" options={hobbies} multi="multi" name="selected-hobbies" value={this.state.userData.hobbies} onChange={this.updateHobbies
 }/>
-      </div>
+        </div>
+      </ReduxBlockUi>
       <Button size="lg" block="block" className="submit" onClick={this.postForm}>
         <Loader spinning={this.props.posting} height="22" width="22">
           Submit
