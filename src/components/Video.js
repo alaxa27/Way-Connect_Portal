@@ -13,19 +13,19 @@ import {postClaim} from "../actions/claimActions";
 
 @connect((store) => {
   let informationStore = store.information;
-  return {communicationURL: informationStore.informationData.communicationURL};
+  return {informationData: informationStore.informationData};
 })
 
 class Video extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      communicationURL: "http://localhost:8000/media/videos/temp_arJXLuY.mp4"
     };
+    window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${this.props.informationData.token}&redir=${this.props.informationData.redir}`;
+
   }
 
   render() {
-    console.log(this.props.communicationURL);
     return (<div className="video">
       <h1>WiFi is granted</h1>
     </div>);
@@ -33,7 +33,7 @@ class Video extends Component {
 }
 
 Video.propTypes = {
-  communicationURL: PropTypes.string
+  informationData: PropTypes.object
 };
 
 export default Video;
