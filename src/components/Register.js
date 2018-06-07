@@ -9,6 +9,7 @@ import Select from "react-select";
 
 import Navbar from "./Navbar";
 import Loader from "./Loader";
+import SelectBox from "./SelectBox";
 
 import {postRegisterForm, fetchRegisterData} from "../actions/registerActions";
 
@@ -117,7 +118,7 @@ class Register extends Component {
         <div>
           <Row>
             <Label>
-            Gender
+              Gender
             </Label>
           </Row>
           <div className="gender-radio-buttons">
@@ -134,53 +135,50 @@ class Register extends Component {
         </div>
         <div>
           <Label className="pull-left">
-          Age
+            Age
           </Label>
           <Label className="age-title">{this.state.userData.age}yo</Label>
           <InputRange maxValue={100} minValue={0} value={this.state.userData.age} onChange={this.updateAge}/>
         </div>
         <div>
           <Label>
-          Nationality
+            Nationality
           </Label>
-          <Select id="nationality-select" options={nationality} simpleValue="simpleValue" name="selected-nationality" value={this.state.userData.nationality} onChange={this.updateNationality}/>
+          <SelectBox name="nationality-select" options={nationality} onChange={this.updateNationality}/>
         </div>
         <div>
           <Label>
-          Relationship
+            Relationship
           </Label>
-          <Select id="relationship-select" options={relationshipStatus} simpleValue="simpleValue" name="selected-realtionship" value={this.state.userData.relationship_status} onChange={this.updateRelationshipStatus}/>
+          <SelectBox name="relationship-select" options={relationshipStatus} onChange={this.updateRelationshipStatus}/>
         </div>
         <div>
           <Label>
-          Professional
+            Professional
           </Label>
-          <Select id="professional-select" options={workStatus} simpleValue="simpleValue" name="selected-professional" value={this.state.userData.work_status} onChange={this.updateWorkStatus}/>
+          <SelectBox name="work-select" options={workStatus} onChange={this.updateWorkStatus}/>
         </div>
         <div>
           <Label>
-          Hobbies
+            Hobbies
           </Label>
-          <Select id="hobbies-select" options={hobbies} multi="multi" name="selected-hobbies" value={this.state.userData.hobbies} onChange={this.updateHobbies
-}/>
+          <SelectBox isMulti={true} name="hobbies-select" options={hobbies} onChange={this.updateHobbies}/>
         </div>
       </ReduxBlockUi>
-      <Button size="lg" block="block" className="submit" onClick={this.postForm}>
-        <Loader spinning={this.props.posting} height="22" width="22">
-          Submit
+      <Button size="lg" block={true} className="submit" onClick={this.postForm}>
+        <Loader spinning={this.props.posting} height={22} width={22}>
+          <div>
+            {"Submit"}
+          </div>
         </Loader>
       </Button>
-    </div>);
-  }
-}
-
-Register.propTypes = {
-  dispatch: PropTypes.func,
-  userData: PropTypes.object,
-  registerData: PropTypes.shape({hobbies: PropTypes.array}),
-  posting: PropTypes.bool,
-  posted: PropTypes.bool,
-  history: PropTypes.shape({goBack: PropTypes.func})
-};
+    </div>); } } Register.propTypes = {
+      dispatch: PropTypes.func,
+      userData: PropTypes.object,
+      registerData: PropTypes.shape({hobbies: PropTypes.array}),
+      posting: PropTypes.bool,
+      posted: PropTypes.bool,
+      history: PropTypes.shape({goBack: PropTypes.func})
+    };
 
 export default Register;

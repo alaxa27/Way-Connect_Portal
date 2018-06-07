@@ -62,7 +62,6 @@ export function postRegisterForm(payload) {
       });
       let userData = { ...payload
       };
-      console.log("USERDATA", userData);
       const informationData = { ...getState().information.informationData
       };
       userData.hobbies = userData.hobbies.map((item) => {
@@ -73,6 +72,10 @@ export function postRegisterForm(payload) {
       delete userData.nationality;
 
       try {
+        if (userData.country.length === 0 || userData.work_status.length === 0 || userData.relationship_status.length === 0 || userData.hobbies.length === 0) {
+          throw new Error("Some fields are empty");
+        }
+
         const response = await axiosInstance({
           method: "post",
           url: "/customers/register/",
