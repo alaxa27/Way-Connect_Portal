@@ -4,12 +4,26 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col} from "reactstrap";
 
-import {Player, ControlBar} from "video-react";
+import {Player, ControlBar, Shortcut} from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
 import Loader from "./Loader";
 
 import {acknowledgeCommunication} from "../actions/dashboardActions";
+
+
+const playerShortcuts = [
+  {
+    keyCode: 39, // Right arrow
+    handle: (player, actions) => {
+    }
+  },
+  {
+    keyCode: 76, // LKey
+    handle: (player, actions) => {
+    }
+  }
+];
 
 @connect((store) => {
   let informationStore = store.information;
@@ -84,9 +98,12 @@ class Dashboard extends Component {
           this.state.playing
           ? "video-playing"
           : "video-not-playing")}>
-        <Player ref={(c) => { this.player = c; }}>
+        <Player ref={(c) => {
+            this.player = c;
+          }}>
           <source src="/assets/trailer_hd.mp4"/>
           <ControlBar disabled={true}/>
+          <Shortcut clickable={false} shortcuts={playerShortcuts}/>
         </Player>
       </div>
 
