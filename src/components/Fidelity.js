@@ -77,7 +77,7 @@ class Fidelity extends Component {
         </Loader>
       </Button>
       <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>
-        <ModalHeader toggle={this.toggleDiscountModal}>Discount Code</ModalHeader>
+        <ModalHeader toggle={this.toggleDiscountModal}>{"Show this code to the waiter"}</ModalHeader>
         <ModalBody>
           <h4>
             {this.props.discountData.code}
