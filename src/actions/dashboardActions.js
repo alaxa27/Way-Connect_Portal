@@ -30,10 +30,10 @@ export function acknowledgeCommunication(payload) {
         }
       });
 
-      payload.history.push("/video");
       dispatch({
         type: ACKNOWLEDGE_COMMUNICATION_FULFILLED,
       });
+      payload.history.push("/video");
 
       // window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}&redir=${informationData.redir}`;
 
