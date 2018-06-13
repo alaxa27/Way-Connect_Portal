@@ -31,4 +31,4 @@ Profile.propTypes = {
   history: PropTypes.shape({goBack: PropTypes.func})
 };
 
-export default MyInfo;
+export default Profile;
