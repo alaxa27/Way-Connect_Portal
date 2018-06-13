@@ -7,13 +7,13 @@ import {Button, Row, Col, Input, Label} from "reactstrap";
 import InputRange from "react-input-range";
 import Select from "react-select";
 
-import Navbar from "./Navbar";
-import Loader from "./Loader";
-import SelectBox from "./SelectBox";
+import Navbar from "../../components/Navbar";
+import Loader from "../../components/Loader";
+import SelectBox from "../../components/SelectBox";
 
-import {postRegisterForm, fetchRegisterData} from "../actions/registerActions";
+import {postRegisterForm, fetchRegisterData} from "../../actions/registerActions";
 
-const STATUS = require("../data/status");
+const STATUS = require("../../data/status");
 
 @connect((store) => {
   let registerStore = store.register;

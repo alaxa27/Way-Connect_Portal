@@ -6,8 +6,8 @@ import {Button, Row, Col} from "reactstrap";
 import ReduxBlockUi from "react-block-ui/redux";
 import {FacebookLogin} from "react-facebook-login-component";
 
-import {postRegisterForm} from "../actions/registerActions";
-import {NATIONALITY} from "../data/status";
+import {postRegisterForm} from "../../actions/registerActions";
+import {NATIONALITY} from "../../data/status";
 
 @connect((store) => {
   let registerStore = store.register;
@@ -53,7 +53,7 @@ class Login extends Component {
   render() {
 
     return (<div className="login">
-      <img src="assets/logo.png" className="logo"/>
+      <img src="/assets/logo.png" className="logo"/>
       <ReduxBlockUi tag="div" block="POST_REGISTER_FORM" unblock={["POST_REGISTER_FORM_FULFILLED", "POST_REGISTER_FORM_REJECTED"]}>
         <FacebookLogin socialId="160726801313681" language="fr_FR" scope="public_profile,email,user_age_range,user_birthday,user_gender,user_location,user_hometown" responseHandler={this.callbackFacebookLogin.bind(this)} xfbml={true} fields="id,email,name,birthday,gender,location,hometown" version="v3.0" className="btn btn-facebook" buttonText="Continue With Facebook"/>
         <NavLink to="/register" className="no-facebook">

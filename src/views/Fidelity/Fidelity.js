@@ -12,10 +12,10 @@ import {
   ModalFooter
 } from "reactstrap";
 
-import Navbar from "./Navbar";
-import Loader from "./Loader";
+import Navbar from "../../components/Navbar";
+import Loader from "../../components/Loader";
 
-import {fetchFidelity, fetchDiscount} from "../actions/fidelityActions";
+import {fetchFidelity, fetchDiscount} from "../../actions/fidelityActions";
 
 @connect((store) => {
   let fidelityStore = store.fidelity;

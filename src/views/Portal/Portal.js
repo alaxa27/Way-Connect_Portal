@@ -3,11 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import { Button } from "reactstrap";
-import Controls from "./Controls";
 
-import {axiosInstance} from "../constants/ApiConfig";
+import {axiosInstance} from "../../constants/ApiConfig";
 
-import {fetchInformation} from "../actions/informationActions";
+import {fetchInformation} from "../../actions/informationActions";
 
 @connect((store) => {
   let informationStore = store.information;
@@ -31,7 +30,6 @@ import {fetchInformation} from "../actions/informationActions";
 
   constructor(props) {
     super(props);
-    console.log(props);
     axiosInstance.defaults.headers.common["X-API-Key"] = this.props.match.params.API_Key;
     this.props.dispatch(fetchInformation({...this.props.match.params}));
 

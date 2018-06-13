@@ -1,22 +1,14 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import {Button} from "reactstrap";
 
-import {Player} from "video-react";
-import "video-react/dist/video-react.css"; // import css
-
-import Navbar from "./Navbar";
-
-import {postClaim} from "../actions/claimActions";
 
 @connect((store) => {
   let informationStore = store.information;
   return {informationData: informationStore.informationData};
 })
 
-class Video extends Component {
+class WifiAccess extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,8 +24,8 @@ class Video extends Component {
   }
 }
 
-Video.propTypes = {
+WifiAccess.propTypes = {
   informationData: PropTypes.object
 };
 
-export default Video;
+export default WifiAccess;

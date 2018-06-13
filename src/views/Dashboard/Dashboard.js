@@ -7,9 +7,9 @@ import {Button, Row, Col} from "reactstrap";
 import {Player, ControlBar, Shortcut} from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
-import Loader from "./Loader";
+import Loader from "../../components/Loader";
 
-import {acknowledgeCommunication} from "../actions/dashboardActions";
+import {acknowledgeCommunication} from "../../actions/dashboardActions";
 
 
 const playerShortcuts = [

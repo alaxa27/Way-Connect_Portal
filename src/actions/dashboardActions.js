@@ -33,7 +33,7 @@ export function acknowledgeCommunication(payload) {
       dispatch({
         type: ACKNOWLEDGE_COMMUNICATION_FULFILLED,
       });
-      payload.history.push("/video");
+      payload.history.push("/wifi-access");
 
       // window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}&redir=${informationData.redir}`;
 

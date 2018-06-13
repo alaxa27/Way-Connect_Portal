@@ -7,12 +7,12 @@ import {axiosInstance} from "./constants/ApiConfig";
 
 import {fetchInformation} from "./actions/informationActions";
 
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
-import Claim from "./components/Claim";
-import Fidelity from "./components/Fidelity";
-import Video from "./components/Video";
+import Login from "./views/Login";
+import Register from "./views/Register";
+import Dashboard from "./views/Dashboard";
+import Claim from "./views/Claim";
+import Fidelity from "./views/Fidelity";
+import WifiAccess from "./views/WifiAccess";
 
 // @connect((store) => {
 //   let informationStore = store.information
@@ -55,7 +55,7 @@ class App extends Component {
           <PrivateRoute path="/login" name="Login" component={Login} to="/dashboard" display={!isKnown}/>
           <PrivateRoute path="/register" name="Register" component={Register} to="/dashboard" display={!isKnown}/>
           <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/login" display={isKnown}/>
-          <Route path="/video" name="Video" component={Video} to="/login" display={isKnown}/>
+          <PrivateRoute path="/wifi-access" name="WifiAccess" component={WifiAccess} to="/login" display={isKnown}/>
           <PrivateRoute hotel="hotel" path="/claim" name="Claim" component={Claim} to="/login" display={isKnown && isHotel}/>
           <PrivateRoute path="/fidelity" name="Fidelity" component={Fidelity} to="/login" display={isKnown && !isHotel}/>
         </Switch>

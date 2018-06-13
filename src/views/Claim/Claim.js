@@ -4,12 +4,12 @@ import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Row, Input, Label, Button} from "reactstrap";
 
-import Navbar from "./Navbar";
-import Loader from "./Loader";
+import Navbar from "../../components/Navbar";
+import Loader from "../../components/Loader";
 
-import {postClaim} from "../actions/claimActions";
+import {postClaim} from "../../actions/claimActions";
 
-import {POST_CLAIM_REDIRECTED} from "../constants/ActionTypes";
+import {POST_CLAIM_REDIRECTED} from "../../constants/ActionTypes";
 
 @connect((store) => {
   let claimStore = store.claim;
