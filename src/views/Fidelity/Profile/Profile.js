@@ -21,7 +21,7 @@ class Profile extends Component {
   }
 
   render() {
-    return (<div className="discounts">
+    return (<div className="profile">
       <Navbar title="Profile" goBack="/fidelity" history={this.props.history}/>
     </div>);
   }
