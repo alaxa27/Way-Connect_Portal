@@ -39,7 +39,7 @@ const discountsData = {
   fetching: false,
   fetched: false,
   discounts: []
-}
+};
 
 export default function reducer(state = {
   posting: false,
@@ -77,7 +77,7 @@ export default function reducer(state = {
 
     case FETCH_DISCOUNTS:
       return { ...state
-      }
+      };
     case FETCH_DISCOUNTS_FULFILLED:
       return { ...state,
         discountsData: {
@@ -85,14 +85,14 @@ export default function reducer(state = {
           fetching: false,
           fetched: true
         }
-      }
+      };
     case FETCH_DISCOUNTS_REJECTED:
       return { ...state,
         discountsData: {
           fetching: false,
           fetched: false
         }
-      }
+      };
 
     case FETCH_DISCOUNT:
       return { ...state,

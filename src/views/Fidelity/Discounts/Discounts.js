@@ -22,21 +22,18 @@ class Discounts extends Component {
   }
 
   renderDiscounts(discounts) {
-    console.log("HHHHHHEZERTYUIH", discounts);
     if (discounts.length > 0) {
-      console.log("HHHHHHH", discounts);
       return (<div className="discount mt-4">
         {
           _.map(discounts, (discount, key) => {
             return (<Discount key={key} discount={discount}/>);
           })
         }
-      </div>)
+      </div>);
     }
   }
 
   render() {
-    console.log(this.props.discountsData);
     return (<div className="discounts">
       <Navbar title="Discounts" goBack="/fidelity" history={this.props.history}/> {this.renderDiscounts(this.props.discountsData.discounts)}
     </div>);
@@ -44,11 +41,11 @@ class Discounts extends Component {
 }
 Discounts.propTypes = {
   history: PropTypes.shape({goBack: PropTypes.func}),
-  // discountsData: PropTypes.shape({
-  //   fetching: PropTypes.bool,
-  //   fetched: PropTypes.bool,
-  //   discounts: PropTypes.array
-  // }).isRequired
+  discountsData: PropTypes.shape({
+    fetching: PropTypes.bool,
+    fetched: PropTypes.bool,
+    discounts: PropTypes.array
+  })
 };
 
 export default Discounts;

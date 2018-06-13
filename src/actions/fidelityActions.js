@@ -53,7 +53,7 @@ export function fetchFidelity(payload) {
     } catch (error) {
       dispatch({
         type: FETCH_FIDELITY_REJECTED
-      })
+      });
     }
   };
 }
@@ -121,8 +121,8 @@ function fetchDiscounts(payload) {
     } catch (error) {
       dispatch({
         type: FETCH_DISCOUNTS_REJECTED
-      })
-      throw new Error(error)
+      });
+      throw new Error(error);
     }
   };
 }
