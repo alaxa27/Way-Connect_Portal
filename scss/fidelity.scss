@@ -26,7 +26,7 @@
     .logo-black {
       width: $fidelity_logo_size;
       height: $fidelity_logo_size;
-      position: fixed;
+      position: absolute;
       overflow-y: hidden;
       transition: height 2s ease;
     }
@@ -34,7 +34,7 @@
     .logo-white {
       width: $fidelity_logo_size;
       height: $fidelity_logo_size;
-      position: fixed;
+      position: absolute;
       overflow-y: hidden;
     }
   }
@@ -56,12 +56,24 @@
     display: initial;
   }
 
+  .my-info {
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: map-get($colors, way-gray);
+    position: absolute;
+    margin-left: 40px;
+    margin-top: -15px;
+    z-index: 1;
+  }
+
   .activate {
     font-size: 3rem;
     width: 100px;
     height: 100px;
-    background-color: map-get($colors, way-gray);
     border-radius: 100px;
+    background-color: map-get($colors, way-gray);
   }
 
   .loader {
