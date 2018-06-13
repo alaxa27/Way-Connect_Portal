@@ -11,6 +11,10 @@ import {
   FETCH_FIDELITY_FULFILLED,
   FETCH_FIDELITY_REJECTED,
 
+  FETCH_DISCOUNTS,
+  FETCH_DISCOUNTS_FULFILLED,
+  FETCH_DISCOUNTS_REJECTED,
+
   FETCH_DISCOUNT,
   FETCH_DISCOUNT_FULFILLED,
   FETCH_DISCOUNT_REJECTED
@@ -31,9 +35,17 @@ const discountData = {
   date: ""
 };
 
+const discountsData = {
+  fetching: false,
+  fetched: false,
+  discounts: []
+}
+
 export default function reducer(state = {
   posting: false,
   posted: false,
+  discountsData: { ...discountsData
+  },
   fidelityData: { ...fidelityData
   },
   discountData: { ...discountData
@@ -62,6 +74,26 @@ export default function reducer(state = {
           fetched: false,
         }
       };
+
+    case FETCH_DISCOUNTS:
+      return { ...state
+      }
+    case FETCH_DISCOUNTS_FULFILLED:
+      return { ...state,
+        discountsData: {
+          discounts: action.payload,
+          fetching: false,
+          fetched: true
+        }
+      }
+    case FETCH_DISCOUNTS_REJECTED:
+      return { ...state,
+        discountsData: {
+          fetching: false,
+          fetched: false
+        }
+      }
+
     case FETCH_DISCOUNT:
       return { ...state,
         discountData: { ...state.discountData,

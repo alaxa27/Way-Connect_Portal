@@ -8,29 +8,29 @@ class Discount extends Component {
   }
 
   render() {
-    const promotion = {
+    const discount = {
       ...this.props.discount
-    }
+    };
     return (
-      <div className="promotion__item d-flex align-items-center my-3 px-4 py-1">
-        <div className="promotion__circle-container pr-4">
-          <div className="promotion__circle">
-            <span>{promotion.reward}</span>
-            <span>{promotion.reward_currency}</span>
+      <div className="discount__item d-flex align-items-center my-3 px-4 py-1">
+        <div className="discount__circle-container pr-4">
+          <div className="discount__circle">
+            <span>{discount.reward}</span>
+            <span>{discount.reward_currency}</span>
           </div>
         </div>
         <div className="pl-4" style={{
             flex: 1
           }}>
-          <label className="promotion__label-middle">{promotion.code.toUpperCase()}</label>
-          <span className="promotion__span-middle">{new Date(promotion.date).toLocaleString()}</span>
+          <label className="discount__label-middle">{discount.code.toUpperCase()}</label>
+          <span className="discount__span-middle">{new Date(discount.date).toLocaleString()}</span>
         </div>
         <div className="text-right">
-          <label className="promotion__label-right">{promotion.views}<sup>th</sup>
+          <label className="discount__label-right">{discount.views}<sup>th</sup>
           </label>
-          <span className="promotion__span-right">visit</span>
+          <span className="discount__span-right">visit</span>
         </div>
-    </div>);
+      </div>);
   }
 }
 
