@@ -51,12 +51,14 @@ class Fidelity extends Component {
   render() {
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
     return (<div className="fidelity">
-      <Navbar title="Fidelity" goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/discounts"/>
+      <Navbar title="Fidelity" goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
 
       <div>
-        <Button className="my-info" onClick={() => {}}>
-          <i className="fa fa-chart-line"></i>
-        </Button>
+        <Link to="/fidelity/my-info">
+          <Button className="my-info">
+            <i className="fa fa-chart-line"></i>
+          </Button>
+        </Link>
 
         <div className="logo">
           <div className="logo-white">

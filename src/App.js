@@ -12,6 +12,8 @@ import Register from "./views/Register";
 import Dashboard from "./views/Dashboard";
 import Claim from "./views/Claim";
 import Fidelity from "./views/Fidelity";
+import Discounts from "./views/Fidelity/Discounts";
+import MyInfo from "./views/Fidelity/MyInfo";
 import WifiAccess from "./views/WifiAccess";
 
 // @connect((store) => {
@@ -60,8 +62,10 @@ class App extends Component {
           <PrivateRoute path="/register" name="Register" component={Register} to="/dashboard" display={!isKnown}/>
           <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/login" display={isKnown}/>
           <PrivateRoute path="/wifi-access" name="WifiAccess" component={WifiAccess} to="/login" display={isKnown}/>
-          <PrivateRoute hotel="hotel" path="/claim" name="Claim" component={Claim} to="/login" display={isKnown && isHotel}/>
-          <PrivateRoute path="/fidelity" name="Fidelity" component={Fidelity} to="/login" display={isKnown && !isHotel}/>
+          <PrivateRoute path="/claim" name="Claim" component={Claim} to="/login" display={isKnown && isHotel}/>
+          <PrivateRoute exact={true} path="/fidelity" name="Fidelity" component={Fidelity} to="/login" display={isKnown && !isHotel}/>
+          <Route path="/fidelity/discounts" name="Discounts" component={Discounts} />
+          <Route path="/fidelity/my-info" name="MyInfo" component={MyInfo} />
         </Switch>
       </div>
     </div>);
