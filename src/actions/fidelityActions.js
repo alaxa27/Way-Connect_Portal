@@ -66,7 +66,8 @@ export function fetchDiscount(payload) {
         payload: {
           rate: 0,
           code: response.data.code,
-          reward: `${response.data.reward} ${response.data.reward_currency}`
+          reward: `${response.data.reward} ${response.data.reward_currency}`,
+          date: response.data.date
         }
       });
       payload.toggleDiscountModal();

@@ -27,14 +27,17 @@ const discountData = {
   fetching: false,
   fetched: false,
   code: "",
-  reward: ""
+  reward: "",
+  date: ""
 };
 
 export default function reducer(state = {
   posting: false,
   posted: false,
-  fidelityData: {...fidelityData},
-  discountData: {...discountData}
+  fidelityData: { ...fidelityData
+  },
+  discountData: { ...discountData
+  }
 }, action) {
   switch (action.type) {
     case FETCH_FIDELITY:
@@ -67,11 +70,13 @@ export default function reducer(state = {
       };
     case FETCH_DISCOUNT_FULFILLED:
       return { ...state,
-        fidelityData: {...state.fidelityData,
-          rate: action.payload.rate},
+        fidelityData: { ...state.fidelityData,
+          rate: action.payload.rate
+        },
         discountData: { ...state.discountData,
           code: action.payload.code,
           reward: action.payload.reward,
+          date: action.payload.date,
           fetching: false,
           fetched: true,
         }

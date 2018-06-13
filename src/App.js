@@ -44,10 +44,10 @@ PrivateRoute.propTypes = {
 class App extends Component {
   constructor(props) {
     super(props);
-    /// IN DEVELOPMENT ///
+    /// IN DEVELOPMENT /
     axiosInstance.defaults.headers.common["X-API-Key"] = "409582aa0ce24032904b49f145f725cc";
     this.props.dispatch(fetchInformation({API_Key: "409582aa0ce24032904b49f145f725cc", mac_address: "11:ED:1D:F2:1B:1B", token: "idujza"}));
-    //////////////////////
+    ////////////////////
   }
 
   render() {
