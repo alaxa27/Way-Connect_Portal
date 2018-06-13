@@ -54,7 +54,7 @@ class Fidelity extends Component {
       <Navbar title="Fidelity" goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
 
       <div>
-        <Link to="/fidelity/my-info">
+        <Link to="/fidelity/profile">
           <Button className="my-info">
             <i className="fa fa-chart-line"></i>
           </Button>

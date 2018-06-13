@@ -14,7 +14,7 @@ import Loader from "../../../components/Loader";
 //   return {fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData};
 // })
 
-class MyInfo extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -22,12 +22,12 @@ class MyInfo extends Component {
 
   render() {
     return (<div className="discounts">
-      <Navbar title="MyInfo" goBack="/fidelity" history={this.props.history}/>
+      <Navbar title="Profile" goBack="/fidelity" history={this.props.history}/>
     </div>);
   }
 }
 
-MyInfo.propTypes = {
+Profile.propTypes = {
   history: PropTypes.shape({goBack: PropTypes.func})
 };
 
