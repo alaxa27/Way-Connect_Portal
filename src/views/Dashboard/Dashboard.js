@@ -4,17 +4,10 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col} from "reactstrap";
 
-import Loader from "../../components/Loader";
-
 @connect((store) => {
   let informationStore = store.information;
-  let gatewayStore = store.gateway;
   return {
     isHotel: informationStore.informationData.isHotel,
-    fetching: informationStore.fetching,
-    fetched: informationStore.fetched,
-    acknowledging: gatewayStore.acknowledging,
-    acknowledged: gatewayStore.acknowledged
   };
 })
 
@@ -23,7 +16,6 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      playing: false
     };
   }
 
@@ -48,9 +40,7 @@ class Dashboard extends Component {
     return (<div className="dashboard">
       <div>
         <Button>
-          <Loader height={150} width={150} spinning={this.props.fetching || !this.props.fetched || this.props.acknowledging || !this.props.acknowledged}>
-            <i className="fa fa-wifi"></i>
-          </Loader>
+          <i className="fa fa-wifi"></i>
         </Button>
         <h4>
           {"Join the WiFi Network"}
@@ -65,10 +55,6 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   isHotel: PropTypes.bool,
-  fetching: PropTypes.bool,
-  fetched: PropTypes.bool,
-  acknowledging: PropTypes.bool,
-  acknowledged: PropTypes.bool,
   dispatch: PropTypes.func,
 };
 
