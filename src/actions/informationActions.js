@@ -38,7 +38,7 @@ export function fetchInformation(payload) {
         }
       });
       if (response.data.known) {
-        dispatch(fetchCommunication());
+        dispatch(fetchConnection());
       }
     } catch (error) {
       dispatch({
@@ -50,25 +50,27 @@ export function fetchInformation(payload) {
 }
 
 
-function fetchCommunication(payload) {
+export function fetchConnection(payload) {
   return async (dispatch, getState) => {
+    axiosInstance.defaults.headers.common["X-API-Key"] = payload.API_Key;
     dispatch({
       type: POST_CONNECT
     });
     try {
-      const informationData = { ...getState().information.informationData
-      };
       const response = await axiosInstance({
         method: "post",
         url: "/customers/connect/",
         data: {
-          mac_address: informationData.mac_address
+          mac_address: payload.mac_address
         }
       });
 
       dispatch({
         type: POST_CONNECT_FULFILLED,
-        payload: response.data.video
+        payload: {
+          ...payload,
+          communicationURL: response.data.video,
+        }
       });
     } catch (error) {
       dispatch({

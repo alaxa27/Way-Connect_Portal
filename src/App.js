@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 
 import {axiosInstance} from "./constants/ApiConfig";
 
-import {fetchInformation} from "./actions/informationActions";
+import {fetchConnection} from "./actions/informationActions";
 
+import Gateway from "./views/Gateway";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import Dashboard from "./views/Dashboard";
@@ -15,11 +16,6 @@ import Fidelity from "./views/Fidelity";
 import Discounts from "./views/Fidelity/Discounts";
 import Profile from "./views/Fidelity/Profile";
 import WifiAccess from "./views/WifiAccess";
-
-// @connect((store) => {
-//   let informationStore = store.information
-//   return {isKnown: informationStore.isKnown}
-// })
 
 const PrivateRoute = ({
   component: Component,
@@ -47,8 +43,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     /// IN DEVELOPMENT /
-    axiosInstance.defaults.headers.common["X-API-Key"] = "409582aa0ce24032904b49f145f725cc";
-    this.props.dispatch(fetchInformation({API_Key: "409582aa0ce24032904b49f145f725cc", mac_address: "11:ED:1D:F2:1B:1B", token: "idujza"}));
+    this.props.dispatch(fetchConnection({API_Key: "409582aa0ce24032904b49f145f725cc", mac_address: "11:ED:1D:F2:1B:1B", token: "idujza"}));
     ////////////////////
   }
 
@@ -58,14 +53,17 @@ class App extends Component {
       <div className="background"></div>
       <div className="app">
         <Switch>
-          <PrivateRoute path="/login" name="Login" component={Login} to="/dashboard" display={!isKnown}/>
-          <PrivateRoute path="/register" name="Register" component={Register} to="/dashboard" display={!isKnown}/>
-          <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/login" display={isKnown}/>
-          <PrivateRoute path="/wifi-access" name="WifiAccess" component={WifiAccess} to="/login" display={isKnown}/>
-          <PrivateRoute path="/claim" name="Claim" component={Claim} to="/login" display={isKnown && isHotel}/>
-          <PrivateRoute exact={true} path="/fidelity" name="Fidelity" component={Fidelity} to="/login" display={isKnown && !isHotel}/>
+          <Route path="/gateway" name="Gateway" component={Gateway} />
+
+          <Route path="/dashboard" name="Dashboard" component={Dashboard} />
+
+          <Route path="/wifi-access" name="WifiAccess" component={WifiAccess} />
+
+          <Route exact={true} path="/fidelity" name="Fidelity" component={Fidelity}/>
           <Route path="/fidelity/discounts" name="Discounts" component={Discounts} />
           <Route path="/fidelity/profile" name="Profile" component={Profile} />
+
+          <Route path="/claim" name="Claim" component={Claim} />
         </Switch>
       </div>
     </div>);
