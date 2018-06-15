@@ -8,8 +8,6 @@ import {axiosInstance} from "./constants/ApiConfig";
 import {fetchConnection} from "./actions/informationActions";
 
 import Gateway from "./views/Gateway";
-import Login from "./views/Login";
-import Register from "./views/Register";
 import Dashboard from "./views/Dashboard";
 import Claim from "./views/Claim";
 import Fidelity from "./views/Fidelity";
@@ -48,7 +46,7 @@ class App extends Component {
   }
 
   render() {
-    const {fetched, isKnown, isHotel} = this.props;
+    const {fetched} = this.props;
     return (<div>
       <div className="background"></div>
       <div className="app">
@@ -72,14 +70,12 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func,
-  isKnown: PropTypes.bool,
-  isHotel: PropTypes.bool,
   fetched: PropTypes.bool
 };
 
 const mapStateToProps = (store) => {
   let informationStore = store.information;
-  return {isKnown: informationStore.informationData.isKnown, isHotel: informationStore.informationData.isHotel, fetched: informationStore.fetched};
+  return {fetched: informationStore.fetched};
 };
 // <Route exact="exact" path="/" name="Login" component={Login}/>
 

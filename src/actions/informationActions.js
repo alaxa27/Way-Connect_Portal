@@ -8,47 +8,10 @@ import {
   axiosInstance
 } from "../constants/ApiConfig.js";
 import {
-  FETCH_INFORMATION,
-  FETCH_INFORMATION_FULFILLED,
-  FETCH_INFORMATION_REJECTED,
   POST_CONNECT,
   POST_CONNECT_FULFILLED,
   POST_CONNECT_REJECTED
 } from "../constants/ActionTypes";
-
-export function fetchInformation(payload) {
-  return async (dispatch, getState) => {
-    dispatch({
-      type: FETCH_INFORMATION,
-    });
-    try {
-      const response = await axiosInstance({
-        method: "get",
-        url: "/customers/known/",
-        params: {
-          mac_address: payload.mac_address
-        }
-      });
-      dispatch({
-        type: FETCH_INFORMATION_FULFILLED,
-        payload: { ...response.data,
-          mac_address: payload.mac_address,
-          API_Key: payload.API_Key,
-          token: payload.token
-        }
-      });
-      if (response.data.known) {
-        dispatch(fetchConnection());
-      }
-    } catch (error) {
-      dispatch({
-        type: FETCH_INFORMATION_REJECTED,
-      });
-      console.error(error);
-    }
-  };
-}
-
 
 export function fetchConnection(payload) {
   return async (dispatch, getState) => {
@@ -69,6 +32,7 @@ export function fetchConnection(payload) {
         type: POST_CONNECT_FULFILLED,
         payload: {
           ...payload,
+          establishment_type: "restaurant",
           communicationURL: response.data.video,
         }
       });

@@ -2,9 +2,8 @@
 import { combineReducers } from "redux";
 
 import gateway from "./gateway";
-import register from "./register";
 import claim from "./claim";
 import fidelity from "./fidelity";
 import information from "./information";
 
-export default combineReducers({ gateway, register, claim, fidelity, information });
+export default combineReducers({ gateway, claim, fidelity, information });

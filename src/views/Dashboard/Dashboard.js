@@ -9,7 +9,7 @@ import ActionButton from "./components/ActionButton";
 @connect((store) => {
   let informationStore = store.information;
   return {
-    isHotel: informationStore.informationData.isHotel,
+    establishment_type: informationStore.informationData.establishment_type,
   };
 })
 
@@ -21,14 +21,14 @@ class Dashboard extends Component {
   render() {
     return (<div className="dashboard">
       <ActionButton link="wifi-access" icon="wifi" text="Join the WiFi Network" show={true} />
-      <ActionButton link="claim" icon="exclamation-triangle" text="Make a Claim" show={this.props.isHotel} />
-      <ActionButton link="fidelity" icon="hand-holding-usd" text="Fidelity Bonus" show={!this.props.isHotel} />
+      <ActionButton link="claim" icon="exclamation-triangle" text="Make a Claim" show={this.props.establishment_type === "hotel"} />
+      <ActionButton link="fidelity" icon="hand-holding-usd" text="Fidelity Bonus" show={this.props.establishment_type !== "hotel"} />
     </div>);
   }
 }
 
 Dashboard.propTypes = {
-  isHotel: PropTypes.bool,
+  establishment_type: PropTypes.string,
   dispatch: PropTypes.func,
 };
 
