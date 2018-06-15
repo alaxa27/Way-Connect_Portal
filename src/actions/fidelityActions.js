@@ -115,6 +115,7 @@ export function fetchDiscount(payload) {
           date: response.data.date
         }
       });
+      dispatch(fetchFidelity());
       payload.toggleDiscountModal();
     }
   };
