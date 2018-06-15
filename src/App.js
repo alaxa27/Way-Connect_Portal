@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect, withRouter} from "reac
 import PropTypes from "prop-types";
 
 import {axiosInstance} from "./constants/ApiConfig";
+import {INFORMATIONS} from "./constants/ActionTypes";
 
 import {fetchConnection} from "./actions/informationActions";
 
@@ -41,27 +42,34 @@ class App extends Component {
   constructor(props) {
     super(props);
     /// IN DEVELOPMENT /
-    this.props.dispatch(fetchConnection({API_Key: "409582aa0ce24032904b49f145f725cc", mac_address: "11:ED:1D:F2:1B:1B", token: "idujza"}));
+    this.props.dispatch({
+      type: INFORMATIONS,
+      payload: {
+        API_Key: "409582aa0ce24032904b49f145f725cc",
+        mac_address: "11:ED:1D:F2:1B:1B",
+        token: "idujza"
+      }
+    });
     ////////////////////
   }
 
   render() {
-    const {fetched} = this.props;
+    const {fetched, acknowledged} = this.props;
     return (<div>
       <div className="background"></div>
       <div className="app">
         <Switch>
-          <Route path="/gateway" name="Gateway" component={Gateway} />
+          <Route path="/gateway" name="Gateway" component={Gateway}/>
 
-          <Route path="/dashboard" name="Dashboard" component={Dashboard} />
+          <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/gateway" display={fetched && acknowledged}/>
 
-          <Route path="/wifi-access" name="WifiAccess" component={WifiAccess} />
+          <PrivateRoute path="/wifi-access" name="WifiAccess" component={WifiAccess} to="/gateway" display={fetched && acknowledged}/>
 
           <Route exact={true} path="/fidelity" name="Fidelity" component={Fidelity}/>
-          <Route path="/fidelity/discounts" name="Discounts" component={Discounts} />
-          <Route path="/fidelity/profile" name="Profile" component={Profile} />
+          <Route path="/fidelity/discounts" name="Discounts" component={Discounts}/>
+          <Route path="/fidelity/profile" name="Profile" component={Profile}/>
 
-          <Route path="/claim" name="Claim" component={Claim} />
+          <PrivateRoute path="/claim" name="Claim" component={Claim} to="/gateway" display={fetched && acknowledged}/>
         </Switch>
       </div>
     </div>);
@@ -70,13 +78,14 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func,
-  fetched: PropTypes.bool
+  fetched: PropTypes.bool,
+  acknowledged: PropTypes.bool
 };
 
 const mapStateToProps = (store) => {
   let informationStore = store.information;
-  return {fetched: informationStore.fetched};
+  let gatewayStore = store.gateway;
+  return {fetched: informationStore.fetched, acknowledged: gatewayStore.acknowledged};
 };
-// <Route exact="exact" path="/" name="Login" component={Login}/>
 
 export default withRouter(connect(mapStateToProps)(App));

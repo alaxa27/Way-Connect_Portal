@@ -15,7 +15,10 @@ import {
 
 export function fetchConnection(payload) {
   return async (dispatch, getState) => {
-    axiosInstance.defaults.headers.common["X-API-Key"] = payload.API_Key;
+
+    const informationData = await getState().information.informationData;
+    axiosInstance.defaults.headers.common["X-API-Key"] = informationData.API_Key;
+
     dispatch({
       type: POST_CONNECT
     });
@@ -24,14 +27,13 @@ export function fetchConnection(payload) {
         method: "post",
         url: "/customers/connect/",
         data: {
-          mac_address: payload.mac_address
+          mac_address: informationData.mac_address
         }
       });
 
       dispatch({
         type: POST_CONNECT_FULFILLED,
         payload: {
-          ...payload,
           establishment_type: "restaurant",
           communicationURL: response.data.video,
         }

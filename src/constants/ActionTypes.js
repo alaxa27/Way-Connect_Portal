@@ -5,6 +5,7 @@
 
 /* eslint-disable */
 
+export const INFORMATIONS = "INFORMATIONS";
 
 export const POST_CONNECT = "POST_CONNECT";
 export const POST_CONNECT_FULFILLED = "POST_CONNECT_FULFILLED";

@@ -7,6 +7,8 @@
 // Read more on Reducers - https://redux.js.org/docs/basics/Reducers.html
 
 import {
+  INFORMATIONS,
+
   POST_CONNECT,
   POST_CONNECT_FULFILLED,
   POST_CONNECT_REJECTED
@@ -29,6 +31,13 @@ export default function reducer(state = {
   fetched: false
 }, action) {
   switch (action.type) {
+    case INFORMATIONS:
+      return { ...state,
+        informationData: { ...state.informationData,
+          ...action.payload
+        }
+      };
+
     case POST_CONNECT:
       return { ...state,
         fetching: true,

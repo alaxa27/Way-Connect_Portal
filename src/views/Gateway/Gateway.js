@@ -8,6 +8,7 @@ import "video-react/dist/video-react.css"; // import css
 
 import Loader from "../../components/Loader";
 
+import {fetchConnection} from "../../actions/informationActions";
 import {acknowledgeCommunication} from "../../actions/gatewayActions";
 
 const playerShortcuts = [
@@ -33,6 +34,9 @@ class Gateway extends Component {
     this.state = {
       playing: false
     };
+
+    this.props.dispatch(fetchConnection());
+
   }
 
   handleStateChange(state, prevState) {
