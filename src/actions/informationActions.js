@@ -8,21 +8,31 @@ import {
   axiosInstance
 } from "../constants/ApiConfig.js";
 import {
+  INFORMATIONS,
+
   POST_CONNECT,
   POST_CONNECT_FULFILLED,
   POST_CONNECT_REJECTED
 } from "../constants/ActionTypes";
 
+export function dispatchInformations(payload) {
+  return (dispatch, getState) => {
+    axiosInstance.defaults.headers.common["X-API-Key"] = payload.API_Key;
+    dispatch({
+      type: INFORMATIONS,
+      payload: payload
+    });
+  };
+}
+
 export function fetchConnection(payload) {
   return async (dispatch, getState) => {
-
-    const informationData = await getState().information.informationData;
-    axiosInstance.defaults.headers.common["X-API-Key"] = informationData.API_Key;
-
     dispatch({
       type: POST_CONNECT
     });
     try {
+      const informationData = await getState().information.informationData;
+
       const response = await axiosInstance({
         method: "post",
         url: "/customers/connect/",

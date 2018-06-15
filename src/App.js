@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import {axiosInstance} from "./constants/ApiConfig";
 import {INFORMATIONS} from "./constants/ActionTypes";
 
-import {fetchConnection} from "./actions/informationActions";
+import {dispatchInformations} from "./actions/informationActions";
 
 import Gateway from "./views/Gateway";
 import Dashboard from "./views/Dashboard";
@@ -42,14 +42,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     /// IN DEVELOPMENT /
-    // this.props.dispatch({
-    //   type: INFORMATIONS,
-    //   payload: {
-    //     API_Key: "409582aa0ce24032904b49f145f725cc",
-    //     mac_address: "11:ED:1D:F2:1B:1B",
-    //     token: "idujza"
-    //   }
-    // });
+    this.props.dispatch(dispatchInformations({
+        API_Key: "409582aa0ce24032904b49f145f725cc",
+        mac_address: "11:ED:1D:F2:1B:1B",
+        token: "idujza"
+      })
+    );
     ////////////////////
   }
 

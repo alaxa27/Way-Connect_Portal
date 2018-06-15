@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
-import {INFORMATIONS} from "../../constants/ActionTypes";
+import {dispatchInformations} from "../../actions/informationActions";
 
 @connect((store) => {
   return {};
@@ -24,12 +24,7 @@ class Portal extends Component {
     };
 
     delete this.props.match.params.target;
-    this.props.dispatch({
-      type: INFORMATIONS,
-      payload: {
-        ...this.props.match.params
-      }
-    });
+    this.props.dispatch(dispatchInformations(this.props.match.params));
 
   }
   render() {
