@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Button, Row, Col} from "reactstrap";
 
-import ActionButton from "./components/ActionButton"
+import ActionButton from "./components/ActionButton";
 
 @connect((store) => {
   let informationStore = store.information;
@@ -20,9 +20,9 @@ class Dashboard extends Component {
 
   render() {
     return (<div className="dashboard">
-    <ActionButton link="wifi-access" icon="wifi" text="Join the WiFi Network" show={true} />
-    <ActionButton link="claim" icon="exclamation-triangle" text="Make a Claim" show={this.props.isHotel} />
-    <ActionButton link="fidelity" icon="hand-holding-usd" text="Fidelity Bonus" show={!this.props.isHotel} />
+      <ActionButton link="wifi-access" icon="wifi" text="Join the WiFi Network" show={true} />
+      <ActionButton link="claim" icon="exclamation-triangle" text="Make a Claim" show={this.props.isHotel} />
+      <ActionButton link="fidelity" icon="hand-holding-usd" text="Fidelity Bonus" show={!this.props.isHotel} />
     </div>);
   }
 }
