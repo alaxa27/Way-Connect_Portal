@@ -18,7 +18,7 @@ import "react-block-ui/style.css";
 render(<Provider store={store}>
   <Router>
     <Switch>
-      <Route exact path="/portal/:mac_address/:API_Key/:token/" component={Portal}/>
+      <Route exact path="/portal/:target/:mac_address/:API_Key/:token/" component={Portal}/>
       <Route path="/" component={App}/>
     </Switch>
   </Router>
