@@ -1,5 +1,5 @@
 .discounts {
-  width: 100%;
+  max-width: 500px;
 
   .discount {
     overflow: auto;
@@ -41,8 +41,8 @@
     }
 
     &__circle {
-      width: 100px;
-      height: 100px;
+      width: 75px;
+      height: 75px;
       background: map-get($colors, way-gray-dark);
       color: white;
       display: flex;
@@ -54,18 +54,13 @@
       span {
         &:first-child {
           font-weight: bold;
-          font-size: 30px;
-        }
-
-        &:first-child {
-          font-weight: bold;
-          font-size: 25px;
+          font-size: 1rem;
         }
 
         &:last-child {
           position: relative;
           bottom: -4px;
-          font-size: 12px;
+          font-size: 0.5rem;
         }
       }
     }
