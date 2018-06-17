@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {Button} from "reactstrap";
+import {Button, Row} from "reactstrap";
 import {Player, ControlBar, Shortcut} from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
@@ -46,7 +46,7 @@ class Gateway extends Component {
   }
 
   playVideo() {
-    if (!this.props.fetching) {
+    if (!this.props.fetching && this.props.fetched) {
       this.setState({playing: true});
       this.player.subscribeToStateChange(this.handleStateChange.bind(this));
       this.player.play();
@@ -57,11 +57,16 @@ class Gateway extends Component {
   render() {
 
     return (<div className="gateway">
-      <Button onClick={this.playVideo.bind(this)}>
-        <Loader height={150} width={150} spinning={this.props.fetching || !this.props.fetched}>
-          <i className="fa fa-wifi"></i>
-        </Loader>
-      </Button>
+      <img src="/assets/logo.png" className="logo"/>
+      <Row>
+        {"We offer you a high Speed Wi-Fi and a discount on your next Order."}
+      </Row>
+      <Row className="go-block">
+        <p>{"In under"}</p>
+        <Button onClick={this.playVideo.bind(this)} block="block">
+          {"15 seconds"}
+        </Button>
+      </Row>
 
       <div className={(
           this.state.playing
