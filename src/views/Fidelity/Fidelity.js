@@ -94,7 +94,7 @@ class Fidelity extends Component {
             {this.props.discountData.reward}
           </h4>
           <h4>
-            {this.props.discountData.date}
+            {new Date(this.props.discountData.date).toLocaleString()}
           </h4>
         </ModalBody>
         <ModalFooter>
