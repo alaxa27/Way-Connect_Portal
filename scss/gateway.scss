@@ -18,16 +18,29 @@
     flex-direction: column;
     align-items: center;
     font-weight: 200;
+
+    .btn {
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      background: $way-connect-gradient;
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+    }
   }
 
-  .go-btn {
-    font-size: 1rem;
-    background: $way-connect-gradient;
-  }
-  .way-btn {
-    border-radius: 8rem;
-    width: 250px;
-    height: 250px;
+  .way-connect {
+    h4 {
+      font-size: 2.5rem;
+      font-weight: 900;
+    }
+
+    .btn {
+      border-radius: 8rem;
+      width: 250px;
+      height: 250px;
+    }
   }
 
   .video-playing {
@@ -45,5 +58,4 @@
   }
 }
 
-.gateway {
-}
+.gateway {}

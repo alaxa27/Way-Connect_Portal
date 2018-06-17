@@ -21,7 +21,7 @@ class WayConnect extends Component {
 
   render() {
 
-    return (<div className="gateway">
+    return (<div className="way-connect">
       <Button className="way-btn" onClick={() => {
           this.props.history.push("/gateway/partner");
         }}>
@@ -29,6 +29,7 @@ class WayConnect extends Component {
           <img src="/assets/logo-white.png" className="logo"/>
         </Loader>
       </Button>
+      <h4>{"Way-Connect"}</h4>
     </div>);
   }
 }

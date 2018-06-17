@@ -53,13 +53,13 @@ class Partner extends Component {
   render() {
 
     return (<div className="gateway">
-      <img src="/assets/logo.png" className="logo"/>
+      <img src="/assets/mustache.png" className="logo"/>
       <Row>
         {"We offer you a high-speed Wi-Fi and a discount on your next Order."}
       </Row>
       <Row className="go-block">
         <p>{"In under"}</p>
-        <Button onClick={this.playVideo.bind(this)} className="go-btn" block={true}>
+        <Button onClick={this.playVideo.bind(this)} block={true}>
           {"15 seconds"}
         </Button>
       </Row>
