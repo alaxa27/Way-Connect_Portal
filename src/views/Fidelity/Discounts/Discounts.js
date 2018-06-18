@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {Row, Col, Card, CardBody} from "reactstrap";
 import _ from "underscore";
+import TransitionGroup from "react-transition-group/TransitionGroup";
+import * as Animated from "animated/lib/targets/react-dom";
 
 import Navbar from "../../../components/Navbar";
 import Loader from "../../../components/Loader";
@@ -18,7 +20,10 @@ import Discount from "./components/Discount";
 class Discounts extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      animations: [],
+      discounts: []
+    };
   }
 
   renderDiscounts(discounts) {
@@ -33,19 +38,53 @@ class Discounts extends Component {
     }
   }
 
+  componentDidMount() {
+    this._renderDiscounts(this.props.discountsData.discounts);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.discountsData.discounts.length && nextProps.discountsData.discounts.length) {
+      this._renderDiscounts(nextProps.discountsData.discounts);
+    }
+  }
+
+  _renderDiscounts(discounts) {
+    this.setState({
+      discounts: discounts,
+      animations: discounts.map((_, i) => new Animated.Value(0))
+    }, () => {
+      Animated.stagger(100, this.state.animations.map(anim => Animated.spring(anim, {toValue: 1}))).start();
+    });
+  }
+
   render() {
     return (<div className="discounts">
-      <Navbar title="Discounts" goBack="/fidelity" history={this.props.history}/> {this.renderDiscounts(this.props.discountsData.discounts)}
+      <Navbar title="Discounts" goBack="/fidelity" history={this.props.history}/>
+      <TransitionGroup component="div" className="mt-4">
+        {
+          this.state.discounts.map((p, i) => {
+            const style = {
+              opacity: this.state.animations[i],
+              transform: Animated.template `
+    								translate3d(0,${this.state.animations[i].interpolate({
+                inputRange: [
+                  0, 1
+                ],
+                outputRange: ["12px", "0px"]})},0)
+    							`
+              };
+              return (<Animated.div key={i} style={style}>
+                <Discount discount={p}/>
+              </Animated.div>);
+            })
+          }
+      </TransitionGroup>
+
     </div>);
   }
 }
 Discounts.propTypes = {
   history: PropTypes.shape({goBack: PropTypes.func}),
-  discountsData: PropTypes.shape({
-    fetching: PropTypes.bool,
-    fetched: PropTypes.bool,
-    discounts: PropTypes.array
-  })
+  discountsData: PropTypes.shape({fetching: PropTypes.bool, fetched: PropTypes.bool, discounts: PropTypes.array})
 };
 
 export default Discounts;
