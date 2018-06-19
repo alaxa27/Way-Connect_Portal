@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {Label} from "reactstrap";
+import DateTime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 
 class Datetime extends Component {
   constructor(props) {
-
     super(props);
     this.updateField = this.updateField.bind(this);
   }
@@ -19,6 +20,7 @@ class Datetime extends Component {
         <p>{"What's your"}</p>
         {this.props.title}
       </Label>
+      <DateTime viewMode="years" />
     </div>);
   }
 }

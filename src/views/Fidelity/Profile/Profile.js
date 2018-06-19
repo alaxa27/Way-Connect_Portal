@@ -26,15 +26,15 @@ class Profile extends Component {
       id: 0,
       questions: [
         {
+          name: "birthday",
+          type: "date",
+          title: "Birthday",
+          value: null
+        }, {
           name: "nationality",
           type: "select-unique",
           title: "Nationality",
           options: STATUS["NATIONALITY"],
-          value: null
-        }, {
-          name: "birthday",
-          type: "date",
-          title: "Birthday",
           value: null
         }, {
           name: "work",

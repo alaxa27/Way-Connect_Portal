@@ -6,7 +6,6 @@ import Datetime from "./Datetime";
 
 class Question extends Component {
   constructor(props) {
-
     super(props);
   }
 
