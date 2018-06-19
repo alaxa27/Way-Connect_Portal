@@ -32,6 +32,11 @@ class Profile extends Component {
           options: STATUS["NATIONALITY"],
           value: null
         }, {
+          name: "birthday",
+          type: "date",
+          title: "Birthday",
+          value: null
+        }, {
           name: "work",
           type: "select-unique",
           title: "Work Status",
