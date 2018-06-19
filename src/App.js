@@ -59,15 +59,15 @@ class App extends Component {
         <Switch>
           <Route path="/gateway" name="Gateway" component={Gateway}/>
 
-          <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/gateway" display={fetched && acknowledged}/>
+          <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/gateway/way-connect" display={fetched && acknowledged}/>
 
-          <PrivateRoute path="/wifi-access" name="WifiAccess" component={WifiAccess} to="/gateway" display={fetched && acknowledged}/>
+          <PrivateRoute path="/wifi-access" name="WifiAccess" component={WifiAccess} to="/gateway/way-connect" display={fetched && acknowledged}/>
 
           <Route exact={true} path="/fidelity" name="Fidelity" component={Fidelity}/>
           <Route path="/fidelity/discounts" name="Discounts" component={Discounts}/>
           <Route path="/fidelity/profile" name="Profile" component={Profile}/>
 
-          <PrivateRoute path="/claim" name="Claim" component={Claim} to="/gateway" display={fetched && acknowledged}/>
+          <PrivateRoute path="/claim" name="Claim" component={Claim} to="/gateway/way-connect" display={fetched && acknowledged}/>
         </Switch>
       </div>
     </div>);
