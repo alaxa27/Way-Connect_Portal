@@ -40,6 +40,7 @@
 
     .form-control {
       background-color: map-get($colors, way-gray);
+      color: map-get($colors, light);
       border-radius: 1.5rem;
       border-width: 0;
       width: 50%;

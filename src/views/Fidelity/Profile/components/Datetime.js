@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {Label} from "reactstrap";
 import DateTime from "react-datetime";
+import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 
 class Datetime extends Component {
@@ -11,7 +12,7 @@ class Datetime extends Component {
   }
 
   updateField(val) {
-    this.props.updateValue(this.props.name, val);
+    this.props.updateValue(this.props.name, val.format("L"));
   }
 
   render() {
@@ -20,7 +21,7 @@ class Datetime extends Component {
         <p>{"What's your"}</p>
         {this.props.title}
       </Label>
-      <DateTime viewMode="years" />
+      <DateTime viewMode="years" viewDate={moment().year(1980)} dateFormat={moment().format("YYYY MMM DD")} timeFormat={false} onChange={this.updateField} closeOnSelect={true}/>
     </div>);
   }
 }
