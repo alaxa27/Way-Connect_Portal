@@ -4,6 +4,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  .progress {
+    position: absolute;
+    top: $navbar_height;
+    left: 0;
+    width: 100vw;
+    background-color: map-get($colors, way-gray);
+    border-radius: 0;
+    .progress-bar {
+      background: $way-connect-gradient;
+    }
+  }
+
   label {
     display: inherit;
     text-align: left;
@@ -13,6 +26,12 @@
       font-weight: lighter;
       color: map-get($colors, way-gray);
     }
+  }
+  .question-block {
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
   }
   .next-btn {
     height: 40px;
