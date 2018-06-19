@@ -6,7 +6,7 @@ import {Button, Label} from "reactstrap";
 
 import Navbar from "../../../components/Navbar";
 import Loader from "../../../components/Loader";
-import SelectBox from "../../../components/SelectBox";
+import Question from "./components/Question";
 
 const STATUS = require("../../../data/status");
 
@@ -22,30 +22,51 @@ class Profile extends Component {
 
     super(props);
     this.state = {
-      nationality: STATUS["NATIONALITY"]
+      questions: [
+        {
+          name: "nationality",
+          type: "select-unique",
+          title: "Nationality",
+          options: STATUS["NATIONALITY"],
+          value: {}
+        }, {
+          name: "work",
+          type: "select-unique",
+          title: "Work Status",
+          options: STATUS["PROFESSIONAL"],
+          value: {}
+        }, {
+          name: "relationship",
+          type: "select-unique",
+          title: "Relationship Status",
+          options: STATUS["RELATIONSHIP"],
+          value: {}
+        }
+      ]
     };
-    this.updateNationality = this.updateNationality.bind(this);
+    this.updateValue = this.updateValue.bind(this);
+    this.goToNextQuestion = this.goToNextQuestion.bind(this);
   }
 
-  updateNationality(val) {
-    let userData = {
-      ...this.state.userData
-    };
-    userData.nationality = val;
-    this.setState({userData});
+  updateValue(name, val) {
+    let questions = [...this.state.questions];
+    const index = questions.findIndex(e => e.name === name);
+    questions[index].value = val;
+    this.setState({
+      questions: questions
+    });
+  }
+
+  goToNextQuestion() {
+    console.log(this.state);
   }
 
   render() {
     return (<div className="profile">
       <Navbar title="Profile" goBack="/fidelity" history={this.props.history}/>
-      <div>
-        <Label>
-          <p>{"Select your"}</p>
-          {"Nationality"}
-        </Label>
-        <SelectBox name="nationality-select" options={this.state.nationality} onChange={this.updateNationality}/>
-      </div>
-      <Button className="next-btn">
+      <Question {...this.state.questions[0]} updateValue={this.updateValue}/>
+      <Question {...this.state.questions[1]} updateValue={this.updateValue}/>
+      <Button className="next-btn" onClick={this.goToNextQuestion}>
         {"Next Question"}
         <i className="fa fa-chevron-right"></i>
       </Button>
