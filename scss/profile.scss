@@ -1,3 +1,20 @@
 .profile {
-  
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  label {
+    display: inherit;
+    text-align: left;
+    font-size: 4rem;
+
+    p {
+      font-weight: lighter;
+      color: map-get($colors, way-gray);
+    }
+  }
+  .next-btn {
+    height: 40px;
+  }
 }
