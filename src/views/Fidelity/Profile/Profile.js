@@ -9,7 +9,7 @@ import Loader from "../../../components/Loader";
 import Congratulations from "./components/Congratulations";
 import Question from "./components/Question";
 
-import {fetchQuestions} from "../../../actions/fidelityActions";
+import {postQuestion} from "../../../actions/fidelityActions";
 
 @connect((store) => {
   let fidelityStore = store.fidelity;
@@ -43,10 +43,8 @@ class Profile extends Component {
   }
 
   goToNextQuestion() {
-    if (this.state.questions[this.state.id].value !== null && this.state.id < this.state.questions.length) {
-      this.setState({
-        id: this.state.id + 1
-      });
+    if (this.state.questions[this.state.id].value && this.state.id < this.state.questions.length) {
+      this.props.dispatch(postQuestion({id: this.state.id, answer: this.state.value}));
     }
   }
 
@@ -59,30 +57,26 @@ class Profile extends Component {
           <i className="fa fa-chevron-right"></i>
         </Button>
       </div>);
-    } else if (this.state.questions.length > 0 && this.state.id >= this.state.questions.length) {
-        return (<Congratulations />);
     } else {
-      return (<Loader spinning={this.props.questionsData.fetching || !this.props.questionsData.fetched}/>);
+      return (<Congratulations/>);
     }
-
   }
 
   render() {
     return (<div className="profile">
       <Navbar title="Profile" goBack="/fidelity" history={this.props.history}/>
-      <Progress value={(this.state.id / this.state.questions.length) * 100}/> {this._renderQuestion()}
+      <Progress value={(this.state.id / this.state.questions.length) * 100}/>
+      <Loader spinning={this.props.questionsData.fetching || !this.props.questionsData.fetched || this.props.questionsData.posting}>
+        {this._renderQuestion()}
+      </Loader>
     </div>);
   }
 }
 
 Profile.propTypes = {
   history: PropTypes.shape({goBack: PropTypes.func}),
-  questionsData: PropTypes.shape({
-    fetching: PropTypes.bool,
-    fetched: PropTypes.bool,
-    questions: PropTypes.array,
-    id: PropTypes.number
-  })
+  dispatch: PropTypes.func,
+  questionsData: PropTypes.shape({posting: PropTypes.bool, fetching: PropTypes.bool, fetched: PropTypes.bool, questions: PropTypes.array, id: PropTypes.number})
 };
 
 export default Profile;

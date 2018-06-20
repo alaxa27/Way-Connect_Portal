@@ -24,6 +24,10 @@ import {
   FETCH_QUESTIONS,
   FETCH_QUESTIONS_FULFILLED,
   FETCH_QUESTIONS_REJECTED,
+
+  POST_QUESTION,
+  POST_QUESTION_FULFILLED,
+  POST_QUESTION_REJECTED,
 } from "../constants/ActionTypes";
 
 const STATUS = require("../data/status");
@@ -148,19 +152,19 @@ export function fetchQuestions(payload) {
         name: "birthday",
         type: "date",
         title: "Birthday",
-        answered: false
+        answered: true
       }, {
         name: "nationality",
         type: "select-unique",
         title: "Nationality",
         options: STATUS["NATIONALITY"],
-        answered: false
+        answered: true
       }, {
         name: "work",
         type: "select-unique",
         title: "Work Status",
         options: STATUS["PROFESSIONAL"],
-        answered: true
+        answered: false
       }, {
         name: "relationship",
         type: "select-unique",
@@ -182,6 +186,36 @@ export function fetchQuestions(payload) {
     } catch (error) {
       dispatch({
         type: FETCH_QUESTIONS_REJECTED
+      });
+    }
+  };
+}
+
+export function postQuestion(payload) {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: POST_QUESTION
+      });
+      const informationData = { ...getState().information.informationData
+      };
+
+      // const response = await axiosInstance({
+      //   method: "post",
+      //   url: `/customers/questions/${payload.id}`,
+      //   data: {
+      //     mac_address: informationData.mac_address,
+      //     answer: payload.answer
+      //   }
+      // });
+
+      dispatch({
+        type: POST_QUESTION_FULFILLED
+      });
+
+    } catch (error) {
+      dispatch({
+        type: POST_QUESTION_REJECTED
       });
     }
   };

@@ -15,9 +15,9 @@ class Loader extends Component {
   }
 
   render() {
-    return (<div>
+    return (<React.Fragment>
       {this.renderLoader(this.props.spinning, this.props.children)}
-    </div>);
+    </React.Fragment>);
   }
 }
 
