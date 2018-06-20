@@ -12,7 +12,7 @@ class Datetime extends Component {
   }
 
   updateField(val) {
-    this.props.updateValue(this.props.name, val.format("L"));
+    this.props.updateValue(this.props.name, val.format("YYYY-MM-DD"));
   }
 
   render() {
@@ -21,7 +21,7 @@ class Datetime extends Component {
         <p>{"What's your"}</p>
         {this.props.title}
       </Label>
-      <DateTime viewMode="years" viewDate={moment().year(1980)} dateFormat={moment().format("YYYY MMM DD")} timeFormat={false} onChange={this.updateField} closeOnSelect={true}/>
+      <DateTime viewMode="years" viewDate={moment().year(1980)} dateFormat={moment().format("YYYY MMM DD")} timeFormat={false} onChange={this.updateField} closeOnSelect={true} />
     </div>);
   }
 }
