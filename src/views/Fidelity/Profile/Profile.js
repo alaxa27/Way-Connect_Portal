@@ -9,50 +9,30 @@ import Loader from "../../../components/Loader";
 import Congratulations from "./components/Congratulations";
 import Question from "./components/Question";
 
-const STATUS = require("../../../data/status");
+import {fetchQuestions} from "../../../actions/fidelityActions";
 
-// import {fetchFidelity, fetchDiscount} from "../../actions/fidelityActions";
-//
-// @connect((store) => {
-//   let fidelityStore = store.fidelity;
-//   return {fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData};
-// })
+@connect((store) => {
+  let fidelityStore = store.fidelity;
+  return {questionsData: fidelityStore.questionsData};
+})
 
 class Profile extends Component {
   constructor(props) {
 
     super(props);
     this.state = {
-      id: 0,
-      questions: [
-        {
-          name: "birthday",
-          type: "date",
-          title: "Birthday",
-          value: null
-        }, {
-          name: "nationality",
-          type: "select-unique",
-          title: "Nationality",
-          options: STATUS["NATIONALITY"],
-          value: null
-        }, {
-          name: "work",
-          type: "select-unique",
-          title: "Work Status",
-          options: STATUS["PROFESSIONAL"],
-          value: null
-        }, {
-          name: "relationship",
-          type: "select-unique",
-          title: "Relationship Status",
-          options: STATUS["RELATIONSHIP"],
-          value: null
-        }
-      ]
+      id: this.props.questionsData.id,
+      questions: this.props.questionsData.questions
     };
+
     this.updateValue = this.updateValue.bind(this);
     this.goToNextQuestion = this.goToNextQuestion.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.questionsData.questions.length !== this.state.questions || this.props.questionsData.id !== this.state.id) {
+      this.setState({id: nextProps.questionsData.id, questions: nextProps.questionsData.questions});
+    }
   }
 
   updateValue(name, val) {
@@ -68,7 +48,6 @@ class Profile extends Component {
         id: this.state.id + 1
       });
     }
-    console.log(this.state);
   }
 
   _renderQuestion() {
@@ -80,8 +59,10 @@ class Profile extends Component {
           <i className="fa fa-chevron-right"></i>
         </Button>
       </div>);
+    } else if (this.state.questions.length > 0 && this.state.id >= this.state.questions.length) {
+        return (<Congratulations />);
     } else {
-      return (<Congratulations/>);
+      return (<Loader spinning={this.props.questionsData.fetching || !this.props.questionsData.fetched}/>);
     }
 
   }
@@ -95,7 +76,13 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  history: PropTypes.shape({goBack: PropTypes.func})
+  history: PropTypes.shape({goBack: PropTypes.func}),
+  questionsData: PropTypes.shape({
+    fetching: PropTypes.bool,
+    fetched: PropTypes.bool,
+    questions: PropTypes.array,
+    id: PropTypes.number
+  })
 };
 
 export default Profile;

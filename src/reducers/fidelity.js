@@ -17,7 +17,11 @@ import {
 
   FETCH_DISCOUNT,
   FETCH_DISCOUNT_FULFILLED,
-  FETCH_DISCOUNT_REJECTED
+  FETCH_DISCOUNT_REJECTED,
+
+  FETCH_QUESTIONS,
+  FETCH_QUESTIONS_FULFILLED,
+  FETCH_QUESTIONS_REJECTED,
 } from "../constants/ActionTypes";
 
 const fidelityData = {
@@ -41,6 +45,13 @@ const discountsData = {
   discounts: []
 };
 
+const questionsData = {
+  fetching: false,
+  fetched: false,
+  questions: [],
+  id: 0
+};
+
 export default function reducer(state = {
   posting: false,
   posted: false,
@@ -49,6 +60,8 @@ export default function reducer(state = {
   fidelityData: { ...fidelityData
   },
   discountData: { ...discountData
+  },
+  questionsData: { ...questionsData
   }
 }, action) {
   switch (action.type) {
@@ -116,6 +129,29 @@ export default function reducer(state = {
     case FETCH_DISCOUNT_REJECTED:
       return { ...state,
         discountData: { ...state.discountData,
+          fetching: false,
+          fetched: false
+        }
+      };
+
+    case FETCH_QUESTIONS:
+      return { ...state,
+        questionsData: { ...state.questionsData,
+          fetching: true
+        }
+      };
+    case FETCH_QUESTIONS_FULFILLED:
+      console.log("PAYLOAD: ", action.payload);
+      return { ...state,
+        questionsData: { ...state.questionsData,
+          ...action.payload,
+          fetching: false,
+          fetched: true,
+        }
+      };
+    case FETCH_QUESTIONS_REJECTED:
+      return { ...state,
+        questionsData: { ...state.questionsData,
           fetching: false,
           fetched: false
         }

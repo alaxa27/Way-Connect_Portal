@@ -19,8 +19,14 @@ import {
 
   FETCH_DISCOUNT,
   FETCH_DISCOUNT_FULFILLED,
-  FETCH_DISCOUNT_REJECTED
+  FETCH_DISCOUNT_REJECTED,
+
+  FETCH_QUESTIONS,
+  FETCH_QUESTIONS_FULFILLED,
+  FETCH_QUESTIONS_REJECTED,
 } from "../constants/ActionTypes";
+
+const STATUS = require("../data/status");
 
 export function fetchFidelity(payload) {
   return async (dispatch, getState) => {
@@ -49,6 +55,7 @@ export function fetchFidelity(payload) {
       });
 
       await dispatch(fetchDiscounts());
+      await dispatch(fetchQuestions());
 
     } catch (error) {
       dispatch({
@@ -117,6 +124,65 @@ export function fetchDiscount(payload) {
       });
       dispatch(fetchFidelity());
       payload.toggleDiscountModal();
+    }
+  };
+}
+
+export function fetchQuestions(payload) {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: FETCH_QUESTIONS
+      });
+      const informationData = { ...getState().information.informationData
+      };
+
+      // const response = await axiosInstance({
+      //   method: "get",
+      //   url: "/customers/questions/",
+      //   params: {
+      //     mac_address: informationData.mac_address
+      //   }
+      // });
+      const questions = [{
+        name: "birthday",
+        type: "date",
+        title: "Birthday",
+        answered: false
+      }, {
+        name: "nationality",
+        type: "select-unique",
+        title: "Nationality",
+        options: STATUS["NATIONALITY"],
+        answered: false
+      }, {
+        name: "work",
+        type: "select-unique",
+        title: "Work Status",
+        options: STATUS["PROFESSIONAL"],
+        answered: true
+      }, {
+        name: "relationship",
+        type: "select-unique",
+        title: "Relationship Status",
+        options: STATUS["RELATIONSHIP"],
+        answered: false
+      }];
+
+      const questionsSorted = questions.sort((a, b) => !a.answered && b.answered);
+      const countAnswered = questionsSorted.filter((e) => e.answered).length;
+
+      dispatch({
+        type: FETCH_QUESTIONS_FULFILLED,
+        payload: {
+          questions: questionsSorted,
+          id: countAnswered
+        }
+      });
+    } catch (error) {
+      dispatch({
+        type: FETCH_QUESTIONS_REJECTED
+      });
     }
   };
 }
