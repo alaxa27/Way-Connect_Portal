@@ -17,7 +17,6 @@ import {
 
 export function dispatchInformations(payload) {
   return (dispatch, getState) => {
-    axiosInstance.defaults.headers.common["X-API-Key"] = payload.API_Key;
     dispatch({
       type: INFORMATIONS,
       payload: payload

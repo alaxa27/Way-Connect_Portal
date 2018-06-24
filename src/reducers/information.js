@@ -16,7 +16,6 @@ import {
 
 const informationData = {
   mac_address: "",
-  API_Key: "",
   token: "",
   auth_action: "",
   redir: "https://www.way-connect.com/",

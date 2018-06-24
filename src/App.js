@@ -43,7 +43,6 @@ class App extends Component {
     super(props);
     /// IN DEVELOPMENT /
     this.props.dispatch(dispatchInformations({
-        API_Key: "409582aa0ce24032904b49f145f725cc",
         mac_address: "11:ED:1D:F2:1B:1B",
         token: "idujza"
       })

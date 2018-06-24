@@ -13,7 +13,7 @@ class Portal extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     match: PropTypes.shape({
-      params: PropTypes.shape({target: PropTypes.string, token: PropTypes.string, mac_address: PropTypes.string, API_Key: PropTypes.string, auth_action: PropTypes.string})
+      params: PropTypes.shape({target: PropTypes.string, token: PropTypes.string, mac_address: PropTypes.string, auth_action: PropTypes.string})
     })
   }
 
