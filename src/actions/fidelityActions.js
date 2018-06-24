@@ -50,10 +50,13 @@ export function fetchFidelity(payload) {
       const rate = Math.round(100 * response.data.current_views / response.data.promotion.max_views) / 100;
       const rewardString = `${response.data.promotion.reward} ${response.data.promotion.reward_currency}`;
 
+      console.log("RESPONSE: ", response.data);
+
       dispatch({
         type: FETCH_FIDELITY_FULFILLED,
         payload: {
           rate: rate,
+          amount: Math.round(100 * rate * response.data.promotion.reward) / 100,
           reward: rewardString
         }
       });

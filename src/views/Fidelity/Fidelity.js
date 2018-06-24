@@ -56,13 +56,13 @@ class Fidelity extends Component {
       <div>
         <Link to="/fidelity/profile">
           <Button className="my-info">
-            <i className="fa fa-chart-line"></i>
+            <i className="fa fa-plus"></i>
           </Button>
         </Link>
 
         <div className="logo">
           <div className="logo-white">
-            <img src="assets/logo-white.png"></img>
+            <img src="assets/logo-fullgradient.png"></img>
           </div>
           <div className="logo-black" style={{
               height: fidelityRate + "px"
@@ -73,15 +73,14 @@ class Fidelity extends Component {
       </div>
       <h2>{this.props.fidelityData.rate * 100}{" "}%</h2>
       <div className="bonus-max">
-        <i className="fa fa-star"></i>
-        {" " + this.props.fidelityData.reward}
+        {this.props.fidelityData.amount + "/" + this.props.fidelityData.reward}
       </div>
       <Button className={"activate" + (
           this.props.fidelityData.rate > 0
           ? ""
           : " disabled")} onClick={this.fetchDiscount}>
         <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching}>
-          <i className="fa fa-bolt"></i>
+          <i className="fa fa-bolt"></i>{" Activate your discount"}
         </Loader>
       </Button>
       <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>
@@ -107,7 +106,7 @@ class Fidelity extends Component {
 
 Fidelity.propTypes = {
   dispatch: PropTypes.func,
-  fidelityData: PropTypes.shape({rate: PropTypes.number, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
+  fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, date: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   className: PropTypes.string,
   history: PropTypes.shape({goBack: PropTypes.func})

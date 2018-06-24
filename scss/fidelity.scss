@@ -1,5 +1,6 @@
 .fidelity {
   max-width: 500px;
+  width: 100%;
   margin: auto;
   $fidelity_logo_size: 200px;
   $fidelity_logo_size_half: ($fidelity_logo_size);
@@ -29,6 +30,7 @@
       position: absolute;
       overflow-y: hidden;
       transition: height 2s ease;
+      margin-top: -1px;
     }
 
     .logo-white {
@@ -42,7 +44,6 @@
   .bonus-max {
     height: 3rem;
     font-size: 1.5rem;
-    border-radius: 1rem;
     padding: 0.25rem;
     background-color: rgba(map-get($colors, way-gray), 0.5);
     margin: 15% auto;
@@ -69,11 +70,8 @@
   }
 
   .activate {
-    font-size: 3rem;
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    background-color: map-get($colors, way-gray);
+    font-size: 1.5rem;
+    width: 100%;
   }
 
   .loader {

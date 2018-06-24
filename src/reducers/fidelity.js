@@ -33,6 +33,7 @@ const fidelityData = {
   fetched: false,
   rate: 0,
   reward: "",
+  amount: 0,
 };
 
 const discountData = {
@@ -79,8 +80,7 @@ export default function reducer(state = {
     case FETCH_FIDELITY_FULFILLED:
       return { ...state,
         fidelityData: { ...state.fidelityData,
-          rate: action.payload.rate,
-          reward: action.payload.reward,
+          ...action.payload,
           fetching: false,
           fetched: true,
         }
