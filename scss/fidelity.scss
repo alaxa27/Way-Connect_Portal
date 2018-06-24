@@ -78,4 +78,18 @@
   .modal {
     text-align: center;
   }
+
+  button {
+    &:active,
+    &:hover {
+      background: $way-connect-gradient;
+
+      .fa:before {
+        background: map-get($colors, light);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: initial;
+      }
+    }
+  }
 }
