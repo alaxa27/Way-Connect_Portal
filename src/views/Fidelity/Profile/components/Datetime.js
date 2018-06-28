@@ -1,11 +1,12 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {translate} from "react-i18next";
 import {Label} from "reactstrap";
 import DateTime from "react-datetime";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 
-import i18n from "../../../../constants/i18n";
+@translate("translations")
 
 class Datetime extends Component {
   constructor(props) {
@@ -18,9 +19,10 @@ class Datetime extends Component {
   }
 
   render() {
+    let {t, i18n} = this.props;
     return (<div>
       <Label>
-        <p>{i18n.t("question.datetime.label")}</p>
+        <p>{t("question.datetime.label")}</p>
         {this.props.title}
       </Label>
       <DateTime viewMode="years" viewDate={moment().year(1980)} dateFormat={moment().format("DD MMM YYYY")} timeFormat={false} onChange={this.updateField} closeOnSelect={true} />
@@ -31,7 +33,9 @@ class Datetime extends Component {
 Datetime.propTypes = {
   name: PropTypes.string,
   title: PropTypes.string,
-  updateValue: PropTypes.func
+  updateValue: PropTypes.func,
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 export default Datetime;

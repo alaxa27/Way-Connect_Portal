@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {translate} from "react-i18next";
 import {Label} from "reactstrap";
 
-import i18n from "../../../../constants/i18n";
-
 import SelectBox from "../../../../components/SelectBox";
+
+@translate("translations")
 
 class Select extends Component {
   constructor(props) {
@@ -18,9 +19,10 @@ class Select extends Component {
   }
 
   render() {
+    let {t, i18n} = this.props;
     return (<div>
       <Label>
-        <p>{i18n.t("question.select.label")}</p>
+        <p>{t("question.select.label")}</p>
         {this.props.title}
       </Label>
       <SelectBox name={this.props.name} options={this.props.options} onChange={this.updateField} isMulti={this.props.isMulti}/>
@@ -33,7 +35,9 @@ Select.propTypes = {
   title: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   updateValue: PropTypes.func.isRequired,
-  isMulti: PropTypes.bool.isRequired
+  isMulti: PropTypes.bool.isRequired,
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 export default Select;

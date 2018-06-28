@@ -1,19 +1,19 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {translate} from "react-i18next";
 import {Link} from "react-router-dom";
 import {Row, Col, Card, CardBody} from "reactstrap";
 import _ from "underscore";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import * as Animated from "animated/lib/targets/react-dom";
 
-import i18n from "../../../constants/i18n";
-
 import Navbar from "../../../components/Navbar";
 import Loader from "../../../components/Loader";
 
 import Discount from "./components/Discount";
 
+@translate("translations")
 @connect((store) => {
   let fidelityStore = store.fidelity;
   return {discountsData: fidelityStore.discountsData};
@@ -59,8 +59,9 @@ class Discounts extends Component {
   }
 
   render() {
+    let {t, i18n} = this.props;
     return (<div className="discounts">
-      <Navbar title={i18n.t("fidelity.discounts.title")} goBack="/fidelity" history={this.props.history}/>
+      <Navbar title={t("fidelity.discounts.title")} goBack="/fidelity" history={this.props.history}/>
       <TransitionGroup component="div" className="mt-4">
         {
           this.state.discounts.map((p, i) => {
@@ -86,7 +87,9 @@ class Discounts extends Component {
 }
 Discounts.propTypes = {
   history: PropTypes.shape({goBack: PropTypes.func}),
-  discountsData: PropTypes.shape({fetching: PropTypes.bool, fetched: PropTypes.bool, discounts: PropTypes.array})
+  discountsData: PropTypes.shape({fetching: PropTypes.bool, fetched: PropTypes.bool, discounts: PropTypes.array}),
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 export default Discounts;

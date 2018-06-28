@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {translate} from "react-i18next";
 import {Button, Row} from "reactstrap";
 import {Player, ControlBar, Shortcut} from "video-react";
 import "video-react/dist/video-react.css"; // import css
-
-import i18n from "../../../constants/i18n";
 
 import Loader from "../../../components/Loader";
 
@@ -21,7 +20,10 @@ const playerShortcuts = [
   }
 ];
 
+@translate("translations")
 @connect((store) => {
+    let {t, i18n} = this.props;
+
   let informationStore = store.information;
   let gatewayStore = store.gateway;
   return {fetching: informationStore.fetching, fetched: informationStore.fetched, acknowledging: gatewayStore.acknowledging, acknowledged: gatewayStore.acknowledged};
@@ -53,15 +55,16 @@ class Partner extends Component {
   }
 
   render() {
+    let {t, i18n} = this.props;
     return (<div className="gateway">
       <img src="/assets/mustache.png" className="logo"/>
       <Row>
-        {i18n.t("gateway.partner.offer")}
+        {t("gateway.partner.offer")}
       </Row>
       <Row className="go-block">
-        <p>{i18n.t("gateway.partner.under")}</p>
+        <p>{t("gateway.partner.under")}</p>
         <Button onClick={this.playVideo.bind(this)} block={true}>
-          {"15 " + i18n.t("gateway.partner.seconds")}
+          {"15 " + t("gateway.partner.seconds")}
         </Button>
       </Row>
 
@@ -88,7 +91,9 @@ Partner.propTypes = {
   fetching: PropTypes.bool,
   fetched: PropTypes.bool,
   dispatch: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 export default Partner;

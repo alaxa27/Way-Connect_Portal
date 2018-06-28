@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {translate} from "react-i18next";
+import {Link} from "react-router-dom";
 import {
   Button,
   Row,
@@ -12,13 +13,12 @@ import {
   ModalFooter
 } from "reactstrap";
 
-import i18n from "../../constants/i18n";
-
 import Navbar from "../../components/Navbar";
 import Loader from "../../components/Loader";
 
 import {fetchFidelity, fetchDiscount} from "../../actions/fidelityActions";
 
+@translate("translations")
 @connect((store) => {
   let fidelityStore = store.fidelity;
   return {fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData};
@@ -51,9 +51,10 @@ class Fidelity extends Component {
   }
 
   render() {
+    let {t, i18n} = this.props;
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
     return (<div className="fidelity">
-      <Navbar title={i18n.t("fidelity.title")} goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
+      <Navbar title={t("fidelity.title")} goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
 
       <div>
         <Link to="/fidelity/profile">
@@ -82,7 +83,7 @@ class Fidelity extends Component {
           ? ""
           : " disabled")} onClick={this.fetchDiscount}>
         <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching} width={50} height={50}>
-          <i className="fa fa-bolt"></i>{" " + i18n.t("fidelity.activate")}
+          <i className="fa fa-bolt"></i>{" " + t("fidelity.activate")}
         </Loader>
       </Button>
       <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>
@@ -111,7 +112,9 @@ Fidelity.propTypes = {
   fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, date: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   className: PropTypes.string,
-  history: PropTypes.shape({goBack: PropTypes.func})
+  history: PropTypes.shape({goBack: PropTypes.func}),
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 export default Fidelity;
