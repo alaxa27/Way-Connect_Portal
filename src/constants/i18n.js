@@ -11,7 +11,7 @@ i18n
   // .use(reactI18nextModule) // if not using I18nextProvider
   .init({
     fallbackLng: "en",
-    debug: true,
+    debug: !(process.env.NODE_ENV === "production"),
 
     ns: ["translations"],
     defaultNS: "translations",

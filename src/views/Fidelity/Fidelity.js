@@ -83,7 +83,9 @@ class Fidelity extends Component {
           ? ""
           : " disabled")} onClick={this.fetchDiscount}>
         <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching} width={50} height={50}>
-          <i className="fa fa-bolt"></i>{" " + t("fidelity.activate")}
+          <React.Fragment>
+            <i className="fa fa-bolt"></i>{" " + t("fidelity.activate")}
+          </React.Fragment>
         </Loader>
       </Button>
       <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>
