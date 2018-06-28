@@ -34,10 +34,8 @@ export function fetchConnection(payload) {
 
       const response = await axiosInstance({
         method: "post",
-        url: "/customers/connect/",
-        data: {
-          mac_address: informationData.mac_address
-        }
+        url: `/customers/${informationData.mac_address}/connect/`,
+        data: {}
       });
 
       dispatch({

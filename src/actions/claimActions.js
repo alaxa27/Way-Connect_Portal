@@ -6,7 +6,9 @@
 // Read more on Actions - https://redux.js.org/docs/basics/Actions.html
 import axios from "axios";
 
-import { axiosInstance } from "../constants/ApiConfig.js";
+import {
+  axiosInstance
+} from "../constants/ApiConfig.js";
 import {
   POST_CLAIM,
   POST_CLAIM_FULFILLED,
@@ -28,10 +30,9 @@ export function postClaim(payload) {
         };
         const response = await axiosInstance({
           method: "post",
-          url: "/customers/claim/",
+          url: `/customers/${informationData.mac_address}/claim/`,
           data: {
-            ...claimData,
-            mac_address: informationData.mac_address
+            ...claimData
           }
         });
 

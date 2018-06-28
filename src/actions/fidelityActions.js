@@ -42,10 +42,8 @@ export function fetchFidelity(payload) {
       };
       const response = await axiosInstance({
         method: "get",
-        url: "/customers/retrieve_discount/",
-        params: {
-          mac_address: informationData.mac_address
-        }
+        url: `/customers/${informationData.mac_address}/retrieve_discount/`,
+        params: {}
       });
       const rate = Math.round(100 * response.data.current_views / response.data.promotion.max_views) / 100;
       const rewardString = `${response.data.promotion.reward} ${response.data.promotion.reward_currency}`;
@@ -81,7 +79,7 @@ function fetchDiscounts(payload) {
       };
       const response = await axiosInstance({
         method: "get",
-        url: "/customers/discount_activations/",
+        url: `/customers/${informationData.mac_address}/discount_activations/`,
         params: {
           mac_address: informationData.mac_address
         }
@@ -111,7 +109,7 @@ export function fetchDiscount(payload) {
       };
       const response = await axiosInstance({
         method: "post",
-        url: "/customers/activate_discount/",
+        url: `/customers/${informationData.mac_address}/activate_discount/`,
         data: {
           mac_address: informationData.mac_address
         }

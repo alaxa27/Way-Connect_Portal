@@ -24,10 +24,8 @@ export function acknowledgeCommunication(payload) {
       };
       const response = await axiosInstance({
         method: "post",
-        url: "/customers/acknowledge_communication/",
-        data: {
-          mac_address: informationData.mac_address
-        }
+        url: `/customers/${informationData.mac_address}/acknowledge_communication/`,
+        data: {}
       });
 
       dispatch({
