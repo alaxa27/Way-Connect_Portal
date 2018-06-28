@@ -22,8 +22,6 @@ const playerShortcuts = [
 
 @translate("translations")
 @connect((store) => {
-    let {t, i18n} = this.props;
-
   let informationStore = store.information;
   let gatewayStore = store.gateway;
   return {fetching: informationStore.fetching, fetched: informationStore.fetched, acknowledging: gatewayStore.acknowledging, acknowledged: gatewayStore.acknowledged};
