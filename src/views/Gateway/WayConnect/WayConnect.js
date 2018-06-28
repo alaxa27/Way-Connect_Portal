@@ -23,7 +23,9 @@ class WayConnect extends Component {
 
     return (<div className="way-connect">
       <Button className="way-btn" onClick={() => {
-          this.props.history.push("/gateway/partner");
+          if (!this.props.fetching && this.props.fetched) {
+            this.props.history.push("/gateway/partner");
+          }
         }}>
         <Loader spinning={this.props.fetching || !this.props.fetched}>
           <img src="/assets/logo-white.png" className="logo"/>
