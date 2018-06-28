@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import {translate} from "react-i18next";
 import PropTypes from "prop-types";
 
-
+@translate("translations")
 @connect((store) => {
   let informationStore = store.information;
   return {informationData: informationStore.informationData};
@@ -18,14 +19,17 @@ class WifiAccess extends Component {
   }
 
   render() {
+    let {t, i18n} = this.props;
     return (<div className="video">
-      <h1>WiFi is granted</h1>
+      <h1>{t("wifi-granted")}</h1>
     </div>);
   }
 }
 
 WifiAccess.propTypes = {
-  informationData: PropTypes.object
+  informationData: PropTypes.object,
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 export default WifiAccess;

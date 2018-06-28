@@ -24,16 +24,14 @@ export function acknowledgeCommunication(payload) {
       };
       const response = await axiosInstance({
         method: "post",
-        url: "/customers/acknowledge_communication/",
-        data: {
-          mac_address: informationData.mac_address
-        }
+        url: `/customers/${informationData.mac_address}/acknowledge_communication/`,
+        data: {}
       });
 
       dispatch({
         type: ACKNOWLEDGE_COMMUNICATION_FULFILLED,
       });
-      payload.history.push("/wifi-access");
+      payload.history.push("/dashboard");
 
       // window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}&redir=${informationData.redir}`;
 

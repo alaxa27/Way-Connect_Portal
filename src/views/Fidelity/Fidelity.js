@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {translate} from "react-i18next";
+import {Link} from "react-router-dom";
 import {
   Button,
   Row,
@@ -17,6 +18,7 @@ import Loader from "../../components/Loader";
 
 import {fetchFidelity, fetchDiscount} from "../../actions/fidelityActions";
 
+@translate("translations")
 @connect((store) => {
   let fidelityStore = store.fidelity;
   return {fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData};
@@ -49,31 +51,41 @@ class Fidelity extends Component {
   }
 
   render() {
+    let {t, i18n} = this.props;
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
     return (<div className="fidelity">
-      <Navbar title="Fidelity" goBack="/dashboard" history={this.props.history}/>
+      <Navbar title={t("fidelity.title")} goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
 
-      <div className="logo">
-        <div className="logo-white">
-          <img src="assets/logo-white.png"></img>
-        </div>
-        <div className="logo-black" style={{
-            height: fidelityRate + "px"
-          }}>
-          <img src="assets/logo-black.png"></img>
+      <div>
+        <Link to="/fidelity/profile">
+          <Button className="my-info">
+            <i className="fa fa-plus"></i>
+          </Button>
+        </Link>
+
+        <div className="logo">
+          <div className="logo-white">
+            <img src="assets/logo-fullgradient.png"></img>
+          </div>
+          <div className="logo-black" style={{
+              height: fidelityRate + "px"
+            }}>
+            <img src="assets/logo-black.png"></img>
+          </div>
         </div>
       </div>
       <h2>{this.props.fidelityData.rate * 100}{" "}%</h2>
       <div className="bonus-max">
-        <i className="fa fa-star"></i>
-        {" " + this.props.fidelityData.reward}
+        {this.props.fidelityData.amount + "/" + this.props.fidelityData.reward}
       </div>
       <Button className={"activate" + (
           this.props.fidelityData.rate > 0
           ? ""
           : " disabled")} onClick={this.fetchDiscount}>
-        <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching}>
-          <i className="fa fa-bolt"></i>
+        <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching} width={50} height={50}>
+          <React.Fragment>
+            <i className="fa fa-bolt"></i>{" " + t("fidelity.activate")}
+          </React.Fragment>
         </Loader>
       </Button>
       <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>
@@ -84,6 +96,9 @@ class Fidelity extends Component {
           </h4>
           <h4>
             {this.props.discountData.reward}
+          </h4>
+          <h4>
+            {new Date(this.props.discountData.date).toLocaleString()}
           </h4>
         </ModalBody>
         <ModalFooter>
@@ -96,10 +111,12 @@ class Fidelity extends Component {
 
 Fidelity.propTypes = {
   dispatch: PropTypes.func,
-  fidelityData: PropTypes.shape({rate: PropTypes.number, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
-  discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
+  fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
+  discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, date: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   className: PropTypes.string,
-  history: PropTypes.shape({goBack: PropTypes.func})
+  history: PropTypes.shape({goBack: PropTypes.func}),
+  t: PropTypes.func,
+  i18n: PropTypes.object
 };
 
 export default Fidelity;

@@ -1,26 +1,86 @@
 exports.PROFESSIONAL = [{
-    value: "EN",
-    label: "Entrepreneur"
+    value: 1,
+    label: "Aviation"
   },
   {
-    value: "EM",
-    label: "Employee"
+    value: 2,
+    label: "Food"
   },
   {
-    value: "UN",
-    label: "Unemployed"
+    value: 3,
+    label: "Craft"
   },
   {
-    value: "MA",
-    label: "Manager"
+    value: 4,
+    label: "Arts and Representations"
   },
   {
-    value: "ST",
-    label: "Student"
+    value: 5,
+    label: "Construction and Public Works"
   },
   {
-    value: "OF",
-    label: "Official"
+    value: 6,
+    label: "Commerce"
+  },
+  {
+    value: 7,
+    label: "Law"
+  },
+  {
+    value: 8,
+    label: "Teaching and Resarch"
+  },
+  {
+    value: 9,
+    label: "Industry"
+  },
+  {
+    value: 10,
+    label: "Computer Science"
+  },
+  {
+    value: 11,
+    label: "Social"
+  },
+  {
+    value: 12,
+    label: "Linguistic"
+  },
+  {
+    value: 13,
+    label: "Health"
+  },
+  {
+    value: 14,
+    label: "Security"
+  },
+  {
+    value: 15,
+    label: "Sport"
+  },
+  {
+    value: 16,
+    label: "Tourism"
+  },
+  {
+    value: 17,
+    label: "Transports and Logistics"
+  },
+  {
+    value: 18,
+    label: "Media"
+  },
+  {
+    value: 19,
+    label: "Politics"
+  },
+  {
+    value: 20,
+    label: "Printing"
+  },
+  {
+    value: 21,
+    label: "Finance"
   }
 ];
 

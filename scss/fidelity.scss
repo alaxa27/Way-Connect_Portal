@@ -1,5 +1,6 @@
 .fidelity {
   max-width: 500px;
+  width: 100%;
   margin: auto;
   $fidelity_logo_size: 200px;
   $fidelity_logo_size_half: ($fidelity_logo_size);
@@ -26,15 +27,16 @@
     .logo-black {
       width: $fidelity_logo_size;
       height: $fidelity_logo_size;
-      position: fixed;
+      position: absolute;
       overflow-y: hidden;
       transition: height 2s ease;
+      margin-top: -1px;
     }
 
     .logo-white {
       width: $fidelity_logo_size;
       height: $fidelity_logo_size;
-      position: fixed;
+      position: absolute;
       overflow-y: hidden;
     }
   }
@@ -42,7 +44,6 @@
   .bonus-max {
     height: 3rem;
     font-size: 1.5rem;
-    border-radius: 1rem;
     padding: 0.25rem;
     background-color: rgba(map-get($colors, way-gray), 0.5);
     margin: 15% auto;
@@ -56,23 +57,39 @@
     display: initial;
   }
 
-  .activate {
-    font-size: 3rem;
-    width: 100px;
-    height: 100px;
+  .my-info {
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
     background-color: map-get($colors, way-gray);
-    border-radius: 100px;
+    position: absolute;
+    margin-left: 40px;
+    margin-top: -15px;
+    z-index: 1;
   }
 
-  .loader {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    left: -13px;
-    top: -8px;
+  .activate {
+    width: 100%;
+    height: 50px;
+    font-size: 1.5rem;
   }
 
   .modal {
     text-align: center;
+  }
+
+  button {
+    &:active,
+    &:hover {
+      background: $way-connect-gradient;
+
+      .fa:before {
+        background: map-get($colors, light);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: initial;
+      }
+    }
   }
 }

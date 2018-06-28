@@ -4,20 +4,17 @@ import {BrowserRouter as Router, Route, Switch, Redirect, withRouter} from "reac
 import PropTypes from "prop-types";
 
 import {axiosInstance} from "./constants/ApiConfig";
+import {INFORMATIONS} from "./constants/ActionTypes";
 
-import {fetchInformation} from "./actions/informationActions";
+import {dispatchInformations} from "./actions/informationActions";
 
-import Login from "./views/Login";
-import Register from "./views/Register";
+import Gateway from "./views/Gateway";
 import Dashboard from "./views/Dashboard";
 import Claim from "./views/Claim";
 import Fidelity from "./views/Fidelity";
+import Discounts from "./views/Fidelity/Discounts";
+import Profile from "./views/Fidelity/Profile";
 import WifiAccess from "./views/WifiAccess";
-
-// @connect((store) => {
-//   let informationStore = store.information
-//   return {isKnown: informationStore.isKnown}
-// })
 
 const PrivateRoute = ({
   component: Component,
@@ -44,20 +41,32 @@ PrivateRoute.propTypes = {
 class App extends Component {
   constructor(props) {
     super(props);
+    /// IN DEVELOPMENT /
+    this.props.dispatch(dispatchInformations({
+        mac_address: "11:ED:1D:F2:1B:1B",
+        token: "idujza"
+      })
+    );
+    ////////////////////
   }
 
   render() {
-    const {fetched, isKnown, isHotel} = this.props;
+    const {fetched, acknowledged} = this.props;
     return (<div>
       <div className="background"></div>
       <div className="app">
         <Switch>
-          <PrivateRoute path="/login" name="Login" component={Login} to="/dashboard" display={!isKnown}/>
-          <PrivateRoute path="/register" name="Register" component={Register} to="/dashboard" display={!isKnown}/>
-          <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/login" display={isKnown}/>
-          <PrivateRoute path="/wifi-access" name="WifiAccess" component={WifiAccess} to="/login" display={isKnown}/>
-          <PrivateRoute hotel="hotel" path="/claim" name="Claim" component={Claim} to="/login" display={isKnown && isHotel}/>
-          <PrivateRoute path="/fidelity" name="Fidelity" component={Fidelity} to="/login" display={isKnown && !isHotel}/>
+          <Route path="/gateway" name="Gateway" component={Gateway}/>
+
+          <PrivateRoute path="/dashboard" name="Dashboard" component={Dashboard} to="/gateway/way-connect" display={fetched && acknowledged}/>
+
+          <PrivateRoute path="/wifi-access" name="WifiAccess" component={WifiAccess} to="/gateway/way-connect" display={fetched && acknowledged}/>
+
+          <Route exact={true} path="/fidelity" name="Fidelity" component={Fidelity}/>
+          <Route path="/fidelity/discounts" name="Discounts" component={Discounts}/>
+          <Route path="/fidelity/profile" name="Profile" component={Profile}/>
+
+          <PrivateRoute path="/claim" name="Claim" component={Claim} to="/gateway/way-connect" display={fetched && acknowledged}/>
         </Switch>
       </div>
     </div>);
@@ -66,15 +75,14 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func,
-  isKnown: PropTypes.bool,
-  isHotel: PropTypes.bool,
-  fetched: PropTypes.bool
+  fetched: PropTypes.bool,
+  acknowledged: PropTypes.bool
 };
 
 const mapStateToProps = (store) => {
   let informationStore = store.information;
-  return {isKnown: informationStore.informationData.isKnown, isHotel: informationStore.informationData.isHotel, fetched: informationStore.fetched};
+  let gatewayStore = store.gateway;
+  return {fetched: informationStore.fetched, acknowledged: gatewayStore.acknowledged};
 };
-// <Route exact="exact" path="/" name="Login" component={Login}/>
 
 export default withRouter(connect(mapStateToProps)(App));

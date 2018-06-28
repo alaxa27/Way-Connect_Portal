@@ -8,67 +8,42 @@ import {
   axiosInstance
 } from "../constants/ApiConfig.js";
 import {
-  FETCH_INFORMATION,
-  FETCH_INFORMATION_FULFILLED,
-  FETCH_INFORMATION_REJECTED,
+  INFORMATIONS,
+
   POST_CONNECT,
   POST_CONNECT_FULFILLED,
   POST_CONNECT_REJECTED
 } from "../constants/ActionTypes";
 
-export function fetchInformation(payload) {
-  return async (dispatch, getState) => {
+export function dispatchInformations(payload) {
+  return (dispatch, getState) => {
     dispatch({
-      type: FETCH_INFORMATION,
+      type: INFORMATIONS,
+      payload: payload
     });
-    try {
-      const response = await axiosInstance({
-        method: "get",
-        url: "/customers/known/",
-        params: {
-          mac_address: payload.mac_address
-        }
-      });
-      dispatch({
-        type: FETCH_INFORMATION_FULFILLED,
-        payload: { ...response.data,
-          mac_address: payload.mac_address,
-          API_Key: payload.API_Key,
-          token: payload.token
-        }
-      });
-      if (response.data.known) {
-        dispatch(fetchCommunication());
-      }
-    } catch (error) {
-      dispatch({
-        type: FETCH_INFORMATION_REJECTED,
-      });
-      console.error(error);
-    }
   };
 }
 
-
-function fetchCommunication(payload) {
+export function fetchConnection(payload) {
   return async (dispatch, getState) => {
     dispatch({
       type: POST_CONNECT
     });
     try {
-      const informationData = { ...getState().information.informationData
-      };
+      const informationData = await getState().information.informationData;
+
       const response = await axiosInstance({
         method: "post",
-        url: "/customers/connect/",
-        data: {
-          mac_address: informationData.mac_address
-        }
+        url: `/customers/${informationData.mac_address}/connect/`,
+        data: {}
       });
 
       dispatch({
         type: POST_CONNECT_FULFILLED,
-        payload: response.data.video
+        payload: {
+          establishment_type: "restaurant",
+          communicationURL: response.data.video,
+        }
       });
     } catch (error) {
       dispatch({
