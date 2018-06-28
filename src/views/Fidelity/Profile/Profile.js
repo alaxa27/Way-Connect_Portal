@@ -31,9 +31,9 @@ class Profile extends Component {
     this.goToNextQuestion = this.goToNextQuestion.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.questionsData.questions.length !== this.state.questions || this.props.questionsData.id !== this.state.id) {
-      this.setState({id: nextProps.questionsData.id, questions: nextProps.questionsData.questions});
+  componentDidUpdate(prevProps) {
+    if (prevProps.questionsData.questions.length !== this.state.questions || prevProps.questionsData.id !== this.state.id) {
+      this.setState({id: this.props.questionsData.id, questions: this.props.questionsData.questions});
     }
   }
 

@@ -43,9 +43,9 @@ class Discounts extends Component {
   componentDidMount() {
     this._renderDiscounts(this.props.discountsData.discounts);
   }
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.discountsData.discounts.length && nextProps.discountsData.discounts.length) {
-      this._renderDiscounts(nextProps.discountsData.discounts);
+  componentDidUpdate(prevProps) {
+    if (!prevProps.discountsData.discounts.length && this.props.discountsData.discounts.length) {
+      this._renderDiscounts(this.props.discountsData.discounts);
     }
   }
 
