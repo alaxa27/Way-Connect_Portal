@@ -58,7 +58,7 @@ class Fidelity extends Component {
 
       <div>
         <Link to="/fidelity/profile">
-          <Button className="my-info">
+          <Button className="my-info enabled">
             <i className="fa fa-plus"></i>
           </Button>
         </Link>
@@ -80,7 +80,7 @@ class Fidelity extends Component {
       </div>
       <Button className={"activate" + (
           this.props.fidelityData.rate > 0
-          ? ""
+          ? " enabled"
           : " disabled")} onClick={this.fetchDiscount}>
         <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching} width={50} height={50}>
           <React.Fragment>
@@ -89,7 +89,7 @@ class Fidelity extends Component {
         </Loader>
       </Button>
       <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>
-        <ModalHeader toggle={this.toggleDiscountModal}>{"Show this code to the waiter"}</ModalHeader>
+        <ModalHeader toggle={this.toggleDiscountModal}>{t("fidelity.waiter")}</ModalHeader>
         <ModalBody>
           <h4>
             {this.props.discountData.code}

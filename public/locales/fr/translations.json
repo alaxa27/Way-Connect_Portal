@@ -14,6 +14,7 @@
   "fidelity": {
     "title": "Fidelité",
     "activate": "Activez votre réduction",
+    "waiter": "Montrer le code au serveur",
     "discounts": {
       "title": "Réductions"
     },
