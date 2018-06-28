@@ -1,7 +1,3 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -6189,10 +6185,13 @@ html {
   z-index: 10;
   top: 0;
   left: 0; }
-  .navbar .back-button {
+  .navbar h4 {
+    font-weight: 900;
+    font-size: 2.5rem; }
+  .navbar .nav-button {
     cursor: pointer;
     width: 30px; }
-    .navbar .back-button .fa:before {
+    .navbar .nav-button .fa:before {
       font-weight: bold;
       font-size: 1.75rem;
       background: #4d4d4d;
@@ -6202,29 +6201,43 @@ html {
   .navbar h4 {
     margin: 0 auto; }
 
-.login {
+.gateway {
   height: 100%;
+  width: 100%;
   max-width: 500px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-around; }
-  .login .logo {
-    max-width: 200px;
-    height: 200px; }
-  .login .btn-facebook {
+  .gateway .logo {
+    max-width: 200px; }
+  .gateway .go-block {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    border-radius: 1rem;
-    font-weight: bold;
-    border: 0;
-    background-color: #3b5998;
-    padding: 0.5rem 1.5rem; }
-  .login .no-facebook {
-    color: white !important;
-    text-decoration: none !important; }
-  .login .buttons {
-    margin-top: 250px;
-    bottom: 100px; }
+    flex-direction: column;
+    align-items: center;
+    font-weight: 200; }
+    .gateway .go-block .btn {
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      background: linear-gradient(to right, #EF4136, #FFDD00); }
+    .gateway .go-block p {
+      margin-bottom: 0.5rem; }
+  .gateway .way-connect h4 {
+    font-size: 2.5rem;
+    font-weight: 900; }
+  .gateway .way-connect .btn {
+    border-radius: 8rem;
+    width: 250px;
+    height: 250px; }
+  .gateway .video-playing .video-react {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0; }
+  .gateway .video-not-playing {
+    display: none; }
 
 .claim,
 .register {
@@ -6311,9 +6324,16 @@ html {
     height: 150px; }
   .dashboard h4 {
     margin-top: 10px; }
+  .dashboard .loader {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    left: -13px;
+    top: -8px; }
 
 .fidelity {
   max-width: 500px;
+  width: 100%;
   margin: auto; }
   .fidelity h2,
   .fidelity h4 {
@@ -6330,18 +6350,18 @@ html {
     .fidelity .logo .logo-black {
       width: 200px;
       height: 200px;
-      position: fixed;
+      position: absolute;
       overflow-y: hidden;
-      transition: height 2s ease; }
+      transition: height 2s ease;
+      margin-top: -1px; }
     .fidelity .logo .logo-white {
       width: 200px;
       height: 200px;
-      position: fixed;
+      position: absolute;
       overflow-y: hidden; }
   .fidelity .bonus-max {
     height: 3rem;
     font-size: 1.5rem;
-    border-radius: 1rem;
     padding: 0.25rem;
     background-color: rgba(77, 77, 77, 0.5);
     margin: 15% auto; }
@@ -6350,18 +6370,116 @@ html {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: initial; }
-  .fidelity .activate {
-    font-size: 3rem;
-    width: 100px;
-    height: 100px;
+  .fidelity .my-info {
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
     background-color: #4d4d4d;
-    border-radius: 100px; }
-  .fidelity .loader {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    left: -13px;
-    top: -8px; }
+    position: absolute;
+    margin-left: 40px;
+    margin-top: -15px;
+    z-index: 1; }
+  .fidelity .activate {
+    width: 100%;
+    height: 50px;
+    font-size: 1.5rem; }
+  .fidelity .modal {
+    text-align: center; }
+  .fidelity button:active, .fidelity button:hover {
+    background: linear-gradient(to right, #EF4136, #FFDD00); }
+    .fidelity button:active .fa:before, .fidelity button:hover .fa:before {
+      background: #f4f4f4;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: initial; }
+
+.discounts {
+  max-width: 500px; }
+  .discounts .discount {
+    overflow: auto; }
+    .discounts .discount__item {
+      background-color: #4d4d4d;
+      border-radius: 4rem;
+      box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.2), 0 11px 20px 0 rgba(0, 0, 0, 0.2); }
+    .discounts .discount__label-middle {
+      width: 100%;
+      margin-bottom: 0;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: normal; }
+    .discounts .discount__span-middle {
+      font-weight: lighter;
+      font-size: 14px; }
+    .discounts .discount__label-right {
+      width: 100%;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: normal;
+      margin-bottom: 0; }
+    .discounts .discount__span-right {
+      font-weight: lighter;
+      font-size: 12px; }
+    .discounts .discount__circle-container {
+      border-right: 1px solid #cbcbcb; }
+    .discounts .discount__circle {
+      width: 75px;
+      height: 75px;
+      background: #333333;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: inset 0 10px 18px 0 rgba(0, 0, 0, 0.2), inset 0 -10px 20px 0 rgba(0, 0, 0, 0.2); }
+      .discounts .discount__circle span:first-child {
+        font-weight: bold;
+        font-size: 1rem; }
+      .discounts .discount__circle span:last-child {
+        position: relative;
+        bottom: -4px;
+        font-size: 0.5rem; }
+
+.profile {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+  .profile .progress {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100vw;
+    background-color: #4d4d4d;
+    border-radius: 0; }
+    .profile .progress .progress-bar {
+      background: linear-gradient(to right, #EF4136, #FFDD00); }
+  .profile label {
+    display: inherit;
+    text-align: left;
+    font-size: 4rem; }
+    .profile label p {
+      font-weight: lighter;
+      color: #4d4d4d; }
+  .profile .question-block {
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%; }
+  .profile .next-btn {
+    height: 40px; }
+  .profile .rdt .form-control {
+    background-color: #4d4d4d;
+    color: #f4f4f4;
+    border-radius: 1.5rem;
+    border-width: 0;
+    width: 50%;
+    box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.2), inset 0 6px 20px 0 rgba(0, 0, 0, 0.2); }
+  .profile .rdt .rdtPicker {
+    background-color: #4d4d4d;
+    border-radius: 0.75rem;
+    border-width: 0; }
 
 .video {
   height: 100%;
@@ -6370,3 +6488,5 @@ html {
     width: 100%;
     height: auto;
     max-height: 100%; }
+
+/*# sourceMappingURL=main.styles.css.map*/

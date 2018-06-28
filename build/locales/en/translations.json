@@ -1,0 +1,37 @@
+{
+  "gateway": {
+    "partner": {
+      "offer": "We offer you a high-speed Wi-Fi and a discount on your next Order.",
+      "under": "In under",
+      "seconds": "seconds"
+    }
+  },
+  "dashboard": {
+    "wifi": "Join the WiFi Network",
+    "fidelity": "Fidelity Bonus",
+    "claim": "Make a Claim"
+  },
+  "fidelity": {
+    "title": "Fidelity",
+    "activate": "Activate your discount",
+    "discounts": {
+      "title": "Discounts"
+    },
+    "profile": {
+      "title": "Profile",
+      "congratulations": {
+        "congratulations": "Félicitations !"
+      }
+    }
+  },
+  "question": {
+    "next": "Next Question",
+    "select": {
+      "label": "Select your"
+    },
+    "datetime": {
+      "label": "What's your"
+    }
+  },
+  "wifi-granted": "WiFi Access Granted!"
+}

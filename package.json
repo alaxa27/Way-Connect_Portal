@@ -65,7 +65,7 @@
   },
   "scripts": {
     "start:dev": "webpack-dev-server --progress --color --inline --env.dev",
-    "build": "webpack",
+    "build": "webpack --env.NODE_ENV=production",
     "watch": "webpack --watch",
     "lint": "./node_modules/.bin/eslint ./src --fix"
   },

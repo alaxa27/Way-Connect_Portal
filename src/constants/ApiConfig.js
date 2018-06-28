@@ -14,6 +14,7 @@ if (hostname === "way-connect.com") {
 }
 
 backendHost = "http://localhost:5000";
+backendHost = "http://192.168.220.2:5000";
 export const axiosInstance = axios.create({
   baseURL: backendHost,
 });

@@ -28,7 +28,14 @@ class Portal extends Component {
 
   }
   render() {
-    return (<Redirect to={`/${this.state.target}`}/>);
+    switch (this.state.target) {
+      case "gateway":
+        return (<Redirect to={"/gateway/way-connect"}/>);
+      case "fidelity":
+        return (<Redirect to={"/fidelity"}/>);
+      default:
+        return (null);
+    }
   }
 }
 

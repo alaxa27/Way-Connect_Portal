@@ -42,11 +42,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     /// IN DEVELOPMENT /
-    this.props.dispatch(dispatchInformations({
-        mac_address: "11:ED:1D:F2:1B:1B",
-        token: "idujza"
-      })
-    );
+    if (process.env.NODE_ENV !== "production") {
+      this.props.dispatch(dispatchInformations({mac_address: "11:ED:1D:F2:1B:1B", token: "idujza"}));
+    }
     ////////////////////
   }
 
