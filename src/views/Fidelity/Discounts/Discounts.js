@@ -7,6 +7,8 @@ import _ from "underscore";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import * as Animated from "animated/lib/targets/react-dom";
 
+import i18n from "../../../constants/i18n";
+
 import Navbar from "../../../components/Navbar";
 import Loader from "../../../components/Loader";
 
@@ -58,7 +60,7 @@ class Discounts extends Component {
 
   render() {
     return (<div className="discounts">
-      <Navbar title="Discounts" goBack="/fidelity" history={this.props.history}/>
+      <Navbar title={i18n.t("fidelity.discounts.title")} goBack="/fidelity" history={this.props.history}/>
       <TransitionGroup component="div" className="mt-4">
         {
           this.state.discounts.map((p, i) => {

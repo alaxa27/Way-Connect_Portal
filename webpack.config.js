@@ -107,6 +107,12 @@ module.exports = (env = {}) => {
         to: 'assets'
       }], {
         copyUnmodified: false
+      }),
+      new CopyWebpackPlugin([{
+        from: './public/locales',
+        to: 'locales'
+      }], {
+        copyUnmodified: false
       })
     ]
   }

@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {Label} from "reactstrap";
 
+import i18n from "../../../../constants/i18n";
+
 import SelectBox from "../../../../components/SelectBox";
 
 class Select extends Component {
@@ -18,7 +20,7 @@ class Select extends Component {
   render() {
     return (<div>
       <Label>
-        <p>{"Select your"}</p>
+        <p>{i18n.t("question.select.label")}</p>
         {this.props.title}
       </Label>
       <SelectBox name={this.props.name} options={this.props.options} onChange={this.updateField} isMulti={this.props.isMulti}/>

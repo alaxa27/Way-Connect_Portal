@@ -5,6 +5,8 @@ import {Button, Row} from "reactstrap";
 import {Player, ControlBar, Shortcut} from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
+import i18n from "../../../constants/i18n";
+
 import Loader from "../../../components/Loader";
 
 import {acknowledgeCommunication} from "../../../actions/gatewayActions";
@@ -51,16 +53,15 @@ class Partner extends Component {
   }
 
   render() {
-
     return (<div className="gateway">
       <img src="/assets/mustache.png" className="logo"/>
       <Row>
-        {"We offer you a high-speed Wi-Fi and a discount on your next Order."}
+        {i18n.t("gateway.partner.offer")}
       </Row>
       <Row className="go-block">
-        <p>{"In under"}</p>
+        <p>{i18n.t("gateway.partner.under")}</p>
         <Button onClick={this.playVideo.bind(this)} block={true}>
-          {"15 seconds"}
+          {"15 " + i18n.t("gateway.partner.seconds")}
         </Button>
       </Row>
 

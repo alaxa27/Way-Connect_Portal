@@ -5,6 +5,8 @@ import DateTime from "react-datetime";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 
+import i18n from "../../../../constants/i18n";
+
 class Datetime extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class Datetime extends Component {
   render() {
     return (<div>
       <Label>
-        <p>{"What's your"}</p>
+        <p>{i18n.t("question.datetime.label")}</p>
         {this.props.title}
       </Label>
       <DateTime viewMode="years" viewDate={moment().year(1980)} dateFormat={moment().format("DD MMM YYYY")} timeFormat={false} onChange={this.updateField} closeOnSelect={true} />

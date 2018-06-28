@@ -12,6 +12,8 @@ import {
   ModalFooter
 } from "reactstrap";
 
+import i18n from "../../constants/i18n";
+
 import Navbar from "../../components/Navbar";
 import Loader from "../../components/Loader";
 
@@ -51,7 +53,7 @@ class Fidelity extends Component {
   render() {
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
     return (<div className="fidelity">
-      <Navbar title="Fidelity" goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
+      <Navbar title={i18n.t("fidelity.title")} goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
 
       <div>
         <Link to="/fidelity/profile">
@@ -80,7 +82,7 @@ class Fidelity extends Component {
           ? ""
           : " disabled")} onClick={this.fetchDiscount}>
         <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching} width={50} height={50}>
-          <i className="fa fa-bolt"></i>{" Activate your discount"}
+          <i className="fa fa-bolt"></i>{" " + i18n.t("fidelity.activate")}
         </Loader>
       </Button>
       <Modal isOpen={this.state.discountModal} toggle={this.toggleDiscountModal} className={this.props.className}>

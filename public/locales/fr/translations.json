@@ -1,0 +1,37 @@
+{
+  "gateway":{
+    "partner": {
+      "offer": "Nous vous offrons un WiFi haut-débit ainsi qu'une réduction sur votre prochaine consommation.",
+      "under": "Valable sous",
+      "seconds": "secondes"
+    }
+  },
+  "dashboard": {
+    "wifi": "Rejoindre le réseau WiFi",
+    "fidelity": "Bonus de Fidélité",
+    "claim": "Faire une Réclamation"
+  },
+  "fidelity": {
+    "title": "Fidelité",
+    "activate": "Activez votre réduction",
+    "discounts": {
+      "title": "Réductions"
+    },
+    "profile": {
+      "title": "Profil",
+      "congratulations": {
+        "congratulations": "Félicitations !"
+      }
+    }
+  },
+  "question": {
+    "next": "Question Suivante",
+    "select": {
+      "label": "Sélectionner votre"
+    },
+    "datetime": {
+      "label": "Quel est votre"
+    }
+  },
+  "wifi-granted": "Accès au WiFi autorisé!"
+}

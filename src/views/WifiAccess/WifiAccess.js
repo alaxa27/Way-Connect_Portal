@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
+import i18n from "../../constants/i18n";
 
 @connect((store) => {
   let informationStore = store.information;
@@ -19,7 +20,7 @@ class WifiAccess extends Component {
 
   render() {
     return (<div className="video">
-      <h1>WiFi is granted</h1>
+      <h1>{i18n.t("wifi-granted")}</h1>
     </div>);
   }
 }
