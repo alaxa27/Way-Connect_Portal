@@ -15,7 +15,15 @@ class Select extends Component {
   }
 
   updateField(val) {
-    this.props.updateValue(this.props.name, val);
+    let value;
+    if (this.props.isMulti) {
+      value = val.map((item) => {
+        return item.value;
+      });
+    } else {
+      value = val.value;
+    }
+    this.props.updateValue(this.props.name, value);
   }
 
   render() {

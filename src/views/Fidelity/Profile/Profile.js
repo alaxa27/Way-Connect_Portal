@@ -10,7 +10,7 @@ import Loader from "../../../components/Loader";
 import Congratulations from "./components/Congratulations";
 import Question from "./components/Question";
 
-import {postQuestion} from "../../../actions/fidelityActions";
+import {postQuestion, updateQuestion} from "../../../actions/fidelityActions";
 
 @translate("translations")
 @connect((store) => {
@@ -22,38 +22,28 @@ class Profile extends Component {
   constructor(props) {
 
     super(props);
-    this.state = {
-      id: this.props.questionsData.id,
-      questions: this.props.questionsData.questions
-    };
+    this.state = {};
 
     this.updateValue = this.updateValue.bind(this);
     this.goToNextQuestion = this.goToNextQuestion.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.questionsData.questions.length !== this.state.questions || prevProps.questionsData.id !== this.state.id) {
-      this.setState({id: this.props.questionsData.id, questions: this.props.questionsData.questions});
-    }
-  }
-
   updateValue(name, val) {
-    let questions = [...this.state.questions];
-    const index = questions.findIndex(e => e.name === name);
-    questions[index].value = val;
-    this.setState({questions: questions});
+    this.props.dispatch(updateQuestion({name: name, value: val}));
   }
 
   goToNextQuestion() {
-    if (this.state.questions[this.state.id].value && this.state.id < this.state.questions.length) {
-      this.props.dispatch(postQuestion({id: this.state.id, answer: this.state.value}));
+    const question = this.props.questionsData.questions[this.props.questionsData.id];
+    if (question.value && this.props.questionsData.id < this.props.questionsData.questions.length) {
+      this.props.dispatch(postQuestion({name: question.name, answer: question.value}));
+
     }
   }
 
   _renderQuestion() {
-    if (this.state.id < this.state.questions.length) {
+    if (this.props.questionsData.id < this.props.questionsData.questions.length) {
       return (<div className="question-block">
-        <Question {...this.state.questions[this.state.id]} updateValue={this.updateValue}/>
+        <Question {...this.props.questionsData.questions[this.props.questionsData.id]} updateValue={this.updateValue}/>
         <Button className="next-btn" onClick={this.goToNextQuestion}>
           {this.props.t("question.next") + " "}
           <i className="fa fa-chevron-right"></i>
@@ -68,7 +58,7 @@ class Profile extends Component {
     let {t, i18n} = this.props;
     return (<div className="profile">
       <Navbar title={t("fidelity.profile.title")} goBack="/fidelity" history={this.props.history}/>
-      <Progress value={(this.state.id / this.state.questions.length) * 100}/>
+      <Progress value={(this.props.questionsData.id / this.props.questionsData.questions.length) * 100}/>
       <Loader spinning={this.props.questionsData.fetching || !this.props.questionsData.fetched || this.props.questionsData.posting}>
         {this._renderQuestion()}
       </Loader>
