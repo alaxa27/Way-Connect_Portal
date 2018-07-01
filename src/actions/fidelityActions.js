@@ -79,10 +79,7 @@ function fetchDiscounts(payload) {
       };
       const response = await axiosInstance({
         method: "get",
-        url: `/customers/${informationData.mac_address}/discount_activations/`,
-        params: {
-          mac_address: informationData.mac_address
-        }
+        url: `/customers/${informationData.mac_address}/discount_activations/`
       });
 
       dispatch({
@@ -140,36 +137,46 @@ export function fetchQuestions(payload) {
       const informationData = { ...getState().information.informationData
       };
 
-      // const response = await axiosInstance({
-      //   method: "get",
-      //   url: "/customers/questions/",
-      //   params: {
-      //     mac_address: informationData.mac_address
-      //   }
-      // });
+      const hobbiesOptions = await axiosInstance({
+        method: "get",
+        url: "/customers/hobbies"
+      })
+
+      const response = await axiosInstance({
+        method: "get",
+        url: `/customers/${informationData.mac_address}/`
+      });
+
+      const customerState = {...response.data};
       const questions = [{
-        name: "birthday",
+        name: "date_of_birth",
         type: "date",
         title: "Birthday",
-        answered: true
+        answered: (customerState.date_of_birth === null ? false : true)
       }, {
-        name: "nationality",
+        name: "country",
         type: "select-unique",
         title: "Nationality",
         options: STATUS["NATIONALITY"],
-        answered: true
+        answered: (customerState.country === null ? false : true)
       }, {
         name: "work",
         type: "select-unique",
         title: "Work Status",
         options: STATUS["PROFESSIONAL"],
-        answered: false
+        answered: (customerState.work_status === null ? false : true)
+      }, {
+        name: "hobbies",
+        type: "select-multi",
+        title: "Hobbies",
+        options: STATUS["PROFESSIONAL"],
+        answered: (customerState.hobbies.length === 0 ? false : true)
       }, {
         name: "relationship",
         type: "select-unique",
         title: "Relationship Status",
         options: STATUS["RELATIONSHIP"],
-        answered: false
+        answered: (customerState.relationship_status === null ? false : true)
       }];
 
       const questionsSorted = questions.sort((a, b) => !a.answered && b.answered);
