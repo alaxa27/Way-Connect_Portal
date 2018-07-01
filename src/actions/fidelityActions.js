@@ -167,13 +167,7 @@ export function fetchQuestions(payload) {
         type: "select-unique",
         title: "Nationality",
         options: STATUS["NATIONALITY"],
-        answered: (customerState.country === null ? false : true)
-      }, {
-        name: "hobbies",
-        type: "select-multi",
-        title: "Hobbies",
-        options: STATUS["PROFESSIONAL"],
-        answered: (customerState.hobbies.length === 0 ? false : true)
+        answered: (customerState.country === "" ? false : true)
       }, {
         name: "relationship_status",
         type: "select-unique",
@@ -186,6 +180,12 @@ export function fetchQuestions(payload) {
         title: "Work Status",
         options: STATUS["PROFESSIONAL"],
         answered: (customerState.work_status === null ? false : true)
+      }, {
+        name: "hobbies",
+        type: "select-multi",
+        title: "Hobbies",
+        options: STATUS["PROFESSIONAL"],
+        answered: (customerState.hobbies.length === 0 ? false : true)
       }];
 
       const questionsSorted = questions.sort((a, b) => !a.answered && b.answered);
