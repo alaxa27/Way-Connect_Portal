@@ -140,7 +140,7 @@ export function fetchQuestions(payload) {
       const hobbiesOptions = await axiosInstance({
         method: "get",
         url: "/customers/hobbies"
-      })
+      });
 
       const response = await axiosInstance({
         method: "get",
