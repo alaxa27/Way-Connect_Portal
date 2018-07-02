@@ -161,8 +161,8 @@ export function fetchQuestions(payload) {
         name: "gender",
         type: "radio",
         options: STATUS["GENDER"],
-        title: "Birthday",
-        answered: (customerState.date_of_birth === null ? false : true)
+        title: "Gender",
+        answered: (customerState.gender === null ? false : true)
       }, {
         name: "date_of_birth",
         type: "date",
