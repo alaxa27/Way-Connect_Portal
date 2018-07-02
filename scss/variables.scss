@@ -14,5 +14,6 @@ $colors: (
 );
 $background-color: map-get($colors, way-dark);
 $way-connect-gradient: linear-gradient(to right, map-get($colors, way-red), map-get($colors, way-yellow)); // Import bootstrap styles
+$way-out-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.6), 0 11px 20px 0 rgba(0, 0, 0, 0.6);
 
 $navbar_height: 50px;

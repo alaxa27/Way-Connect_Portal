@@ -7,7 +7,7 @@
     &__item {
       background-color: map-get($colors, way-gray);
       border-radius: 4rem;
-      box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.2), 0 11px 20px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: $way-out-shadow;
     }
 
     &__label-middle {
