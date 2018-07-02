@@ -158,6 +158,12 @@ export function fetchQuestions(payload) {
       const customerState = { ...response.data
       };
       const questions = [{
+        name: "gender",
+        type: "radio",
+        options: STATUS["GENDER"],
+        title: "Birthday",
+        answered: (customerState.date_of_birth === null ? false : true)
+      }, {
         name: "date_of_birth",
         type: "date",
         title: "Birthday",
@@ -184,7 +190,7 @@ export function fetchQuestions(payload) {
         name: "hobbies",
         type: "select-multi",
         title: "Hobbies",
-        options: STATUS["PROFESSIONAL"],
+        options: hobbiesOptions,
         answered: (customerState.hobbies.length === 0 ? false : true)
       }];
 
@@ -214,15 +220,13 @@ export function postQuestion(payload) {
       });
       const informationData = { ...getState().information.informationData
       };
-      console.log(payload);
-      const data = {
-        [payload.name]: payload.answer
-      };
-      console.log("DAta: ", data);
+
       const response = await axiosInstance({
         method: "patch",
         url: `/customers/${informationData.mac_address}/`,
-        data: data
+        data: {
+          [payload.name]: payload.answer
+        }
       });
 
       dispatch({
