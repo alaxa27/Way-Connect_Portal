@@ -42,11 +42,12 @@
 
   .rdt {
     .form-control {
+      width: 50%;
+      height: 30px;
       background-color: map-get($colors, way-gray);
       color: map-get($colors, light);
       border-radius: 1.5rem;
       border-width: 0;
-      width: 50%;
       box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.2), inset 0 6px 20px 0 rgba(0, 0, 0, 0.2);
     }
 

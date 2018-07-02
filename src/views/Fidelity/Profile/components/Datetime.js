@@ -11,11 +11,20 @@ import "react-datetime/css/react-datetime.css";
 class Datetime extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      value: ""
+    };
     this.updateField = this.updateField.bind(this);
+    this.renderInput = this.renderInput.bind(this);
   }
 
   updateField(val) {
+    this.setState({value: val.format("DD MMM YYYY")});
     this.props.updateValue(this.props.name, val.format("YYYY-MM-DD"));
+  }
+
+  renderInput(props, openCalendar, closeCalendar) {
+    return (<div {...props}>{this.state.value}</div>);
   }
 
   render() {
@@ -25,7 +34,7 @@ class Datetime extends Component {
         <p>{t("question.datetime.label")}</p>
         {this.props.title}
       </Label>
-      <DateTime viewMode="years" viewDate={moment().year(1980)} dateFormat={moment().format("DD MMM YYYY")} timeFormat={false} onChange={this.updateField} closeOnSelect={true} />
+      <DateTime viewMode="years" renderInput={this.renderInput} viewDate={moment().year(1980)} dateFormat={moment().format("DD MMM YYYY")} timeFormat={false} onChange={this.updateField} closeOnSelect={true}/>
     </div>);
   }
 }
