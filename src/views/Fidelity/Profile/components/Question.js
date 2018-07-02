@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 
+import Radio from "./Radio";
 import Select from "./Select";
 import Datetime from "./Datetime";
 
@@ -11,6 +12,8 @@ class Question extends Component {
 
   render() {
     switch (this.props.type) {
+      case "radio":
+        return (<Radio {...this.props}/>);
       case "select-unique":
         return (<Select {...this.props} isMulti={false}/>);
       case "select-multi":

@@ -28,7 +28,11 @@ import {
   POST_QUESTION,
   POST_QUESTION_FULFILLED,
   POST_QUESTION_REJECTED,
+
+  UPDATE_QUESTION,
 } from "../constants/ActionTypes";
+
+import i18n from "../constants/i18n";
 
 const STATUS = require("../data/status");
 
@@ -79,10 +83,7 @@ function fetchDiscounts(payload) {
       };
       const response = await axiosInstance({
         method: "get",
-        url: `/customers/${informationData.mac_address}/discount_activations/`,
-        params: {
-          mac_address: informationData.mac_address
-        }
+        url: `/customers/${informationData.mac_address}/discount_activations/`
       });
 
       dispatch({
@@ -140,36 +141,59 @@ export function fetchQuestions(payload) {
       const informationData = { ...getState().information.informationData
       };
 
-      // const response = await axiosInstance({
-      //   method: "get",
-      //   url: "/customers/questions/",
-      //   params: {
-      //     mac_address: informationData.mac_address
-      //   }
-      // });
+      const hobbiesResponse = await axiosInstance({
+        method: "get",
+        url: "/customers/hobbies"
+      });
+      const hobbiesOptions = hobbiesResponse.data.map((item) => {
+        return {
+          "label": item.name,
+          "value": item.id
+        };
+      });
+
+      const response = await axiosInstance({
+        method: "get",
+        url: `/customers/${informationData.mac_address}/`
+      });
+
+      const customerState = { ...response.data
+      };
       const questions = [{
-        name: "birthday",
+        name: "gender",
+        type: "radio",
+        options: STATUS["GENDER"],
+        title: i18n.t("fidelity.profile.titles.gender"),
+        answered: (customerState.gender === null ? false : true)
+      }, {
+        name: "date_of_birth",
         type: "date",
-        title: "Birthday",
-        answered: true
+        title: i18n.t("fidelity.profile.titles.date_of_birth"),
+        answered: (customerState.date_of_birth === null ? false : true)
       }, {
-        name: "nationality",
+        name: "country",
         type: "select-unique",
-        title: "Nationality",
+        title: i18n.t("fidelity.profile.titles.country"),
         options: STATUS["NATIONALITY"],
-        answered: true
+        answered: (customerState.country === "" ? false : true)
       }, {
-        name: "work",
+        name: "relationship_status",
         type: "select-unique",
-        title: "Work Status",
-        options: STATUS["PROFESSIONAL"],
-        answered: false
-      }, {
-        name: "relationship",
-        type: "select-unique",
-        title: "Relationship Status",
+        title: i18n.t("fidelity.profile.titles.relationship_status"),
         options: STATUS["RELATIONSHIP"],
-        answered: false
+        answered: (customerState.relationship_status === null ? false : true)
+      }, {
+        name: "work_status",
+        type: "select-unique",
+        title: i18n.t("fidelity.profile.titles.work_status"),
+        options: STATUS["PROFESSIONAL"],
+        answered: (customerState.work_status === null ? false : true)
+      }, {
+        name: "hobbies",
+        type: "select-multi",
+        title: i18n.t("fidelity.profile.titles.hobbies"),
+        options: hobbiesOptions,
+        answered: (customerState.hobbies.length === 0 ? false : true)
       }];
 
       const questionsSorted = questions.sort((a, b) => !a.answered && b.answered);
@@ -199,14 +223,13 @@ export function postQuestion(payload) {
       const informationData = { ...getState().information.informationData
       };
 
-      // const response = await axiosInstance({
-      //   method: "post",
-      //   url: `/customers/questions/${payload.id}`,
-      //   data: {
-      //     mac_address: informationData.mac_address,
-      //     answer: payload.answer
-      //   }
-      // });
+      const response = await axiosInstance({
+        method: "patch",
+        url: `/customers/${informationData.mac_address}/`,
+        data: {
+          [payload.name]: payload.answer
+        }
+      });
 
       dispatch({
         type: POST_QUESTION_FULFILLED
@@ -217,5 +240,17 @@ export function postQuestion(payload) {
         type: POST_QUESTION_REJECTED
       });
     }
+  };
+}
+
+export function updateQuestion(payload) {
+  return (dispatch, getState) => {
+    let questions = [...getState().fidelity.questionsData.questions];
+    const index = questions.findIndex(e => e.name === payload.name);
+    questions[index].value = payload.value;
+    dispatch({
+      type: UPDATE_QUESTION,
+      payload: questions
+    });
   };
 }

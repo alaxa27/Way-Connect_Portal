@@ -26,6 +26,8 @@ import {
   POST_QUESTION,
   POST_QUESTION_FULFILLED,
   POST_QUESTION_REJECTED,
+
+  UPDATE_QUESTION,
 } from "../constants/ActionTypes";
 
 const fidelityData = {
@@ -178,6 +180,13 @@ export default function reducer(state = {
       return { ...state,
         questionsData: { ...state.questionsData,
           posting: false
+        }
+      };
+
+    case UPDATE_QUESTION:
+      return { ...state,
+        questionsData: { ...state.questionsData,
+          questions: action.payload
         }
       };
     default:

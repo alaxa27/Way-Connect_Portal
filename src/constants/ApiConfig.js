@@ -13,8 +13,12 @@ if (hostname === "way-connect.com") {
   backendHost = "http://localhost:8000";
 }
 
-backendHost = "http://localhost:5000";
-backendHost = "http://192.168.220.2:5000";
+if (process.env.NODE_ENV === "production") {
+  backendHost = "http://192.168.220.2:5000";
+} else {
+  backendHost = "http://localhost:5000";
+}
+
 export const axiosInstance = axios.create({
   baseURL: backendHost,
 });
