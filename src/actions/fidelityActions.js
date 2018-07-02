@@ -32,6 +32,8 @@ import {
   UPDATE_QUESTION,
 } from "../constants/ActionTypes";
 
+import i18n from "../constants/i18n";
+
 const STATUS = require("../data/status");
 
 export function fetchFidelity(payload) {
@@ -161,35 +163,35 @@ export function fetchQuestions(payload) {
         name: "gender",
         type: "radio",
         options: STATUS["GENDER"],
-        title: "Gender",
+        title: i18n.t("fidelity.profile.titles.gender"),
         answered: (customerState.gender === null ? false : true)
       }, {
         name: "date_of_birth",
         type: "date",
-        title: "Birthday",
+        title: i18n.t("fidelity.profile.titles.date_of_birth"),
         answered: (customerState.date_of_birth === null ? false : true)
       }, {
         name: "country",
         type: "select-unique",
-        title: "Nationality",
+        title: i18n.t("fidelity.profile.titles.country"),
         options: STATUS["NATIONALITY"],
         answered: (customerState.country === "" ? false : true)
       }, {
         name: "relationship_status",
         type: "select-unique",
-        title: "Relationship Status",
+        title: i18n.t("fidelity.profile.titles.relationship_status"),
         options: STATUS["RELATIONSHIP"],
         answered: (customerState.relationship_status === null ? false : true)
       }, {
         name: "work_status",
         type: "select-unique",
-        title: "Work Status",
+        title: i18n.t("fidelity.profile.titles.work_status"),
         options: STATUS["PROFESSIONAL"],
         answered: (customerState.work_status === null ? false : true)
       }, {
         name: "hobbies",
         type: "select-multi",
-        title: "Hobbies",
+        title: i18n.t("fidelity.profile.titles.hobbies"),
         options: hobbiesOptions,
         answered: (customerState.hobbies.length === 0 ? false : true)
       }];

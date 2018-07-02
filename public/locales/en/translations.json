@@ -20,18 +20,34 @@
     },
     "profile": {
       "title": "Profile",
+      "titles": {
+        "gender": "Gender",
+        "date_of_birth": "Date of Birth",
+        "country": "Nationality",
+        "relationship_status": "Relationhip Status",
+        "work_status": "Work Status",
+        "hobbies": "Hobbies"
+      },
       "congratulations": {
-        "congratulations": "Félicitations !"
+        "congratulations": "Congratulations !"
       }
     }
   },
   "question": {
     "next": "Next Question",
     "select": {
-      "label": "Select your"
+      "unique": {
+        "label": "Select your"
+      },
+      "multi": {
+        "label": "Select your"
+      }
     },
     "datetime": {
       "label": "What's your"
+    },
+    "radio": {
+      "label": "Choose your"
     }
   },
   "wifi-granted": "WiFi Access Granted!"

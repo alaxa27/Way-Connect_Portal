@@ -30,7 +30,7 @@ class Select extends Component {
     let {t, i18n} = this.props;
     return (<div>
       <Label>
-        <p>{t("question.select.label")}</p>
+        <p>{t(`question.select.${(this.props.isMulti ? "multi" : "unique")}.label`)}</p>
         {this.props.title}
       </Label>
       <SelectBox name={this.props.name} options={this.props.options} onChange={this.updateField} isMulti={this.props.isMulti}/>

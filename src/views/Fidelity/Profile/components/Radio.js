@@ -24,7 +24,7 @@ class Radio extends Component {
     let {t, i18n} = this.props;
     return (<div>
       <Label>
-        <p>{"Choose your"}</p>
+        <p>{this.props.t("question.radio.label")}</p>
         {this.props.title}
       </Label>
       <div className="radio-buttons">

@@ -1,5 +1,5 @@
 {
-  "gateway":{
+  "gateway": {
     "partner": {
       "offer": "Nous vous offrons un WiFi haut-débit ainsi qu'une réduction sur votre prochaine consommation.",
       "under": "Valable sous",
@@ -20,6 +20,14 @@
     },
     "profile": {
       "title": "Profil",
+      "titles": {
+        "gender": "Sexe",
+        "date_of_birth": "Date de naissance",
+        "country": "Nationalité",
+        "relationship_status": "Situation amoureuse",
+        "work_status": "Situation professionnelle",
+        "hobbies": "Centres d'intérêts"
+      },
       "congratulations": {
         "congratulations": "Félicitations !"
       }
@@ -28,11 +36,20 @@
   "question": {
     "next": "Question Suivante",
     "select": {
-      "label": "Sélectionner votre"
+      "unique": {
+        "label": "Sélectionnez votre"
+      },
+      "multi": {
+        "label": "Sélectionnez vos"
+      }
     },
     "datetime": {
       "label": "Quel est votre"
+    },
+    "radio": {
+      "label": "Choisir votre"
     }
+
   },
   "wifi-granted": "Accès au WiFi autorisé!"
 }
