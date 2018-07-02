@@ -11,7 +11,13 @@ class Radio extends Component {
     this.state = {
       checked: props.options[0].value
     };
+
     this.updateField = this.updateField.bind(this);
+    this.updateField({
+      target: {
+        value: props.options[0].value
+      }
+    });
   }
 
   updateField(event) {
@@ -28,14 +34,14 @@ class Radio extends Component {
         {this.props.title}
       </Label>
       <div className="radio-buttons">
-        {this.props.options.map((item, key) => {
-          return (
-            <div key={key}>
+        {
+          this.props.options.map((item, key) => {
+            return (<div key={key}>
               <Input type="radio" id={item.value} name="radio" value={item.value} checked={this.state.checked === item.value} onChange={this.updateField}/>
               <Label htmlFor={item.value} className="pull-left">{item.label}</Label>
-            </div>
-          );
-        })}
+            </div>);
+          })
+        }
         <div className="clearfix"></div>
       </div>
     </div>);
