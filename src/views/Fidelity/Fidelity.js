@@ -53,8 +53,9 @@ class Fidelity extends Component {
   render() {
     let {t, i18n} = this.props;
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
+    console.log(this.props.location);
     return (<div className="fidelity">
-      <Navbar title={t("fidelity.title")} goBack="/dashboard" history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
+      <Navbar title={t("fidelity.title")} goBack={this.props.location.state ? "" : "/dashboard"} history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
 
       <div>
         <Link to="/fidelity/profile">
@@ -115,6 +116,7 @@ Fidelity.propTypes = {
   discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, date: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   className: PropTypes.string,
   history: PropTypes.shape({goBack: PropTypes.func}),
+  location: PropTypes.shape({state: PropTypes.bool}),
   t: PropTypes.func,
   i18n: PropTypes.object
 };

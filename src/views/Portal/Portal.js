@@ -32,7 +32,10 @@ class Portal extends Component {
       case "gateway":
         return (<Redirect to={"/gateway/way-connect"}/>);
       case "fidelity":
-        return (<Redirect to={"/fidelity"}/>);
+        return (<Redirect to={{
+            pathname: "/fidelity",
+            state: true
+          }}/>);
       default:
         return (null);
     }
