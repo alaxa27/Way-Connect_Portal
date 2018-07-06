@@ -10,7 +10,7 @@ import Loader from "../../../components/Loader";
 import Congratulations from "./components/Congratulations";
 import Question from "./components/Question";
 
-import {postQuestion, updateQuestion} from "../../../actions/fidelityActions";
+import {fetchQuestions, postQuestion, updateQuestion} from "../../../actions/fidelityActions";
 
 @translate("translations")
 @connect((store) => {
@@ -24,6 +24,7 @@ class Profile extends Component {
     super(props);
     this.state = {};
 
+    this.props.dispatch(fetchQuestions());
     this.updateValue = this.updateValue.bind(this);
     this.goToNextQuestion = this.goToNextQuestion.bind(this);
   }
@@ -41,9 +42,10 @@ class Profile extends Component {
   }
 
   _renderQuestion() {
+    let question = this.props.questionsData.questions[this.props.questionsData.id];
     if (this.props.questionsData.id < this.props.questionsData.questions.length) {
       return (<div className="question-block">
-        <Question {...this.props.questionsData.questions[this.props.questionsData.id]} updateValue={this.updateValue}/>
+        <Question {...question} updateValue={this.updateValue}/>
         <Button className="next-btn" onClick={this.goToNextQuestion}>
           {this.props.t("question.next") + " "}
           <i className="fa fa-chevron-right"></i>

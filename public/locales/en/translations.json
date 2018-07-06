@@ -21,34 +21,21 @@
     "profile": {
       "title": "Profile",
       "titles": {
-        "gender": "Gender",
-        "date_of_birth": "Date of Birth",
-        "country": "Nationality",
-        "relationship_status": "Relationhip Status",
-        "work_status": "Work Status",
-        "hobbies": "Hobbies"
+        "gender": "Choose your Gender",
+        "date_of_birth": "What's your Date of Birth",
+        "country": "Select your Nationality",
+        "relationship_status": "Select your Relationhip Status",
+        "work_status": "Select your Work Status",
+        "hobbies": "Select your Hobbies"
       },
       "congratulations": {
-        "congratulations": "Congratulations !"
+        "congratulations": "Congratulations !",
+        "continue": "Continue !"
       }
     }
   },
   "question": {
-    "next": "Next Question",
-    "select": {
-      "unique": {
-        "label": "Select your"
-      },
-      "multi": {
-        "label": "Select your"
-      }
-    },
-    "datetime": {
-      "label": "What's your"
-    },
-    "radio": {
-      "label": "Choose your"
-    }
+    "next": "Next Question"
   },
-  "wifi-granted": "WiFi Access Granted!"
+  "wifi-granted": "WiFi Access Granted for 30 minutes!"
 }

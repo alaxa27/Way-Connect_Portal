@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {Label} from "reactstrap";
 
 import Radio from "./Radio";
 import Select from "./Select";
@@ -10,7 +11,7 @@ class Question extends Component {
     super(props);
   }
 
-  render() {
+  _renderQuestionType() {
     switch (this.props.type) {
       case "radio":
         return (<Radio {...this.props}/>);
@@ -22,13 +23,25 @@ class Question extends Component {
         return (<Datetime {...this.props}/>);
     }
   }
+  render() {
+    return (<React.Fragment>
+      <div className="icon">
+        <i className={`fas fa-${this.props.icon}`}/>
+      </div>
+      <Label>
+        {this.props.title}
+      </Label>
+      {this._renderQuestionType()}
+    </React.Fragment>);
+  }
 }
 
 Question.propTypes = {
-  name: PropTypes.string,
   type: PropTypes.string.isRequired,
-  title: PropTypes.string,
   options: PropTypes.array,
+  name: PropTypes.string,
+  title: PropTypes.string,
+  icon: PropTypes.string,
   updateValue: PropTypes.func
 };
 

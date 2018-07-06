@@ -21,35 +21,21 @@
     "profile": {
       "title": "Profil",
       "titles": {
-        "gender": "Sexe",
-        "date_of_birth": "Date de naissance",
-        "country": "Nationalité",
-        "relationship_status": "Situation amoureuse",
-        "work_status": "Situation professionnelle",
-        "hobbies": "Centres d'intérêts"
+        "gender": "Choisissez votre Sexe",
+        "date_of_birth": "Quel est votre Date de naissance",
+        "country": "Sélectionnez votre Nationalité",
+        "relationship_status": "Sélectionnez votre Situation amoureuse",
+        "work_status": "Sélectionnez votre Situation professionnelle",
+        "hobbies": "Sélectionnez vos Centres d'intérêts"
       },
       "congratulations": {
-        "congratulations": "Félicitations !"
+        "congratulations": "Félicitations !",
+        "continue": "Continuer !"
       }
     }
   },
   "question": {
-    "next": "Question Suivante",
-    "select": {
-      "unique": {
-        "label": "Sélectionnez votre"
-      },
-      "multi": {
-        "label": "Sélectionnez vos"
-      }
-    },
-    "datetime": {
-      "label": "Quel est votre"
-    },
-    "radio": {
-      "label": "Choisir votre"
-    }
-
+    "next": "Question Suivante"
   },
-  "wifi-granted": "Accès au WiFi autorisé!"
+  "wifi-granted": "Accès au WiFi autorisé pour 30 minutes!"
 }

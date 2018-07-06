@@ -160,39 +160,45 @@ export function fetchQuestions(payload) {
       const customerState = { ...response.data
       };
       const questions = [{
-        name: "gender",
         type: "radio",
         options: STATUS["GENDER"],
+        name: "gender",
         title: i18n.t("fidelity.profile.titles.gender"),
+        icon: "transgender",
         answered: (customerState.gender === null ? false : true)
       }, {
-        name: "date_of_birth",
         type: "date",
+        name: "date_of_birth",
         title: i18n.t("fidelity.profile.titles.date_of_birth"),
+        icon: "birthday-cake",
         answered: (customerState.date_of_birth === null ? false : true)
       }, {
-        name: "country",
         type: "select-unique",
-        title: i18n.t("fidelity.profile.titles.country"),
         options: STATUS["NATIONALITY"],
+        name: "country",
+        title: i18n.t("fidelity.profile.titles.country"),
+        icon: "globe-africa",
         answered: (customerState.country === "" ? false : true)
       }, {
-        name: "relationship_status",
         type: "select-unique",
-        title: i18n.t("fidelity.profile.titles.relationship_status"),
         options: STATUS["RELATIONSHIP"],
+        name: "relationship_status",
+        title: i18n.t("fidelity.profile.titles.relationship_status"),
+        icon: "heart",
         answered: (customerState.relationship_status === null ? false : true)
       }, {
-        name: "work_status",
         type: "select-unique",
-        title: i18n.t("fidelity.profile.titles.work_status"),
         options: STATUS["PROFESSIONAL"],
+        name: "work_status",
+        title: i18n.t("fidelity.profile.titles.work_status"),
+        icon: "briefcase",
         answered: (customerState.work_status === null ? false : true)
       }, {
-        name: "hobbies",
         type: "select-multi",
-        title: i18n.t("fidelity.profile.titles.hobbies"),
         options: hobbiesOptions,
+        name: "hobbies",
+        title: i18n.t("fidelity.profile.titles.hobbies"),
+        icon: "futbol",
         answered: (customerState.hobbies.length === 0 ? false : true)
       }];
 

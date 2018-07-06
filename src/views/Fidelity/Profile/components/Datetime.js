@@ -30,10 +30,6 @@ class Datetime extends Component {
   render() {
     let {t, i18n} = this.props;
     return (<div>
-      <Label>
-        <p>{t("question.datetime.label")}</p>
-        {this.props.title}
-      </Label>
       <DateTime viewMode="years" renderInput={this.renderInput} viewDate={moment().year(1980)} dateFormat={moment().format("DD MMM YYYY")} timeFormat={false} onChange={this.updateField} closeOnSelect={true}/>
     </div>);
   }
