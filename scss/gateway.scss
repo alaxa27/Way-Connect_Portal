@@ -56,6 +56,37 @@
   .video-not-playing {
     display: none;
   }
-}
 
-.gateway {}
+  .slider-button {
+    display: flex;
+    align-items: left;
+    width: 300px;
+    height: 55px;
+    border-radius: 0.5rem;
+    background-color: map-get($colors, way-gray);
+
+    .dropped {
+      transition: 0.3s ease-out;
+    }
+
+    .handle {
+      height: 100%;
+      width: 55px;
+      border-radius: 0.5rem;
+      font-size: 2.5rem;
+      background-color: map-get($colors, way-gray-dark);
+
+      .fas:before {
+        // color: $way-connect-gradient;
+        background: $way-connect-gradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: initial;
+      }
+    }
+    p {
+      font-size: 1.2rem;
+      margin: auto;
+    }
+  }
+}

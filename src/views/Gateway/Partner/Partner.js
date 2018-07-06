@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import {Button, Row} from "reactstrap";
+import Draggable from "react-draggable";
 import {Player, ControlBar, Shortcut} from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
@@ -32,9 +33,45 @@ class Partner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing: false
+      playing: false,
+      slider: {
+        position: {
+          x: 0,
+          y: 0
+        },
+        dropped: false
+      }
     };
+    this.playVideo = this.playVideo.bind(this);
+    this.handleSliderDrag = this.handleSliderDrag.bind(this);
+    this.handleSliderDrop = this.handleSliderDrop.bind(this);
+  }
 
+  handleSliderDrop(e, d) {
+    if (d.x >= 250) {
+      this.playVideo();
+    }
+    this.setState({
+      slider: {
+        position: {
+          x: (
+            d.x < 250
+            ? 0
+            : d.x),
+          y: 0
+        },
+        dropped: true
+      }
+    });
+  }
+
+  handleSliderDrag() {
+    this.setState({
+      slider: {
+        ...this.state.slider,
+        dropped: false
+      }
+    });
   }
 
   handleStateChange(state, prevState) {
@@ -60,10 +97,21 @@ class Partner extends Component {
         {t("gateway.partner.offer")}
       </Row>
       <Row className="go-block">
-        <p>{t("gateway.partner.under")}</p>
+        {/*<p>{t("gateway.partner.under")}</p>
         <Button onClick={this.playVideo.bind(this)} block={true}>
           {"15 " + t("gateway.partner.seconds")}
-        </Button>
+        </Button>*/}
+        <div className="slider-button">
+          <Draggable axis="x" bounds={{
+              left: 0,
+              right: 250
+            }} position={this.state.slider.position} onStart={this.handleSliderDrag} onStop={this.handleSliderDrop}>
+            <div className={`handle ${(this.state.slider.dropped ? "dropped" : "")}`}>
+              <i className="fas fa-chevron-right"></i>
+            </div>
+          </Draggable>
+          <p>Slide to Continue</p>
+        </div>
       </Row>
 
       <div className={(
