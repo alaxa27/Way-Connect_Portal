@@ -35,6 +35,8 @@ class Partner extends Component {
     this.state = {
       playing: false,
       slider: {
+        ref: React.createRef(),
+        handleRef: React.createRef(),
         position: {
           x: 0,
           y: 0
@@ -42,20 +44,32 @@ class Partner extends Component {
         dropped: false
       }
     };
+
+    this.playerRef = React.createRef();
     this.playVideo = this.playVideo.bind(this);
     this.handleSliderDrag = this.handleSliderDrag.bind(this);
     this.handleSliderDrop = this.handleSliderDrop.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      slider: {
+        ...this.state.slider,
+        width: this.state.slider.ref.current.offsetWidth - this.state.slider.handleRef.current.offsetWidth
+      }
+    });
+  }
+
   handleSliderDrop(e, d) {
-    if (d.x >= 250) {
+    if (d.x >= this.state.slider.width) {
       this.playVideo();
     }
     this.setState({
       slider: {
+        ...this.state.slider,
         position: {
           x: (
-            d.x < 250
+            d.x < this.state.slider.width
             ? 0
             : d.x),
           y: 0
@@ -83,9 +97,9 @@ class Partner extends Component {
   playVideo() {
     if (!this.props.fetching && this.props.fetched) {
       this.setState({playing: true});
-      this.player.subscribeToStateChange(this.handleStateChange.bind(this));
-      this.player.play();
-      this.player.toggleFullscreen();
+      this.playerRef.current.subscribeToStateChange(this.handleStateChange.bind(this));
+      this.playerRef.current.play();
+      this.playerRef.current.toggleFullscreen();
     }
   }
 
@@ -101,16 +115,16 @@ class Partner extends Component {
         <Button onClick={this.playVideo.bind(this)} block={true}>
           {"15 " + t("gateway.partner.seconds")}
         </Button>*/}
-        <div className="slider-button">
+        <div ref={this.state.slider.ref} className="slider-button">
           <Draggable axis="x" bounds={{
               left: 0,
-              right: 250
+              right: this.state.slider.width
             }} position={this.state.slider.position} onStart={this.handleSliderDrag} onStop={this.handleSliderDrop}>
-            <div className={`handle ${(this.state.slider.dropped ? "dropped" : "")}`}>
+            <div ref={this.state.slider.handleRef} className={`handle ${(this.state.slider.dropped ? "dropped" : "")}`}>
               <i className="fas fa-chevron-right"></i>
             </div>
           </Draggable>
-          <p>Slide to Continue</p>
+          <p>{t("gateway.partner.slider")}</p>
         </div>
       </Row>
 
@@ -118,9 +132,7 @@ class Partner extends Component {
           this.state.playing
           ? "video-playing"
           : "video-not-playing")}>
-        <Player ref={(c) => {
-            this.player = c;
-          }}>
+        <Player ref={this.playerRef}>
           <source src="/assets/trailer_hd.mp4"/>
           <ControlBar disabled={true}/>
           <Shortcut clickable={false} shortcuts={playerShortcuts}/>

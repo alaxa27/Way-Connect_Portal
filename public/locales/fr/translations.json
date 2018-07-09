@@ -3,7 +3,8 @@
     "partner": {
       "offer": "Nous vous offrons un WiFi haut-débit ainsi qu'une réduction sur votre prochaine consommation.",
       "under": "Valable sous",
-      "seconds": "secondes"
+      "seconds": "secondes",
+      "slider": "Glissez pour Continuer"
     }
   },
   "dashboard": {
