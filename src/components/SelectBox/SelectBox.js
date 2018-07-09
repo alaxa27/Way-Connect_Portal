@@ -51,7 +51,7 @@ class SelectBox extends Component {
         ? []
         : options)} classNamePrefix="select" components={{
         DropdownIndicator
-      }} styles={selectStyles} {...rest} menuPlacement="top"/>);
+      }} styles={selectStyles} {...rest} menuPlacement="bottom"/>);
   }
 }
 export default SelectBox;

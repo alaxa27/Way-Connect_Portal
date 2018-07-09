@@ -53,7 +53,7 @@
   .next-btn {
     height: 40px;
     min-height: 40px;
-    margin-top: 100px;
+    margin-top: auto;
   }
 
   .rdt {
@@ -68,6 +68,7 @@
 
     .rdtPicker {
       background-color: map-get($colors, way-gray);
+      margin-top: -240px;
       border-radius: 0.75rem;
       border-width: 0;
     }

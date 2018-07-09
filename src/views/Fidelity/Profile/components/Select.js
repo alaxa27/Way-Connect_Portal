@@ -29,7 +29,7 @@ class Select extends Component {
   render() {
     let {t, i18n} = this.props;
     return (<div>
-      <SelectBox name={this.props.name} options={this.props.options} onChange={this.updateField} isMulti={this.props.isMulti}/>
+      <SelectBox name={this.props.name} options={this.props.options} onChange={this.updateField} isMulti={this.props.isMulti} isSearchable={(this.props.options.length > 20)}/>
     </div>);
   }
 }
