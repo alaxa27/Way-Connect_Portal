@@ -89,6 +89,9 @@ class Partner extends Component {
   }
 
   handleStateChange(state, prevState) {
+    if (state.seeking && !prevState.seeking) {
+      this.playerRef.current.seek(prevState.currentTime);
+    }
     if (state.ended && !this.props.acknowledging && !this.props.acknowledged) {
       this.props.dispatch(acknowledgeCommunication({history: this.props.history}));
     }
