@@ -7,9 +7,23 @@
   align-items: center;
   justify-content: space-around;
 
-  .logo {
-    max-width: 200px;
-    // height: 200px;
+  .establishment {
+    display: inherit;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    &__white {
+      background-color: map-get($colors, light);
+    }
+    &__black {
+      background-color: map-get($colors, way-gray-dark);
+    }
+    .logo {
+      max-width: 90%;
+      max-height: 90%;
+    }
   }
 
   .go-block {

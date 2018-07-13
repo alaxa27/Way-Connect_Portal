@@ -9,12 +9,25 @@
 import {
   ACKNOWLEDGE_COMMUNICATION,
   ACKNOWLEDGE_COMMUNICATION_FULFILLED,
-  ACKNOWLEDGE_COMMUNICATION_REJECTED
+  ACKNOWLEDGE_COMMUNICATION_REJECTED,
+
+  FETCH_ESTABLISHMENT,
+  FETCH_ESTABLISHMENT_FULFILLED,
+  FETCH_ESTABLISHMENT_REJECTED
 } from "../constants/ActionTypes";
+
+const establishmentData = {
+  fetching: false,
+  fetched: false,
+  name: "",
+  picture: "",
+  background_color: "black"
+};
 
 export default function reducer(state = {
   acknowledging: false,
-  acknowledged: false
+  acknowledged: false,
+  establishmentData: establishmentData
 }, action) {
   switch (action.type) {
     case ACKNOWLEDGE_COMMUNICATION:
@@ -31,6 +44,31 @@ export default function reducer(state = {
       return { ...state,
         acknowledging: false,
         acknowledged: false
+      };
+
+    case FETCH_ESTABLISHMENT:
+      return { ...state,
+        establishmentData: {
+          ...state.establishmentData,
+          fetching: true,
+        }
+      };
+    case FETCH_ESTABLISHMENT_FULFILLED:
+      return { ...state,
+        establishmentData: {
+          ...state.establishmentData,
+          ...action.payload,
+          fetching: false,
+          fetched: true
+        }
+      };
+    case FETCH_ESTABLISHMENT_REJECTED:
+      return { ...state,
+        establishmentData: {
+          ...state.establishmentData,
+          fetching: false,
+          fetched: false
+        }
       };
     default:
       return { ...state

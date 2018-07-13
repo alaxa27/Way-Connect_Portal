@@ -11,7 +11,11 @@ import {
 import {
   ACKNOWLEDGE_COMMUNICATION,
   ACKNOWLEDGE_COMMUNICATION_FULFILLED,
-  ACKNOWLEDGE_COMMUNICATION_REJECTED
+  ACKNOWLEDGE_COMMUNICATION_REJECTED,
+
+  FETCH_ESTABLISHMENT,
+  FETCH_ESTABLISHMENT_FULFILLED,
+  FETCH_ESTABLISHMENT_REJECTED,
 } from "../constants/ActionTypes";
 
 export function acknowledgeCommunication(payload) {
@@ -38,6 +42,31 @@ export function acknowledgeCommunication(payload) {
     } catch (error) {
       dispatch({
         type: ACKNOWLEDGE_COMMUNICATION_REJECTED
+      });
+    }
+  };
+}
+
+export function fetchEstablishment(payload) {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: FETCH_ESTABLISHMENT
+    });
+    try {
+      const informationData = { ...getState().information.informationData
+      };
+      // const response = await axiosInstance({
+      //   method: "get",
+      //   url: `/customers/${informationData.mac_address}/establishment/`,
+      // });
+
+      dispatch({
+        type: FETCH_ESTABLISHMENT_FULFILLED,
+        payload: response.data
+      });
+    } catch (error) {
+      dispatch({
+        type: FETCH_ESTABLISHMENT_REJECTED
       });
     }
   };

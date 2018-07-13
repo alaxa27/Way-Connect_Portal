@@ -25,7 +25,7 @@ const playerShortcuts = [
 @connect((store) => {
   let informationStore = store.information;
   let gatewayStore = store.gateway;
-  return {fetching: informationStore.fetching, fetched: informationStore.fetched, acknowledging: gatewayStore.acknowledging, acknowledged: gatewayStore.acknowledged};
+  return {fetching: informationStore.fetching, fetched: informationStore.fetched, acknowledging: gatewayStore.acknowledging, acknowledged: gatewayStore.acknowledged, establishmentData: gatewayStore.establishmentData};
 })
 
 class Partner extends Component {
@@ -109,7 +109,9 @@ class Partner extends Component {
   render() {
     let {t, i18n} = this.props;
     return (<div className="gateway">
-      <img src="/assets/mustache.png" className="logo"/>
+      <div className={`establishment establishment__${this.props.establishmentData.background_color}`}>
+        <img src={this.props.establishmentData.picture} className="logo"/>
+      </div>
       <Row>
         {t("gateway.partner.offer")}
       </Row>
@@ -151,6 +153,10 @@ Partner.propTypes = {
   acknowledged: PropTypes.bool,
   fetching: PropTypes.bool,
   fetched: PropTypes.bool,
+  establishmentData: PropTypes.shape({
+    picture: PropTypes.string,
+    background_color: PropTypes.string
+  }),
   dispatch: PropTypes.func,
   history: PropTypes.object,
   t: PropTypes.func,

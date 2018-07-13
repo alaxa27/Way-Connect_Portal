@@ -8,6 +8,7 @@ import WayConnect from "./WayConnect";
 import Loader from "../../components/Loader";
 
 import {fetchConnection} from "../../actions/informationActions";
+import {fetchEstablishment} from "../../actions/gatewayActions";
 
 @connect((store) => {
   return {};
@@ -21,6 +22,7 @@ class Gateway extends Component {
     };
 
     this.props.dispatch(fetchConnection());
+    this.props.dispatch(fetchEstablishment());
   }
   render() {
 
