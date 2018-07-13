@@ -49,7 +49,7 @@ export function fetchFidelity(payload) {
         url: `/customers/${informationData.mac_address}/retrieve_discount/`,
         params: {}
       });
-      const rate = Math.round(100 * response.data.current_progress) / 100;
+      const rate = Math.round(100 * Math.log2(response.data.current_progress)) / 100;
       const rewardString = `${response.data.promotion_level.reward} ${response.data.promotion_level.reward_currency}`;
 
       dispatch({
