@@ -49,14 +49,15 @@ export function fetchFidelity(payload) {
         url: `/customers/${informationData.mac_address}/retrieve_discount/`,
         params: {}
       });
-      const rate = Math.round(100 * response.data.current_views / response.data.promotion.max_views) / 100;
-      const rewardString = `${response.data.promotion.reward} ${response.data.promotion.reward_currency}`;
+      const rate = Math.round(100 * response.data.current_progress) / 100;
+      const rewardString = `${response.data.promotion_level.reward} ${response.data.promotion_level.reward_currency}`;
 
       dispatch({
         type: FETCH_FIDELITY_FULFILLED,
         payload: {
+          level: reponse.data.promotion_level.rank,
           rate: rate,
-          amount: Math.round(100 * rate * response.data.promotion.reward) / 100,
+          amount: Math.round(100 * rate * response.data.promotion_level.reward) / 100,
           reward: rewardString
         }
       });
@@ -102,7 +103,7 @@ function fetchDiscounts(payload) {
 
 export function fetchDiscount(payload) {
   return async (dispatch, getState) => {
-    if (!getState().fidelity.fidelityData.fetching && !getState().fidelity.discountData.fetched && getState().fidelity.fidelityData.rate > 0) {
+    if (!getState().fidelity.fidelityData.fetching && !getState().fidelity.discountData.fetched && getState().fidelity.fidelityData.rate === 1) {
       dispatch({
         type: FETCH_DISCOUNT
       });

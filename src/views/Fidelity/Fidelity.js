@@ -55,7 +55,9 @@ class Fidelity extends Component {
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
     console.log(this.props.location);
     return (<div className="fidelity">
-      <Navbar title={t("fidelity.title")} goBack={this.props.location.state ? "" : "/dashboard"} history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
+      <Navbar title={t("fidelity.title")} goBack={this.props.location.state
+          ? ""
+          : "/dashboard"} history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
 
       <div>
         <Link to="/fidelity/profile">
@@ -79,10 +81,10 @@ class Fidelity extends Component {
       <div className="bonus-max">
         {this.props.fidelityData.amount + "/" + this.props.fidelityData.reward}
       </div>
-      <Button className={"activate" + (
-          this.props.fidelityData.rate > 0
-          ? " enabled"
-          : " disabled")} onClick={this.fetchDiscount}>
+      <Button className={`activate ${ (
+          this.props.fidelityData.rate === 1
+          ? "enabled"
+          : "disabled")}`} onClick={this.fetchDiscount}>
         <Loader spinning={this.props.fidelityData.fetching || this.props.discountData.fetching} width={50} height={50}>
           <React.Fragment>
             <i className="fa fa-bolt"></i>{" " + t("fidelity.activate")}
