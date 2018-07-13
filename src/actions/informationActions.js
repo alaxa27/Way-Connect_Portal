@@ -15,6 +15,8 @@ import {
   POST_CONNECT_REJECTED
 } from "../constants/ActionTypes";
 
+import {fetchEstablishment} from "./gatewayActions";
+
 export function dispatchInformations(payload) {
   return (dispatch, getState) => {
     dispatch({
@@ -38,6 +40,8 @@ export function fetchConnection(payload) {
         data: {}
       });
 
+      await dispatch(fetchEstablishment());
+      
       dispatch({
         type: POST_CONNECT_FULFILLED,
         payload: {

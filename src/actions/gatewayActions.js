@@ -55,10 +55,10 @@ export function fetchEstablishment(payload) {
     try {
       const informationData = { ...getState().information.informationData
       };
-      // const response = await axiosInstance({
-      //   method: "get",
-      //   url: `/customers/${informationData.mac_address}/establishment/`,
-      // });
+      const response = await axiosInstance({
+        method: "get",
+        url: "/customers/establishment/",
+      });
 
       dispatch({
         type: FETCH_ESTABLISHMENT_FULFILLED,
