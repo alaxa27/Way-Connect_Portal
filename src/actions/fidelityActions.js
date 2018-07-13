@@ -49,15 +49,16 @@ export function fetchFidelity(payload) {
         url: `/customers/${informationData.mac_address}/retrieve_discount/`,
         params: {}
       });
-      const rate = Math.round(100 * Math.log2(response.data.current_progress)) / 100;
+      const rate = Math.round(100 * Math.log2(1 + response.data.current_progress)) / 100;
       const rewardString = `${response.data.promotion_level.reward} ${response.data.promotion_level.reward_currency}`;
+      const amount = Math.round(100 * rate * response.data.promotion_level.reward) / 100;
 
       dispatch({
         type: FETCH_FIDELITY_FULFILLED,
         payload: {
-          level: reponse.data.promotion_level.rank,
+          level: response.data.promotion_level.rank,
           rate: rate,
-          amount: Math.round(100 * rate * response.data.promotion_level.reward) / 100,
+          amount: amount,
           reward: rewardString
         }
       });
@@ -79,7 +80,6 @@ function fetchDiscounts(payload) {
       type: FETCH_DISCOUNTS,
     });
     try {
-
       const informationData = { ...getState().information.informationData
       };
       const response = await axiosInstance({

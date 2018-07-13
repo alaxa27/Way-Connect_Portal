@@ -53,7 +53,6 @@ class Fidelity extends Component {
   render() {
     let {t, i18n} = this.props;
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
-    console.log(this.props.location);
     return (<div className="fidelity">
       <Navbar title={t("fidelity.title")} goBack={this.props.location.state
           ? ""
@@ -77,7 +76,7 @@ class Fidelity extends Component {
           </div>
         </div>
       </div>
-      <h2>{this.props.fidelityData.rate * 100}{" "}%</h2>
+      <h2>{Math.round(this.props.fidelityData.rate * 10000)/100}{" "}%</h2>
       <div className="bonus-max">
         {this.props.fidelityData.amount + "/" + this.props.fidelityData.reward}
       </div>

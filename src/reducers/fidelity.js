@@ -33,6 +33,7 @@ import {
 const fidelityData = {
   fetching: false,
   fetched: false,
+  level: 0,
   rate: 0,
   reward: "",
   amount: 0,
