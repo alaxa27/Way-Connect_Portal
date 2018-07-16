@@ -13,9 +13,12 @@ class Radio extends Component {
     };
 
     this.updateField = this.updateField.bind(this);
+  }
+
+  componentDidMount() {
     this.updateField({
       target: {
-        value: props.options[0].value
+        value: this.props.options[0].value
       }
     });
   }

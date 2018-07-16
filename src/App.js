@@ -43,7 +43,7 @@ class App extends Component {
     super(props);
     /// IN DEVELOPMENT /
     if (process.env.NODE_ENV !== "production") {
-      this.props.dispatch(dispatchInformations({mac_address: "11:ED:4D:F2:1B:1B", token: "idujza"}));
+      this.props.dispatch(dispatchInformations({mac_address: "11:AD:4D:F2:1B:1B", token: "idujza"}));
     }
     ////////////////////
   }
