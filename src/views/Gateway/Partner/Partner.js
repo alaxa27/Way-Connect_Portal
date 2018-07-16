@@ -104,7 +104,7 @@ class Partner extends Component {
       this.setState({playing: true});
       this.playerRef.current.subscribeToStateChange(this.handleStateChange.bind(this));
       this.playerRef.current.play();
-      this.playerRef.current.toggleFullscreen();
+      // this.playerRef.current.toggleFullscreen();
     }
   }
 
