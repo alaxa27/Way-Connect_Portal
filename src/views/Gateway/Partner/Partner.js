@@ -139,9 +139,9 @@ class Partner extends Component {
           this.state.playing
           ? "video-playing"
           : "video-not-playing")}>
-        <Player ref={this.playerRef}>
+        <Player playsInline={true} ref={this.playerRef}>
           <source src="/assets/trailer_hd.mp4"/>
-          <ControlBar disabled={false}/>
+          <ControlBar disabled={true}/>
           <Shortcut clickable={false} shortcuts={playerShortcuts}/>
         </Player>
       </div>
