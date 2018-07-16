@@ -14,7 +14,9 @@ import {acknowledgeCommunication} from "../../../actions/gatewayActions";
 const playerShortcuts = [
   {
     keyCode: 39, // Right arrow
-    handle: (player, actions) => {}
+    handle: (player, actions) => {
+      console.log("HHHHH");
+    }
   }, {
     keyCode: 76, // LKey
     handle: (player, actions) => {}
@@ -139,7 +141,7 @@ class Partner extends Component {
           : "video-not-playing")}>
         <Player ref={this.playerRef}>
           <source src="/assets/trailer_hd.mp4"/>
-          <ControlBar disabled={true}/>
+          <ControlBar disabled={false}/>
           <Shortcut clickable={false} shortcuts={playerShortcuts}/>
         </Player>
       </div>
