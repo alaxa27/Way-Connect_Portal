@@ -49,29 +49,31 @@ export function fetchFidelity(payload) {
         url: `/customers/${informationData.mac_address}/retrieve_discount/`,
         params: {}
       });
-      const rate = Math.round(100 * Math.log2(1 + response.data.current_progress)) / 100;
-      const rewardString = `${response.data.promotion_level.reward} ${response.data.promotion_level.reward_currency}`;
-      const amount = Math.round(100 * rate * response.data.promotion_level.reward) / 100;
+      const slope = 0.1;
+      let rate = Math.log((slope + response.data.current_progress) / slope) / Math.log((1 + slope) / slope);
+      rate = Math.round(100 * rate) / 100;
+    const rewardString = `${response.data.promotion_level.reward} ${response.data.promotion_level.reward_currency}`;
+    const amount = Math.round(100 * rate * response.data.promotion_level.reward) / 100;
 
-      dispatch({
-        type: FETCH_FIDELITY_FULFILLED,
-        payload: {
-          level: response.data.promotion_level.rank,
-          rate: rate,
-          amount: amount,
-          reward: rewardString
-        }
-      });
+    dispatch({
+      type: FETCH_FIDELITY_FULFILLED,
+      payload: {
+        level: response.data.promotion_level.rank,
+        rate: rate,
+        amount: amount,
+        reward: rewardString
+      }
+    });
 
-      await dispatch(fetchDiscounts());
-      await dispatch(fetchQuestions());
+    await dispatch(fetchDiscounts());
+    await dispatch(fetchQuestions());
 
-    } catch (error) {
-      dispatch({
-        type: FETCH_FIDELITY_REJECTED
-      });
-    }
-  };
+  } catch (error) {
+    dispatch({
+      type: FETCH_FIDELITY_REJECTED
+    });
+  }
+};
 }
 
 function fetchDiscounts(payload) {
