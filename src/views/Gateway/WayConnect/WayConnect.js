@@ -22,7 +22,7 @@ class WayConnect extends Component {
   render() {
 
     return (<div className="way-connect">
-      <Button onClick={() => {
+      <Button className={(!this.props.fetching && this.props.fetched ? "pulse": "")} onClick={() => {
           if (!this.props.fetching && this.props.fetched) {
             this.props.history.push("/gateway/partner");
           }
