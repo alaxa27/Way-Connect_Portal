@@ -18,7 +18,7 @@ const informationData = {
   mac_address: "",
   token: "",
   auth_action: "",
-  redir: "https://www.way-connect.com/",
+  redir: "https://google.com",
   establishment_type: "",
   communicationURL: ""
 };
