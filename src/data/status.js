@@ -12,19 +12,19 @@ exports.PROFESSIONAL = [{
   },
   {
     value: "2",
-    label: "Food"
+    label: "Restauration"
   },
   {
     value: "3",
-    label: "Craft"
+    label: "Artisanat"
   },
   {
     value: "4",
-    label: "Arts and Representations"
+    label: "Art et Représentations"
   },
   {
     value: "5",
-    label: "Construction and Public Works"
+    label: "Construction et Travaux Publiques"
   },
   {
     value: "6",
@@ -32,19 +32,19 @@ exports.PROFESSIONAL = [{
   },
   {
     value: "7",
-    label: "Law"
+    label: "Droit"
   },
   {
     value: "8",
-    label: "Teaching and Resarch"
+    label: "Enseignement et Recherche"
   },
   {
     value: "9",
-    label: "Industry"
+    label: "Industrie"
   },
   {
     value: "10",
-    label: "Computer Science"
+    label: "Informatique"
   },
   {
     value: "11",
@@ -52,15 +52,15 @@ exports.PROFESSIONAL = [{
   },
   {
     value: "12",
-    label: "Linguistic"
+    label: "Langues"
   },
   {
     value: "13",
-    label: "Health"
+    label: "Santé"
   },
   {
     value: "14",
-    label: "Security"
+    label: "Sécurité"
   },
   {
     value: "15",
@@ -68,45 +68,49 @@ exports.PROFESSIONAL = [{
   },
   {
     value: "16",
-    label: "Tourism"
+    label: "Tourisme"
   },
   {
     value: "17",
-    label: "Transports and Logistics"
+    label: "Transport et Logistique"
   },
   {
     value: "18",
-    label: "Media"
+    label: "Média"
   },
   {
     value: "19",
-    label: "Politics"
+    label: "Politique"
   },
   {
     value: "20",
-    label: "Printing"
+    label: "Impression"
   },
   {
     value: "21",
     label: "Finance"
+  },
+  {
+    value: "22",
+    label: "Étudiant"
   }
 ];
 
 exports.RELATIONSHIP = [{
     value: "SI",
-    label: "Single"
+    label: "Célibataire"
   },
   {
     value: "CO",
-    label: "In a Relationship"
+    label: "En Couple"
   },
   {
     value: "EN",
-    label: "Engaged"
+    label: "Fiancé"
   },
   {
     value: "MA",
-    label: "Married"
+    label: "Marié"
   }
 ];
 

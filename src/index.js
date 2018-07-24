@@ -2,7 +2,7 @@ import React from "react";
 import {render} from "react-dom";
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
-import {I18nextProvider, translate} from "react-i18next";
+import {I18nextProvider} from "react-i18next";
 
 import i18n from "./constants/i18n";
 
