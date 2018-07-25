@@ -26,7 +26,14 @@ const playerShortcuts = [
 @connect((store) => {
   let informationStore = store.information;
   let gatewayStore = store.gateway;
-  return {fetching: informationStore.fetching, fetched: informationStore.fetched, acknowledging: gatewayStore.acknowledging, acknowledged: gatewayStore.acknowledged, establishmentData: gatewayStore.establishmentData};
+  return {
+    tour: informationStore.informationData.tour,
+    fetching: informationStore.fetching,
+    fetched: informationStore.fetched,
+    acknowledging: gatewayStore.acknowledging,
+    acknowledged: gatewayStore.acknowledged,
+    establishmentData: gatewayStore.establishmentData
+  };
 })
 
 class Partner extends Component {
@@ -81,9 +88,20 @@ class Partner extends Component {
       },
       joyride: {
         ...this.state.joyride,
-        run: true
+        run: this.props.tour
       }
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.tour !== prevProps.tour) {
+      this.setState({
+        joyride: {
+          ...this.state.joyride,
+          run: this.props.tour
+        }
+      });
+    }
   }
 
   handleSliderDrop(e, d) {
@@ -182,6 +200,7 @@ class Partner extends Component {
 Partner.propTypes = {
   acknowledging: PropTypes.bool,
   acknowledged: PropTypes.bool,
+  tour: PropTypes.bool,
   fetching: PropTypes.bool,
   fetched: PropTypes.bool,
   establishmentData: PropTypes.shape({picture: PropTypes.string, background_color: PropTypes.string}),

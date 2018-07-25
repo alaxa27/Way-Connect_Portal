@@ -20,7 +20,8 @@ const informationData = {
   auth_action: "",
   redir: "https://google.com",
   establishment_type: "",
-  communicationURL: ""
+  communicationURL: "",
+  tour: false
 };
 
 export default function reducer(state = {

@@ -22,7 +22,8 @@ import {fetchFidelity, fetchDiscount} from "../../actions/fidelityActions";
 @translate("translations")
 @connect((store) => {
   let fidelityStore = store.fidelity;
-  return {fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData};
+  let informationStore = store.information;
+  return {tour: informationStore.informationData.tour, fidelityData: fidelityStore.fidelityData, discountData: fidelityStore.discountData};
 })
 
 class Fidelity extends Component {
@@ -79,7 +80,7 @@ class Fidelity extends Component {
     this.setState({
       joyride: {
         ...this.state.joyride,
-        run: true
+        run: this.props.tour
       }
     });
   }
@@ -162,6 +163,7 @@ class Fidelity extends Component {
 }
 
 Fidelity.propTypes = {
+  tour: PropTypes.bool,
   dispatch: PropTypes.func,
   fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, date: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),

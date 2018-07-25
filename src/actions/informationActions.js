@@ -41,12 +41,13 @@ export function fetchConnection(payload) {
       });
 
       await dispatch(fetchEstablishment());
-      
+
       dispatch({
         type: POST_CONNECT_FULFILLED,
         payload: {
           establishment_type: "restaurant",
           communicationURL: response.data.video,
+          tour: (response.data.connections === 0)
         }
       });
     } catch (error) {
