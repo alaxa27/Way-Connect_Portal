@@ -4,7 +4,10 @@
       "offer": "Nous vous offrons un WiFi haut-débit ainsi qu'une réduction sur votre prochaine consommation.",
       "under": "Valable sous",
       "seconds": "secondes",
-      "slider": "Glissez pour Continuer"
+      "slider": "Glissez pour Continuer",
+      "joyride": {
+        "handle": "Regardez une vidéo de 15 secondes pour accéder au Wi-Fi gratuitement."
+      }
     }
   },
   "dashboard": {
@@ -33,10 +36,23 @@
         "congratulations": "Félicitations !",
         "continue": "Continuer !"
       }
+    },
+    "joyride": {
+      "bonus-max": "Votre fidélité augmente et vous permet de passer des niveaux. Plus le niveau est élevé plus il faut de visite pour le compléter.",
+      "my-info": "Répondez aux questions pour gagner plus de fidélité.",
+      "activate": "Lorsque vous atteignez 100% vous pouvez activer votre réduction et montrer le code au serveur.",
+      "database": "Accédez à l'historique de vos activation de réductions."
     }
+
   },
   "question": {
     "next": "Question Suivante"
   },
-  "wifi-granted": "Accès au WiFi autorisé pour 30 minutes!"
+  "wifi-granted": "Accès au WiFi autorisé pour 30 minutes!",
+  "joyride": {
+    "next": "Suivant",
+    "back": "Précédent",
+    "close": "Fermer",
+    "last": "Dernier"
+  }
 }

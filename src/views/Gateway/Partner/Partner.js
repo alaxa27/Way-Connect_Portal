@@ -5,6 +5,7 @@ import {translate} from "react-i18next";
 import {Button, Row} from "reactstrap";
 import Draggable from "react-draggable";
 import {Player, ControlBar, Shortcut} from "video-react";
+import Joyride from "react-joyride";
 import "video-react/dist/video-react.css"; // import css
 
 import Loader from "../../../components/Loader";
@@ -14,9 +15,7 @@ import {acknowledgeCommunication} from "../../../actions/gatewayActions";
 const playerShortcuts = [
   {
     keyCode: 39, // Right arrow
-    handle: (player, actions) => {
-      console.log("HHHHH");
-    }
+    handle: (player, actions) => {}
   }, {
     keyCode: 76, // LKey
     handle: (player, actions) => {}
@@ -44,6 +43,27 @@ class Partner extends Component {
           y: 0
         },
         dropped: false
+      },
+      joyride: {
+        run: false,
+        steps: [
+          {
+            target: ".handle",
+            content: props.t("gateway.partner.joyride.handle"),
+            placement: "top"
+          }
+        ],
+        styles: {
+          buttonNext: {
+            background: "linear-gradient(to right, #EF4136, #FFDD00)"
+          }
+        },
+        locale: {
+          next: props.t("joyride.next"),
+          back: props.t("joyride.back"),
+          close: props.t("joyride.close"),
+          last: props.t("joyride.last")
+        }
       }
     };
 
@@ -58,6 +78,10 @@ class Partner extends Component {
       slider: {
         ...this.state.slider,
         width: this.state.slider.ref.current.offsetWidth - this.state.slider.handleRef.current.offsetWidth
+      },
+      joyride: {
+        ...this.state.joyride,
+        run: true
       }
     });
   }
@@ -111,6 +135,7 @@ class Partner extends Component {
   render() {
     let {t, i18n} = this.props;
     return (<div className="gateway">
+      <Joyride {...this.state.joyride}/>
       <div className={`establishment establishment__${this.props.establishmentData.background_color}`}>
         <img src={this.props.establishmentData.picture} className="logo"/>
       </div>
@@ -121,13 +146,17 @@ class Partner extends Component {
         {/*<p>{t("gateway.partner.under")}</p>
         <Button onClick={this.playVideo.bind(this)} block={true}>
           {"15 " + t("gateway.partner.seconds")}
-        </Button>*/}
+        </Button>*/
+        }
         <div ref={this.state.slider.ref} className="slider-button">
           <Draggable axis="x" bounds={{
               left: 0,
               right: this.state.slider.width
             }} position={this.state.slider.position} onStart={this.handleSliderDrag} onStop={this.handleSliderDrop}>
-            <div ref={this.state.slider.handleRef} className={`handle ${(this.state.slider.dropped ? "dropped" : "")}`}>
+            <div ref={this.state.slider.handleRef} className={`handle ${ (
+                this.state.slider.dropped
+                ? "dropped"
+                : "")}`}>
               <i className="fas fa-chevron-right"></i>
             </div>
           </Draggable>
@@ -155,10 +184,7 @@ Partner.propTypes = {
   acknowledged: PropTypes.bool,
   fetching: PropTypes.bool,
   fetched: PropTypes.bool,
-  establishmentData: PropTypes.shape({
-    picture: PropTypes.string,
-    background_color: PropTypes.string
-  }),
+  establishmentData: PropTypes.shape({picture: PropTypes.string, background_color: PropTypes.string}),
   dispatch: PropTypes.func,
   history: PropTypes.object,
   t: PropTypes.func,

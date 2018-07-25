@@ -4,7 +4,10 @@
       "offer": "We offer you a high-speed Wi-Fi and a discount on your next Order.",
       "under": "In under",
       "seconds": "seconds",
-      "slider": "Slide to Continue"
+      "slider": "Slide to Continue",
+      "joyride": {
+        "handle": "Watch a 15 seconds ad to access Free Wi-Fi."
+      }
     }
   },
   "dashboard": {
@@ -33,10 +36,22 @@
         "congratulations": "Congratulations !",
         "continue": "Continue !"
       }
+    },
+    "joyride": {
+      "bonus-max": "Your fidelity adds up and enables you to pass levels. The higher the level, the more visits you need to complete it.",
+      "my-info": "Answer questions to gain more fidelity.",
+      "activate": "When you reach 100% you can activate your discount and show the code to the waiter.",
+      "database": "Access to the discount activation history."
     }
   },
   "question": {
     "next": "Next Question"
   },
-  "wifi-granted": "WiFi Access Granted for 30 minutes!"
+  "wifi-granted": "WiFi Access Granted for 30 minutes!",
+  "joyride": {
+    "next": "Next",
+    "back": "Back",
+    "close": "Close",
+    "last": "Last"
+  }
 }

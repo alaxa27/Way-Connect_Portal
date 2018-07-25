@@ -12,6 +12,7 @@ import {
   ModalBody,
   ModalFooter
 } from "reactstrap";
+import Joyride from "react-joyride";
 
 import Navbar from "../../components/Navbar";
 import Loader from "../../components/Loader";
@@ -28,11 +29,59 @@ class Fidelity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      discountModal: false
+      discountModal: false,
+      joyride: {
+        run: false,
+        steps: [
+          {
+            target: ".bonus-max",
+            content: props.t("fidelity.joyride.bonus-max"),
+            placement: "top",
+            placementBeacon: "top"
+          }, {
+            target: ".my-info",
+            content: props.t("fidelity.joyride.my-info"),
+            placement: "bottom"
+          }, {
+            target: ".activate",
+            content: props.t("fidelity.joyride.activate"),
+            placement: "bottom"
+          }, {
+            target: ".fa-database",
+            content: props.t("fidelity.joyride.database"),
+            placement: "bottom"
+          }
+        ],
+        styles: {
+          buttonNext: {
+            background: "linear-gradient(to right, #EF4136, #FFDD00)",
+            borderRadius: "5px"
+          },
+          buttonBack: {
+            color: "black"
+          }
+        },
+        locale: {
+          next: props.t("joyride.next"),
+          back: props.t("joyride.back"),
+          close: props.t("joyride.close"),
+          last: props.t("joyride.last")
+        }
+      }
+
     };
     this.props.dispatch(fetchFidelity());
     this.fetchDiscount = this.fetchDiscount.bind(this);
     this.toggleDiscountModal = this.toggleDiscountModal.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      joyride: {
+        ...this.state.joyride,
+        run: true
+      }
+    });
   }
 
   toggleDiscountModal() {
@@ -54,6 +103,7 @@ class Fidelity extends Component {
     let {t, i18n} = this.props;
     let fidelityRate = this.calcHeight(this.props.fidelityData.rate);
     return (<div className="fidelity">
+      <Joyride continuous={true} showProgress={true} {...this.state.joyride}/>
       <Navbar title={t("fidelity.title")} goBack={this.props.location.state
           ? ""
           : "/dashboard"} history={this.props.history} moreIcon="fa-database" goMore="/fidelity/discounts"/>
@@ -76,7 +126,7 @@ class Fidelity extends Component {
           </div>
         </div>
       </div>
-      <h2>{Math.round(this.props.fidelityData.rate * 10000)/100}{" "}%</h2>
+      <h2>{Math.round(this.props.fidelityData.rate * 10000) / 100}{" "}%</h2>
       <div className="bonus-max">
         {this.props.fidelityData.amount + "/" + this.props.fidelityData.reward}
       </div>
