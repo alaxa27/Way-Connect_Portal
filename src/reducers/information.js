@@ -21,7 +21,7 @@ const informationData = {
   redir: "https://google.com",
   establishment_type: "",
   communicationURL: "",
-  tour: false
+  tour: true
 };
 
 export default function reducer(state = {

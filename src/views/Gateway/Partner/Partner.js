@@ -5,7 +5,6 @@ import {translate} from "react-i18next";
 import {Button, Row} from "reactstrap";
 import Draggable from "react-draggable";
 import {Player, ControlBar, Shortcut} from "video-react";
-import Joyride from "react-joyride";
 import "video-react/dist/video-react.css"; // import css
 
 import Loader from "../../../components/Loader";
@@ -50,27 +49,6 @@ class Partner extends Component {
           y: 0
         },
         dropped: false
-      },
-      joyride: {
-        run: false,
-        steps: [
-          {
-            target: ".handle",
-            content: props.t("gateway.partner.joyride.handle"),
-            placement: "top"
-          }
-        ],
-        styles: {
-          buttonNext: {
-            background: "linear-gradient(to right, #EF4136, #FFDD00)"
-          }
-        },
-        locale: {
-          next: props.t("joyride.next"),
-          back: props.t("joyride.back"),
-          close: props.t("joyride.close"),
-          last: props.t("joyride.last")
-        }
       }
     };
 
@@ -85,23 +63,8 @@ class Partner extends Component {
       slider: {
         ...this.state.slider,
         width: this.state.slider.ref.current.offsetWidth - this.state.slider.handleRef.current.offsetWidth
-      },
-      joyride: {
-        ...this.state.joyride,
-        run: this.props.tour
       }
     });
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.tour !== prevProps.tour) {
-      this.setState({
-        joyride: {
-          ...this.state.joyride,
-          run: this.props.tour
-        }
-      });
-    }
   }
 
   handleSliderDrop(e, d) {
@@ -153,7 +116,6 @@ class Partner extends Component {
   render() {
     let {t, i18n} = this.props;
     return (<div className="gateway">
-      <Joyride {...this.state.joyride}/>
       <div className={`establishment establishment__${this.props.establishmentData.background_color}`}>
         <img src={this.props.establishmentData.picture} className="logo"/>
       </div>

@@ -38,7 +38,8 @@ class Fidelity extends Component {
             target: ".bonus-max",
             content: props.t("fidelity.joyride.bonus-max"),
             placement: "top",
-            placementBeacon: "top"
+            placementBeacon: "top",
+            disableBeacon: true
           }, {
             target: ".my-info",
             content: props.t("fidelity.joyride.my-info"),
