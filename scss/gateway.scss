@@ -62,23 +62,6 @@
       width: 250px;
       height: 250px;
     }
-
-    .pulse {
-      animation: 0.75s ease 0s pulse infinite;
-    }
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-
-      25% {
-        transform: scale(1.1);
-      }
-
-      50% {
-        transform: scale(1);
-      }
-    }
   }
 
   .video-playing {

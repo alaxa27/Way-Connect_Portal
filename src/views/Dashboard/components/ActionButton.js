@@ -13,7 +13,7 @@ class ActionButton extends Component {
     if (show) {
       return (<div>
         <Link to={"/" + link}>
-          <Button>
+          <Button className={this.props.className}>
             <i className={"fa fa-" + icon}></i>
           </Button>
         </Link>
@@ -31,7 +31,8 @@ ActionButton.propTypes = {
   show: PropTypes.bool,
   link: PropTypes.string,
   text: PropTypes.string,
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default ActionButton;

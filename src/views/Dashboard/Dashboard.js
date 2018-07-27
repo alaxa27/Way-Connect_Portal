@@ -22,9 +22,9 @@ class Dashboard extends Component {
 
   render() {
     return (<div className="dashboard">
+      <ActionButton link="fidelity" icon="hand-holding-usd" text={i18n.t("dashboard.fidelity")} className="pulse" show={this.props.establishment_type !== "hotel"} />
       <ActionButton link="wifi-access" icon="wifi" text={i18n.t("dashboard.wifi")} show={true} />
       <ActionButton link="claim" icon="exclamation-triangle" text={i18n.t("dashboard.claim")} show={this.props.establishment_type === "hotel"} />
-      <ActionButton link="fidelity" icon="hand-holding-usd" text={i18n.t("dashboard.fidelity")} show={this.props.establishment_type !== "hotel"} />
     </div>);
   }
 }

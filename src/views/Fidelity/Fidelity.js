@@ -112,7 +112,7 @@ class Fidelity extends Component {
 
       <div>
         <Link to="/fidelity/profile">
-          <Button className="my-info enabled">
+          <Button className="my-info enabled pulse">
             <i className="fa fa-plus"></i>
           </Button>
         </Link>
