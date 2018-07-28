@@ -9,18 +9,10 @@ class Radio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: props.options[0].value
+      checked: ""
     };
 
     this.updateField = this.updateField.bind(this);
-  }
-
-  componentDidMount() {
-    this.updateField({
-      target: {
-        value: this.props.options[0].value
-      }
-    });
   }
 
   updateField(event) {
