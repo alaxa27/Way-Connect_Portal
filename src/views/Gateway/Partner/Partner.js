@@ -99,8 +99,13 @@ class Partner extends Component {
     if (state.seeking && !prevState.seeking) {
       this.playerRef.current.seek(prevState.currentTime);
     }
-    if (state.ended && !this.props.acknowledging && !this.props.acknowledged) {
-      this.props.dispatch(acknowledgeCommunication({history: this.props.history}));
+
+    if (state.currentTime / state.duration > 0.7 && !this.props.acknowledging && !this.props.acknowledged) {
+      this.props.dispatch(acknowledgeCommunication());
+    }
+
+    if (state.ended && !this.props.acknowledging && this.props.acknowledged) {
+      this.props.history.push("/dashboard");
     }
   }
 
