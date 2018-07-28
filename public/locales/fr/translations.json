@@ -35,12 +35,11 @@
       }
     },
     "joyride": {
-      "bonus-max": "Votre fidélité augmente et vous permet de passer des niveaux. Plus le niveau est élevé plus il faut de visite pour le compléter.",
-      "my-info": "Répondez aux questions pour gagner plus de fidélité.",
-      "activate": "Lorsque vous atteignez 100% vous pouvez activer votre réduction et montrer le code au serveur.",
-      "database": "Accédez à l'historique de vos activation de réductions."
+      "bonus-max": "Gain du 1er niveau.",
+      "my-info": "+10% en répondant aux questions.",
+      "activate": "Atteignez 100% pour activer votre réduction.",
+      "database": "Historique des réductions."
     }
-
   },
   "question": {
     "next": "Question Suivante"

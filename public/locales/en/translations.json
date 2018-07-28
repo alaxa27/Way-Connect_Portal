@@ -35,10 +35,10 @@
       }
     },
     "joyride": {
-      "bonus-max": "Your fidelity adds up and enables you to pass levels. The higher the level, the more visits you need to complete it.",
-      "my-info": "Answer questions to gain more fidelity.",
-      "activate": "When you reach 100% you can activate your discount and show the code to the waiter.",
-      "database": "Access to the discount activation history."
+      "bonus-max": "First level earnings.",
+      "my-info": "+10% by answering the questions.",
+      "activate": "Gain 100% to activate your discount.",
+      "database": "Discount history."
     }
   },
   "question": {
