@@ -1,9 +1,9 @@
 exports.GENDER = [{
   value: "M",
-  label: "Male"
+  label: "Homme"
 }, {
   value: "F",
-  label: "Female"
+  label: "Femme"
 }];
 
 exports.PROFESSIONAL = [{
