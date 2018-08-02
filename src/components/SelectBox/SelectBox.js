@@ -14,13 +14,22 @@ const selectStyles = {
     ...base,
     border: "none",
     backgroundColor: "#4d4d4d",
-    color: "white",
+    color: "ffffff",
     borderRadius: "1.5rem",
     minHeight: "28px",
     width: "100%"
   }),
+  singleValue: (base, state) => ({
+    ...base,
+    color: "ffffff"
+  }),
   menu: (base, state) => ({
+    ...base,
     backgroundColor: "#4d4d4d",
+  }),
+  option: (base, {isSelected, isFocused}) => ({
+    ...base,
+    backgroundColor: isSelected ? "#202020" : isFocused ? "#2020201f" : null
   })
 };
 
