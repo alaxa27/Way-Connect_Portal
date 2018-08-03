@@ -205,7 +205,7 @@ export function fetchQuestions(payload) {
         answered: (customerState.hobbies.length === 0 ? false : true)
       }];
 
-      const questionsSorted = questions.sort((a, b) => !a.answered && b.answered);
+      const questionsSorted = questions.sort((a, b) => !a.answered && b.answered ? 1 : -1);
       const countAnswered = questionsSorted.filter((e) => e.answered).length;
 
       dispatch({
