@@ -12,15 +12,19 @@ import PropTypes from "prop-types";
 class WifiAccess extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
     window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${this.props.informationData.token}&redir=${this.props.informationData.redir}`;
 
   }
 
   render() {
     let {t, i18n} = this.props;
-    return (<div className="video">
+    return (<div className="wifi-access">
+      <div className="pulse circle-gradient">
+        <div className="circle-gradient__inner">
+          <i className="fa fa-wifi"></i>
+        </div>
+      </div>
       <h1>{t("wifi-granted")}</h1>
     </div>);
   }

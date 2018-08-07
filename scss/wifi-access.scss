@@ -1,0 +1,19 @@
+.wifi-access {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .circle-gradient {
+    width: 150px;
+    height: 150px;
+    font-size: 3rem;
+    .fa:before {
+      // color: $way-connect-gradient;
+      background: $way-connect-gradient;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: initial;
+    }
+  }
+}

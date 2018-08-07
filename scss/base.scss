@@ -22,3 +22,24 @@ html {
     text-align: center;
   }
 }
+
+.circle-gradient {
+  border-radius: 10rem;
+  background: $way-connect-gradient;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  &__inner {
+    display: inherit;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    padding: auto;
+    border-radius: 10rem;
+    background-color: map-get($colors, way-gray);
+  }
+}
