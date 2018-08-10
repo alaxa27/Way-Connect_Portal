@@ -119,4 +119,17 @@
       margin: auto;
     }
   }
+
+  .contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: fade-out(map-get($colors, light), 0.7);
+  }
 }

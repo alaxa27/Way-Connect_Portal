@@ -20,8 +20,8 @@ class WifiAccess extends Component {
   render() {
     let {t, i18n} = this.props;
     return (<div className="wifi-access">
-      <div className="pulse circle-gradient">
-        <div className="circle-gradient__inner">
+      <div className="pulse circle circle__gradient">
+        <div className="circle__inner">
           <i className="fa fa-wifi"></i>
         </div>
       </div>

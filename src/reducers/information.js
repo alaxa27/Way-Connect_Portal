@@ -21,6 +21,7 @@ const informationData = {
   redir: "https://google.com",
   establishment_type: "",
   communicationURL: "",
+  redirection: "",
   tour: false
 };
 

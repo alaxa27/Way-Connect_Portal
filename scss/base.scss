@@ -23,13 +23,26 @@ html {
   }
 }
 
-.circle-gradient {
-  border-radius: 10rem;
-  background: $way-connect-gradient;
-  margin: auto;
+a {
+  &:hover {
+    color: darken(map-get($colors, light), 30%);
+    text-decoration: none;
+  }
+  color: map-get($colors, light);
+  text-decoration: none;
+}
+
+.circle {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin: auto;
+  padding: 0;
+  border-radius: 10rem !important;
+  width: 150px;
+  height: 150px;
+  background-color: map-get($colors, way-gray);
+  font-size: 3rem;
 
   &__inner {
     display: inherit;
@@ -41,5 +54,17 @@ html {
     padding: auto;
     border-radius: 10rem;
     background-color: map-get($colors, way-gray);
+  }
+
+  &__gradient {
+    background: $way-connect-gradient !important;
+
+    .fa:before {
+      // color: $way-connect-gradient;
+      background: $way-connect-gradient;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: initial;
+    }
   }
 }

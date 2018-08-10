@@ -7,6 +7,7 @@ import Draggable from "react-draggable";
 import {Player, ControlBar, Shortcut} from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
+import Contact from "../components/Contact";
 import Loader from "../../../components/Loader";
 
 import {acknowledgeCommunication} from "../../../actions/gatewayActions";
@@ -27,6 +28,7 @@ const playerShortcuts = [
   let gatewayStore = store.gateway;
   return {
     tour: informationStore.informationData.tour,
+    redirection: informationStore.informationData.redirection,
     fetching: informationStore.fetching,
     fetched: informationStore.fetched,
     acknowledging: gatewayStore.acknowledging,
@@ -160,6 +162,8 @@ class Partner extends Component {
         </Player>
       </div>
 
+      <Contact redirection={this.props.redirection} />
+
     </div>);
   }
 }
@@ -168,6 +172,7 @@ Partner.propTypes = {
   acknowledging: PropTypes.bool,
   acknowledged: PropTypes.bool,
   tour: PropTypes.bool,
+  redirection: PropTypes.string,
   fetching: PropTypes.bool,
   fetched: PropTypes.bool,
   establishmentData: PropTypes.shape({picture: PropTypes.string, background_color: PropTypes.string}),

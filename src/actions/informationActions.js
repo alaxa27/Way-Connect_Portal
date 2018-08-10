@@ -46,7 +46,8 @@ export function fetchConnection(payload) {
         type: POST_CONNECT_FULFILLED,
         payload: {
           establishment_type: "restaurant",
-          communicationURL: response.data.video,
+          communicationURL: response.data.communication.video,
+          redirection: response.data.communication.redirection,
           tour: (response.data.connections === 0)
         }
       });
