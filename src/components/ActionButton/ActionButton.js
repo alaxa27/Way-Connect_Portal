@@ -8,6 +8,7 @@ class ActionButton extends Component {
     super(props);
 
     this._renderInner = this._renderInner.bind(this);
+    this._runAction = this._runAction.bind(this);
   }
 
   _renderInner(gradient) {
@@ -20,18 +21,20 @@ class ActionButton extends Component {
     }
   }
 
+  _runAction() {
+    this.props.action();
+  }
+
   render() {
     const {link, text, icon, show, gradient} = this.props;
     if (show) {
       return (<div>
-        <Link to={link}>
-          <div className={this.props.className + " circle btn" + (
+        <div onClick={this._runAction} className={this.props.className + " circle btn" + (
               this.props.gradient
               ? " circle__gradient"
               : "")}>
-            {this._renderInner(gradient)}
-          </div>
-        </Link>
+          {this._renderInner(gradient)}
+        </div>
         <h4>
           {text}
         </h4>
@@ -44,7 +47,8 @@ class ActionButton extends Component {
 ActionButton.defaultProps = {
   gradient: false,
   className: "",
-  text: ""
+  text: "",
+  action: () => {}
 };
 ActionButton.propTypes = {
   show: PropTypes.bool,
@@ -52,7 +56,8 @@ ActionButton.propTypes = {
   text: PropTypes.string,
   icon: PropTypes.string,
   className: PropTypes.string,
-  gradient: PropTypes.bool
+  gradient: PropTypes.bool,
+  action: PropTypes.func
 };
 
 export default ActionButton;

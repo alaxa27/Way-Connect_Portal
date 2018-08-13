@@ -22,9 +22,9 @@ class Dashboard extends Component {
 
   render() {
     return (<div className="dashboard">
-      <ActionButton link="/fidelity" icon="hand-holding-usd" text={i18n.t("dashboard.fidelity")} className="pulse" show={this.props.establishment_type !== "hotel"} />
-      <ActionButton link="/wifi-access" icon="wifi" text={i18n.t("dashboard.wifi")} show={true} />
-      <ActionButton link="/claim" icon="exclamation-triangle" text={i18n.t("dashboard.claim")} show={this.props.establishment_type === "hotel"} />
+      <ActionButton action={() => this.props.history.push("/fidelity")} icon="hand-holding-usd" text={i18n.t("dashboard.fidelity")} className="pulse" show={this.props.establishment_type !== "hotel"} />
+      <ActionButton action={() => this.props.history.push("/wifi-access")} icon="wifi" text={i18n.t("dashboard.wifi")} show={true} />
+      <ActionButton action={() => this.props.history.push("/claim")} icon="exclamation-triangle" text={i18n.t("dashboard.claim")} show={this.props.establishment_type === "hotel"} />
     </div>);
   }
 }
@@ -32,6 +32,9 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   establishment_type: PropTypes.string,
   dispatch: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
 };
 
 export default Dashboard;

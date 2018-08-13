@@ -11,19 +11,44 @@ class Contact extends Component {
 
   constructor(props) {
     super(props);
+    this._renderInner = this._renderInner.bind(this);
   }
 
-  render() {
+  _renderInner() {
     return (<div className="contact">
       <Countdown className="pulse">
-        <ActionButton gradient={false} link={this.props.redirection} className="countdown__children pulse" icon="phone" show={true}/>
+        <ActionButton gradient={false} action={this.props.action} className="countdown__children pulse" icon="phone" show={true}/>
       </Countdown>
     </div>);
   }
+
+  render() {
+    let {show} = this.props;
+    return (<React.Fragment>
+      <div className={(
+          show
+          ? "blur"
+          : "")}>
+        {this.props.children}
+      </div>
+      {
+        (
+          show
+          ? this._renderInner()
+          : null)
+      }
+    </React.Fragment>);
+  }
 }
 
+Contact.defaultProps = {
+  show: true
+};
+
 Contact.propTypes = {
-  redirection: PropTypes.string.isRequired
+  action: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+  children: PropTypes.object
 };
 
 export default Contact;

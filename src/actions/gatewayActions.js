@@ -13,10 +13,39 @@ import {
   ACKNOWLEDGE_COMMUNICATION_FULFILLED,
   ACKNOWLEDGE_COMMUNICATION_REJECTED,
 
+  CLICK_COMMUNICATION,
+  CLICK_COMMUNICATION_FULFILLED,
+  CLICK_COMMUNICATION_REJECTED,
+
   FETCH_ESTABLISHMENT,
   FETCH_ESTABLISHMENT_FULFILLED,
   FETCH_ESTABLISHMENT_REJECTED,
 } from "../constants/ActionTypes";
+
+export function fetchEstablishment(payload) {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: FETCH_ESTABLISHMENT
+    });
+    try {
+      const informationData = { ...getState().information.informationData
+      };
+      const response = await axiosInstance({
+        method: "get",
+        url: "/customers/establishment/",
+      });
+
+      dispatch({
+        type: FETCH_ESTABLISHMENT_FULFILLED,
+        payload: response.data
+      });
+    } catch (error) {
+      dispatch({
+        type: FETCH_ESTABLISHMENT_REJECTED
+      });
+    }
+  };
+}
 
 export function acknowledgeCommunication(payload) {
   return async (dispatch, getState) => {
@@ -47,26 +76,30 @@ export function acknowledgeCommunication(payload) {
   };
 }
 
-export function fetchEstablishment(payload) {
+export function clickCommunication(payload) {
   return async (dispatch, getState) => {
     dispatch({
-      type: FETCH_ESTABLISHMENT
+      type: CLICK_COMMUNICATION
     });
     try {
       const informationData = { ...getState().information.informationData
       };
       const response = await axiosInstance({
-        method: "get",
-        url: "/customers/establishment/",
+        method: "post",
+        url: `/customers/${informationData.mac_address}/click_communication/`,
+        data: {}
       });
 
       dispatch({
-        type: FETCH_ESTABLISHMENT_FULFILLED,
-        payload: response.data
+        type: CLICK_COMMUNICATION_FULFILLED,
       });
+      // payload.history.push("/dashboard");
+
+      // window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}&redir=${informationData.redir}`;
+
     } catch (error) {
       dispatch({
-        type: FETCH_ESTABLISHMENT_REJECTED
+        type: CLICK_COMMUNICATION_REJECTED
       });
     }
   };

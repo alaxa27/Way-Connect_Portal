@@ -10,7 +10,7 @@ import "video-react/dist/video-react.css"; // import css
 import Contact from "../components/Contact";
 import Loader from "../../../components/Loader";
 
-import {acknowledgeCommunication} from "../../../actions/gatewayActions";
+import {acknowledgeCommunication, clickCommunication} from "../../../actions/gatewayActions";
 
 const playerShortcuts = [
   {
@@ -43,6 +43,7 @@ class Partner extends Component {
     super(props);
     this.state = {
       playing: false,
+      ended: false,
       slider: {
         ref: React.createRef(),
         handleRef: React.createRef(),
@@ -107,7 +108,8 @@ class Partner extends Component {
     }
 
     if (state.ended && !this.props.acknowledging && this.props.acknowledged) {
-      this.props.history.push("/dashboard");
+      // this.props.history.push("/dashboard");
+      this.setState({ended: true});
     }
   }
 
@@ -122,36 +124,37 @@ class Partner extends Component {
 
   render() {
     let {t, i18n} = this.props;
-    return (<React.Fragment>
-      <div className="gateway blur">
-        <div className={`establishment establishment__${this.props.establishmentData.background_color}`}>
-          <img src={this.props.establishmentData.picture} className="logo"/>
-        </div>
-        <Row>
-          {t("gateway.partner.offer")}
-        </Row>
-        <Row className="go-block">
-          {/*<p>{t("gateway.partner.under")}</p>
+    return (<div className="gateway">
+      <div className={`establishment establishment__${this.props.establishmentData.background_color}`}>
+        <img src={this.props.establishmentData.picture} className="logo"/>
+      </div>
+      <Row>
+        {t("gateway.partner.offer")}
+      </Row>
+      <Row className="go-block">
+        {/*<p>{t("gateway.partner.under")}</p>
         <Button onClick={this.playVideo.bind(this)} block={true}>
           {"15 " + t("gateway.partner.seconds")}
         </Button>*/
-          }
-          <div ref={this.state.slider.ref} className="slider-button">
-            <Draggable axis="x" bounds={{
-                left: 0,
-                right: this.state.slider.width
-              }} position={this.state.slider.position} onStart={this.handleSliderDrag} onStop={this.handleSliderDrop}>
-              <div ref={this.state.slider.handleRef} className={`handle ${ (
-                  this.state.slider.dropped
-                  ? "dropped"
-                  : "")}`}>
-                <i className="fas fa-chevron-right"></i>
-              </div>
-            </Draggable>
-            <p>{t("gateway.partner.slider")}</p>
-          </div>
-        </Row>
+        }
+        <div ref={this.state.slider.ref} className="slider-button">
+          <Draggable axis="x" bounds={{
+              left: 0,
+              right: this.state.slider.width
+            }} position={this.state.slider.position} onStart={this.handleSliderDrag} onStop={this.handleSliderDrop}>
+            <div ref={this.state.slider.handleRef} className={`handle ${ (
+                this.state.slider.dropped
+                ? "dropped"
+                : "")}`}>
+              <i className="fas fa-chevron-right"></i>
+            </div>
+          </Draggable>
+          <p>{t("gateway.partner.slider")}</p>
+        </div>
+      </Row>
 
+
+      <Contact action={() => this.props.dispatch(clickCommunication())} show={this.state.ended}>
         <div className={(
             this.state.playing
             ? "video-playing"
@@ -162,18 +165,18 @@ class Partner extends Component {
             <Shortcut clickable={false} shortcuts={playerShortcuts}/>
           </Player>
         </div>
+      </Contact>
 
-      </div>
-      <Contact redirection={this.props.redirection}/>
-    </React.Fragment>);
+    </div>);
   }
 }
 
 Partner.propTypes = {
   acknowledging: PropTypes.bool,
   acknowledged: PropTypes.bool,
+  clicking: PropTypes.bool,
+  clicked: PropTypes.bool,
   tour: PropTypes.bool,
-  redirection: PropTypes.string,
   fetching: PropTypes.bool,
   fetched: PropTypes.bool,
   establishmentData: PropTypes.shape({picture: PropTypes.string, background_color: PropTypes.string}),
