@@ -2,35 +2,34 @@
   &__children {
     position: relative;
   }
-}
+  $countdown_size: 170px;
+  $pi: 3.141592654;
 
-$countdown_size: 170px;
-$pi: 3.141592654;
-svg {
-  position: fixed;
-  margin-left: -1 * $countdown_size / 2;
-  margin-top: -1 * 10px;
-  width: $countdown_size;
-  height: $countdown_size;
-  transform: rotateY(-180deg) rotateZ(-90deg);
-}
-
-svg circle {
-  stroke-dasharray: (2 * $pi * $countdown_size / 2);
-  stroke-dashoffset: 0;
-  stroke-linecap: square;
-  stroke-width: 10px;
-  stroke: map-get($colors, way-gray-dark);
-  fill: none;
-  animation: countdown 4s linear infinite forwards;
-}
-
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 0;
+  svg {
+    position: fixed;
+    margin-left: -1 * $countdown_size / 2;
+    margin-top: -1 * 10px;
+    width: $countdown_size;
+    height: $countdown_size;
+    transform: rotateY(-180deg) rotateZ(-90deg);
   }
 
-  to {
-    stroke-dashoffset: (2 * $pi * $countdown_size / 2);
+  svg circle {
+    stroke-dasharray: (2 * $pi * $countdown_size / 2);
+    stroke-dashoffset: 0;
+    stroke-linecap: square;
+    stroke-width: 10px;
+    stroke: map-get($colors, way-gray-dark);
+    fill: none;
+    animation: countdown 4s linear infinite forwards;
+  }
+  @keyframes countdown {
+    from {
+      stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: (2 * $pi * $countdown_size / 2);
+    }
   }
 }
