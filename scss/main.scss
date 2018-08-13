@@ -1,10 +1,15 @@
 @import "variables";
 @import "bootstrap/bootstrap"; //Import react-input-range style
+@import "mixins";
+@import "utils";
 @import "input-range";
 @import "slide-unlock";
 
 @import "base";
 @import "app";
+
+@import "components";
+
 @import "navbar";
 @import "gateway";
 @import "claim";

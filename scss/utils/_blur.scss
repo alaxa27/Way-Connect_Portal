@@ -1,0 +1,3 @@
+.blur {
+  @include filter(blur, 2px);
+}

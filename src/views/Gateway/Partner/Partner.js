@@ -122,49 +122,50 @@ class Partner extends Component {
 
   render() {
     let {t, i18n} = this.props;
-    return (<div className="gateway">
-      <div className={`establishment establishment__${this.props.establishmentData.background_color}`}>
-        <img src={this.props.establishmentData.picture} className="logo"/>
-      </div>
-      <Row>
-        {t("gateway.partner.offer")}
-      </Row>
-      <Row className="go-block">
-        {/*<p>{t("gateway.partner.under")}</p>
+    return (<React.Fragment>
+      <div className="gateway blur">
+        <div className={`establishment establishment__${this.props.establishmentData.background_color}`}>
+          <img src={this.props.establishmentData.picture} className="logo"/>
+        </div>
+        <Row>
+          {t("gateway.partner.offer")}
+        </Row>
+        <Row className="go-block">
+          {/*<p>{t("gateway.partner.under")}</p>
         <Button onClick={this.playVideo.bind(this)} block={true}>
           {"15 " + t("gateway.partner.seconds")}
         </Button>*/
-        }
-        <div ref={this.state.slider.ref} className="slider-button">
-          <Draggable axis="x" bounds={{
-              left: 0,
-              right: this.state.slider.width
-            }} position={this.state.slider.position} onStart={this.handleSliderDrag} onStop={this.handleSliderDrop}>
-            <div ref={this.state.slider.handleRef} className={`handle ${ (
-                this.state.slider.dropped
-                ? "dropped"
-                : "")}`}>
-              <i className="fas fa-chevron-right"></i>
-            </div>
-          </Draggable>
-          <p>{t("gateway.partner.slider")}</p>
+          }
+          <div ref={this.state.slider.ref} className="slider-button">
+            <Draggable axis="x" bounds={{
+                left: 0,
+                right: this.state.slider.width
+              }} position={this.state.slider.position} onStart={this.handleSliderDrag} onStop={this.handleSliderDrop}>
+              <div ref={this.state.slider.handleRef} className={`handle ${ (
+                  this.state.slider.dropped
+                  ? "dropped"
+                  : "")}`}>
+                <i className="fas fa-chevron-right"></i>
+              </div>
+            </Draggable>
+            <p>{t("gateway.partner.slider")}</p>
+          </div>
+        </Row>
+
+        <div className={(
+            this.state.playing
+            ? "video-playing"
+            : "video-not-playing")}>
+          <Player playsInline={true} preload="auto" ref={this.playerRef}>
+            <source src="/assets/trailer_hd.mp4"/>
+            <ControlBar disabled={true}/>
+            <Shortcut clickable={false} shortcuts={playerShortcuts}/>
+          </Player>
         </div>
-      </Row>
 
-      <div className={(
-          this.state.playing
-          ? "video-playing"
-          : "video-not-playing")}>
-        <Player playsInline={true} preload="auto" ref={this.playerRef}>
-          <source src="/assets/trailer_hd.mp4"/>
-          <ControlBar disabled={true}/>
-          <Shortcut clickable={false} shortcuts={playerShortcuts}/>
-        </Player>
       </div>
-
-      <Contact redirection={this.props.redirection} />
-
-    </div>);
+      <Contact redirection={this.props.redirection}/>
+    </React.Fragment>);
   }
 }
 
