@@ -20,6 +20,9 @@ class Contact extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.show !== this.props.show) {
+      if (!this.props.exists) {
+        this.setState({ticking: false});
+      }
       this.timerHandle = setTimeout(() => {
         this.setState({ticking: false});
       }, 4000);
@@ -28,7 +31,7 @@ class Contact extends Component {
 
   componentWillUnmount = () => {
     if (this.timerHandle) {
-      clearTimeout(this.timerHandle); 
+      clearTimeout(this.timerHandle);
       this.timerHandle = 0;
     }
   };
@@ -67,11 +70,13 @@ class Contact extends Component {
 }
 
 Contact.defaultProps = {
+  exists: true,
   show: true
 };
 
 Contact.propTypes = {
   action: PropTypes.func.isRequired,
+  exists: PropTypes.bool,
   show: PropTypes.bool,
   children: PropTypes.object,
   history: PropTypes.shape({push: PropTypes.func})
