@@ -153,8 +153,7 @@ class Partner extends Component {
         </div>
       </Row>
 
-
-      <Contact action={() => this.props.dispatch(clickCommunication())} show={this.state.ended}>
+      <Contact action={() => this.props.dispatch(clickCommunication({history: this.props.history}))} show={this.state.ended}>
         <div className={(
             this.state.playing
             ? "video-playing"

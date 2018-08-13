@@ -8,7 +8,6 @@ class ActionButton extends Component {
     super(props);
 
     this._renderInner = this._renderInner.bind(this);
-    this._runAction = this._runAction.bind(this);
   }
 
   _renderInner(gradient) {
@@ -21,15 +20,11 @@ class ActionButton extends Component {
     }
   }
 
-  _runAction() {
-    this.props.action();
-  }
-
   render() {
-    const {link, text, icon, show, gradient} = this.props;
+    const {link, text, icon, show, gradient, action} = this.props;
     if (show) {
       return (<div>
-        <div onClick={this._runAction} className={this.props.className + " circle btn" + (
+        <div onClick={action} className={this.props.className + " circle btn" + (
               this.props.gradient
               ? " circle__gradient"
               : "")}>

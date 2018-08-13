@@ -8,10 +8,10 @@ class Countdown extends Component {
 
   render() {
     return (<div className={"countdown " + this.props.className}>
-      {this.props.children}
       <svg>
         <circle r="80" cx="85" cy="85"></circle>
       </svg>
+      {this.props.children}
     </div>);
   }
 }

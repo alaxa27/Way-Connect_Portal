@@ -90,10 +90,17 @@ export function clickCommunication(payload) {
         data: {}
       });
 
+      var tempLink = document.createElement("a");
+      tempLink.style.display = "none";
+      tempLink.href = "tel:+21629181000";//informationData.redirection;
+      tempLink.click();
+      payload.history.push("/dashboard");
+      document.body.removeChild(tempLink);
+
       dispatch({
         type: CLICK_COMMUNICATION_FULFILLED,
       });
-      // payload.history.push("/dashboard");
+
 
       // window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}&redir=${informationData.redir}`;
 
