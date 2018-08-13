@@ -92,7 +92,7 @@ export function clickCommunication(payload) {
 
       var tempLink = document.createElement("a");
       tempLink.style.display = "none";
-      tempLink.href = "tel:+21629181000";//informationData.redirection;
+      tempLink.href = informationData.redirection;
       tempLink.click();
       payload.history.push("/dashboard");
       document.body.removeChild(tempLink);
