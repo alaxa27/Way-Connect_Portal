@@ -29,6 +29,7 @@ const playerShortcuts = [
   return {
     tour: informationStore.informationData.tour,
     redirection: informationStore.informationData.redirection,
+    communicationURL: informationStore.informationData.communicationURL,
     fetching: informationStore.fetching,
     fetched: informationStore.fetched,
     acknowledging: gatewayStore.acknowledging,
@@ -159,7 +160,7 @@ class Partner extends Component {
             ? "video-playing"
             : "video-not-playing")}>
           <Player playsInline={true} preload="auto" ref={this.playerRef}>
-            <source src="/assets/trailer_hd.mp4"/>
+            <source src={this.props.communicationURL}/>
             <ControlBar disabled={true}/>
             <Shortcut clickable={false} shortcuts={playerShortcuts}/>
           </Player>
@@ -176,6 +177,7 @@ Partner.propTypes = {
   clicking: PropTypes.bool,
   clicked: PropTypes.bool,
   redirection: PropTypes.string,
+  communicationURL: PropTypes.string,
   tour: PropTypes.bool,
   fetching: PropTypes.bool,
   fetched: PropTypes.bool,
