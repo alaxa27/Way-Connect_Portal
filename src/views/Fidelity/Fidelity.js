@@ -130,7 +130,7 @@ class Fidelity extends Component {
       </div>
       <h2>{Math.round(this.props.fidelityData.rate * 10000) / 100}{" "}%</h2>
       <div className="bonus-max">
-        {this.props.fidelityData.amount + "/" + this.props.fidelityData.reward}
+        {this.props.fidelityData.text ? this.props.fidelityData.text : this.props.fidelityData.amount + "/" + this.props.fidelityData.reward}
       </div>
       <Button className={`activate ${ (
           this.props.fidelityData.rate === 1
@@ -166,7 +166,7 @@ class Fidelity extends Component {
 Fidelity.propTypes = {
   tour: PropTypes.bool,
   dispatch: PropTypes.func,
-  fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, reward: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
+  fidelityData: PropTypes.shape({rate: PropTypes.number, amount: PropTypes.number, reward: PropTypes.string, text: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   discountData: PropTypes.shape({code: PropTypes.string, reward: PropTypes.string, date: PropTypes.string, fetching: PropTypes.bool, fetched: PropTypes.bool}),
   className: PropTypes.string,
   history: PropTypes.shape({goBack: PropTypes.func}),

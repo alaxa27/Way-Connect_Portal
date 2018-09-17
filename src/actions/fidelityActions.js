@@ -61,7 +61,8 @@ export function fetchFidelity(payload) {
         level: response.data.promotion_level.rank,
         rate: rate,
         amount: amount,
-        reward: rewardString
+        reward: rewardString,
+        text: response.data.promotion_level.text
       }
     });
 

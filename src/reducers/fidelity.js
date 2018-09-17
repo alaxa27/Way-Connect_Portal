@@ -37,6 +37,7 @@ const fidelityData = {
   rate: 0,
   reward: "",
   amount: 0,
+  text: null
 };
 
 const discountData = {
