@@ -9,7 +9,7 @@ class Countdown extends Component {
   render() {
     return (<div className={"countdown " + this.props.className}>
       <svg>
-        <circle r="80" cx="85" cy="85"></circle>
+        <circle r={this.props.r} cx={parseInt(this.props.r) + parseInt(this.props.width)} cy={parseInt(this.props.r) + parseInt(this.props.width)}></circle>
       </svg>
       {this.props.children}
     </div>);
@@ -17,12 +17,16 @@ class Countdown extends Component {
 }
 
 Countdown.defaultProps = {
-  className: ""
+  className: "",
+  r: "80",
+  width: "5"
 };
 
 Countdown.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.object
+  children: PropTypes.object,
+  r: PropTypes.string,
+  width: PropTypes.string
 };
 
 export default Countdown;

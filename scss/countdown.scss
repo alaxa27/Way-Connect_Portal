@@ -3,12 +3,13 @@
     position: relative;
   }
   $countdown_size: 170px;
+  $stroke-width: 10px;
   $pi: 3.141592654;
 
   svg {
     position: fixed;
     margin-left: -1 * $countdown_size / 2;
-    margin-top: -1 * 10px;
+    margin-top: -1 * $stroke-width;
     width: $countdown_size;
     height: $countdown_size;
     transform: rotateY(-180deg) rotateZ(-90deg);
@@ -18,7 +19,7 @@
     stroke-dasharray: (2 * $pi * $countdown_size / 2);
     stroke-dashoffset: 0;
     stroke-linecap: square;
-    stroke-width: 10px;
+    stroke-width: $stroke-width;
     stroke: map-get($colors, way-gray-dark);
     fill: none;
     animation: countdown 4s linear infinite forwards;

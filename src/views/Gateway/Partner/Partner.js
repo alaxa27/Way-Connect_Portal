@@ -8,6 +8,7 @@ import {Player, ControlBar, Shortcut} from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
 import Contact from "../components/Contact";
+import Skip from "../components/Skip";
 import Loader from "../../../components/Loader";
 
 import {acknowledgeCommunication, clickCommunication} from "../../../actions/gatewayActions";
@@ -124,7 +125,7 @@ class Partner extends Component {
 
   playVideo() {
     if (!this.props.fetching && this.props.fetched) {
-      if (this.props.communicationURL) {
+      if (!this.props.communicationURL) {
         this.setState({playing: true});
         this.playerRef.current.subscribeToStateChange(this.handleStateChange.bind(this));
         this.playerRef.current.play();
@@ -166,7 +167,10 @@ class Partner extends Component {
         </div>
       </Row>
 
-      <Contact action={() => this.props.dispatch(clickCommunication({history: this.props.history}))} exists={(this.props.redirection ? this.props.redirection.length > 0 : false)} show={this.state.ended}>
+      <Contact action={() => this.props.dispatch(clickCommunication({history: this.props.history}))} exists={(
+          this.props.redirection
+          ? this.props.redirection.length > 0
+          : false)} show={this.state.ended}>
         <div className={(
             this.state.playing
             ? "video-playing"
@@ -176,6 +180,11 @@ class Partner extends Component {
             <ControlBar disabled={true}/>
             <Shortcut clickable={false} shortcuts={playerShortcuts}/>
           </Player>
+          <Skip action={() => {
+              this.props.dispatch(acknowledgeCommunication());
+            }} skippable={this.props.acknowledged && !this.props.acknowledging} onClick={() => {
+              this.props.history.push("/dashboard");
+            }}/>
         </div>
       </Contact>
 

@@ -1,0 +1,35 @@
+$countdown_size: 68px;
+$stroke-width: 8px;
+$pi: 3.141592654;
+
+.skip {
+  font-size: 1rem !important;
+
+  .btn {
+    width: $countdown_size - 2 * $stroke-width !important;
+    height: $countdown_size - 2 * $stroke-width !important;
+    box-shadow: none !important;
+  }
+
+  svg {
+    margin-left: -1 * $countdown_size / 2;
+    margin-top: -1 * $stroke-width;
+    width: $countdown_size;
+    height: $countdown_size;
+  }
+
+  svg circle {
+    stroke-dasharray: (2 * $pi * $countdown_size / 2);
+    stroke-width: $stroke-width;
+    animation: skip-countdown 4s linear forwards;
+  }
+  @keyframes skip-countdown {
+    from {
+      stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: (2 * $pi * $countdown_size / 2);
+    }
+  }
+}
