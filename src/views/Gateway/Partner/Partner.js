@@ -71,6 +71,14 @@ class Partner extends Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.acknowledged !== this.props.acknowledged) {
+      if (this.props.acknowledged && !this.props.communicationURL) {
+        this.props.history.push("/dashboard");
+      }
+    }
+  }
+
   handleSliderDrop(e, d) {
     if (d.x >= this.state.slider.width) {
       this.playVideo();
@@ -116,10 +124,14 @@ class Partner extends Component {
 
   playVideo() {
     if (!this.props.fetching && this.props.fetched) {
-      this.setState({playing: true});
-      this.playerRef.current.subscribeToStateChange(this.handleStateChange.bind(this));
-      this.playerRef.current.play();
-      // this.playerRef.current.toggleFullscreen();
+      if (this.props.communicationURL) {
+        this.setState({playing: true});
+        this.playerRef.current.subscribeToStateChange(this.handleStateChange.bind(this));
+        this.playerRef.current.play();
+        // this.playerRef.current.toggleFullscreen();
+      } else {
+        this.props.dispatch(acknowledgeCommunication());
+      }
     }
   }
 
@@ -154,7 +166,7 @@ class Partner extends Component {
         </div>
       </Row>
 
-      <Contact action={() => this.props.dispatch(clickCommunication({history: this.props.history}))} exists={this.props.redirection.length > 0} show={this.state.ended}>
+      <Contact action={() => this.props.dispatch(clickCommunication({history: this.props.history}))} exists={(this.props.redirection ? this.props.redirection.length > 0 : false)} show={this.state.ended}>
         <div className={(
             this.state.playing
             ? "video-playing"

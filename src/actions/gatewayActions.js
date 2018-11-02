@@ -69,9 +69,17 @@ export function acknowledgeCommunication(payload) {
       // window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${informationData.token}&redir=${informationData.redir}`;
 
     } catch (error) {
-      dispatch({
-        type: ACKNOWLEDGE_COMMUNICATION_REJECTED
-      });
+      if (error.response.status == 400) {
+        if (error.response.data.detail === "Cannot acknowledge a connection with no communication.") {
+          dispatch({
+            type: ACKNOWLEDGE_COMMUNICATION_FULFILLED,
+          });
+        }
+      } else {
+        dispatch({
+          type: ACKNOWLEDGE_COMMUNICATION_REJECTED
+        });
+      }
     }
   };
 }

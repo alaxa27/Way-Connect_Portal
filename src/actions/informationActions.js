@@ -42,6 +42,7 @@ export function fetchConnection(payload) {
 
       await dispatch(fetchEstablishment());
 
+
       dispatch({
         type: POST_CONNECT_FULFILLED,
         payload: {

@@ -1,9 +1,10 @@
 {
-  "gateway":{
+  "gateway": {
     "partner": {
       "offer": "Nous vous offrons un WiFi haut-débit ainsi qu'une réduction sur votre prochaine consommation.",
       "under": "Valable sous",
-      "seconds": "secondes"
+      "seconds": "secondes",
+      "slider": "Glissez pour Continuer"
     }
   },
   "dashboard": {
@@ -14,24 +15,40 @@
   "fidelity": {
     "title": "Fidelité",
     "activate": "Activez votre réduction",
+    "waiter": "Montrer le code au serveur",
     "discounts": {
       "title": "Réductions"
     },
     "profile": {
       "title": "Profil",
+      "titles": {
+        "gender": "Choisissez votre Sexe",
+        "date_of_birth": "Quel est votre Date de naissance",
+        "country": "Sélectionnez votre Nationalité",
+        "relationship_status": "Sélectionnez votre Situation amoureuse",
+        "work_status": "Sélectionnez votre Situation professionnelle",
+        "hobbies": "Sélectionnez vos Centres d'intérêts"
+      },
       "congratulations": {
-        "congratulations": "Félicitations !"
+        "congratulations": "Félicitations !",
+        "continue": "Continuer !"
       }
+    },
+    "joyride": {
+      "bonus-max": "Gain du 1er niveau.",
+      "my-info": "+10% en répondant aux questions.",
+      "activate": "Atteignez 100% pour activer votre réduction.",
+      "database": "Historique des réductions."
     }
   },
   "question": {
-    "next": "Question Suivante",
-    "select": {
-      "label": "Sélectionner votre"
-    },
-    "datetime": {
-      "label": "Quel est votre"
-    }
+    "next": "Question Suivante"
   },
-  "wifi-granted": "Accès au WiFi autorisé!"
+  "wifi-granted": "Accès au WiFi autorisé pour 30 minutes!",
+  "joyride": {
+    "next": "Suivant",
+    "back": "Précédent",
+    "close": "Fermer",
+    "last": "Dernier"
+  }
 }
