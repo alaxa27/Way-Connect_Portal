@@ -125,7 +125,7 @@ class Partner extends Component {
 
   playVideo() {
     if (!this.props.fetching && this.props.fetched) {
-      if (!this.props.communicationURL) {
+      if (this.props.communicationURL) {
         this.setState({playing: true});
         this.playerRef.current.subscribeToStateChange(this.handleStateChange.bind(this));
         this.playerRef.current.play();
