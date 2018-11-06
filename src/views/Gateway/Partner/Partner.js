@@ -183,7 +183,7 @@ class Partner extends Component {
             <ControlBar disabled={true}/>
             <Shortcut clickable={false} shortcuts={playerShortcuts}/>
           </Player>
-          <Skip time={5 - this.state.currentTime} skippable={this.props.acknowledged && !this.props.acknowledging} onClick={() => {
+          <Skip time={Math.max(5 - this.state.currentTime, 0)} skippable={this.props.acknowledged && !this.props.acknowledging} onClick={() => {
               this.props.history.push("/dashboard");
             }}/>
         </div>
