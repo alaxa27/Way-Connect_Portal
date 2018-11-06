@@ -10,20 +10,32 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import Footer from 'components/Footer';
-import messages from './messages';
+
+import logoWhiteTransparent from 'images/logo_white_transparent.png';
+import HomeWrapper from './HomeWrapper';
+import WayConnectWrapper from './WayConnectWrapper';
+import WayConnectLogo from './WayConnectLogo';
+import Title from './Title';
+import Moto from './Moto';
+import WelcomeMessage from './WelcomeMessage';
+import EstablishmentName from './EstablishmentName';
+// import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
   render() {
     return (
-      <div>
-        <h1>
-          <FormattedMessage {...messages.header} />
-        </h1>
-        <Footer />
-      </div>
+      <HomeWrapper>
+        <WayConnectWrapper>
+          <WayConnectLogo src={logoWhiteTransparent} />
+          <Title>Way-Connect</Title>
+          <Moto>SMART ADVERTISING</Moto>
+        </WayConnectWrapper>
+        <WelcomeMessage>
+          <p>Bienvenue sur le WiFi de</p>
+          <EstablishmentName>180 DEGRES</EstablishmentName>
+        </WelcomeMessage>
+      </HomeWrapper>
     );
   }
 }
