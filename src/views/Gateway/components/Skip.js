@@ -12,55 +12,25 @@ class Skip extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      ticking: true
-    };
     this._renderInner = this._renderInner.bind(this);
   }
-
-  componentDidMount() {
-      this.timerHandle = setTimeout(() => {
-        this.props.action();
-        this.setState({ticking: false});
-      }, 5000);
-  }
-
-// componentDidUpdate(prevProps, prevState) {
-//   if (prevProps.show !== this.props.show) {
-//     if (!this.props.exists) {
-//       this.setState({ticking: false});
-//     }
-//     this.timerHandle = setTimeout(() => {
-//       this.setState({ticking: false});
-//     }, 4000);
-//   }
-// }
-
-  componentWillUnmount = () => {
-    if (this.timerHandle) {
-      clearTimeout(this.timerHandle);
-      this.timerHandle = 0;
-    }
-  };
 
   _renderInner() {
     return (<div>
       <Countdown className={`${ (
-          !this.state.ticking
+          this.props.skippable
           ? "pulse"
           : "")} skip`} r="30" width="4">
-        <ActionButton gradient={false} icon="arrow-right" show={true} className="countdown__children skip" action={() => {
-            if (!this.state.ticking && this.props.skippable) {
+        <ActionButton gradient={this.props.skippable} icon={(this.props.skippable ? "arrow-right" : null)} show={true} className="countdown__children skip" action={() => {
+            if (this.props.skippable) {
               this.props.onClick();
             }
-          }}/>
+          }}>{Math.floor(this.props.time)}</ActionButton>
       </Countdown>
     </div>);
   }
 
   render() {
-    console.log(this.state);
-    let {show} = this.props;
     return (<React.Fragment>
       {this._renderInner()}
     </React.Fragment>);
@@ -68,18 +38,12 @@ class Skip extends Component {
 }
 
 Skip.defaultProps = {
-  exists: true,
-  show: true,
-  pulse: true,
   skippable: true
 };
 
 Skip.propTypes = {
-  action: PropTypes.func.isRequired,
-  exists: PropTypes.bool,
-  show: PropTypes.bool,
-  children: PropTypes.object,
   skippable: PropTypes.bool,
+  time: PropTypes.number,
   onClick: PropTypes.func.isRequired,
   history: PropTypes.shape({push: PropTypes.func})
 };

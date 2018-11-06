@@ -21,7 +21,7 @@ $pi: 3.141592654;
   svg circle {
     stroke-dasharray: (2 * $pi * $countdown_size / 2);
     stroke-width: $stroke-width;
-    animation: skip-countdown 4s linear forwards;
+    animation: skip-countdown 5s linear forwards;
   }
   @keyframes skip-countdown {
     from {

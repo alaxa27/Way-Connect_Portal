@@ -45,6 +45,7 @@ class Partner extends Component {
     super(props);
     this.state = {
       playing: false,
+      currentTime: 0,
       ended: false,
       slider: {
         ref: React.createRef(),
@@ -113,7 +114,9 @@ class Partner extends Component {
       this.playerRef.current.seek(prevState.currentTime);
     }
 
-    if (state.currentTime / state.duration > 0.7 && !this.props.acknowledging && !this.props.acknowledged) {
+    this.setState({currentTime: state.currentTime});
+
+    if ((state.currentTime > 4) && !this.props.acknowledging && !this.props.acknowledged) {
       this.props.dispatch(acknowledgeCommunication());
     }
 
@@ -180,9 +183,7 @@ class Partner extends Component {
             <ControlBar disabled={true}/>
             <Shortcut clickable={false} shortcuts={playerShortcuts}/>
           </Player>
-          <Skip action={() => {
-              this.props.dispatch(acknowledgeCommunication());
-            }} skippable={this.props.acknowledged && !this.props.acknowledging} onClick={() => {
+          <Skip time={5 - this.state.currentTime} skippable={this.props.acknowledged && !this.props.acknowledging} onClick={() => {
               this.props.history.push("/dashboard");
             }}/>
         </div>
