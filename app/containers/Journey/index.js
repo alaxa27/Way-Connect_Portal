@@ -28,7 +28,7 @@ export class Journey extends React.Component {
         <JourneyItem>
           <Question />
         </JourneyItem>
-        <Footer />
+        <Footer index={4} number={6} active />
       </JourneyWrapper>
     );
   }

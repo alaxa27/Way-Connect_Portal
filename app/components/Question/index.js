@@ -9,6 +9,7 @@ import React from 'react';
 // import styled from 'styled-components';
 
 import Title from 'components/Title';
+import QuestionChoice from 'components/QuestionChoice';
 import QuestionWrapper from './QuestionWrapper';
 import QuestionText from './QuestionText';
 
@@ -21,7 +22,8 @@ class Question extends React.Component {
     return (
       <QuestionWrapper>
         <Title>Questionnaire</Title>
-        <QuestionText>Quelle est la réponse 3 ?</QuestionText>
+        <QuestionText>Quelle est la réponse numéro 3 ?</QuestionText>
+        <QuestionChoice />
       </QuestionWrapper>
     );
   }

@@ -9,7 +9,7 @@ const Dot = styled.div`
       return '#808080';
     }
     if (props.active) {
-      return 'linear-gradient(to top right, #F18F10, #F37327)';
+      return 'linear-gradient(to top right, #F1612C, #F58921)';
     }
     return '#4D4D4D';
   }};

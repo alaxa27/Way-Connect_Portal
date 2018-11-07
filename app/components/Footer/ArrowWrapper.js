@@ -12,7 +12,7 @@ const ArrowWrapper = styled.div`
       return 'transparent';
     }
     if (props.active) {
-      return 'linear-gradient(to top right, #F18F10, #F37327)';
+      return 'linear-gradient(to top, #F18F10, #F37327)';
     }
     return '#6D6D6D';
   }};
