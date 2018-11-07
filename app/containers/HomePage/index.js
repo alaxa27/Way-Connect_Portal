@@ -12,10 +12,10 @@
 import React from 'react';
 
 import logoWhiteTransparent from 'images/logo_white_transparent.png';
+import Title from 'components/Title';
 import HomeWrapper from './HomeWrapper';
 import WayConnectWrapper from './WayConnectWrapper';
 import WayConnectLogo from './WayConnectLogo';
-import Title from './Title';
 import Moto from './Moto';
 import WelcomeMessage from './WelcomeMessage';
 import EstablishmentName from './EstablishmentName';

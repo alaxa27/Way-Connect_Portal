@@ -18,13 +18,16 @@ import makeSelectJourney from './selectors';
 import reducer from './reducer';
 
 import JourneyWrapper from './JourneyWrapper';
+import JourneyItem from './JourneyItem';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Journey extends React.Component {
   render() {
     return (
       <JourneyWrapper>
-        <Question />
+        <JourneyItem>
+          <Question />
+        </JourneyItem>
         <Footer />
       </JourneyWrapper>
     );

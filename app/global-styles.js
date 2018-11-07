@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     min-height: 100%;
     min-width: 100%;
+    padding: 35px;
   }
 
   p,
