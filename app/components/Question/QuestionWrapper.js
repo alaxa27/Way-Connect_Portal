@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-const WayConnectWrapper = styled.div`
+const QuestionWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex: 1;
   justify-content: space-around;
   align-items: center;
+  justify-self: flex-end;
 `;
 
-export default WayConnectWrapper;
+export default QuestionWrapper;
