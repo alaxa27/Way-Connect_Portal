@@ -4,7 +4,7 @@
 
 // import RangeSlider from '../index';
 
-describe('<RangeSlider />', () => {
+describe('<ValueSlider />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });
