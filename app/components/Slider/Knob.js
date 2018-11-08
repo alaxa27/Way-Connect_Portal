@@ -10,6 +10,7 @@ const Knob = styled.div`
   background: ${props =>
     props.active ? 'linear-gradient(to top, #F18F10, #F37327)' : '#333333'};
   color: ${props => (props.active ? '#000000' : '#666666')};
+  transition: ${props => (props.dropped ? '0.5s ease-out' : 'none')};
 `;
 
 export default Knob;

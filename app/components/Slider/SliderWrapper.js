@@ -7,7 +7,7 @@ const SliderWrapper = styled.div`
   align-items: center;
   background-color: #000000;
   height: 55px;
-  padding: 5px;
+  padding: ${props => props.padding}px;
   border-radius: 55px;
   color: #666666;
 `;
