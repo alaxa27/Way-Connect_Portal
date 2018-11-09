@@ -26,8 +26,8 @@ ArrowWrapper.defaultProps = {
 };
 
 ArrowWrapper.propTypes = {
-  transparent: PropTypes.Boolean,
-  active: PropTypes.Boolean,
+  transparent: PropTypes.bool,
+  active: PropTypes.bool,
 };
 
 export default ArrowWrapper;

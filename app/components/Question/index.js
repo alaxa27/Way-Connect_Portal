@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 import Title from 'components/Title';
@@ -22,11 +22,13 @@ class Question extends React.Component {
   renderQuestion(question) {
     switch (question.type) {
       case 'VALUE':
-        return <QuestionValue {...question} />;
+        return <QuestionValue onValid={this.props.onValid} {...question} />;
       case 'VALUE_RANGE':
-        return <QuestionValue range {...question} />;
+        return (
+          <QuestionValue range onValid={this.props.onValid} {...question} />
+        );
       case 'CHOICE':
-        return <QuestionChoice {...question} />;
+        return <QuestionChoice onValid={this.props.onValid} {...question} />;
       default:
         return null;
     }
@@ -44,6 +46,8 @@ class Question extends React.Component {
   }
 }
 
-Question.propTypes = {};
+Question.propTypes = {
+  onValid: PropTypes.func.isRequired,
+};
 
 export default Question;

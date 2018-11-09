@@ -22,7 +22,7 @@ const Choice = props => (
 );
 
 Choice.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.array,
   id: PropTypes.number.isRequired,
   onChoiceClick: PropTypes.func.isRequired,
 };

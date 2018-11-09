@@ -20,50 +20,66 @@ class QuestionChoice extends React.Component {
     super(props);
 
     this.state = {
-      choices: [],
+      answers: [],
     };
 
-    this.choose = this.choose.bind(this);
-    this.addChoice = this.addChoice.bind(this);
-    this.removeChoice = this.removeChoice.bind(this);
+    this.answer = this.answer.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
+    this.removeAnswer = this.removeAnswer.bind(this);
     this.isActive = this.isActive.bind(this);
+    this.isValid = this.isValid.bind(this);
   }
 
-  removeChoice(i) {
-    this.setState(prevProps => {
-      const choices = [...prevProps.choices];
-      choices.splice(i, 1);
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.answers !== this.state.answers) {
+      if (this.isValid()) {
+        this.props.onValid();
+      }
+    }
+  }
+
+  removeAnswer(i) {
+    this.setState(prevState => {
+      const answers = [...prevState.answers];
+      answers.splice(i, 1);
       return {
-        choices,
+        answers,
       };
     });
   }
 
-  addChoice(id) {
-    this.setState(prevProps => ({
-      choices: [...prevProps.choices, id],
+  addAnswer(id) {
+    this.setState(prevState => ({
+      answers: [...prevState.answers, id],
     }));
   }
 
-  choose(id) {
+  answer(id) {
     const { multiple } = this.props;
-    const choiceIndex = _.indexOf(this.state.choices, id);
+    const answerIndex = _.indexOf(this.state.answers, id);
 
-    if (choiceIndex === -1) {
+    if (answerIndex === -1) {
       if (multiple) {
-        this.addChoice(id);
+        this.addAnswer(id);
       } else {
         this.setState({
-          choices: [id],
+          answers: [id],
         });
       }
     } else if (multiple) {
-      this.removeChoice(choiceIndex);
+      this.removeAnswer(answerIndex);
     }
   }
 
   isActive(id) {
-    return _.contains(this.state.choices, id);
+    return _.contains(this.state.answers, id);
+  }
+
+  isValid() {
+    if (this.state.answers.length > 0) {
+      return true;
+    }
+    return false;
   }
 
   renderChoices(choices, multiple) {
@@ -75,7 +91,7 @@ class QuestionChoice extends React.Component {
           multiple={multiple}
           key={key}
           id={choice.id}
-          onChoiceClick={this.choose}
+          onChoiceClick={this.answer}
         >
           <ChoiceInput active={active} multiple={multiple} />
           <ChoiceLabel>{choice.text}</ChoiceLabel>
@@ -102,6 +118,7 @@ QuestionChoice.defaultProps = {
 QuestionChoice.propTypes = {
   multiple: PropTypes.bool,
   choices: PropTypes.array.isRequired,
+  onValid: PropTypes.func.isRequired,
 };
 
 export default QuestionChoice;

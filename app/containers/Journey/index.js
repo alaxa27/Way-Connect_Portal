@@ -25,8 +25,11 @@ export class Journey extends React.Component {
   constructor(props) {
     super(props);
 
+    const { id } = props.match.params;
+
     this.state = {
-      index: 1,
+      index: parseInt(id, 10),
+      footerActive: false,
       journey: [
         {
           type: 'Q',
@@ -94,25 +97,48 @@ export class Journey extends React.Component {
         },
       ],
     };
+
+    this.activateFooter = this.activateFooter.bind(this);
+    this.deactivateFooter = this.deactivateFooter.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.changeIndex(this.props.match.params.id);
+      this.deactivateFooter();
+    }
+  }
+
+  changeIndex(index) {
+    this.setState({
+      index: parseInt(index, 10),
+    });
+  }
+
+  activateFooter() {
+    this.setState({ footerActive: true });
+  }
+
+  deactivateFooter() {
+    this.setState({ footerActive: false });
   }
 
   renderJourneyItem(item) {
     switch (item.type) {
       case 'Q':
-        return <Question {...item.question} />;
+        return <Question onValid={this.activateFooter} {...item.question} />;
       default:
         return null;
     }
   }
 
   render() {
-    const { index } = this.state;
+    const { index, journey, footerActive } = this.state;
+
     return (
       <JourneyWrapper>
-        <JourneyItem>
-          {this.renderJourneyItem(this.state.journey[index])}
-        </JourneyItem>
-        <Footer index={this.state.index} number={this.state.journey.length} />
+        <JourneyItem>{this.renderJourneyItem(journey[index])}</JourneyItem>
+        <Footer active={footerActive} index={index} number={journey.length} />
       </JourneyWrapper>
     );
   }

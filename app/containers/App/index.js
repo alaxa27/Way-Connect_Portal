@@ -21,7 +21,7 @@ export default function App() {
     <React.Fragment>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/journey" component={Journey} />
+        <Route exact path="/journey/:id" component={Journey} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
