@@ -19,10 +19,9 @@ class QuestionChoice extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      answers: [],
-    };
+    this.state = {};
 
+    this.initializeAnswers = this.initializeAnswers.bind(this);
     this.answer = this.answer.bind(this);
     this.addAnswer = this.addAnswer.bind(this);
     this.removeAnswer = this.removeAnswer.bind(this);
@@ -30,12 +29,20 @@ class QuestionChoice extends React.Component {
     this.isValid = this.isValid.bind(this);
   }
 
+  componentDidMount() {
+    this.initializeAnswers(this.props.defaultAnswers);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.answers !== this.state.answers) {
       if (this.isValid()) {
-        this.props.onValid();
+        this.props.onValid(this.state.answers);
       }
     }
+  }
+
+  initializeAnswers(answers) {
+    this.setState({ answers });
   }
 
   removeAnswer(i) {
@@ -113,10 +120,12 @@ class QuestionChoice extends React.Component {
 
 QuestionChoice.defaultProps = {
   multiple: false,
+  defaultAnswers: [],
 };
 
 QuestionChoice.propTypes = {
   multiple: PropTypes.bool,
+  defaultAnswers: PropTypes.array,
   choices: PropTypes.array.isRequired,
   onValid: PropTypes.func.isRequired,
 };

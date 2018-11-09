@@ -22,13 +22,11 @@ class Question extends React.Component {
   renderQuestion(question) {
     switch (question.type) {
       case 'VALUE':
-        return <QuestionValue onValid={this.props.onValid} {...question} />;
+        return <QuestionValue key={question.id} {...question} />;
       case 'VALUE_RANGE':
-        return (
-          <QuestionValue range onValid={this.props.onValid} {...question} />
-        );
+        return <QuestionValue key={question.id} range {...question} />;
       case 'CHOICE':
-        return <QuestionChoice onValid={this.props.onValid} {...question} />;
+        return <QuestionChoice key={question.id} {...question} />;
       default:
         return null;
     }
@@ -47,7 +45,9 @@ class Question extends React.Component {
 }
 
 Question.propTypes = {
-  onValid: PropTypes.func.isRequired,
+  question: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }),
 };
 
 export default Question;

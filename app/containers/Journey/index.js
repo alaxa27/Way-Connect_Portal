@@ -34,6 +34,7 @@ export class Journey extends React.Component {
         {
           type: 'Q',
           question: {
+            id: 32,
             type: 'CHOICE',
             text: 'FOOBARBAZ ????',
             multiple: false,
@@ -51,10 +52,12 @@ export class Journey extends React.Component {
                 text: 'baz',
               },
             ],
+            defaultAnswers: [],
           },
         },
         {
           type: 'Q',
+          id: 2,
           question: {
             type: 'CHOICE',
             text: 'Multiple foobarbaz ?????',
@@ -73,10 +76,12 @@ export class Journey extends React.Component {
                 text: 'baz',
               },
             ],
+            defaultAnswers: [],
           },
         },
         {
           type: 'Q',
+          id: 4,
           question: {
             type: 'VALUE',
             text: 'How much?',
@@ -87,6 +92,7 @@ export class Journey extends React.Component {
         },
         {
           type: 'Q',
+          id: 445,
           question: {
             type: 'VALUE_RANGE',
             text: 'How much?',
@@ -100,6 +106,7 @@ export class Journey extends React.Component {
 
     this.activateFooter = this.activateFooter.bind(this);
     this.deactivateFooter = this.deactivateFooter.bind(this);
+    this.validateAnswer = this.validateAnswer.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -123,10 +130,20 @@ export class Journey extends React.Component {
     this.setState({ footerActive: false });
   }
 
+  validateAnswer(defaultAnswers) {
+    this.setState(prevState => {
+      const { index } = prevState;
+      const journey = [...prevState.journey];
+      journey[index].question.defaultAnswers = defaultAnswers;
+      return { journey };
+    });
+    this.activateFooter();
+  }
+
   renderJourneyItem(item) {
     switch (item.type) {
       case 'Q':
-        return <Question onValid={this.activateFooter} {...item.question} />;
+        return <Question onValid={this.validateAnswer} {...item.question} />;
       default:
         return null;
     }

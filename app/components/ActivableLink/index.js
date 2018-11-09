@@ -14,7 +14,7 @@ const ActivableLink = props => {
   if (props.active) {
     const derivedProps = { ...props };
     delete derivedProps.active;
-    return <Link {...props}>{props.children}</Link>;
+    return <Link {...derivedProps}>{props.children}</Link>;
   }
   return <React.Fragment>{props.children}</React.Fragment>;
 };
