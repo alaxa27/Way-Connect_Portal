@@ -16,7 +16,7 @@ class QuestionValue extends React.Component {
   render() {
     return (
       <QuestionValueWrapper>
-        <ValueSlider min={0} max={10} range />
+        <ValueSlider {...this.props} />
       </QuestionValueWrapper>
     );
   }

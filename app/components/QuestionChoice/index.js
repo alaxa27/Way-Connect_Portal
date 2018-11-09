@@ -5,7 +5,8 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import _ from 'underscore';
+import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 import QuestionChoiceWrapper from './QuestionChoiceWrapper';
@@ -15,38 +16,33 @@ import ChoiceLabel from './ChoiceLabel';
 
 /* eslint-disable react/prefer-stateless-function */
 class QuestionChoice extends React.Component {
+  renderChoices(choices, multiple) {
+    return _.map(choices, (choice, key) => (
+      <Choice multiple={multiple} key={key}>
+        <ChoiceInput multiple={multiple} />
+        <ChoiceLabel>{choice.text}</ChoiceLabel>
+      </Choice>
+    ));
+  }
+
   render() {
+    const { multiple, choices } = this.props;
+
     return (
       <QuestionChoiceWrapper>
-        <Choice active>
-          <ChoiceInput unique active />
-          <ChoiceLabel active>Female</ChoiceLabel>
-        </Choice>
-        <Choice>
-          <ChoiceInput unique />
-          <ChoiceLabel>Male</ChoiceLabel>
-        </Choice>
-        <Choice>
-          <ChoiceInput unique />
-          <ChoiceLabel>Unknown</ChoiceLabel>
-        </Choice>
-        <Choice active>
-          <ChoiceInput active />
-          <ChoiceLabel active>Female</ChoiceLabel>
-        </Choice>
-        <Choice>
-          <ChoiceInput />
-          <ChoiceLabel>Male</ChoiceLabel>
-        </Choice>
-        <Choice>
-          <ChoiceInput />
-          <ChoiceLabel>Unknown</ChoiceLabel>
-        </Choice>
+        {this.renderChoices(choices, multiple)}
       </QuestionChoiceWrapper>
     );
   }
 }
 
-QuestionChoice.propTypes = {};
+QuestionChoice.defaultProps = {
+  multiple: false,
+};
+
+QuestionChoice.propTypes = {
+  multiple: PropTypes.bool,
+  choices: PropTypes.array.isRequired,
+};
 
 export default QuestionChoice;

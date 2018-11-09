@@ -9,7 +9,7 @@ import React from 'react';
 // import styled from 'styled-components';
 
 import Title from 'components/Title';
-// import QuestionChoice from 'components/QuestionChoice';
+import QuestionChoice from 'components/QuestionChoice';
 import QuestionValue from 'components/QuestionValue';
 import QuestionWrapper from './QuestionWrapper';
 import QuestionText from './QuestionText';
@@ -19,12 +19,26 @@ import QuestionText from './QuestionText';
 
 /* eslint-disable react/prefer-stateless-function */
 class Question extends React.Component {
+  renderQuestion(question) {
+    switch (question.type) {
+      case 'VALUE':
+        return <QuestionValue {...question} />;
+      case 'VALUE_RANGE':
+        return <QuestionValue range {...question} />;
+      case 'CHOICE':
+        return <QuestionChoice {...question} />;
+      default:
+        return null;
+    }
+  }
+
   render() {
+    const { text } = this.props;
     return (
       <QuestionWrapper>
         <Title>Questionnaire</Title>
-        <QuestionText>Quelle est la réponse numéro 3 ?</QuestionText>
-        <QuestionValue />
+        <QuestionText>{text}</QuestionText>
+        {this.renderQuestion(this.props)}
       </QuestionWrapper>
     );
   }

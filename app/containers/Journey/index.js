@@ -22,13 +22,97 @@ import JourneyItem from './JourneyItem';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Journey extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      index: 1,
+      journey: [
+        {
+          type: 'Q',
+          question: {
+            type: 'CHOICE',
+            text: 'FOOBARBAZ ????',
+            multiple: false,
+            choices: [
+              {
+                id: 1,
+                text: 'foo',
+              },
+              {
+                id: 2,
+                text: 'bar',
+              },
+              {
+                id: 3,
+                text: 'baz',
+              },
+            ],
+          },
+        },
+        {
+          type: 'Q',
+          question: {
+            type: 'CHOICE',
+            text: 'Multiple foobarbaz ?????',
+            multiple: true,
+            choices: [
+              {
+                id: 1,
+                text: 'foo',
+              },
+              {
+                id: 2,
+                text: 'bar',
+              },
+              {
+                id: 3,
+                text: 'baz',
+              },
+            ],
+          },
+        },
+        {
+          type: 'Q',
+          question: {
+            type: 'VALUE',
+            text: 'How much?',
+            min: 1, // may be null
+            max: 10, // may be null
+            step: 1, // may be null
+          },
+        },
+        {
+          type: 'Q',
+          question: {
+            type: 'VALUE_RANGE',
+            text: 'How much?',
+            min: 1, // may be null
+            max: 10, // may be null
+            step: 1, // may be null
+          },
+        },
+      ],
+    };
+  }
+
+  renderJourneyItem(item) {
+    switch (item.type) {
+      case 'Q':
+        return <Question {...item.question} />;
+      default:
+        return null;
+    }
+  }
+
   render() {
+    const { index } = this.state;
     return (
       <JourneyWrapper>
         <JourneyItem>
-          <Question />
+          {this.renderJourneyItem(this.state.journey[index])}
         </JourneyItem>
-        <Footer index={3} number={6} />
+        <Footer index={this.state.index} number={this.state.journey.length} />
       </JourneyWrapper>
     );
   }
