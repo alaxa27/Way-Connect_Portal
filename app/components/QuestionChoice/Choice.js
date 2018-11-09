@@ -1,11 +1,30 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Choice = styled.div`
+const StyledChoice = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
   margin-top: 5px;
+  cursor: pointer;
   color: ${props => (props.active ? '#CCCCCC' : '#666666')};
 `;
+
+const Choice = props => (
+  <StyledChoice
+    onClick={() => {
+      props.onChoiceClick(props.id);
+    }}
+  >
+    {props.children}
+  </StyledChoice>
+);
+
+Choice.propTypes = {
+  children: PropTypes.object,
+  id: PropTypes.number.isRequired,
+  onChoiceClick: PropTypes.func.isRequired,
+};
 
 export default Choice;
