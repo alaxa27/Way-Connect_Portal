@@ -87,7 +87,7 @@ class ValueSlider extends React.Component {
     } = this.state;
     const { min, max, range } = this.props;
 
-    const value1 = position1 / rangeSliderWidth;
+    const value1 = rangeSliderWidth > 0 ? position1 / rangeSliderWidth : 0;
     const bounds1 = {
       left: 0,
       right: rangeSliderWidth + position2 - (range ? 16 : 0),
