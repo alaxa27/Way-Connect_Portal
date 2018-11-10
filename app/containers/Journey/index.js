@@ -12,6 +12,7 @@ import { compose } from 'redux';
 
 import Footer from 'components/Footer';
 import Question from 'components/Question';
+import Fidelity from 'components/Fidelity';
 
 import injectReducer from 'utils/injectReducer';
 import makeSelectJourney from './selectors';
@@ -101,6 +102,9 @@ export class Journey extends React.Component {
             step: 1, // may be null
           },
         },
+        {
+          type: 'F',
+        },
       ],
     };
 
@@ -144,6 +148,8 @@ export class Journey extends React.Component {
     switch (item.type) {
       case 'Q':
         return <Question onValid={this.validateAnswer} {...item.question} />;
+      case 'F':
+        return <Fidelity />;
       default:
         return null;
     }

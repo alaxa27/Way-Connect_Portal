@@ -9,10 +9,10 @@ import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 import Title from 'components/Title';
+import SubTitle from 'components/SubTitle';
 import QuestionChoice from 'components/QuestionChoice';
 import QuestionValue from 'components/QuestionValue';
 import QuestionWrapper from './QuestionWrapper';
-import QuestionText from './QuestionText';
 
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
@@ -37,7 +37,7 @@ class Question extends React.Component {
     return (
       <QuestionWrapper>
         <Title>Questionnaire</Title>
-        <QuestionText>{text}</QuestionText>
+        <SubTitle>{text}</SubTitle>
         {this.renderQuestion(this.props)}
       </QuestionWrapper>
     );
