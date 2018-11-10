@@ -2,52 +2,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import lockOpen from 'images/lock_open.png';
+import lockClose from 'images/lock_close.png';
+
+import Title from './Title';
 import PromotionCardWrapper from './PromotionCardWrapper';
 
-const Title = styled.div`
-  font-size: 1rem;
+const Lock = styled.img`
+  margin-bottom: 10px;
 `;
 
-const Label = styled.div`
-  color: #ffffff;
-  border-bottom
+const Offer = styled.div`
+  color: #cccccc;
+  font-weight: bold;
 `;
 
-const Info = styled.div`
-  display: flex;
-  align-items: space-between;
-  justify-content: space-between;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+const Text = styled.p`
+  text-align: center;
 `;
 
 const LockedCard = props => {
-  const { index, visitCount, visitTotal, offer } = props;
+  const { index, offer, active } = props;
+  const activeText = `Tapez ici pour obtenir l'offre suivante`;
+  const notActiveText = `Vous devez finir le palier précédent pour accéder à cette offre`;
+
   return (
-    <PromotionCardWrapper>
-      <Title>
+    <PromotionCardWrapper locked>
+      <Lock src={active ? lockOpen : lockClose} />
+      <Title active={active}>
         Promotion n°
         {index}
       </Title>
-      <Info>
-        Visite
-        <Label>
-          {visitCount}/{visitTotal}
-        </Label>
-      </Info>
-      <Info>
-        Offre
-        <Label>{offer}</Label>
-      </Info>
+      <Text>{active ? activeText : notActiveText}</Text>
+      <Offer>{offer}</Offer>
     </PromotionCardWrapper>
   );
 };
 
+LockedCard.defaultProps = {
+  active: false,
+};
+
 LockedCard.propTypes = {
   index: PropTypes.number.isRequired,
-  visitCount: PropTypes.number.isRequired,
-  visitTotal: PropTypes.number.isRequired,
   offer: PropTypes.string.isRequired,
+  active: PropTypes.bool,
 };
 
 export default LockedCard;

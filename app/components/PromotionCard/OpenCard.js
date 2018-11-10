@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Title from './Title';
 import PromotionCardWrapper from './PromotionCardWrapper';
-
-const Title = styled.div`
-  font-size: 1rem;
-`;
 
 const Label = styled.div`
   color: #ffffff;
@@ -18,8 +15,6 @@ const Info = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  font-size: 0.75rem;
-  font-weight: lighter;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   margin: 10px 0;

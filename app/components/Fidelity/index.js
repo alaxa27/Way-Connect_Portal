@@ -28,31 +28,17 @@ class Fidelity extends React.Component {
           <EstablishmentName> 180 DEGRES </EstablishmentName>
           {'ou accédez directement à Internet.'}
         </SubTitle>
-        <LockedCard index={1} offer="Café Maschiatto double Java" />
         <OpenCard
           index={1}
           visitCount={2}
           visitTotal={10}
           offer="Café Maschiatto double Java"
         />
-        <OpenCard
-          index={1}
-          visitCount={2}
-          visitTotal={10}
-          offer="Café Maschiatto double Java"
-        />
-        <OpenCard
-          index={1}
-          visitCount={2}
-          visitTotal={10}
-          offer="Café Maschiatto double Java"
-        />
-        <OpenCard
-          index={1}
-          visitCount={2}
-          visitTotal={10}
-          offer="Café Maschiatto double Java"
-        />
+        <LockedCard active index={2} offer="Café Maschiatto double Java" />
+        <LockedCard index={3} offer="Café Maschiatto double Java" />
+        <LockedCard index={4} offer="Café Maschiatto double Java" />
+        <LockedCard index={5} offer="Café Maschiatto double Java" />
+        <LockedCard index={6} offer="Café Maschiatto double Java" />
       </FidelityWrapper>
     );
   }
