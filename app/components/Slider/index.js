@@ -5,15 +5,16 @@
  */
 
 import React from 'react';
+import styled from 'styled-components';
 // import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 import Draggable from 'react-draggable';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import rightArrow from 'images/right-arrow_knob.png';
 
 import Knob from './Knob';
 import SliderText from './SliderText';
 import SliderWrapper from './SliderWrapper';
+
+const Arrow = styled.img``;
 
 /* eslint-disable react/prefer-stateless-function */
 class Slider extends React.Component {
@@ -80,7 +81,7 @@ class Slider extends React.Component {
           onStop={this.handleKnobDrop}
         >
           <Knob ref={this.state.knobRef} dropped={this.state.dropped}>
-            <FontAwesomeIcon icon={faArrowRight} size="xs" />
+            <Arrow src={rightArrow} />
           </Knob>
         </Draggable>
         <SliderText>WiFi</SliderText>

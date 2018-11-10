@@ -6,11 +6,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import _ from 'underscore';
-// import styled from 'styled-components';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import rightArrow from 'images/right-arrow_footer.png';
+import leftArrow from 'images/left-arrow_footer.png';
 
 import Slider from 'components/Slider';
 import ActivableLink from 'components/ActivableLink';
@@ -19,8 +20,25 @@ import ArrowWrapper from './ArrowWrapper';
 import DotsWrapper from './DotsWrapper';
 import Dot from './Dot';
 
+const Arrow = styled.img``;
+
 /* eslint-disable react/prefer-stateless-function */
 class Footer extends React.Component {
+  renderBack() {
+    const { index } = this.props;
+
+    if (index !== 0) {
+      return (
+        <Link to={`/journey/${index - 1}`}>
+          <ArrowWrapper transparent>
+            <Arrow src={leftArrow} />
+          </ArrowWrapper>
+        </Link>
+      );
+    }
+    return <ArrowWrapper transparent />;
+  }
+
   renderNext() {
     const { index, number, active } = this.props;
 
@@ -36,26 +54,11 @@ class Footer extends React.Component {
         </DotsWrapper>
         <ActivableLink active={active} to={`/journey/${index + 1}`}>
           <ArrowWrapper active={active}>
-            <FontAwesomeIcon icon={faArrowRight} />
+            <Arrow src={rightArrow} />
           </ArrowWrapper>
         </ActivableLink>
       </React.Fragment>
     );
-  }
-
-  renderBack() {
-    const { index } = this.props;
-
-    if (index !== 0) {
-      return (
-        <Link to={`/journey/${index - 1}`}>
-          <ArrowWrapper transparent>
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </ArrowWrapper>
-        </Link>
-      );
-    }
-    return <ArrowWrapper transparent />;
   }
 
   render() {
