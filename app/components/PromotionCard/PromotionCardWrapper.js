@@ -8,7 +8,7 @@ const PromotionCardWrapper = styled.div`
   background: #3a3a3a;
   font-size: 0.75rem;
   font-weight: lighter;
-  color: #cccccc;
+  color: ${props => (props.locked && !props.active ? '#666666' : '#cccccc')};
   margin: 15px 0;
   padding: ${props => (props.locked ? '50px' : '15px')};
 `;

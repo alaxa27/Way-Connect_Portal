@@ -104,6 +104,41 @@ export class Journey extends React.Component {
         },
         {
           type: 'F',
+          fidelity: {
+            establishment_name: '180 DEGRES',
+            discounts: [
+              {
+                rank: 1, // Already completed level
+                reward: '15.00',
+                reward_currency: 'EUR',
+                offer: 'Coffee',
+                required_views: 2,
+              },
+              {
+                rank: 2, // Ongoing level 2
+                reward: '19.00',
+                reward_currency: 'EUR',
+                offer: 'Breakfast',
+                required_views: 4,
+                current_views: 2,
+              },
+              {
+                rank: 2, // Ongoing-Completed level 2
+                reward: '19.00',
+                reward_currency: 'EUR',
+                offer: 'Breakfast',
+                required_views: 4,
+                current_views: 4,
+              },
+              {
+                rank: 3, // Locked levels
+                reward: '23.00',
+                reward_currency: 'EUR',
+                offer: 'Lunch',
+                required_views: 5,
+              },
+            ],
+          },
         },
       ],
     };
@@ -149,7 +184,7 @@ export class Journey extends React.Component {
       case 'Q':
         return <Question onValid={this.validateAnswer} {...item.question} />;
       case 'F':
-        return <Fidelity />;
+        return <Fidelity {...item.fidelity} />;
       default:
         return null;
     }

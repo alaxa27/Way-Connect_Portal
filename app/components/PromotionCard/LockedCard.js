@@ -22,16 +22,16 @@ const Text = styled.p`
 `;
 
 const LockedCard = props => {
-  const { index, offer, active } = props;
+  const { rank, offer, active } = props;
   const activeText = `Tapez ici pour obtenir l'offre suivante`;
   const notActiveText = `Vous devez finir le palier précédent pour accéder à cette offre`;
 
   return (
-    <PromotionCardWrapper locked>
+    <PromotionCardWrapper locked active={active}>
       <Lock src={active ? lockOpen : lockClose} />
-      <Title active={active}>
+      <Title locked>
         Promotion n°
-        {index}
+        {rank}
       </Title>
       <Text>{active ? activeText : notActiveText}</Text>
       <Offer>{offer}</Offer>
@@ -44,7 +44,7 @@ LockedCard.defaultProps = {
 };
 
 LockedCard.propTypes = {
-  index: PropTypes.number.isRequired,
+  rank: PropTypes.number.isRequired,
   offer: PropTypes.string.isRequired,
   active: PropTypes.bool,
 };
