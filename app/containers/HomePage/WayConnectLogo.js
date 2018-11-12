@@ -4,11 +4,14 @@ const InfiniteSpinning = keyframes`
 0% {
   transform: rotate(0deg);
 }
-50% {
-  transform: rotate(180deg);
+94% {
+  transform: rotate(360deg);
+}
+95% {
+  transform: scale(1.1)
 }
 100% {
-  transform: rotate(360deg);
+  transform: scale(1);
 }
 `;
 

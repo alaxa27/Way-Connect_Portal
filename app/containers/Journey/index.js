@@ -13,6 +13,7 @@ import { compose } from 'redux';
 import Footer from 'components/Footer';
 import Question from 'components/Question';
 import Fidelity from 'components/Fidelity';
+import VideoPlayer from 'components/VideoPlayer';
 
 import injectReducer from 'utils/injectReducer';
 import makeSelectJourney from './selectors';
@@ -54,6 +55,12 @@ export class Journey extends React.Component {
               },
             ],
             defaultAnswers: [],
+          },
+        },
+        {
+          type: 'C',
+          communication: {
+            video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
           },
         },
         {
@@ -179,12 +186,25 @@ export class Journey extends React.Component {
     this.activateFooter();
   }
 
+  onCommunicationProgress(progress, currentTime) {
+    console.log(currentTime);
+    console.log(progress);
+  }
+
   renderJourneyItem(item) {
     switch (item.type) {
       case 'Q':
         return <Question onValid={this.validateAnswer} {...item.question} />;
       case 'F':
         return <Fidelity {...item.fidelity} />;
+      case 'C':
+        return (
+          <VideoPlayer
+            {...item.communication}
+            onProgress={this.onCommunicationProgress}
+            playing
+          />
+        );
       default:
         return null;
     }

@@ -4,7 +4,7 @@
 
 // import Player from '../index';
 
-describe('<Player />', () => {
+describe('<VideoPlayer />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });
