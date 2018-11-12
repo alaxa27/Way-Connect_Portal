@@ -2,7 +2,14 @@ import styled from 'styled-components';
 
 const SliderWrapper = styled.div`
   display: flex;
-  flex: 1;
+
+  @media screen and (max-width: 499px) {
+    flex: 1;
+  }
+  @media screen and (min-width: 500px) {
+    width: 300px;
+  }
+
   justify-content: start;
   align-items: center;
   background-color: #000000;
