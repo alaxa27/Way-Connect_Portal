@@ -34,6 +34,7 @@ class VideoPlayer extends React.Component {
 
   componentDidMount() {
     this.playerRef.current.subscribeToStateChange(this.handleStateChange);
+    this.playVideo();
   }
 
   componentDidUpdate(prevProps) {

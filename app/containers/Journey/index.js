@@ -22,6 +22,8 @@ import reducer from './reducer';
 import JourneyWrapper from './JourneyWrapper';
 import JourneyItem from './JourneyItem';
 
+const timeBeforeSkip = 5;
+
 /* eslint-disable react/prefer-stateless-function */
 export class Journey extends React.Component {
   constructor(props) {
@@ -170,7 +172,7 @@ export class Journey extends React.Component {
   }
 
   deactivateFooter() {
-    this.setState({ footerActive: false });
+    this.setState({ footerActive: false, countDown: 0 });
   }
 
   validateAnswer(defaultAnswers) {
@@ -184,7 +186,7 @@ export class Journey extends React.Component {
   }
 
   onCommunicationProgress(progress, currentTime) {
-    const countDown = Math.max(5 - Math.floor(currentTime), 0);
+    const countDown = Math.max(timeBeforeSkip - Math.floor(currentTime), 0);
     this.setState({ countDown });
     if (countDown === 0) {
       this.activateFooter();
