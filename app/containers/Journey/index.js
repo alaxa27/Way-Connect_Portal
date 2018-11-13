@@ -22,7 +22,7 @@ import reducer from './reducer';
 import JourneyWrapper from './JourneyWrapper';
 import JourneyItem from './JourneyItem';
 
-const timeBeforeSkip = 5;
+const timeBeforeSkip = 5; // Skip the ad available after 5sec
 
 /* eslint-disable react/prefer-stateless-function */
 export class Journey extends React.Component {
