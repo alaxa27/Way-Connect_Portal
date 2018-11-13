@@ -32,6 +32,7 @@ export class Journey extends React.Component {
     this.state = {
       index: parseInt(id, 10),
       footerActive: false,
+      countDown: 0,
       journey: [
         {
           type: 'Q',
@@ -148,6 +149,7 @@ export class Journey extends React.Component {
     this.activateFooter = this.activateFooter.bind(this);
     this.deactivateFooter = this.deactivateFooter.bind(this);
     this.validateAnswer = this.validateAnswer.bind(this);
+    this.onCommunicationProgress = this.onCommunicationProgress.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -182,8 +184,11 @@ export class Journey extends React.Component {
   }
 
   onCommunicationProgress(progress, currentTime) {
-    console.log(currentTime);
-    console.log(progress);
+    const countDown = Math.max(5 - Math.floor(currentTime), 0);
+    this.setState({ countDown });
+    if (countDown === 0) {
+      this.activateFooter();
+    }
   }
 
   renderJourneyItem(item) {
@@ -211,7 +216,12 @@ export class Journey extends React.Component {
     return (
       <JourneyWrapper>
         <JourneyItem>{this.renderJourneyItem(journey[index])}</JourneyItem>
-        <Footer active={footerActive} index={index} number={journey.length} />
+        <Footer
+          active={footerActive}
+          index={index}
+          number={journey.length}
+          countDown={this.state.countDown}
+        />
       </JourneyWrapper>
     );
   }

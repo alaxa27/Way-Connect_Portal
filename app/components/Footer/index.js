@@ -40,7 +40,7 @@ class Footer extends React.Component {
   }
 
   renderNext() {
-    const { index, number, active } = this.props;
+    const { index, number, active, countDown } = this.props;
 
     if (index === number - 1) {
       return <Slider />;
@@ -54,11 +54,18 @@ class Footer extends React.Component {
         </DotsWrapper>
         <ActivableLink active={active} to={`/journey/${index + 1}`}>
           <ArrowWrapper active={active}>
-            <Arrow src={rightArrow} />
+            {this.renderArrow(countDown)}
           </ArrowWrapper>
         </ActivableLink>
       </React.Fragment>
     );
+  }
+
+  renderArrow(countDown) {
+    if (countDown > 0) {
+      return countDown;
+    }
+    return <Arrow src={rightArrow} />;
   }
 
   render() {
@@ -71,10 +78,16 @@ class Footer extends React.Component {
   }
 }
 
+Footer.defaultProps = {
+  active: false,
+  countDown: 0,
+};
+
 Footer.propTypes = {
   number: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   active: PropTypes.bool,
+  countDown: PropTypes.number,
 };
 
 export default Footer;
