@@ -20,19 +20,25 @@ import FidelityWrapper from './FidelityWrapper';
 
 /* eslint-disable react/prefer-stateless-function */
 class Fidelity extends React.Component {
-  renderPromotionCard(discounts) {
-    let openCardPassed = false;
-
+  renderPromotionCard(discounts, currentLevel) {
     return _.map(discounts, (discount, key) => {
-      if (discount.current_views) {
-        openCardPassed = true;
-        if (discount.current_views === discount.required_views) {
+      if (discount.rank < currentLevel.rank) {
+        return (
+          <OpenCard
+            key={key}
+            {...discount}
+            currentViews={discount.required_views}
+            requiredViews={discount.required_views}
+          />
+        );
+      }
+      if (discount.rank === currentLevel.rank) {
+        if (currentLevel.current_views === discount.required_views) {
           return (
             <LockedCard
               key={key}
               {...discount}
               active
-              currentViews={discount.current_views}
               requiredViews={discount.required_views}
             />
           );
@@ -41,26 +47,16 @@ class Fidelity extends React.Component {
           <OpenCard
             key={key}
             {...discount}
-            currentViews={discount.current_views}
-            requiredViews={discount.required_views}
-          />
-        );
-      }
-      if (openCardPassed) {
-        return (
-          <LockedCard
-            key={key}
-            {...discount}
-            currentViews={discount.current_views}
+            currentViews={currentLevel.current_views}
             requiredViews={discount.required_views}
           />
         );
       }
       return (
-        <OpenCard
+        <LockedCard
           key={key}
           {...discount}
-          currentViews={discount.required_views}
+          currentViews={discount.current_views}
           requiredViews={discount.required_views}
         />
       );
@@ -79,7 +75,7 @@ class Fidelity extends React.Component {
           <EstablishmentName> {establishmentName} </EstablishmentName>
           {'ou accédez directement à Internet.'}
         </SubTitle>
-        {this.renderPromotionCard(discounts)}
+        {this.renderPromotionCard(discounts, this.props.current_level)}
       </FidelityWrapper>
     );
   }
