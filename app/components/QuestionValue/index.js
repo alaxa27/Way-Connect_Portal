@@ -16,7 +16,7 @@ class QuestionValue extends React.Component {
   render() {
     return (
       <QuestionValueWrapper>
-        <ValueSlider {...this.props} />
+        <ValueSlider key={this.props.id} {...this.props} />
       </QuestionValueWrapper>
     );
   }

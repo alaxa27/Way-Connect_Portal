@@ -68,8 +68,8 @@ export class Journey extends React.Component {
         },
         {
           type: 'Q',
-          id: 2,
           question: {
+            id: 2,
             type: 'CHOICE',
             text: 'Multiple foobarbaz ?????',
             multiple: true,
@@ -92,24 +92,26 @@ export class Journey extends React.Component {
         },
         {
           type: 'Q',
-          id: 4,
           question: {
+            id: 4,
             type: 'VALUE',
             text: 'How much?',
-            min: 1, // may be null
+            min: 0, // may be null
             max: 10, // may be null
             step: 1, // may be null
+            defaultAnswers: [],
           },
         },
         {
           type: 'Q',
-          id: 445,
           question: {
+            id: 445,
             type: 'VALUE_RANGE',
             text: 'How much?',
             min: 1, // may be null
             max: 10, // may be null
-            step: 1, // may be null
+            step: 0.1, // may be null
+            defaultAnswers: [],
           },
         },
         {
