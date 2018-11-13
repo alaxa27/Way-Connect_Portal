@@ -198,7 +198,7 @@ export class Journey extends React.Component {
       case 'Q':
         return <Question onValid={this.validateAnswer} {...item.question} />;
       case 'F':
-        return <Fidelity {...item.fidelity} />;
+        return <Fidelity {...item.fidelity} onActiveClick={() => {}} />;
       case 'C':
         return (
           <VideoPlayer

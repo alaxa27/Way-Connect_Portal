@@ -39,6 +39,7 @@ class Fidelity extends React.Component {
               key={key}
               {...discount}
               active
+              onClick={this.props.onActiveClick}
               requiredViews={discount.required_views}
             />
           );
@@ -56,7 +57,6 @@ class Fidelity extends React.Component {
         <LockedCard
           key={key}
           {...discount}
-          currentViews={discount.current_views}
           requiredViews={discount.required_views}
         />
       );
@@ -84,6 +84,7 @@ class Fidelity extends React.Component {
 Fidelity.propTypes = {
   establishment_name: PropTypes.string.isRequired,
   discounts: PropTypes.array.isRequired,
+  onActiveClick: PropTypes.func.isRequired,
 };
 
 export default Fidelity;
