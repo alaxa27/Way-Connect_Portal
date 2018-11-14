@@ -42,6 +42,7 @@ class ValueSlider extends React.Component {
       gridX: 0,
     };
 
+    this.handleStop = this.handleStop.bind(this);
     this.handleDrag1 = this.handleDrag1.bind(this);
     this.handleDrag2 = this.handleDrag2.bind(this);
     this.renderSecondKnob = this.renderSecondKnob.bind(this);
@@ -62,22 +63,18 @@ class ValueSlider extends React.Component {
       const rangeSliderWidth = this.state.rangeSliderRef.current.offsetWidth;
       const [value1, value2] = this.props.defaultAnswers;
       this.setState({ ...calcPositions(value1, value2, rangeSliderWidth) });
+      this.props.onValid([value1, value2]);
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.position1 !== this.state.position1 ||
-      prevState.position2 !== this.state.position2
-    ) {
-      const { position1, position2, rangeSliderWidth } = this.state;
-      const { value1, value2 } = calcValues(
-        position1,
-        position2,
-        rangeSliderWidth,
-      );
-      this.props.onValid([value1, value2]);
-    }
+  handleStop() {
+    const { position1, position2, rangeSliderWidth } = this.state;
+    const { value1, value2 } = calcValues(
+      position1,
+      position2,
+      rangeSliderWidth,
+    );
+    this.props.onValid([value1, value2]);
   }
 
   handleDrag1(e, d) {
@@ -118,6 +115,7 @@ class ValueSlider extends React.Component {
             grid={[gridX, 0]}
             position={{ x: position2, y: 0 }}
             onDrag={this.handleDrag2}
+            onStop={this.handleStop}
             bounds={bounds2}
           >
             <Knob value={rangeSliderWidth}>
@@ -157,6 +155,7 @@ class ValueSlider extends React.Component {
           grid={[gridX, 0]}
           position={{ x: position1, y: 0 }}
           onDrag={this.handleDrag1}
+          onStop={this.handleStop}
           bounds={bounds1}
         >
           <Knob value={0}>
