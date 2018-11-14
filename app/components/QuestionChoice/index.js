@@ -101,7 +101,7 @@ class QuestionChoice extends React.Component {
           onChoiceClick={this.answer}
         >
           <ChoiceInput active={active} multiple={multiple} />
-          <ChoiceLabel>{choice.text}</ChoiceLabel>
+          <ChoiceLabel active={active}>{choice.text}</ChoiceLabel>
         </Choice>
       );
     });
