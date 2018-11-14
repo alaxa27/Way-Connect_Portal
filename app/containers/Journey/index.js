@@ -61,12 +61,6 @@ export class Journey extends React.Component {
           },
         },
         {
-          type: 'C',
-          communication: {
-            video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
-          },
-        },
-        {
           type: 'Q',
           question: {
             id: 2,
@@ -147,6 +141,12 @@ export class Journey extends React.Component {
             ],
           },
         },
+        {
+          type: 'C',
+          communication: {
+            video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+          },
+        },
       ],
     };
 
@@ -200,6 +200,7 @@ export class Journey extends React.Component {
       case 'Q':
         return <Question onValid={this.validateAnswer} {...item.question} />;
       case 'F':
+        if (!this.state.footerActive) this.activateFooter();
         return <Fidelity {...item.fidelity} onActiveClick={() => {}} />;
       case 'C':
         return (
