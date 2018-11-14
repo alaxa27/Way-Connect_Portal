@@ -6,9 +6,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
-import rightArrow from 'images/right-arrow_knob.png';
+import rightGrayArrow from 'images/right-arrow_gray_knob.png';
+// import rightBlackArrow from 'images/right-arrow_black_knob.png';
 
 import Knob from './Knob';
 import SliderText from './SliderText';
@@ -47,7 +48,7 @@ class Slider extends React.Component {
 
   handleKnobDrop(e, d) {
     if (d.x >= this.state.sliderWrapperWidth) {
-      console.log('DROPPED');
+      this.props.action();
     }
     this.setState(prevState => ({
       position: {
@@ -65,6 +66,8 @@ class Slider extends React.Component {
   }
 
   render() {
+    const { children } = this.props;
+
     return (
       <SliderWrapper
         ref={this.state.sliderWrapperRef}
@@ -81,7 +84,7 @@ class Slider extends React.Component {
           onStop={this.handleKnobDrop}
         >
           <Knob ref={this.state.knobRef} dropped={this.state.dropped}>
-            <Arrow src={rightArrow} />
+            {children || <Arrow src={rightGrayArrow} />}
           </Knob>
         </Draggable>
         <SliderText>WiFi</SliderText>
@@ -90,6 +93,13 @@ class Slider extends React.Component {
   }
 }
 
-Slider.propTypes = {};
+Slider.defaultProps = {
+  action: () => {},
+};
+
+Slider.propTypes = {
+  action: PropTypes.func,
+  children: PropTypes.object,
+};
 
 export default Slider;
