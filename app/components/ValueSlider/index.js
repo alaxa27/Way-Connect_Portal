@@ -109,7 +109,7 @@ class ValueSlider extends React.Component {
               <Value>{displayValue}</Value>
             </Knob>
           </Draggable>
-          <Bar width={1 - value2} />
+          <Bar style={{ flexGrow: 1 - value2 }} />
         </React.Fragment>
       );
     }
@@ -136,7 +136,7 @@ class ValueSlider extends React.Component {
 
     return (
       <BarWrapper ref={rangeSliderRef}>
-        <Bar style={{ flexGrow: value1 }} />
+        {range ? null : <Bar transparent style={{ flexGrow: value1 }} />}
         <Draggable
           axis="x"
           grid={[gridX, 0]}
@@ -147,6 +147,7 @@ class ValueSlider extends React.Component {
             <Value>{displayValue}</Value>
           </Knob>
         </Draggable>
+        <Bar style={{ flexGrow: range ? value1 : 1 - value1 }} />
         {this.renderSecondKnob()}
       </BarWrapper>
     );
