@@ -16,8 +16,17 @@ import BarWrapper from './BarWrapper';
 
 const calcValues = (position1, position2, rangeSliderWidth) => {
   const value1 = rangeSliderWidth > 0 ? position1 / rangeSliderWidth : 0;
-  const value2 = (rangeSliderWidth + position2) / rangeSliderWidth;
+  const value2 =
+    rangeSliderWidth > 0
+      ? (rangeSliderWidth + position2) / rangeSliderWidth
+      : 1;
   return { value1, value2 };
+};
+
+const calcPositions = (value1, value2, rangeSliderWidth) => {
+  const position1 = value1 * rangeSliderWidth;
+  const position2 = (value2 - 1) * rangeSliderWidth;
+  return { position1, position2 };
 };
 
 /* eslint-disable react/prefer-stateless-function */
@@ -49,6 +58,11 @@ class ValueSlider extends React.Component {
       }
       return { rangeSliderWidth, gridX };
     });
+    if (this.props.defaultAnswers.length > 0) {
+      const rangeSliderWidth = this.state.rangeSliderRef.current.offsetWidth;
+      const [value1, value2] = this.props.defaultAnswers;
+      this.setState({ ...calcPositions(value1, value2, rangeSliderWidth) });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -102,6 +116,7 @@ class ValueSlider extends React.Component {
           <Draggable
             axis="x"
             grid={[gridX, 0]}
+            position={{ x: position2, y: 0 }}
             onDrag={this.handleDrag2}
             bounds={bounds2}
           >
@@ -140,6 +155,7 @@ class ValueSlider extends React.Component {
         <Draggable
           axis="x"
           grid={[gridX, 0]}
+          position={{ x: position1, y: 0 }}
           onDrag={this.handleDrag1}
           bounds={bounds1}
         >
@@ -157,6 +173,7 @@ class ValueSlider extends React.Component {
 ValueSlider.defaultProps = {
   range: false,
   step: 1,
+  defaultAnswers: [],
   onValid: () => {},
 };
 
@@ -165,6 +182,7 @@ ValueSlider.propTypes = {
   max: PropTypes.number.isRequired,
   step: PropTypes.number,
   range: PropTypes.bool,
+  defaultAnswers: PropTypes.array,
   onValid: PropTypes.func,
 };
 
