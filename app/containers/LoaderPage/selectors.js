@@ -11,6 +11,10 @@ const selectLoaderPageDomain = state => state.get('loaderPage', initialState);
  * Other specific selectors
  */
 
+const makeSelectEstablishmentName = () =>
+  createSelector(selectLoaderPageDomain, loaderState =>
+    loaderState.get('establishmentName'),
+  );
 /**
  * Default selector used by LoaderPage
  */
@@ -19,4 +23,4 @@ const makeSelectLoaderPage = () =>
   createSelector(selectLoaderPageDomain, substate => substate.toJS());
 
 export default makeSelectLoaderPage;
-export { selectLoaderPageDomain };
+export { selectLoaderPageDomain, makeSelectEstablishmentName };

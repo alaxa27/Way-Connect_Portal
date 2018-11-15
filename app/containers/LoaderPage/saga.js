@@ -46,8 +46,8 @@ function getPromotionLevelsRequest() {
 
 export function* getEstablishmentEffect() {
   try {
-    const { estData } = yield call(getEstablishmentRequest);
-    yield put(establishmentLoaded(estData));
+    const { data } = yield call(getEstablishmentRequest);
+    yield put(establishmentLoaded(data.name));
   } catch (err) {
     yield put(establishmentLoadingError(err));
   }
@@ -55,8 +55,8 @@ export function* getEstablishmentEffect() {
 
 export function* postConnectionEffect() {
   try {
-    const { conData } = yield call(postConnectionRequest);
-    yield put(connectionPosted(conData));
+    const { data } = yield call(postConnectionRequest);
+    yield put(connectionPosted(data));
   } catch (err) {
     yield put(connectionPostingError(err));
   }
@@ -64,8 +64,8 @@ export function* postConnectionEffect() {
 
 export function* getPromotionLevelsEffect() {
   try {
-    const { levData } = yield call(getPromotionLevelsRequest);
-    yield put(discountLoaded(levData));
+    const { data } = yield call(getPromotionLevelsRequest);
+    yield put(discountLoaded(data));
   } catch (err) {
     yield put(promotionLevelsLoadingError(err));
   }
@@ -73,11 +73,11 @@ export function* getPromotionLevelsEffect() {
 
 export function* getDiscountEffect() {
   try {
-    const { disData } = yield call(getDiscountRequest);
+    const { data } = yield call(getDiscountRequest);
     yield put(
       promotionLevelsLoaded({
-        current_views: disData.current_views,
-        rank: disData.promotion_level,
+        current_views: data.current_views,
+        rank: data.promotion_level,
       }),
     );
   } catch (err) {

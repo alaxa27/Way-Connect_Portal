@@ -16,7 +16,7 @@ import Title from 'components/Title';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectLoaderPage from './selectors';
+import makeSelectLoaderPage, { makeSelectEstablishmentName } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
@@ -37,6 +37,8 @@ export class LoaderPage extends React.Component {
   }
 
   render() {
+    const { establishmentName } = this.props;
+
     return (
       <HomeWrapper>
         <WayConnectWrapper>
@@ -46,7 +48,7 @@ export class LoaderPage extends React.Component {
         </WayConnectWrapper>
         <WelcomeMessage>
           <p>Bienvenue sur le WiFi de</p>
-          <EstablishmentName>180 DEGRES</EstablishmentName>
+          <EstablishmentName>{establishmentName}</EstablishmentName>
         </WelcomeMessage>
       </HomeWrapper>
     );
@@ -55,10 +57,12 @@ export class LoaderPage extends React.Component {
 
 LoaderPage.propTypes = {
   loadEstablishment: PropTypes.func,
+  establishmentName: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   loaderPage: makeSelectLoaderPage(),
+  establishmentName: makeSelectEstablishmentName(),
 });
 
 function mapDispatchToProps(dispatch) {
