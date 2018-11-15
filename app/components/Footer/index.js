@@ -13,7 +13,6 @@ import _ from 'underscore';
 import rightArrow from 'images/right-arrow_footer.png';
 import leftArrow from 'images/left-arrow_footer.png';
 
-import Slider from 'components/Slider';
 import ActivableLink from 'components/ActivableLink';
 import FooterWrapper from './FooterWrapper';
 import ArrowWrapper from './ArrowWrapper';
@@ -42,9 +41,6 @@ class Footer extends React.Component {
   renderNext() {
     const { index, number, active, countDown } = this.props;
 
-    if (index === number - 1) {
-      return <Slider>{this.renderCountDown(countDown)}</Slider>;
-    }
     return (
       <React.Fragment>
         <DotsWrapper>
