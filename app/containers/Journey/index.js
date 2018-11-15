@@ -156,6 +156,12 @@ export class Journey extends React.Component {
     this.onCommunicationProgress = this.onCommunicationProgress.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      journey: this.props.journey,
+    });
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.changeIndex(this.props.match.params.id);

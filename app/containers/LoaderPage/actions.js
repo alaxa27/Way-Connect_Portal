@@ -52,9 +52,10 @@ export function postConnection() {
   };
 }
 
-export function connectionPosted() {
+export function connectionPosted(connection) {
   return {
     type: POST_CONNECTION_SUCCESS,
+    communication: connection.communication,
   };
 }
 
@@ -70,9 +71,10 @@ export function loadPromotionLevels() {
   };
 }
 
-export function promotionLevelsLoaded() {
+export function promotionLevelsLoaded(promotionLevels) {
   return {
     type: GET_PROMOTION_LEVELS_SUCCESS,
+    promotionLevels,
   };
 }
 
@@ -88,9 +90,10 @@ export function loadDiscount() {
   };
 }
 
-export function discountLoaded() {
+export function discountLoaded(discount) {
   return {
     type: RETRIEVE_DISCOUNT_SUCCESS,
+    discount,
   };
 }
 

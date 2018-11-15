@@ -1,4 +1,5 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, all } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import axios from 'axios';
 
 import { GET_ESTABLISHMENT, POST_CONNECTION_SUCCESS } from './constants';
@@ -40,7 +41,7 @@ function getDiscountRequest() {
 function getPromotionLevelsRequest() {
   return axios({
     method: 'get',
-    url: `${apiURL}/customers/${macAddress}/levels/`,
+    url: `${apiURL}/customers/levels/`,
   });
 }
 
@@ -57,6 +58,7 @@ export function* postConnectionEffect() {
   try {
     const { data } = yield call(postConnectionRequest);
     yield put(connectionPosted(data));
+    yield put(push('/journey/0'));
   } catch (err) {
     yield put(connectionPostingError(err));
   }
@@ -74,12 +76,7 @@ export function* getPromotionLevelsEffect() {
 export function* getDiscountEffect() {
   try {
     const { data } = yield call(getDiscountRequest);
-    yield put(
-      promotionLevelsLoaded({
-        current_views: data.current_views,
-        rank: data.promotion_level,
-      }),
-    );
+    yield put(promotionLevelsLoaded(data));
   } catch (err) {
     yield put(discountLoadingError(err));
   }
@@ -87,8 +84,10 @@ export function* getDiscountEffect() {
 
 // Individual exports for testing
 export default function* loaderPageSaga() {
-  yield takeLatest(GET_ESTABLISHMENT, getEstablishmentEffect);
-  yield takeLatest(GET_ESTABLISHMENT, postConnectionEffect);
-  yield takeLatest(POST_CONNECTION_SUCCESS, getDiscountEffect);
-  yield takeLatest(POST_CONNECTION_SUCCESS, getPromotionLevelsEffect);
+  yield all([
+    takeLatest(GET_ESTABLISHMENT, getEstablishmentEffect),
+    takeLatest(GET_ESTABLISHMENT, postConnectionEffect),
+    takeLatest(POST_CONNECTION_SUCCESS, getDiscountEffect),
+    takeLatest(POST_CONNECTION_SUCCESS, getPromotionLevelsEffect),
+  ]);
 }
