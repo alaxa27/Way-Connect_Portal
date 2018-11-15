@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
@@ -54,6 +54,7 @@ export class LoaderPage extends React.Component {
 }
 
 LoaderPage.propTypes = {
+  loadEstablishment: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
