@@ -95,7 +95,7 @@ const generateFidelity = (discount, promotionLevels, establishmentName) => ({
     },
     discounts: _.map(promotionLevels, lvl => ({
       ...lvl,
-      offer: lvl.text,
+      offer: lvl.text ? lvl.txt : `${lvl.reward} ${lvl.reward_currency}`,
     })),
   },
 });
@@ -134,7 +134,6 @@ const makeSelectJourney = () =>
         generateFidelity(discount, promotionLevels, establishmentName),
       );
     }
-    console.log(journey[2]);
     return journey;
   });
 
