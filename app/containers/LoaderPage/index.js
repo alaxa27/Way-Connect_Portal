@@ -28,8 +28,14 @@ import Moto from './Moto';
 import WelcomeMessage from './WelcomeMessage';
 import EstablishmentName from './EstablishmentName';
 
+import { loadEstablishment } from './actions';
+
 /* eslint-disable react/prefer-stateless-function */
 export class LoaderPage extends React.Component {
+  componentDidMount() {
+    this.props.loadEstablishment();
+  }
+
   render() {
     return (
       <HomeWrapper>
@@ -48,7 +54,6 @@ export class LoaderPage extends React.Component {
 }
 
 LoaderPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -57,7 +62,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    loadEstablishment: () => dispatch(loadEstablishment()),
   };
 }
 

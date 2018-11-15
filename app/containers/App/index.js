@@ -20,8 +20,8 @@ export default function App() {
   return (
     <React.Fragment>
       <Switch>
-        <Route exact path="/" component={NotFoundPage} />
-        <Route exact path="/:mac/:tok" component={LoaderPage} />
+        <Route exact path="/" component={LoaderPage} />
+        <Route exact path="/portal/:mac/:tok" component={LoaderPage} />
         <Route exact path="/journey/:id" component={Journey} />
         <Route component={NotFoundPage} />
       </Switch>
