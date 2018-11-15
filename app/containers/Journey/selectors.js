@@ -3,7 +3,7 @@ import _ from 'underscore';
 import { selectLoaderPageDomain } from 'containers/LoaderPage/selectors';
 import { initialState } from './reducer';
 
-const establishmentsWithFidelity = ['qEstablichement 1'];
+const establishmentsWithFidelity = ['Establichement 1'];
 const questionSamples = [
   {
     type: 'Q',
@@ -134,6 +134,7 @@ const makeSelectJourney = () =>
         generateFidelity(discount, promotionLevels, establishmentName),
       );
     }
+    console.log(journey[2]);
     return journey;
   });
 
