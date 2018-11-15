@@ -10,8 +10,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
-import Journey from 'containers/Journey';
+import LoaderPage from 'containers/LoaderPage/Loadable';
+import Journey from 'containers/Journey/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -20,7 +20,8 @@ export default function App() {
   return (
     <React.Fragment>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={NotFoundPage} />
+        <Route exact path="/:mac/:tok" component={LoaderPage} />
         <Route exact path="/journey/:id" component={Journey} />
         <Route component={NotFoundPage} />
       </Switch>
