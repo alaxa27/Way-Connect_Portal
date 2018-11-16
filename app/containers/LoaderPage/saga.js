@@ -1,6 +1,6 @@
 import { call, put, takeLatest, take, all, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import axios from 'axios';
+import axiosInstance from '../../apiConfig';
 
 import { makeSelectMac } from './selectors';
 
@@ -22,33 +22,31 @@ import {
   discountLoadingError,
 } from './actions';
 
-const apiURL = 'http://localhost:5000';
-
 function getEstablishmentRequest() {
-  return axios({
+  return axiosInstance({
     method: 'get',
-    url: `${apiURL}/customers/establishment/`,
+    url: `/customers/establishment/`,
   });
 }
 
 function postConnectionRequest(mac) {
-  return axios({
+  return axiosInstance({
     method: 'post',
-    url: `${apiURL}/customers/${mac}/connect/`,
+    url: `/customers/${mac}/connect/`,
   });
 }
 
 function getDiscountRequest(mac) {
-  return axios({
+  return axiosInstance({
     method: 'get',
-    url: `${apiURL}/customers/${mac}/retrieve_discount/`,
+    url: `/customers/${mac}/retrieve_discount/`,
   });
 }
 
 function getPromotionLevelsRequest() {
-  return axios({
+  return axiosInstance({
     method: 'get',
-    url: `${apiURL}/customers/levels/`,
+    url: `/customers/levels/`,
   });
 }
 

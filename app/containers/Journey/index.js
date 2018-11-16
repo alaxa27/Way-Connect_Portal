@@ -15,12 +15,16 @@ import Question from 'components/Question';
 import Fidelity from 'components/Fidelity';
 import VideoPlayer from 'components/VideoPlayer';
 
+import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectJourney from './selectors';
 import reducer from './reducer';
+import saga from './saga';
 
 import JourneyWrapper from './JourneyWrapper';
 import JourneyItem from './JourneyItem';
+
+import { skipVideo } from './actions';
 
 const timeBeforeSkip = 5; // Skip the ad available after 5sec
 
@@ -166,6 +170,9 @@ export class Journey extends React.Component {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.changeIndex(this.props.match.params.id);
       this.deactivateFooter();
+      if (this.props.journey[this.props.match.params.id].type === 'C') {
+        this.props.skipVideo();
+      }
     }
   }
 
@@ -248,7 +255,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    skipVideo: () => dispatch(skipVideo()),
   };
 }
 
@@ -258,8 +265,10 @@ const withConnect = connect(
 );
 
 const withReducer = injectReducer({ key: 'journey', reducer });
+const withSaga = injectSaga({ key: 'journey', saga });
 
 export default compose(
   withReducer,
+  withSaga,
   withConnect,
 )(Journey);
