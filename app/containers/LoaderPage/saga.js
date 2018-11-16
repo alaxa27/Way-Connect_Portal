@@ -1,8 +1,11 @@
-import { call, put, takeLatest, take, all } from 'redux-saga/effects';
+import { call, put, takeLatest, take, all, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 
+import { makeSelectMac } from './selectors';
+
 import {
+  SAVE_BOX_INFORMATIONS,
   GET_ESTABLISHMENT,
   POST_CONNECTION_SUCCESS,
   RETRIEVE_DISCOUNT_SUCCESS,
@@ -19,7 +22,6 @@ import {
   discountLoadingError,
 } from './actions';
 
-const macAddress = 'AA:AD:4D:F2:1B:1B';
 const apiURL = 'http://localhost:5000';
 
 function getEstablishmentRequest() {
@@ -29,17 +31,17 @@ function getEstablishmentRequest() {
   });
 }
 
-function postConnectionRequest() {
+function postConnectionRequest(mac) {
   return axios({
     method: 'post',
-    url: `${apiURL}/customers/${macAddress}/connect/`,
+    url: `${apiURL}/customers/${mac}/connect/`,
   });
 }
 
-function getDiscountRequest() {
+function getDiscountRequest(mac) {
   return axios({
     method: 'get',
-    url: `${apiURL}/customers/${macAddress}/retrieve_discount/`,
+    url: `${apiURL}/customers/${mac}/retrieve_discount/`,
   });
 }
 
@@ -61,7 +63,8 @@ export function* getEstablishmentEffect() {
 
 export function* postConnectionEffect() {
   try {
-    const { data } = yield call(postConnectionRequest);
+    const mac = yield select(makeSelectMac());
+    const { data } = yield call(postConnectionRequest, mac);
     yield put(connectionPosted(data));
   } catch (err) {
     yield put(connectionPostingError(err));
@@ -79,7 +82,8 @@ export function* getPromotionLevelsEffect() {
 
 export function* getDiscountEffect() {
   try {
-    const { data } = yield call(getDiscountRequest);
+    const mac = yield select(makeSelectMac());
+    const { data } = yield call(getDiscountRequest, mac);
     yield put(discountLoaded(data));
   } catch (err) {
     yield put(discountLoadingError(err));
@@ -88,6 +92,7 @@ export function* getDiscountEffect() {
 
 // Individual exports for testing
 export default function* loaderPageSaga() {
+  yield take(SAVE_BOX_INFORMATIONS);
   yield all([
     takeLatest(GET_ESTABLISHMENT, getEstablishmentEffect),
     takeLatest(GET_ESTABLISHMENT, postConnectionEffect),

@@ -10,6 +10,8 @@ const selectLoaderPageDomain = state => state.get('loaderPage', initialState);
 /**
  * Other specific selectors
  */
+const makeSelectMac = () =>
+  createSelector(selectLoaderPageDomain, loaderState => loaderState.get('mac'));
 
 const makeSelectEstablishmentName = () =>
   createSelector(selectLoaderPageDomain, loaderState =>
@@ -23,4 +25,4 @@ const makeSelectLoaderPage = () =>
   createSelector(selectLoaderPageDomain, substate => substate.toJS());
 
 export default makeSelectLoaderPage;
-export { selectLoaderPageDomain, makeSelectEstablishmentName };
+export { selectLoaderPageDomain, makeSelectMac, makeSelectEstablishmentName };

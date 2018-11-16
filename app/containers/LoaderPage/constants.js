@@ -6,14 +6,16 @@
 
 export const DEFAULT_ACTION = 'app/LoaderPage/DEFAULT_ACTION';
 
-export const POST_CONNECTION = 'app/LoaderPage/POST_CONNECTION';
-export const POST_CONNECTION_SUCCESS = 'app/LoaderPage/POST_CONNECTION_SUCCESS';
-export const POST_CONNECTION_ERROR = 'app/LoaderPage/POST_CONNECTION_ERROR';
+export const SAVE_BOX_INFORMATIONS = 'app/LoaderPage/SAVE_BOX_INFORMATIONS';
 
 export const GET_ESTABLISHMENT = 'app/LoaderPage/GET_ESTABLISHMENT';
 export const GET_ESTABLISHMENT_SUCCESS =
   'app/LoaderPage/GET_ESTABLISHMENT_SUCCESS';
 export const GET_ESTABLISHMENT_ERROR = 'app/LoaderPage/GET_ESTABLISHMENT_ERROR';
+
+export const POST_CONNECTION = 'app/LoaderPage/POST_CONNECTION';
+export const POST_CONNECTION_SUCCESS = 'app/LoaderPage/POST_CONNECTION_SUCCESS';
+export const POST_CONNECTION_ERROR = 'app/LoaderPage/POST_CONNECTION_ERROR';
 
 export const GET_PROMOTION_LEVELS = 'app/LoaderPage/GET_PROMOTION_LEVELS';
 export const GET_PROMOTION_LEVELS_SUCCESS =

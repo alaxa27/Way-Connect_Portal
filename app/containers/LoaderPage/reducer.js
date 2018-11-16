@@ -7,6 +7,7 @@
 import { fromJS } from 'immutable';
 import {
   DEFAULT_ACTION,
+  SAVE_BOX_INFORMATIONS,
   POST_CONNECTION_SUCCESS,
   GET_ESTABLISHMENT_SUCCESS,
   GET_PROMOTION_LEVELS_SUCCESS,
@@ -14,6 +15,8 @@ import {
 } from './constants';
 
 export const initialState = fromJS({
+  mac: '',
+  tok: '',
   establishmentName: '',
   communication: {
     video: '',
@@ -39,6 +42,8 @@ function loaderPageReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
+    case SAVE_BOX_INFORMATIONS:
+      return state.merge({ mac: action.mac, tok: action.tok });
     case GET_ESTABLISHMENT_SUCCESS:
       return state.set('establishmentName', action.name);
     case POST_CONNECTION_SUCCESS:
