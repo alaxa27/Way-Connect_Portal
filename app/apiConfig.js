@@ -3,13 +3,11 @@ import axios from 'axios';
 let backendHost = 'http://localhost:5000';
 
 if (process.env.NODE_ENV === 'production') {
-  backendHost = 'http://192.168.220.2:5000';
+  backendHost = 'http://192.168.220.2:5000/portal';
 }
 
-const boxReverseProxy = '/portal';
-
 const axiosInstance = axios.create({
-  baseURL: backendHost + boxReverseProxy,
+  baseURL: backendHost,
 });
 
 export default axiosInstance;
