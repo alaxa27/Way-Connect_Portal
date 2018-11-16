@@ -6,8 +6,10 @@ if (process.env.NODE_ENV === 'production') {
   backendHost = 'http://192.168.220.2:5000';
 }
 
+const boxReverseProxy = '/portal';
+
 const axiosInstance = axios.create({
-  baseURL: backendHost,
+  baseURL: backendHost + boxReverseProxy,
 });
 
 export default axiosInstance;
