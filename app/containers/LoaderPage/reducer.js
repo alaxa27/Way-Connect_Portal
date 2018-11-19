@@ -26,7 +26,7 @@ export const initialState = fromJS({
     promotion_level: {
       rank: 1,
     },
-    current_views: 0,
+    current_views: 1,
   },
   promotionLevels: [
     {
@@ -54,7 +54,7 @@ function loaderPageReducer(state = initialState, action) {
     case RETRIEVE_DISCOUNT_ERROR:
       return state.set('discount', {
         promotion_level: { rank: 1 },
-        current_views: 0,
+        current_views: 1,
       });
     case GET_PROMOTION_LEVELS_SUCCESS:
       return state.set('promotionLevels', action.promotionLevels);
