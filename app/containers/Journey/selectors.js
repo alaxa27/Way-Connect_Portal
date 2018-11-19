@@ -3,7 +3,7 @@ import _ from 'underscore';
 import { selectLoaderPageDomain } from 'containers/LoaderPage/selectors';
 import { initialState } from './reducer';
 
-const establishmentsWithFidelity = ['Establichement 1'];
+const establishmentsWithFidelity = ['esttes'];
 const questionSamples = [
   {
     type: 'Q',

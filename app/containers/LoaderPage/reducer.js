@@ -12,6 +12,7 @@ import {
   GET_ESTABLISHMENT_SUCCESS,
   GET_PROMOTION_LEVELS_SUCCESS,
   RETRIEVE_DISCOUNT_SUCCESS,
+  RETRIEVE_DISCOUNT_ERROR,
 } from './constants';
 
 export const initialState = fromJS({
@@ -50,6 +51,11 @@ function loaderPageReducer(state = initialState, action) {
       return state.set('communication', action.communication);
     case RETRIEVE_DISCOUNT_SUCCESS:
       return state.set('discount', action.discount);
+    case RETRIEVE_DISCOUNT_ERROR:
+      return state.set('discount', {
+        promotion_level: { rank: 1 },
+        current_views: 0,
+      });
     case GET_PROMOTION_LEVELS_SUCCESS:
       return state.set('promotionLevels', action.promotionLevels);
     default:
