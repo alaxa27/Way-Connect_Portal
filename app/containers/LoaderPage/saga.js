@@ -9,7 +9,6 @@ import {
   GET_ESTABLISHMENT,
   POST_CONNECTION_SUCCESS,
   RETRIEVE_DISCOUNT_SUCCESS,
-  GET_PROMOTION_LEVELS_SUCCESS,
 } from './constants';
 import {
   establishmentLoaded,
@@ -94,12 +93,8 @@ export default function* loaderPageSaga() {
   yield all([
     takeLatest(GET_ESTABLISHMENT, getEstablishmentEffect),
     takeLatest(GET_ESTABLISHMENT, postConnectionEffect),
-    takeLatest(POST_CONNECTION_SUCCESS, getDiscountEffect),
     takeLatest(POST_CONNECTION_SUCCESS, getPromotionLevelsEffect),
   ]);
-  yield all([
-    take(RETRIEVE_DISCOUNT_SUCCESS),
-    take(GET_PROMOTION_LEVELS_SUCCESS),
-  ]);
+  yield take(RETRIEVE_DISCOUNT_SUCCESS);
   yield put(push('/journey/0'));
 }
