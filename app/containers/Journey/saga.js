@@ -1,20 +1,18 @@
-import { takeLatest, call, put, select } from 'redux-saga/effects';
-import { makeSelectMac } from 'containers/LoaderPage/selectors';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import axiosInstance from '../../apiConfig';
 import { videoSkipped, skippingVideoError } from './actions';
 import { SKIP_VIDEO } from './constants';
 
-function skipVideoRequest(mac) {
+function skipVideoRequest() {
   return axiosInstance({
     method: 'post',
-    url: `/customers/${mac}/acknowledge_communication/`,
+    url: `/customers/mac/acknowledge_communication/`,
   });
 }
 
 export function* skipVideoEffect() {
   try {
-    const mac = yield select(makeSelectMac());
-    yield call(skipVideoRequest, mac);
+    yield call(skipVideoRequest);
     yield put(videoSkipped());
   } catch (err) {
     yield put(skippingVideoError(err));

@@ -6,8 +6,6 @@
 
 export const DEFAULT_ACTION = 'app/LoaderPage/DEFAULT_ACTION';
 
-export const SAVE_BOX_INFORMATIONS = 'app/LoaderPage/SAVE_BOX_INFORMATIONS';
-
 export const GET_ESTABLISHMENT = 'app/LoaderPage/GET_ESTABLISHMENT';
 export const GET_ESTABLISHMENT_SUCCESS =
   'app/LoaderPage/GET_ESTABLISHMENT_SUCCESS';

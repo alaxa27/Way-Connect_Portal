@@ -6,7 +6,6 @@
 
 import {
   DEFAULT_ACTION,
-  SAVE_BOX_INFORMATIONS,
   GET_ESTABLISHMENT,
   GET_ESTABLISHMENT_SUCCESS,
   GET_ESTABLISHMENT_ERROR,
@@ -24,14 +23,6 @@ import {
 export function defaultAction() {
   return {
     type: DEFAULT_ACTION,
-  };
-}
-
-export function saveBoxInformations(mac, tok) {
-  return {
-    type: SAVE_BOX_INFORMATIONS,
-    mac,
-    tok,
   };
 }
 

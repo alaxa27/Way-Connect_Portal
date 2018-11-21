@@ -28,13 +28,11 @@ import Moto from './Moto';
 import WelcomeMessage from './WelcomeMessage';
 import EstablishmentName from './EstablishmentName';
 
-import { loadEstablishment, saveBoxInformations } from './actions';
+import { loadEstablishment } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class LoaderPage extends React.Component {
   componentDidMount() {
-    const { mac, tok } = this.props.match.params;
-    this.props.saveBoxInformations(mac, tok);
     this.props.loadEstablishment();
   }
 
@@ -58,15 +56,8 @@ export class LoaderPage extends React.Component {
 }
 
 LoaderPage.propTypes = {
-  saveBoxInformations: PropTypes.func,
   loadEstablishment: PropTypes.func,
   establishmentName: PropTypes.string,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      mac: PropTypes.string,
-      tok: PropTypes.string,
-    }),
-  }),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -77,7 +68,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     loadEstablishment: () => dispatch(loadEstablishment()),
-    saveBoxInformations: (mac, tok) => dispatch(saveBoxInformations(mac, tok)),
   };
 }
 

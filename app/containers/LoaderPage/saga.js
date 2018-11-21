@@ -1,11 +1,8 @@
-import { call, put, takeLatest, take, all, select } from 'redux-saga/effects';
+import { call, put, takeLatest, take, all } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axiosInstance from '../../apiConfig';
 
-import { makeSelectMac } from './selectors';
-
 import {
-  SAVE_BOX_INFORMATIONS,
   GET_ESTABLISHMENT,
   POST_CONNECTION_SUCCESS,
   GET_PROMOTION_LEVELS_SUCCESS,
@@ -28,17 +25,17 @@ function getEstablishmentRequest() {
   });
 }
 
-function postConnectionRequest(mac) {
+function postConnectionRequest() {
   return axiosInstance({
     method: 'post',
-    url: `/customers/${mac}/connect/`,
+    url: `/customers/mac/connect/`,
   });
 }
 
-function getDiscountRequest(mac) {
+function getDiscountRequest() {
   return axiosInstance({
     method: 'get',
-    url: `/customers/${mac}/retrieve_discount/`,
+    url: `/customers/mac/retrieve_discount/`,
   });
 }
 
@@ -60,8 +57,7 @@ export function* getEstablishmentEffect() {
 
 export function* postConnectionEffect() {
   try {
-    const mac = yield select(makeSelectMac());
-    const { data } = yield call(postConnectionRequest, mac);
+    const { data } = yield call(postConnectionRequest);
     yield put(connectionPosted(data));
   } catch (err) {
     yield put(connectionPostingError(err));
@@ -79,8 +75,7 @@ export function* getPromotionLevelsEffect() {
 
 export function* getDiscountEffect() {
   try {
-    const mac = yield select(makeSelectMac());
-    const { data } = yield call(getDiscountRequest, mac);
+    const { data } = yield call(getDiscountRequest);
     yield put(discountLoaded(data));
   } catch (err) {
     yield put(discountLoadingError(err));
@@ -89,7 +84,6 @@ export function* getDiscountEffect() {
 
 // Individual exports for testing
 export default function* loaderPageSaga() {
-  yield take(SAVE_BOX_INFORMATIONS);
   yield all([
     takeLatest(GET_ESTABLISHMENT, getEstablishmentEffect),
     takeLatest(GET_ESTABLISHMENT, postConnectionEffect),

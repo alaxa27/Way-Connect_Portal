@@ -17,7 +17,6 @@ import VideoPlayer from 'components/VideoPlayer';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectTok } from 'containers/LoaderPage/selectors';
 import makeSelectJourney from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -175,9 +174,7 @@ export class Journey extends React.Component {
       if (
         parseInt(this.props.match.params.id, 10) === this.props.journey.length
       ) {
-        window.location.href = `http://192.168.220.2:2050/nodogsplash_auth/?tok=${
-          this.props.tok
-        }&redir=http://google.com`;
+        // dispatch Authentication through /customers/authenticate + reidrection
       }
 
       if (this.props.journey[this.props.match.params.id].type === 'C') {
@@ -262,7 +259,6 @@ Journey.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   journey: makeSelectJourney(),
-  tok: makeSelectTok(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -21,7 +21,6 @@ export default function App() {
     <React.Fragment>
       <Switch>
         <Route exact path="/" component={LoaderPage} />
-        <Route exact path="/portal/:mac/:tok" component={LoaderPage} />
         <Route exact path="/journey/:id" component={Journey} />
         <Route component={NotFoundPage} />
       </Switch>
