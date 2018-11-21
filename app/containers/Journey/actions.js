@@ -9,6 +9,9 @@ import {
   SKIP_VIDEO,
   SKIP_VIDEO_SUCCESS,
   SKIP_VIDEO_ERROR,
+  AUTHENTICATE,
+  AUTHENTICATE_SUCCESS,
+  AUTHENTICATE_ERROR,
 } from './constants';
 
 export function defaultAction() {
@@ -32,5 +35,23 @@ export function videoSkipped() {
 export function skippingVideoError() {
   return {
     type: SKIP_VIDEO_ERROR,
+  };
+}
+
+export function authenticate() {
+  return {
+    type: AUTHENTICATE,
+  };
+}
+
+export function authenticated() {
+  return {
+    type: AUTHENTICATE_SUCCESS,
+  };
+}
+
+export function authenticationError() {
+  return {
+    type: AUTHENTICATE_ERROR,
   };
 }

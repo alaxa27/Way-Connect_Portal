@@ -24,7 +24,7 @@ import saga from './saga';
 import JourneyWrapper from './JourneyWrapper';
 import JourneyItem from './JourneyItem';
 
-import { skipVideo } from './actions';
+import { skipVideo, authenticate } from './actions';
 
 const timeBeforeSkip = 5; // Skip the ad available after 5sec
 
@@ -174,7 +174,7 @@ export class Journey extends React.Component {
       if (
         parseInt(this.props.match.params.id, 10) === this.props.journey.length
       ) {
-        // dispatch Authentication through /customers/authenticate + reidrection
+        this.props.authenticate();
       }
 
       if (this.props.journey[this.props.match.params.id].type === 'C') {
@@ -264,6 +264,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     skipVideo: () => dispatch(skipVideo()),
+    authenticate: () => dispatch(authenticate()),
   };
 }
 
