@@ -32,17 +32,17 @@ function postConnectionRequest() {
   });
 }
 
-function getDiscountRequest() {
-  return axiosInstance({
-    method: 'get',
-    url: `/customers/mac/retrieve_discount/`,
-  });
-}
-
 function getPromotionLevelsRequest() {
   return axiosInstance({
     method: 'get',
     url: `/customers/levels/`,
+  });
+}
+
+function getDiscountRequest() {
+  return axiosInstance({
+    method: 'get',
+    url: `/customers/mac/retrieve_discount/`,
   });
 }
 

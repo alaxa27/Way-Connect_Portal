@@ -90,7 +90,7 @@ const generateFidelity = (discount, promotionLevels, establishmentName) => ({
   fidelity: {
     establishment_name: establishmentName,
     current_level: {
-      rank: discount.promotion_level.rank,
+      rank: discount.promotion_level ? discount.promotion_level.rank : 1,
       current_views: discount.current_views,
     },
     discounts: _.map(promotionLevels, lvl => ({
