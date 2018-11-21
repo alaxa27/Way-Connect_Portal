@@ -216,28 +216,30 @@ export class Journey extends React.Component {
   }
 
   renderJourneyItem(item) {
-    switch (item.type) {
-      case 'Q':
-        return <Question onValid={this.validateAnswer} {...item.question} />;
-      case 'F':
-        if (!this.state.footerActive) this.activateFooter();
-        return <Fidelity {...item.fidelity} onActiveClick={() => {}} />;
-      case 'C':
-        return (
-          <VideoPlayer
-            {...item.communication}
-            onProgress={this.onCommunicationProgress}
-            playing
-          />
-        );
-      default:
-        return null;
+    if (item) {
+      switch (item.type) {
+        case 'Q':
+          return <Question onValid={this.validateAnswer} {...item.question} />;
+        case 'F':
+          if (!this.state.footerActive) this.activateFooter();
+          return <Fidelity {...item.fidelity} onActiveClick={() => {}} />;
+        case 'C':
+          return (
+            <VideoPlayer
+              {...item.communication}
+              onProgress={this.onCommunicationProgress}
+              playing
+            />
+          );
+        default:
+          return null;
+      }
     }
+    return null;
   }
 
   render() {
     const { index, journey, footerActive } = this.state;
-    if (index === journey.length) return null;
     return (
       <JourneyWrapper>
         <JourneyItem>{this.renderJourneyItem(journey[index])}</JourneyItem>

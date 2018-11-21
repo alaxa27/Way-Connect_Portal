@@ -45,7 +45,7 @@ export function authenticate() {
 }
 
 export function authenticated(data) {
-  window.location.href = data.url;
+  window.location.reoplace(data.url);
   return {
     type: AUTHENTICATE_SUCCESS,
   };
