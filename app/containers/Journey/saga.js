@@ -6,12 +6,7 @@ import {
   authenticationError,
   authenticated,
 } from './actions';
-import {
-  SKIP_VIDEO,
-  SKIP_VIDEO_SUCCESS,
-  AUTHENTICATE,
-  AUTHENTICATE_SUCCESS,
-} from './constants';
+import { SKIP_VIDEO, SKIP_VIDEO_SUCCESS, AUTHENTICATE } from './constants';
 
 function authenticateRequest() {
   return axiosInstance({
@@ -27,14 +22,14 @@ function skipVideoRequest() {
   });
 }
 
-export function* redirectEffect() {
-  window.location.href = 'http://google.com/';
-}
+// export function* redirectEffect() {
+//   window.location.href = 'http://google.com/';
+// }
 
 export function* authenticateEffect() {
   try {
-    yield call(authenticateRequest);
-    yield put(authenticated());
+    const { data } = yield call(authenticateRequest);
+    yield put(authenticated(data));
   } catch (err) {
     yield put(authenticationError(err));
   }
@@ -54,5 +49,5 @@ export default function* journeySaga() {
   yield takeLatest(SKIP_VIDEO, skipVideoEffect);
   yield take(SKIP_VIDEO_SUCCESS);
   yield takeLatest(AUTHENTICATE, authenticateEffect);
-  yield takeLatest(AUTHENTICATE_SUCCESS, redirectEffect);
+  // yield takeLatest(AUTHENTICATE_SUCCESS, redirectEffect);
 }
