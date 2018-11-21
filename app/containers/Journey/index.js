@@ -177,8 +177,10 @@ export class Journey extends React.Component {
         this.props.authenticate();
       }
 
-      if (this.props.journey[this.props.match.params.id].type === 'C') {
-        this.props.skipVideo();
+      if (this.props.match.params.id < this.props.journey.length) {
+        if (this.props.journey[this.props.match.params.id].type === 'C') {
+          this.props.skipVideo();
+        }
       }
     }
   }
