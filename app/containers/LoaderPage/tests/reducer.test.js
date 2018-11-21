@@ -13,18 +13,14 @@ describe('loaderPageReducer', () => {
   beforeEach(() => {
     state = fromJS({
       establishmentName: '',
-      communication: {
-        video: '',
-      },
+      videoCommunication: '',
       discount: {
-        promotion_level: {
-          rank: 1,
-        },
-        current_views: 1,
+        rank: 0,
+        current_views: 0,
       },
       promotionLevels: [
         {
-          rank: 1,
+          rank: 0,
           required_views: 0,
           reward: '0',
           reward_currency: '',
@@ -50,7 +46,7 @@ describe('loaderPageReducer', () => {
 
   it('should handle the connectionPosted action properly', () => {
     const videoURL = 'foobarbaz';
-    const expectedResult = state.setIn(['communication', 'video'], videoURL);
+    const expectedResult = state.set('videoCommunication', videoURL);
     expect(
       loaderPageReducer(
         state,
@@ -90,7 +86,7 @@ describe('loaderPageReducer', () => {
   it('should handle the discountLoaded action properly', () => {
     const expectedResult = state
       .setIn(['discount', 'current_views'], 1)
-      .setIn(['discount', 'promotion_level', 'rank'], 1);
+      .setIn(['discount', 'rank'], 1);
 
     expect(
       loaderPageReducer(
@@ -106,7 +102,7 @@ describe('loaderPageReducer', () => {
   it('should handle the discountLoadingError action properly', () => {
     const expectedResult = state
       .setIn(['discount', 'current_views'], 1)
-      .setIn(['discount', 'promotion_level', 'rank'], 1);
+      .setIn(['discount', 'rank'], 1);
 
     expect(loaderPageReducer(state, discountLoadingError())).toEqual(
       expectedResult,
