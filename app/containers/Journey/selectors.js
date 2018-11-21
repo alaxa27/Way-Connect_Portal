@@ -3,7 +3,14 @@ import _ from 'underscore';
 import { selectLoaderPageDomain } from 'containers/LoaderPage/selectors';
 import { initialState } from './reducer';
 
-const establishmentsWithFidelity = ['esttes'];
+const establishmentsWithFidelity = [
+  'esttes',
+  'Cactus Cafe',
+  '180',
+  'High Square',
+  'Wood and Hills',
+  'Yucca',
+];
 const questionSamples = [
   {
     type: 'Q',
