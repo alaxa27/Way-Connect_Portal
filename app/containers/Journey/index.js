@@ -237,7 +237,7 @@ export class Journey extends React.Component {
 
   render() {
     const { index, journey, footerActive } = this.state;
-
+    if (index === journey.length) return null;
     return (
       <JourneyWrapper>
         <JourneyItem>{this.renderJourneyItem(journey[index])}</JourneyItem>
