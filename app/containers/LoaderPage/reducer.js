@@ -43,18 +43,18 @@ function loaderPageReducer(state = initialState, action) {
     case GET_ESTABLISHMENT_SUCCESS:
       return state.set('establishmentName', action.name);
     case POST_CONNECTION_SUCCESS:
-      return state.set('communication', action.communication);
+      return state.setIn(
+        ['communication', 'video'],
+        action.communication.video,
+      );
     case RETRIEVE_DISCOUNT_SUCCESS:
-      return state.set('discount', action.discount);
+      return state.set('discount', fromJS(action.discount));
     case RETRIEVE_DISCOUNT_ERROR:
-      return state.set('discount', {
-        promotion_level: {
-          rank: 1,
-        },
-        current_views: 1,
-      });
+      return state
+        .setIn(['discount', 'current_views'], 1)
+        .setIn(['discount', 'promotion_level', 'rank'], 1);
     case GET_PROMOTION_LEVELS_SUCCESS:
-      return state.set('promotionLevels', action.promotionLevels);
+      return state.set('promotionLevels', fromJS(action.promotionLevels));
     default:
       return state;
   }
