@@ -17,20 +17,20 @@ const questionSamples = [
     question: {
       id: 32,
       type: 'CHOICE',
-      text: 'FOOBARBAZ ????',
+      text: 'Quel est votre sport préféré ?',
       multiple: false,
       choices: [
         {
           id: 1,
-          text: 'foo',
+          text: 'Football',
         },
         {
           id: 2,
-          text: 'bar',
+          text: 'Basketball',
         },
         {
           id: 3,
-          text: 'baz',
+          text: 'Handball',
         },
       ],
       defaultAnswers: [],
@@ -41,20 +41,20 @@ const questionSamples = [
     question: {
       id: 2,
       type: 'CHOICE',
-      text: 'Multiple foobarbaz ?????',
+      text: 'Vos types détablissements préférés ?',
       multiple: true,
       choices: [
         {
           id: 1,
-          text: 'foo',
+          text: 'Bar',
         },
         {
           id: 2,
-          text: 'bar',
+          text: 'Restaurant',
         },
         {
           id: 3,
-          text: 'baz',
+          text: 'Hôtel',
         },
       ],
       defaultAnswers: [],
@@ -65,22 +65,10 @@ const questionSamples = [
     question: {
       id: 4,
       type: 'VALUE',
-      text: 'How much?',
+      text: 'Quel note donneriez vous à cet établissement?',
       min: 0, // may be null
       max: 10, // may be null
       step: 1, // may be null
-      defaultAnswers: [],
-    },
-  },
-  {
-    type: 'Q',
-    question: {
-      id: 445,
-      type: 'VALUE_RANGE',
-      text: 'How much?',
-      min: 1, // may be null
-      max: 10, // may be null
-      step: 0.1, // may be null
       defaultAnswers: [],
     },
   },
