@@ -61,6 +61,31 @@ describe('makeSelectFidelity', () => {
         rank: 1, // Already completed level
         reward: '1.00',
         reward_currency: 'EUR',
+        text: 'foo',
+        required_views: 1,
+      },
+      {
+        rank: 2, // Already completed level
+        reward: '2.00',
+        reward_currency: 'EUR',
+        text: 'bar',
+        required_views: 2,
+      },
+    ]);
+
+    const mockedState = fromJS({
+      loaderPage: {
+        discount,
+        promotionLevels,
+        establishmentName,
+      },
+    });
+
+    const expectedPromotionLevels = fromJS([
+      {
+        rank: 1, // Already completed level
+        reward: '1.00',
+        reward_currency: 'EUR',
         offer: 'foo',
         required_views: 1,
       },
@@ -72,19 +97,12 @@ describe('makeSelectFidelity', () => {
         required_views: 2,
       },
     ]);
-    const mockedState = fromJS({
-      loaderPage: {
-        discount,
-        promotionLevels,
-        establishmentName,
-      },
-    });
     const expectedResponse = fromJS({
       type: 'F',
       fidelity: {
         establishment_name: establishmentName,
         current_level: discount,
-        discounts: promotionLevels,
+        discounts: expectedPromotionLevels,
       },
     });
     expect(fidelitySelector(mockedState)).toEqual(expectedResponse);
@@ -96,7 +114,7 @@ describe('makeSelectFidelity', () => {
         rank: 100, // Already completed level
         reward: '15.00',
         reward_currency: 'EUR',
-        offer: 'Coffee',
+        text: 'Coffee',
         required_views: 2,
       },
     ]);
@@ -126,14 +144,14 @@ describe('makeSelectJourney', () => {
       rank: 1, // Already completed level
       reward: '1.00',
       reward_currency: 'EUR',
-      offer: 'foo',
+      text: 'foo',
       required_views: 1,
     },
     {
       rank: 2, // Already completed level
       reward: '2.00',
       reward_currency: 'EUR',
-      offer: 'bar',
+      text: 'bar',
       required_views: 2,
     },
   ]);
@@ -158,7 +176,7 @@ describe('makeSelectJourney', () => {
         rank: 100, // Already completed level
         reward: '15.00',
         reward_currency: 'EUR',
-        offer: 'Coffee',
+        text: 'Coffee',
         required_views: 2,
       },
     ]);

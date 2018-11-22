@@ -29,19 +29,14 @@ const makeSelectDiscount = () =>
 const makeSelectPromotionLevels = () =>
   createSelector(selectLoaderPageDomain, loaderState => {
     const promotionLevels = loaderState.get('promotionLevels');
-    return promotionLevels.map(level => {
+    // eslint-disable-next-line no-unused-vars
+    return promotionLevels.map((level, i) => {
       if (level.get('text').length > 0) {
         return level.set('offer', level.get('text')).delete('text');
       }
       return level
         .set('offer', `${level.get('reward')} ${level.get('reward_currency')}`)
         .delete('text');
-      // if (level)
-      // ...level,
-      // offer:
-      //   level.get('text').length > 0
-      //     ? level.get('text')
-      //     : `${level.get('reward')} ${level.get('reward_currency')}`,
     });
   });
 
