@@ -30,7 +30,7 @@ describe('loaderPageReducer', () => {
     ).toEqual(expectedResult);
   });
 
-  it('should handle the connectionPosted action properly', () => {
+  it('should handle the connectionPosted when there is a video', () => {
     const videoURL = 'foobarbaz';
     const expectedResult = state.set('videoCommunication', videoURL);
     expect(
@@ -38,6 +38,13 @@ describe('loaderPageReducer', () => {
         state,
         connectionPosted({ communication: { video: videoURL } }),
       ),
+    ).toEqual(expectedResult);
+  });
+
+  it('should handle the connectionPosted when there is no video', () => {
+    const expectedResult = state.set('videoCommunication', '');
+    expect(
+      loaderPageReducer(state, connectionPosted({ communication: null })),
     ).toEqual(expectedResult);
   });
 
