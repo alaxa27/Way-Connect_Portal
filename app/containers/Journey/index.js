@@ -162,7 +162,7 @@ export class Journey extends React.Component {
 
   componentDidMount() {
     this.setState({
-      journey: this.props.journey,
+      journey: this.props.journey.toJS(),
     });
   }
 
