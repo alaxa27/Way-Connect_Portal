@@ -30,11 +30,12 @@ function loaderPageReducer(state = initialState, action) {
         action.communication ? action.communication.video : '',
       );
     case RETRIEVE_DISCOUNT_SUCCESS:
-      console.log(action.discount);
+      console.log('success');
       return state
         .setIn(['discount', 'rank'], action.discount.promotion_level.rank)
         .setIn(['discount', 'current_views'], action.discount.current_views);
     case RETRIEVE_DISCOUNT_ERROR:
+      console.log('error');
       return state
         .setIn(['discount', 'current_views'], 1)
         .setIn(['discount', 'rank'], 1);

@@ -75,9 +75,13 @@ export function* getPromotionLevelsEffect() {
 
 export function* getDiscountEffect() {
   try {
+    console.log('effect1');
     const { data } = yield call(getDiscountRequest);
+    console.log('effect2');
     yield put(discountLoaded(data));
+    console.log('effect3');
   } catch (err) {
+    console.log('effect4');
     yield put(discountLoadingError(err));
   }
 }
