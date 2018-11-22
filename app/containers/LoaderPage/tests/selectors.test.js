@@ -1,4 +1,4 @@
-import { fromJS, List } from 'immutable';
+import { fromJS } from 'immutable';
 import {
   selectLoaderPageDomain,
   makeSelectEstablishmentName,
@@ -62,13 +62,88 @@ describe('makeSelectDiscount', () => {
 
 describe('makeSelectPromotionLevels', () => {
   const promotionLevelsSelector = makeSelectPromotionLevels();
-  it('should select the promotion levels', () => {
-    const promotionLevels = List([1, 2, 3]);
+  it('should select the promotion levels and make the text as offer', () => {
+    const promotionLevels = [
+      {
+        rank: 1,
+        required_views: 0,
+        reward: '',
+        reward_currency: '',
+        text: 'a',
+      },
+      {
+        rank: 2,
+        required_views: 0,
+        reward: '',
+        reward_currency: '',
+        text: 'b',
+      },
+    ];
+
     const mockedState = fromJS({
       loaderPage: {
         promotionLevels,
       },
     });
-    expect(promotionLevelsSelector(mockedState)).toEqual(promotionLevels);
+
+    const expectedResponse = fromJS([
+      {
+        rank: 1,
+        required_views: 0,
+        reward: '',
+        reward_currency: '',
+        offer: 'a',
+      },
+      {
+        rank: 2,
+        required_views: 0,
+        reward: '',
+        reward_currency: '',
+        offer: 'b',
+      },
+    ]);
+    expect(promotionLevelsSelector(mockedState)).toEqual(expectedResponse);
+  });
+  it('should generate the offer based on reward if no text', () => {
+    const promotionLevels = [
+      {
+        rank: 1,
+        required_views: 0,
+        reward: '1.00',
+        reward_currency: 'EUR',
+        text: '',
+      },
+      {
+        rank: 2,
+        required_views: 0,
+        reward: '2.00',
+        reward_currency: 'EUR',
+        text: '',
+      },
+    ];
+
+    const mockedState = fromJS({
+      loaderPage: {
+        promotionLevels,
+      },
+    });
+
+    const expectedResponse = fromJS([
+      {
+        rank: 1,
+        required_views: 0,
+        reward: '1.00',
+        reward_currency: 'EUR',
+        offer: '1.00 EUR',
+      },
+      {
+        rank: 2,
+        required_views: 0,
+        reward: '2.00',
+        reward_currency: 'EUR',
+        offer: '2.00 EUR',
+      },
+    ]);
+    expect(promotionLevelsSelector(mockedState)).toEqual(expectedResponse);
   });
 });
