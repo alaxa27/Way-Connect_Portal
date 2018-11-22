@@ -13,20 +13,6 @@ describe('loaderPageReducer', () => {
   beforeEach(() => {
     state = fromJS({
       establishmentName: '',
-      videoCommunication: '',
-      discount: {
-        rank: 0,
-        current_views: 0,
-      },
-      promotionLevels: [
-        {
-          rank: 0,
-          required_views: 0,
-          reward: '0',
-          reward_currency: '',
-          text: '',
-        },
-      ],
     });
   });
 
