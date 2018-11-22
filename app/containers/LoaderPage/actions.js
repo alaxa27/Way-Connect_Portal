@@ -91,7 +91,6 @@ export function loadDiscount() {
 }
 
 export function discountLoaded(discount) {
-  console.log('actionS');
   return {
     type: RETRIEVE_DISCOUNT_SUCCESS,
     discount,
@@ -99,7 +98,6 @@ export function discountLoaded(discount) {
 }
 
 export function discountLoadingError() {
-  console.log('actionE');
   return {
     type: RETRIEVE_DISCOUNT_ERROR,
   };
