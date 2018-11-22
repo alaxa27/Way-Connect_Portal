@@ -1,16 +1,13 @@
 import { createSelector } from 'reselect';
-import _ from 'underscore';
-import { selectLoaderPageDomain } from 'containers/LoaderPage/selectors';
+import { fromJS, List } from 'immutable';
+import {
+  makeSelectVideoCommunication,
+  makeSelectDiscount,
+  makeSelectPromotionLevels,
+  makeSelectEstablishmentName,
+} from 'containers/LoaderPage/selectors';
 import { initialState } from './reducer';
 
-const establishmentsWithFidelity = [
-  'esttes',
-  'Cactus Cafe',
-  '180',
-  'High Square',
-  'Wood and Hills',
-  'Yucca',
-];
 const questionSamples = [
   {
     type: 'Q',
@@ -75,26 +72,6 @@ const questionSamples = [
 ];
 const generateQuestion = question => question;
 
-const generateCommunication = communication => ({
-  type: 'C',
-  communication: { ...communication },
-});
-
-const generateFidelity = (discount, promotionLevels, establishmentName) => ({
-  type: 'F',
-  fidelity: {
-    establishment_name: establishmentName,
-    current_level: {
-      rank: discount.promotion_level ? discount.promotion_level.rank : 1,
-      current_views: discount.current_views,
-    },
-    discounts: _.map(promotionLevels, lvl => ({
-      ...lvl,
-      offer: lvl.text ? lvl.txt : `${lvl.reward} ${lvl.reward_currency}`,
-    })),
-  },
-});
-
 /**
  * Direct selector to the journey state domain
  */
@@ -108,29 +85,60 @@ const selectJourneyDomain = state => state.get('journey', initialState);
  * Default selector used by Journey
  */
 
-const makeSelectJourney = () =>
-  createSelector(selectLoaderPageDomain, loaderState => {
-    const establishmentName = loaderState.get('establishmentName');
-    const communication = loaderState.get('communication');
-    const discount = loaderState.get('discount');
-    const promotionLevels = loaderState.get('promotionLevels');
-    const journey = [];
-
-    journey.push(
-      generateQuestion(
-        questionSamples[Math.floor(Math.random() * questionSamples.length)],
-      ),
-    );
-    if (communication) {
-      journey.push(generateCommunication(communication));
-    }
-    if (_.contains(establishmentsWithFidelity, establishmentName)) {
-      journey.push(
-        generateFidelity(discount, promotionLevels, establishmentName),
-      );
-    }
-    return journey;
+const makeSelectCommunication = () => {
+  const videoCommunicationSelector = makeSelectVideoCommunication();
+  return createSelector(videoCommunicationSelector, communicationVideo => {
+    if (!communicationVideo) return null;
+    return fromJS({
+      type: 'C',
+      communication: {
+        video: communicationVideo,
+      },
+    });
   });
+};
+
+const makeSelectFidelity = () => {
+  const discountSelector = makeSelectDiscount();
+  const promotionLevelsSelector = makeSelectPromotionLevels();
+  const establishmentNameSelector = makeSelectEstablishmentName();
+  return createSelector(
+    discountSelector,
+    promotionLevelsSelector,
+    establishmentNameSelector,
+    (discount, promotionLevels, establishmentName) => {
+      if (promotionLevels.get(0).get('rank') === 100) return null;
+      return fromJS({
+        type: 'F',
+        fidelity: {
+          establishment_name: establishmentName,
+          current_level: discount,
+          discounts: promotionLevels,
+        },
+      });
+    },
+  );
+};
+
+const makeSelectJourney = () => {
+  const fidelitySelector = makeSelectFidelity();
+  const communicationSelector = makeSelectCommunication();
+  return createSelector(
+    communicationSelector,
+    fidelitySelector,
+    (communication, fidelity) => {
+      let journey = List([]);
+      const question = generateQuestion(
+        questionSamples[Math.floor(Math.random() * questionSamples.length)],
+      );
+
+      journey = journey.push(question);
+      if (communication) journey = journey.push(communication);
+      if (fidelity) journey = journey.push(fidelity);
+      return journey;
+    },
+  );
+};
 
 export default makeSelectJourney;
-export { selectJourneyDomain };
+export { selectJourneyDomain, makeSelectCommunication, makeSelectFidelity };
