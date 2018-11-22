@@ -172,13 +172,15 @@ export class Journey extends React.Component {
       this.deactivateFooter();
 
       if (
-        parseInt(this.props.match.params.id, 10) === this.props.journey.length
+        parseInt(this.props.match.params.id, 10) === this.state.journey.length
       ) {
         this.props.authenticate();
       }
 
-      if (this.props.match.params.id < this.props.journey.length) {
-        if (this.props.journey[this.props.match.params.id].type === 'C') {
+      if (
+        parseInt(this.props.match.params.id, 10) < this.state.journey.length
+      ) {
+        if (this.state.journey[this.props.match.params.id].type === 'C') {
           this.props.skipVideo();
         }
       }
