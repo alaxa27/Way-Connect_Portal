@@ -1,4 +1,4 @@
-import { call, put, takeLatest, take, all } from 'redux-saga/effects';
+import { call, put, takeLatest, take, race, all } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axiosInstance from '../../apiConfig';
 
@@ -6,6 +6,8 @@ import {
   GET_ESTABLISHMENT,
   POST_CONNECTION_SUCCESS,
   GET_PROMOTION_LEVELS_SUCCESS,
+  RETRIEVE_DISCOUNT_ERROR,
+  RETRIEVE_DISCOUNT_SUCCESS,
 } from './constants';
 import {
   establishmentLoaded,
@@ -94,6 +96,9 @@ export default function* loaderPageSaga() {
     takeLatest(POST_CONNECTION_SUCCESS, getPromotionLevelsEffect),
     takeLatest(POST_CONNECTION_SUCCESS, getDiscountEffect),
   ]);
-  yield take(GET_PROMOTION_LEVELS_SUCCESS);
+  yield all([
+    take(GET_PROMOTION_LEVELS_SUCCESS),
+    race([take(RETRIEVE_DISCOUNT_ERROR), take(RETRIEVE_DISCOUNT_SUCCESS)]),
+  ]);
   yield put(push('/journey/0'));
 }
