@@ -3,13 +3,12 @@
  */
 
 /* eslint-disable redux-saga/yield-effects */
-// import { take, call, put, select } from 'redux-saga/effects';
-import { put } from 'redux-saga/effects';
+import { put, take, takeLatest } from 'redux-saga/effects';
 
-// import { GET_ESTABLISHMENT } from '../constants';
+import { GET_ESTABLISHMENT, GET_PROMOTION_LEVELS_SUCCESS } from '../constants';
 
 import { establishmentLoaded, establishmentLoadingError } from '../actions';
-import { getEstablishmentEffect } from '../saga';
+import loaderPage, { getEstablishmentEffect, fetchAllEffect } from '../saga';
 
 // const generator = loaderPageSaga();
 
@@ -38,13 +37,16 @@ describe('getEstablishment effect', () => {
     expect(putDescriptor).toEqual(put(establishmentLoadingError(response)));
   });
 });
-// describe('loaderPageSaga Saga', () => {
-//   const loaderPageSaga = loaderPage();
 
-//   it('should start task to watch for GET_ESTABLISHMENT action', () => {
-//     const takeLatestDescriptor = loaderPageSaga.next().value;
-//     expect(takeLatestDescriptor).toEqual(
-//       takeLatest(GET_ESTABLISHMENT, getEstablishmentEffect),
-//     );
-//   });
-// });
+describe('loaderPageSaga Saga', () => {
+  const loaderPageSaga = loaderPage();
+
+  it('should start task to watch for GET_ESTABLISHMENT action', () => {
+    const takeLatestDescriptor = loaderPageSaga.next().value;
+    expect(takeLatestDescriptor).toEqual(
+      takeLatest(GET_ESTABLISHMENT, fetchAllEffect),
+    );
+    const takeDescriptor = loaderPageSaga.next().value;
+    expect(takeDescriptor).toEqual(take(GET_PROMOTION_LEVELS_SUCCESS));
+  });
+});

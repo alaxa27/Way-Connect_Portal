@@ -1,10 +1,10 @@
-import { call, put, takeLatest, take, race, all } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { call, put, takeLatest, take, race, fork } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axiosInstance from '../../apiConfig';
 
 import {
   GET_ESTABLISHMENT,
-  POST_CONNECTION_SUCCESS,
   GET_PROMOTION_LEVELS_SUCCESS,
   RETRIEVE_DISCOUNT_ERROR,
   RETRIEVE_DISCOUNT_SUCCESS,
@@ -77,6 +77,7 @@ export function* getPromotionLevelsEffect() {
 
 export function* getDiscountEffect() {
   try {
+    yield call(delay, 10000);
     const { data } = yield call(getDiscountRequest);
     yield put(discountLoaded(data));
   } catch (err) {
@@ -84,17 +85,17 @@ export function* getDiscountEffect() {
   }
 }
 
+export function* fetchAllEffect() {
+  yield fork(getEstablishmentEffect);
+  yield fork(postConnectionEffect);
+  yield fork(getPromotionLevelsEffect);
+  yield fork(getDiscountEffect);
+}
+
 // Individual exports for testing
 export default function* loaderPageSaga() {
-  yield all([
-    takeLatest(GET_ESTABLISHMENT, getEstablishmentEffect),
-    takeLatest(GET_ESTABLISHMENT, postConnectionEffect),
-    takeLatest(POST_CONNECTION_SUCCESS, getPromotionLevelsEffect),
-    takeLatest(POST_CONNECTION_SUCCESS, getDiscountEffect),
-  ]);
-  yield all([
-    take(GET_PROMOTION_LEVELS_SUCCESS),
-    race([take(RETRIEVE_DISCOUNT_ERROR), take(RETRIEVE_DISCOUNT_SUCCESS)]),
-  ]);
+  yield takeLatest(GET_ESTABLISHMENT, fetchAllEffect);
+  yield take(GET_PROMOTION_LEVELS_SUCCESS);
+  yield race([take(RETRIEVE_DISCOUNT_ERROR), take(RETRIEVE_DISCOUNT_SUCCESS)]);
   yield put(push('/journey/0'));
 }
