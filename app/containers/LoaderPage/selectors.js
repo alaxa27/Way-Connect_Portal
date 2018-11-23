@@ -31,7 +31,7 @@ const makeSelectPromotionLevels = () =>
     const promotionLevels = loaderState.get('promotionLevels');
     // eslint-disable-next-line no-unused-vars
     return promotionLevels.map((level, i) => {
-      if (level.get('text').length > 0) {
+      if (level.get('text')) {
         return level.set('offer', level.get('text')).delete('text');
       }
       return level

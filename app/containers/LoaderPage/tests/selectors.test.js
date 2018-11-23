@@ -118,7 +118,7 @@ describe('makeSelectPromotionLevels', () => {
         required_views: 0,
         reward: '2.00',
         reward_currency: 'EUR',
-        text: '',
+        text: null,
       },
     ];
 
