@@ -14,6 +14,7 @@ import Footer from 'components/Footer';
 import Question from 'components/Question';
 import Fidelity from 'components/Fidelity';
 import VideoPlayer from 'components/VideoPlayer';
+import Banner from 'components/Banner/Loadable';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -151,6 +152,13 @@ export class Journey extends React.Component {
             video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
           },
         },
+        {
+          type: 'B',
+          banner: {
+            image: 'images/banner.png',
+            text: 'rejoingez nous dans cette grande aventure!',
+          },
+        },
       ],
     };
 
@@ -235,6 +243,9 @@ export class Journey extends React.Component {
               playing
             />
           );
+        case 'B':
+          if (!this.state.footerActive) this.activateFooter();
+          return <Banner {...item.banner} />;
         default:
           return null;
       }

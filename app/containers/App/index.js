@@ -14,6 +14,9 @@ import LoaderPage from 'containers/LoaderPage/Loadable';
 import Journey from 'containers/Journey/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
+// TODO: remove before going to production.
+import Banner from 'components/Banner/Loadable';
+
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
@@ -22,6 +25,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={LoaderPage} />
         <Route exact path="/journey/:id" component={Journey} />
+        <Route exact path="/banner" component={Banner} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
