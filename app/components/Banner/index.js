@@ -6,8 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-import banner from 'images/banner.png';
+
 import Title from 'components/Title';
 import SubTitle from 'components/SubTitle';
 import BannerWrapper from './BannerWrapper';
@@ -20,12 +19,11 @@ import BannerCard from './BannerCard';
 class Banner extends React.Component {
   render() {
     const { text, image } = this.props;
-    console.log(image);
     return (
       <BannerWrapper>
         <Title>Terminé</Title>
         <SubTitle>{text}</SubTitle>
-        <BannerCard src={banner} />
+        <BannerCard src={image} />
       </BannerWrapper>
     );
   }
