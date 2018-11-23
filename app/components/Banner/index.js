@@ -18,12 +18,12 @@ import BannerCard from './BannerCard';
 /* eslint-disable react/prefer-stateless-function */
 class Banner extends React.Component {
   render() {
-    const { text, image } = this.props;
+    const { text, picture } = this.props;
     return (
       <BannerWrapper>
         <Title>Terminé</Title>
         <SubTitle>{text}</SubTitle>
-        <BannerCard src={image} />
+        <BannerCard src={picture} />
       </BannerWrapper>
     );
   }
@@ -31,7 +31,7 @@ class Banner extends React.Component {
 
 Banner.propTypes = {
   text: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
 };
 
 export default Banner;

@@ -21,6 +21,8 @@ export const GET_PROMOTION_LEVELS_SUCCESS =
 export const GET_PROMOTION_LEVELS_ERROR =
   'app/LoaderPage/GET_PROMOTION_LEVELS_ERROR';
 
+export const BANNER_TEXT_FOUND = 'app/LoaderPage/BANNER_TEXT_FOUND';
+
 export const RETRIEVE_DISCOUNT = 'app/LoaderPage/RETRIEVE_DISCOUNT';
 export const RETRIEVE_DISCOUNT_SUCCESS =
   'app/LoaderPage/RETRIEVE_DISCOUNT_SUCCESS';

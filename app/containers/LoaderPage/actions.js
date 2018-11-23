@@ -15,6 +15,7 @@ import {
   GET_PROMOTION_LEVELS,
   GET_PROMOTION_LEVELS_SUCCESS,
   GET_PROMOTION_LEVELS_ERROR,
+  BANNER_TEXT_FOUND,
   RETRIEVE_DISCOUNT,
   RETRIEVE_DISCOUNT_SUCCESS,
   RETRIEVE_DISCOUNT_ERROR,
@@ -32,10 +33,11 @@ export function loadEstablishment() {
   };
 }
 
-export function establishmentLoaded(name) {
+export function establishmentLoaded(name, picture) {
   return {
     type: GET_ESTABLISHMENT_SUCCESS,
     name,
+    picture,
   };
 }
 
@@ -72,6 +74,14 @@ export function loadPromotionLevels() {
 }
 
 export function promotionLevelsLoaded(promotionLevels) {
+  const bannerLevelIndex = promotionLevels.findIndex(
+    level => level.rank === 101,
+  );
+  if (bannerLevelIndex > -1) {
+    const bannerText = promotionLevels[bannerLevelIndex].text;
+    promotionLevels.splice(bannerLevelIndex, 1);
+    bannerLoaded(bannerText);
+  }
   return {
     type: GET_PROMOTION_LEVELS_SUCCESS,
     promotionLevels,
@@ -81,6 +91,13 @@ export function promotionLevelsLoaded(promotionLevels) {
 export function promotionLevelsLoadingError() {
   return {
     type: GET_PROMOTION_LEVELS_ERROR,
+  };
+}
+
+export function bannerLoaded(bannerText) {
+  return {
+    type: BANNER_TEXT_FOUND,
+    bannerText,
   };
 }
 

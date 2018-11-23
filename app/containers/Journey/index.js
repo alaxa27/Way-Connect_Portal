@@ -155,8 +155,8 @@ export class Journey extends React.Component {
         {
           type: 'B',
           banner: {
-            image: 'images/banner.png',
             text: 'rejoingez nous dans cette grande aventure!',
+            picture: 'images/banner.png',
           },
         },
       ],

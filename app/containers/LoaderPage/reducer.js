@@ -10,6 +10,7 @@ import {
   POST_CONNECTION_SUCCESS,
   GET_ESTABLISHMENT_SUCCESS,
   GET_PROMOTION_LEVELS_SUCCESS,
+  BANNER_TEXT_FOUND,
   RETRIEVE_DISCOUNT_SUCCESS,
   RETRIEVE_DISCOUNT_ERROR,
 } from './constants';
@@ -23,7 +24,9 @@ function loaderPageReducer(state = initialState, action) {
     case DEFAULT_ACTION:
       return state;
     case GET_ESTABLISHMENT_SUCCESS:
-      return state.set('establishmentName', action.name);
+      return state
+        .set('establishmentName', action.name)
+        .set('establishmentPicture', action.picture);
     case POST_CONNECTION_SUCCESS:
       return state.set(
         'videoCommunication',
@@ -39,6 +42,8 @@ function loaderPageReducer(state = initialState, action) {
         .setIn(['discount', 'rank'], 1);
     case GET_PROMOTION_LEVELS_SUCCESS:
       return state.set('promotionLevels', fromJS(action.promotionLevels));
+    case BANNER_TEXT_FOUND:
+      return state.set('bannerText', action.bannerText);
     default:
       return state;
   }

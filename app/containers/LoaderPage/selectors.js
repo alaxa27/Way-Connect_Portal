@@ -16,6 +16,12 @@ const makeSelectEstablishmentName = () =>
     loaderState.get('establishmentName'),
   );
 
+const makeSelectEstablishmentPicture = () =>
+  createSelector(
+    selectLoaderPageDomain,
+    loaderState => loaderState.get('establishmentPicture') || null,
+  );
+
 const makeSelectVideoCommunication = () =>
   createSelector(selectLoaderPageDomain, loaderState =>
     loaderState.get('videoCommunication'),
@@ -40,6 +46,12 @@ const makeSelectPromotionLevels = () =>
     });
   });
 
+const makeSelectBannerText = () =>
+  createSelector(selectLoaderPageDomain, loaderState => {
+    const bannerText = loaderState.get('bannerText');
+    return bannerText || null;
+  });
+
 /**
  * Default selector used by LoaderPage
  */
@@ -51,7 +63,9 @@ export default makeSelectLoaderPage;
 export {
   selectLoaderPageDomain,
   makeSelectEstablishmentName,
+  makeSelectEstablishmentPicture,
   makeSelectVideoCommunication,
   makeSelectDiscount,
   makeSelectPromotionLevels,
+  makeSelectBannerText,
 };

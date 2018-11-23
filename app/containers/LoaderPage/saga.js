@@ -51,7 +51,7 @@ function getDiscountRequest() {
 export function* getEstablishmentEffect() {
   try {
     const { data } = yield call(getEstablishmentRequest);
-    yield put(establishmentLoaded(data.name));
+    yield put(establishmentLoaded(data.name, data.picture));
   } catch (err) {
     yield put(establishmentLoadingError(err));
   }

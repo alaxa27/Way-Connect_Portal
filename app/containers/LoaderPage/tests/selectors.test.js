@@ -2,9 +2,11 @@ import { fromJS } from 'immutable';
 import {
   selectLoaderPageDomain,
   makeSelectEstablishmentName,
+  makeSelectEstablishmentPicture,
   makeSelectVideoCommunication,
   makeSelectDiscount,
   makeSelectPromotionLevels,
+  makeSelectBannerText,
 } from '../selectors';
 
 describe('selectLoaderPageDomain', () => {
@@ -29,6 +31,29 @@ describe('makeSelectEstablishmentName', () => {
       },
     });
     expect(establishmentNameSelector(mockedState)).toEqual(establishmentName);
+  });
+});
+
+describe('makeSelectEstablishmentPicture', () => {
+  const establishmentPictureSelector = makeSelectEstablishmentPicture();
+  it('should select the establishmentPicture', () => {
+    const establishmentPicture = 'picutreMOCK';
+
+    const mockedState = fromJS({
+      loaderPage: {
+        establishmentPicture,
+      },
+    });
+    expect(establishmentPictureSelector(mockedState)).toEqual(
+      establishmentPicture,
+    );
+  });
+
+  it('should return null if no establishmentPicture', () => {
+    const mockedState = fromJS({
+      loaderPage: {},
+    });
+    expect(establishmentPictureSelector(mockedState)).toEqual(null);
   });
 });
 
@@ -145,5 +170,26 @@ describe('makeSelectPromotionLevels', () => {
       },
     ]);
     expect(promotionLevelsSelector(mockedState)).toEqual(expectedResponse);
+  });
+});
+
+describe('makeSelectBannerText', () => {
+  const bannerTextSelector = makeSelectBannerText();
+  it('should select the bannerText', () => {
+    const bannerText = 'BANNER';
+
+    const mockedState = fromJS({
+      loaderPage: {
+        bannerText,
+      },
+    });
+    expect(bannerTextSelector(mockedState)).toEqual(bannerText);
+  });
+
+  it('should return null if there is no bannerText', () => {
+    const mockedState = fromJS({
+      loaderPage: {},
+    });
+    expect(bannerTextSelector(mockedState)).toEqual(null);
   });
 });

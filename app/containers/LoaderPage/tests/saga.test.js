@@ -25,10 +25,13 @@ describe('getEstablishment effect', () => {
   it('should dispatch the establishmentLoaded action if the request is successful', () => {
     const data = {
       name: 'foo',
+      picture: 'bar',
     };
     const putDescriptor = getEstablishmentGenerator.next({ data }).value;
     // console.log(putDescriptor)
-    expect(putDescriptor).toEqual(put(establishmentLoaded(data.name)));
+    expect(putDescriptor).toEqual(
+      put(establishmentLoaded(data.name, data.picture)),
+    );
   });
 
   it('should dispatch the establishmentLoadingError action requests fails', () => {
