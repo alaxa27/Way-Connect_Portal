@@ -1,4 +1,3 @@
-import { delay } from 'redux-saga';
 import { call, put, takeLatest, take, race, fork } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axiosInstance from '../../apiConfig';
@@ -77,7 +76,6 @@ export function* getPromotionLevelsEffect() {
 
 export function* getDiscountEffect() {
   try {
-    yield call(delay, 10000);
     const { data } = yield call(getDiscountRequest);
     yield put(discountLoaded(data));
   } catch (err) {
