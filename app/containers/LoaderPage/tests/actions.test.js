@@ -27,6 +27,7 @@ describe('LoaderPage actions', () => {
       const expected = {
         type: GET_PROMOTION_LEVELS_SUCCESS,
         promotionLevels,
+        bannerText: '',
       };
       expect(promotionLevelsLoaded(promotionLevels)).toEqual(expected);
     });
@@ -44,6 +45,7 @@ describe('LoaderPage actions', () => {
       const expected = {
         type: GET_PROMOTION_LEVELS_SUCCESS,
         promotionLevels,
+        bannerText,
       };
 
       expect(promotionLevelsLoaded(promotionLevelsWith101)).toEqual(expected);

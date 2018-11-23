@@ -15,7 +15,6 @@ import {
   GET_PROMOTION_LEVELS,
   GET_PROMOTION_LEVELS_SUCCESS,
   GET_PROMOTION_LEVELS_ERROR,
-  BANNER_TEXT_FOUND,
   RETRIEVE_DISCOUNT,
   RETRIEVE_DISCOUNT_SUCCESS,
   RETRIEVE_DISCOUNT_ERROR,
@@ -77,27 +76,21 @@ export function promotionLevelsLoaded(promotionLevels) {
   const bannerLevelIndex = promotionLevels.findIndex(
     level => level.rank === 101,
   );
+  let bannerText = '';
   if (bannerLevelIndex > -1) {
-    const bannerText = promotionLevels[bannerLevelIndex].text;
+    bannerText = promotionLevels[bannerLevelIndex].text;
     promotionLevels.splice(bannerLevelIndex, 1);
-    bannerLoaded(bannerText);
   }
   return {
     type: GET_PROMOTION_LEVELS_SUCCESS,
     promotionLevels,
+    bannerText,
   };
 }
 
 export function promotionLevelsLoadingError() {
   return {
     type: GET_PROMOTION_LEVELS_ERROR,
-  };
-}
-
-export function bannerLoaded(bannerText) {
-  return {
-    type: BANNER_TEXT_FOUND,
-    bannerText,
   };
 }
 

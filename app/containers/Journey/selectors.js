@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
 import { fromJS, List } from 'immutable';
 import {
+  makeSelectEstablishmentName,
+  makeSelectEstablishmentPicture,
   makeSelectVideoCommunication,
   makeSelectDiscount,
   makeSelectPromotionLevels,
-  makeSelectEstablishmentName,
+  makeSelectBannerText,
 } from 'containers/LoaderPage/selectors';
 import { initialState } from './reducer';
 
@@ -120,13 +122,36 @@ const makeSelectFidelity = () => {
   );
 };
 
+const makeSelectBanner = () => {
+  const establishmentPictureSelector = makeSelectEstablishmentPicture();
+  const bannerTextSelector = makeSelectBannerText();
+  return createSelector(
+    establishmentPictureSelector,
+    bannerTextSelector,
+    (picture, text) => {
+      if (picture && text) {
+        return fromJS({
+          type: 'B',
+          banner: {
+            text,
+            picture,
+          },
+        });
+      }
+      return null;
+    },
+  );
+};
+
 const makeSelectJourney = () => {
   const fidelitySelector = makeSelectFidelity();
   const communicationSelector = makeSelectCommunication();
+  const bannerSelector = makeSelectBanner();
   return createSelector(
     communicationSelector,
     fidelitySelector,
-    (communication, fidelity) => {
+    bannerSelector,
+    (communication, fidelity, banner) => {
       let journey = List([]);
       const question = generateQuestion(
         questionSamples[Math.floor(Math.random() * questionSamples.length)],
@@ -135,10 +160,16 @@ const makeSelectJourney = () => {
       journey = journey.push(question);
       if (communication) journey = journey.push(communication);
       if (fidelity) journey = journey.push(fidelity);
+      if (banner) journey = journey.push(banner);
       return journey;
     },
   );
 };
 
 export default makeSelectJourney;
-export { selectJourneyDomain, makeSelectCommunication, makeSelectFidelity };
+export {
+  selectJourneyDomain,
+  makeSelectCommunication,
+  makeSelectFidelity,
+  makeSelectBanner,
+};

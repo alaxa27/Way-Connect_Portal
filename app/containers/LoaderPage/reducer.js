@@ -10,7 +10,6 @@ import {
   POST_CONNECTION_SUCCESS,
   GET_ESTABLISHMENT_SUCCESS,
   GET_PROMOTION_LEVELS_SUCCESS,
-  BANNER_TEXT_FOUND,
   RETRIEVE_DISCOUNT_SUCCESS,
   RETRIEVE_DISCOUNT_ERROR,
 } from './constants';
@@ -41,9 +40,9 @@ function loaderPageReducer(state = initialState, action) {
         .setIn(['discount', 'current_views'], 1)
         .setIn(['discount', 'rank'], 1);
     case GET_PROMOTION_LEVELS_SUCCESS:
-      return state.set('promotionLevels', fromJS(action.promotionLevels));
-    case BANNER_TEXT_FOUND:
-      return state.set('bannerText', action.bannerText);
+      return state
+        .set('promotionLevels', fromJS(action.promotionLevels))
+        .set('bannerText', action.bannerText);
     default:
       return state;
   }

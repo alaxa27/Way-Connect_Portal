@@ -3,6 +3,7 @@ import makeSelectJourney, {
   selectJourneyDomain,
   makeSelectCommunication,
   makeSelectFidelity,
+  makeSelectBanner,
 } from '../selectors';
 
 describe('selectJourneyDomain', () => {
@@ -130,6 +131,50 @@ describe('makeSelectFidelity', () => {
   });
 });
 
+describe('makeSelectBanner', () => {
+  const bannerSelector = makeSelectBanner();
+  it('should return null if bannerText is null', () => {
+    const mockedState = fromJS({
+      loaderPage: {
+        establishmentPicture: 'fooo',
+      },
+    });
+
+    const expectedResponse = null;
+    expect(bannerSelector(mockedState)).toEqual(expectedResponse);
+  });
+
+  it('should return null if establishmentPicture is null', () => {
+    const mockedState = fromJS({
+      loaderPage: {
+        bannerText: 'baaaar',
+      },
+    });
+
+    const expectedResponse = null;
+    expect(bannerSelector(mockedState)).toEqual(expectedResponse);
+  });
+
+  it('should generate a banner if bannerText && establishmentPicture', () => {
+    const bannerText = 'foooo';
+    const establishmentPicture = 'baaaar';
+    const mockedState = fromJS({
+      loaderPage: {
+        establishmentPicture,
+        bannerText,
+      },
+    });
+    const expectedResponse = fromJS({
+      type: 'B',
+      banner: {
+        text: bannerText,
+        picture: establishmentPicture,
+      },
+    });
+    expect(bannerSelector(mockedState)).toEqual(expectedResponse);
+  });
+});
+
 describe('makeSelectJourney', () => {
   const journeySelector = makeSelectJourney();
 
@@ -204,5 +249,33 @@ describe('makeSelectJourney', () => {
     const journey = journeySelector(mockedState);
     expect(journey).toBeInstanceOf(List);
     expect(journey.size).toEqual(2);
+  });
+
+  it('should generate a journey with a banner', () => {
+    const bannerText = 'foobar';
+    const establishmentPicture = 'barbaz';
+    const mockedState = fromJS({
+      loaderPage: {
+        establishmentName,
+        establishmentPicture,
+        videoCommunication,
+        promotionLevels,
+        discount,
+        bannerText,
+      },
+    });
+
+    const expectedResponse = fromJS({
+      type: 'B',
+      banner: {
+        text: bannerText,
+        picture: establishmentPicture,
+      },
+    });
+
+    const journey = journeySelector(mockedState);
+    expect(journey).toBeInstanceOf(List);
+    expect(journey.get(journey.size - 1)).toEqual(expectedResponse);
+    expect(journey.size).toEqual(4);
   });
 });

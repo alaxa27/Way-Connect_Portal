@@ -6,7 +6,6 @@ import {
   promotionLevelsLoaded,
   discountLoaded,
   discountLoadingError,
-  bannerLoaded,
 } from '../actions';
 
 describe('loaderPageReducer', () => {
@@ -73,57 +72,48 @@ describe('loaderPageReducer', () => {
       },
     ];
 
-    const expectedResult = state.set(
-      'promotionLevels',
-      fromJS(promotionLevelsObject),
-    );
+    const expectedResult = state
+      .set('promotionLevels', fromJS(promotionLevelsObject))
+      .set('bannerText', '');
 
     expect(
       loaderPageReducer(state, promotionLevelsLoaded(promotionLevelsObject)),
     ).toEqual(expectedResult);
   });
 
-  // it('should handle the bannerText if promotionLevel has rank 101', () => {
-  //   const bannerText = 'Banner placeholder';
-  //   const promotionLevelsObject = [
-  //     {
-  //       rank: 1,
-  //       required_views: 0,
-  //       reward: '0',
-  //       reward_currency: '',
-  //       text: '',
-  //     },
-  //   ];
+  it('should handle the bannerText if promotionLevel has rank 101', () => {
+    const bannerText = 'Banner placeholder';
+    const promotionLevelsObject = [
+      {
+        rank: 1,
+        required_views: 0,
+        reward: '0',
+        reward_currency: '',
+        text: '',
+      },
+    ];
 
-  //   const promotionLevelsServerResponse = [
-  //     ...promotionLevelsObject,
-  //     {
-  //       rank: 101,
-  //       required_views: 0,
-  //       reward: '0',
-  //       reward_currency: '',
-  //       text: bannerText,
-  //     },
-  //   ];
+    const promotionLevelsServerResponse = [
+      ...promotionLevelsObject,
+      {
+        rank: 101,
+        required_views: 0,
+        reward: '0',
+        reward_currency: '',
+        text: bannerText,
+      },
+    ];
 
-  //   const expectedResult = state
-  //     .set('promotionLevels', fromJS(promotionLevelsObject))
-  //     .set('bannerText', bannerText);
+    const expectedResult = state
+      .set('promotionLevels', fromJS(promotionLevelsObject))
+      .set('bannerText', bannerText);
 
-  //   expect(
-  //     loaderPageReducer(
-  //       state,
-  //       promotionLevelsLoaded(promotionLevelsServerResponse),
-  //     ),
-  //   ).toEqual(expectedResult);
-  // });
-
-  it('should handle the bannerLoaded action properly', () => {
-    const bannerText = 'foobarbaz';
-    const expectedResult = state.set('bannerText', bannerText);
-    expect(loaderPageReducer(state, bannerLoaded(bannerText))).toEqual(
-      expectedResult,
-    );
+    expect(
+      loaderPageReducer(
+        state,
+        promotionLevelsLoaded(promotionLevelsServerResponse),
+      ),
+    ).toEqual(expectedResult);
   });
 
   it('should handle the discountLoaded action properly', () => {
