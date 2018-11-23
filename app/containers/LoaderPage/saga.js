@@ -1,4 +1,12 @@
-import { call, put, takeLatest, take, race, fork } from 'redux-saga/effects';
+import {
+  all,
+  call,
+  put,
+  takeLatest,
+  take,
+  race,
+  fork,
+} from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axiosInstance from '../../apiConfig';
 
@@ -7,6 +15,8 @@ import {
   GET_PROMOTION_LEVELS_SUCCESS,
   RETRIEVE_DISCOUNT_ERROR,
   RETRIEVE_DISCOUNT_SUCCESS,
+  POST_CONNECTION_SUCCESS,
+  GET_ESTABLISHMENT_SUCCESS,
 } from './constants';
 import {
   establishmentLoaded,
@@ -93,7 +103,11 @@ export function* fetchAllEffect() {
 // Individual exports for testing
 export default function* loaderPageSaga() {
   yield takeLatest(GET_ESTABLISHMENT, fetchAllEffect);
-  yield take(GET_PROMOTION_LEVELS_SUCCESS);
-  yield race([take(RETRIEVE_DISCOUNT_ERROR), take(RETRIEVE_DISCOUNT_SUCCESS)]);
+  yield all([
+    take(GET_ESTABLISHMENT_SUCCESS),
+    take(POST_CONNECTION_SUCCESS),
+    take(GET_PROMOTION_LEVELS_SUCCESS),
+    race([take(RETRIEVE_DISCOUNT_ERROR), take(RETRIEVE_DISCOUNT_SUCCESS)]),
+  ]);
   yield put(push('/journey/0'));
 }
