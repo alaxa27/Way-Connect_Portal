@@ -14,6 +14,7 @@ import Footer from 'components/Footer';
 import Question from 'components/Question';
 import Fidelity from 'components/Fidelity';
 import VideoPlayer from 'components/VideoPlayer';
+import CustomerService from 'components/CustomerService/Loadable';
 import Banner from 'components/Banner/Loadable';
 
 import injectSaga from 'utils/injectSaga';
@@ -153,6 +154,12 @@ export class Journey extends React.Component {
           },
         },
         {
+          type: 'S',
+          customer_service: {
+            phone_number: '+21609178230',
+          },
+        },
+        {
           type: 'B',
           banner: {
             text: 'rejoingez nous dans cette grande aventure!',
@@ -243,6 +250,9 @@ export class Journey extends React.Component {
               playing
             />
           );
+        case 'S':
+          if (!this.state.footerActive) this.activateFooter();
+          return <CustomerService {...item.customer_service} />;
         case 'B':
           if (!this.state.footerActive) this.activateFooter();
           return <Banner {...item.banner} />;
