@@ -42,7 +42,8 @@ function loaderPageReducer(state = initialState, action) {
     case GET_PROMOTION_LEVELS_SUCCESS:
       return state
         .set('promotionLevels', fromJS(action.promotionLevels))
-        .set('bannerText', action.bannerText);
+        .set('bannerText', action.bannerText)
+        .set('claimPhoneNumber', action.claimPhoneNumber);
     default:
       return state;
   }

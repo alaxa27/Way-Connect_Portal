@@ -52,6 +52,12 @@ const makeSelectBannerText = () =>
     return bannerText || null;
   });
 
+const makeSelectClaimPhoneNumber = () =>
+  createSelector(selectLoaderPageDomain, loaderState => {
+    const claimPhoneNumber = loaderState.get('claimPhoneNumber');
+    return claimPhoneNumber || null;
+  });
+
 /**
  * Default selector used by LoaderPage
  */
@@ -68,4 +74,5 @@ export {
   makeSelectDiscount,
   makeSelectPromotionLevels,
   makeSelectBannerText,
+  makeSelectClaimPhoneNumber,
 };

@@ -4,6 +4,7 @@ import makeSelectJourney, {
   makeSelectCommunication,
   makeSelectFidelity,
   makeSelectBanner,
+  makeSelectCustomerService,
 } from '../selectors';
 
 describe('selectJourneyDomain', () => {
@@ -175,6 +176,37 @@ describe('makeSelectBanner', () => {
   });
 });
 
+describe('makeSelectCustomerService', () => {
+  const customerServiceSelector = makeSelectCustomerService();
+  it('should return null if claimPhoneNumber is null', () => {
+    const mockedState = fromJS({
+      loaderPage: {
+        claimPhoneNumber: '',
+      },
+    });
+
+    const expectedResponse = null;
+    expect(customerServiceSelector(mockedState)).toEqual(expectedResponse);
+  });
+
+  it('should return the claim object if claimPhoneNumber', () => {
+    const claimPhoneNumber = '2345789';
+    const mockedState = fromJS({
+      loaderPage: {
+        claimPhoneNumber,
+      },
+    });
+
+    const expectedResponse = fromJS({
+      type: 'S',
+      customer_service: {
+        phone_number: claimPhoneNumber,
+      },
+    });
+    expect(customerServiceSelector(mockedState)).toEqual(expectedResponse);
+  });
+});
+
 describe('makeSelectJourney', () => {
   const journeySelector = makeSelectJourney();
 
@@ -277,5 +309,26 @@ describe('makeSelectJourney', () => {
     expect(journey).toBeInstanceOf(List);
     expect(journey.get(journey.size - 1)).toEqual(expectedResponse);
     expect(journey.size).toEqual(4);
+  });
+
+  it('should generate a Journey with only a question, fidelity and a customer service', () => {
+    const claimPhoneNumber = '010934809';
+    const mockedState = fromJS({
+      loaderPage: {
+        promotionLevels,
+        claimPhoneNumber,
+      },
+    });
+
+    const expectedResponse = fromJS({
+      type: 'S',
+      customer_service: {
+        phone_number: claimPhoneNumber,
+      },
+    });
+
+    const journey = journeySelector(mockedState);
+    expect(journey.get(journey.size - 1)).toEqual(expectedResponse);
+    expect(journey.size).toEqual(3);
   });
 });

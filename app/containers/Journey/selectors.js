@@ -7,6 +7,7 @@ import {
   makeSelectDiscount,
   makeSelectPromotionLevels,
   makeSelectBannerText,
+  makeSelectClaimPhoneNumber,
 } from 'containers/LoaderPage/selectors';
 import { initialState } from './reducer';
 
@@ -143,15 +144,32 @@ const makeSelectBanner = () => {
   );
 };
 
+const makeSelectCustomerService = () => {
+  const claimPhoneNumberSelector = makeSelectClaimPhoneNumber();
+  return createSelector(claimPhoneNumberSelector, claimPhoneNumber => {
+    if (claimPhoneNumber) {
+      return fromJS({
+        type: 'S',
+        customer_service: {
+          phone_number: claimPhoneNumber,
+        },
+      });
+    }
+    return null;
+  });
+};
+
 const makeSelectJourney = () => {
   const fidelitySelector = makeSelectFidelity();
   const communicationSelector = makeSelectCommunication();
+  const customerServiceSelector = makeSelectCustomerService();
   const bannerSelector = makeSelectBanner();
   return createSelector(
     communicationSelector,
     fidelitySelector,
+    customerServiceSelector,
     bannerSelector,
-    (communication, fidelity, banner) => {
+    (communication, fidelity, customerService, banner) => {
       let journey = List([]);
       const question = generateQuestion(
         questionSamples[Math.floor(Math.random() * questionSamples.length)],
@@ -160,6 +178,7 @@ const makeSelectJourney = () => {
       journey = journey.push(question);
       if (communication) journey = journey.push(communication);
       if (fidelity) journey = journey.push(fidelity);
+      if (customerService) journey = journey.push(customerService);
       if (banner) journey = journey.push(banner);
       return journey;
     },
@@ -172,4 +191,5 @@ export {
   makeSelectCommunication,
   makeSelectFidelity,
   makeSelectBanner,
+  makeSelectCustomerService,
 };

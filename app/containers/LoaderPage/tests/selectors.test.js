@@ -7,6 +7,7 @@ import {
   makeSelectDiscount,
   makeSelectPromotionLevels,
   makeSelectBannerText,
+  makeSelectClaimPhoneNumber,
 } from '../selectors';
 
 describe('selectLoaderPageDomain', () => {
@@ -191,5 +192,27 @@ describe('makeSelectBannerText', () => {
       loaderPage: {},
     });
     expect(bannerTextSelector(mockedState)).toEqual(null);
+  });
+});
+
+describe('makeSelectClaimPhoneNumber', () => {
+  const claimPhoneNumberSelector = makeSelectClaimPhoneNumber();
+  it('should select the claimPhoneNumber', () => {
+    const claimPhoneNumber = '01120938109';
+
+    const mockedState = fromJS({
+      loaderPage: {
+        claimPhoneNumber,
+      },
+    });
+    expect(claimPhoneNumberSelector(mockedState)).toEqual(claimPhoneNumber);
+  });
+
+  it('should return null if no claimPhoneNumber', () => {
+    const mockedState = fromJS({
+      loaderPage: {},
+    });
+
+    expect(claimPhoneNumberSelector(mockedState)).toEqual(null);
   });
 });

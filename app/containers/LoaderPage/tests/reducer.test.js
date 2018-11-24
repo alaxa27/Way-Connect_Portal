@@ -74,7 +74,8 @@ describe('loaderPageReducer', () => {
 
     const expectedResult = state
       .set('promotionLevels', fromJS(promotionLevelsObject))
-      .set('bannerText', '');
+      .set('bannerText', '')
+      .set('claimPhoneNumber', '');
 
     expect(
       loaderPageReducer(state, promotionLevelsLoaded(promotionLevelsObject)),
@@ -106,7 +107,44 @@ describe('loaderPageReducer', () => {
 
     const expectedResult = state
       .set('promotionLevels', fromJS(promotionLevelsObject))
-      .set('bannerText', bannerText);
+      .set('bannerText', bannerText)
+      .set('claimPhoneNumber', '');
+
+    expect(
+      loaderPageReducer(
+        state,
+        promotionLevelsLoaded(promotionLevelsServerResponse),
+      ),
+    ).toEqual(expectedResult);
+  });
+
+  it('should get the claimPhoneNumber if promotionLevels has rank 102', () => {
+    const claimPhoneNumber = '91823091';
+    const promotionLevelsObject = [
+      {
+        rank: 1,
+        required_views: 0,
+        reward: '0',
+        reward_currency: '',
+        text: '',
+      },
+    ];
+
+    const promotionLevelsServerResponse = [
+      ...promotionLevelsObject,
+      {
+        rank: 102,
+        required_views: 0,
+        reward: '0',
+        reward_currency: '',
+        text: claimPhoneNumber,
+      },
+    ];
+
+    const expectedResult = state
+      .set('promotionLevels', fromJS(promotionLevelsObject))
+      .set('claimPhoneNumber', claimPhoneNumber)
+      .set('bannerText', '');
 
     expect(
       loaderPageReducer(

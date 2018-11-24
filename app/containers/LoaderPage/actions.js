@@ -73,18 +73,22 @@ export function loadPromotionLevels() {
 }
 
 export function promotionLevelsLoaded(promotionLevels) {
-  const bannerLevelIndex = promotionLevels.findIndex(
-    level => level.rank === 101,
-  );
-  let bannerText = '';
-  if (bannerLevelIndex > -1) {
-    bannerText = promotionLevels[bannerLevelIndex].text;
-    promotionLevels.splice(bannerLevelIndex, 1);
-  }
+  const removeAndGetText = (rank, levelsArray) => {
+    const index = levelsArray.findIndex(level => level.rank === rank);
+    if (index > -1) {
+      const res = levelsArray[index].text;
+      levelsArray.splice(index, 1);
+      return res;
+    }
+    return '';
+  };
+  const bannerText = removeAndGetText(101, promotionLevels);
+  const claimPhoneNumber = removeAndGetText(102, promotionLevels);
   return {
     type: GET_PROMOTION_LEVELS_SUCCESS,
     promotionLevels,
     bannerText,
+    claimPhoneNumber,
   };
 }
 
