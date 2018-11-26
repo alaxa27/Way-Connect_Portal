@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import Footer from 'components/Footer';
 import Question from 'components/Question';
 import Fidelity from 'components/Fidelity';
-import VideoPlayer from 'components/VideoPlayer';
+import Communication from 'components/Communication/Loadable';
 import CustomerService from 'components/CustomerService/Loadable';
 import Banner from 'components/Banner/Loadable';
 
@@ -244,7 +244,7 @@ export class Journey extends React.Component {
           return <Fidelity {...item.fidelity} onActiveClick={() => {}} />;
         case 'C':
           return (
-            <VideoPlayer
+            <Communication
               {...item.communication}
               onProgress={this.onCommunicationProgress}
               playing
