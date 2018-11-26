@@ -1,3 +1,4 @@
+import { delay } from 'redux-saga';
 import { takeLatest, call, put, take } from 'redux-saga/effects';
 import axiosInstance from '../../apiConfig';
 import {
@@ -37,6 +38,7 @@ export function* authenticateEffect() {
 
 export function* skipVideoEffect() {
   try {
+    yield call(delay, 10000);
     yield call(skipVideoRequest);
     yield put(videoSkipped());
   } catch (err) {

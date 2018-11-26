@@ -110,15 +110,20 @@ const makeSelectFidelity = () => {
     promotionLevelsSelector,
     establishmentNameSelector,
     (discount, promotionLevels, establishmentName) => {
-      if (promotionLevels.get(0).get('rank') === 100) return null;
-      return fromJS({
-        type: 'F',
-        fidelity: {
-          establishment_name: establishmentName,
-          current_level: discount,
-          discounts: promotionLevels,
-        },
-      });
+      try {
+        if (promotionLevels.get(0).get('rank') === 100) return null;
+        return fromJS({
+          type: 'F',
+          fidelity: {
+            establishment_name: establishmentName,
+            current_level: discount,
+            discounts: promotionLevels,
+          },
+        });
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
     },
   );
 };
@@ -171,6 +176,23 @@ const makeSelectJourney = () => {
     bannerSelector,
     (communication, fidelity, customerService, banner) => {
       let journey = List([]);
+      if (true) {
+        return fromJS([
+          {
+            type: 'C',
+            communication: {
+              video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+              phone_number: '+21678546320',
+            },
+          },
+          {
+            type: 'S',
+            customer_service: {
+              phone_number: '+21687234543',
+            },
+          },
+        ]);
+      }
       const question = generateQuestion(
         questionSamples[Math.floor(Math.random() * questionSamples.length)],
       );

@@ -35,15 +35,22 @@ const makeSelectDiscount = () =>
 const makeSelectPromotionLevels = () =>
   createSelector(selectLoaderPageDomain, loaderState => {
     const promotionLevels = loaderState.get('promotionLevels');
-    // eslint-disable-next-line no-unused-vars
-    return promotionLevels.map((level, i) => {
-      if (level.get('text')) {
-        return level.set('offer', level.get('text')).delete('text');
-      }
-      return level
-        .set('offer', `${level.get('reward')} ${level.get('reward_currency')}`)
-        .delete('text');
-    });
+    try {
+      return promotionLevels.map(level => {
+        if (level.get('text')) {
+          return level.set('offer', level.get('text')).delete('text');
+        }
+        return level
+          .set(
+            'offer',
+            `${level.get('reward')} ${level.get('reward_currency')}`,
+          )
+          .delete('text');
+      });
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
   });
 
 const makeSelectBannerText = () =>
