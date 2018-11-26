@@ -22,26 +22,30 @@ describe('selectJourneyDomain', () => {
 describe('makeSelectCommunication', () => {
   const communicationSelector = makeSelectCommunication();
   it('sould select the communication if it exists', () => {
-    const videoCommunication = 'videoURL';
+    const communication = fromJS({
+      video: 'fezlkjjl',
+      redirection: '098312',
+    });
     const mockedState = fromJS({
       loaderPage: {
-        videoCommunication,
+        communication,
       },
     });
     const expectedResponse = fromJS({
       type: 'C',
       communication: {
-        video: videoCommunication,
+        video: communication.get('video'),
+        phone_number: communication.get('redirection'),
       },
     });
     expect(communicationSelector(mockedState)).toEqual(expectedResponse);
   });
 
   it('sould return null if no communication', () => {
-    const videoCommunication = '';
+    const communication = null;
     const mockedState = fromJS({
       loaderPage: {
-        videoCommunication,
+        communication,
       },
     });
     const expectedResponse = null;
@@ -210,7 +214,10 @@ describe('makeSelectCustomerService', () => {
 describe('makeSelectJourney', () => {
   const journeySelector = makeSelectJourney();
 
-  const videoCommunication = 'url';
+  const communication = fromJS({
+    video: 'OLKJEAF',
+    phone_number: '12098302193',
+  });
   const discount = fromJS({
     rank: 1,
     current_views: 3,
@@ -236,7 +243,7 @@ describe('makeSelectJourney', () => {
   it('should generate a journey with fidelity', () => {
     const mockedState = fromJS({
       loaderPage: {
-        videoCommunication,
+        communication,
         discount,
         promotionLevels,
         establishmentName,
@@ -259,7 +266,7 @@ describe('makeSelectJourney', () => {
     ]);
     const mockedState = fromJS({
       loaderPage: {
-        videoCommunication,
+        communication,
         discount,
         promotionLevels: noFidelityPromotionLevels,
         establishmentName,
@@ -290,7 +297,7 @@ describe('makeSelectJourney', () => {
       loaderPage: {
         establishmentName,
         establishmentPicture,
-        videoCommunication,
+        communication,
         promotionLevels,
         discount,
         bannerText,

@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -23,9 +24,14 @@ const makeSelectEstablishmentPicture = () =>
   );
 
 const makeSelectVideoCommunication = () =>
-  createSelector(selectLoaderPageDomain, loaderState =>
-    loaderState.get('videoCommunication'),
-  );
+  createSelector(selectLoaderPageDomain, loaderState => {
+    const communication = loaderState.get('communication');
+    if (!communication) return null;
+    return fromJS({
+      video: communication.get('video'),
+      phone_number: communication.get('redirection'),
+    });
+  });
 
 const makeSelectDiscount = () =>
   createSelector(selectLoaderPageDomain, loaderState =>

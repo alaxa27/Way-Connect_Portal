@@ -37,18 +37,19 @@ describe('loaderPageReducer', () => {
   });
 
   it('should handle the connectionPosted when there is a video', () => {
-    const videoURL = 'foobarbaz';
-    const expectedResult = state.set('videoCommunication', videoURL);
+    const communication = fromJS({
+      video: 'foo',
+      redirection: 'foobar',
+    });
+
+    const expectedResult = state.set('communication', communication);
     expect(
-      loaderPageReducer(
-        state,
-        connectionPosted({ communication: { video: videoURL } }),
-      ),
+      loaderPageReducer(state, connectionPosted({ communication })),
     ).toEqual(expectedResult);
   });
 
   it('should handle the connectionPosted when there is no video', () => {
-    const expectedResult = state.set('videoCommunication', '');
+    const expectedResult = state.set('communication', null);
     expect(
       loaderPageReducer(state, connectionPosted({ communication: null })),
     ).toEqual(expectedResult);

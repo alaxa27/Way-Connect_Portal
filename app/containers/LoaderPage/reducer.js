@@ -27,10 +27,7 @@ function loaderPageReducer(state = initialState, action) {
         .set('establishmentName', action.name)
         .set('establishmentPicture', action.picture);
     case POST_CONNECTION_SUCCESS:
-      return state.set(
-        'videoCommunication',
-        action.communication ? action.communication.video : '',
-      );
+      return state.set('communication', fromJS(action.communication));
     case RETRIEVE_DISCOUNT_SUCCESS:
       return state
         .setIn(['discount', 'rank'], action.discount.promotion_level.rank)

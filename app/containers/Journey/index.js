@@ -151,6 +151,7 @@ export class Journey extends React.Component {
           type: 'C',
           communication: {
             video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+            phone_number: '8231263',
           },
         },
         {

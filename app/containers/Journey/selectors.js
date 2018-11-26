@@ -90,13 +90,11 @@ const selectJourneyDomain = state => state.get('journey', initialState);
 
 const makeSelectCommunication = () => {
   const videoCommunicationSelector = makeSelectVideoCommunication();
-  return createSelector(videoCommunicationSelector, communicationVideo => {
-    if (!communicationVideo) return null;
+  return createSelector(videoCommunicationSelector, communication => {
+    if (!communication) return null;
     return fromJS({
       type: 'C',
-      communication: {
-        video: communicationVideo,
-      },
+      communication,
     });
   });
 };
@@ -176,7 +174,7 @@ const makeSelectJourney = () => {
     bannerSelector,
     (communication, fidelity, customerService, banner) => {
       let journey = List([]);
-      if (true) {
+      if (false) {
         return fromJS([
           {
             type: 'C',

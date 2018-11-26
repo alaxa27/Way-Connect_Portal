@@ -61,13 +61,32 @@ describe('makeSelectEstablishmentPicture', () => {
 describe('makeSelectVideoCommunication', () => {
   const videoCommunicationSelector = makeSelectVideoCommunication();
   it('should select the videoCommunication', () => {
-    const videoCommunication = 'video-url';
+    const videoURL = 'OIUOI';
+    const phoneNumber = '09218309213';
+    const communication = fromJS({
+      video: videoURL,
+      redirection: phoneNumber,
+    });
     const mockedState = fromJS({
       loaderPage: {
-        videoCommunication,
+        communication,
       },
     });
-    expect(videoCommunicationSelector(mockedState)).toEqual(videoCommunication);
+    const expectedResponse = fromJS({
+      video: videoURL,
+      phone_number: phoneNumber,
+    });
+    expect(videoCommunicationSelector(mockedState)).toEqual(expectedResponse);
+  });
+
+  it('should return null if the videoCommunication is null', () => {
+    const mockedState = fromJS({
+      loaderPage: {
+        communication: null,
+      },
+    });
+    const expectedResponse = null;
+    expect(videoCommunicationSelector(mockedState)).toEqual(expectedResponse);
   });
 });
 
