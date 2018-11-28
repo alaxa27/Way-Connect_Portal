@@ -38,8 +38,8 @@ describe('loaderPageReducer', () => {
 
   it('should handle the connectionPosted when there is a video', () => {
     const communication = fromJS({
-      video: 'foo',
-      redirection: 'foobar',
+      foo: 'bar',
+      baz: 'foo',
     });
 
     const expectedResult = state.set('communication', communication);

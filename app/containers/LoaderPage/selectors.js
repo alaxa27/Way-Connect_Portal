@@ -27,7 +27,10 @@ const makeSelectVideoCommunication = () =>
   createSelector(selectLoaderPageDomain, loaderState => {
     const communication = loaderState.get('communication');
     if (!communication) return null;
+    const campaign = communication.get('campaign');
     return fromJS({
+      company_name: campaign.get('company_name'),
+      name: campaign.get('name'),
       video: communication.get('video'),
       phone_number: communication.get('redirection'),
     });

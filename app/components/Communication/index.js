@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import VideoPlayer from 'components/VideoPlayer';
 import PhoneNumber from 'components/PhoneNumber';
 import CommunicationWrapper from './CommunicationWrapper';
-// import CommunicationTitle from './CommunicationTitle';
+import CommunicationTitle from './CommunicationTitle';
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
 
@@ -28,7 +28,9 @@ class Communication extends React.Component {
   render() {
     return (
       <CommunicationWrapper>
-        {/* <CommunicationTitle>Chanel | Bleu, fragrance homme</CommunicationTitle> */}
+        <CommunicationTitle>{`${this.props.company_name} | ${
+          this.props.name
+        }`}</CommunicationTitle>
         {this.renderPhoneNumber(this.props.phone_number)}
         <VideoPlayer {...this.props} />
       </CommunicationWrapper>

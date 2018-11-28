@@ -61,10 +61,16 @@ describe('makeSelectEstablishmentPicture', () => {
 describe('makeSelectVideoCommunication', () => {
   const videoCommunicationSelector = makeSelectVideoCommunication();
   it('should select the videoCommunication', () => {
-    const videoURL = 'OIUOI';
+    const companyName = 'foo';
+    const name = 'barab';
+    const video = 'OIUOI';
     const phoneNumber = '09218309213';
     const communication = fromJS({
-      video: videoURL,
+      campaign: {
+        company_name: companyName,
+        name,
+      },
+      video,
       redirection: phoneNumber,
     });
     const mockedState = fromJS({
@@ -73,7 +79,9 @@ describe('makeSelectVideoCommunication', () => {
       },
     });
     const expectedResponse = fromJS({
-      video: videoURL,
+      company_name: companyName,
+      name,
+      video,
       phone_number: phoneNumber,
     });
     expect(videoCommunicationSelector(mockedState)).toEqual(expectedResponse);

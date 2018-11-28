@@ -22,9 +22,18 @@ describe('selectJourneyDomain', () => {
 describe('makeSelectCommunication', () => {
   const communicationSelector = makeSelectCommunication();
   it('sould select the communication if it exists', () => {
+    const video = 'rtiu';
+    const redirection = 'kjfezjg';
+    const companyName = 'lkjak';
+    const name = 'jlljkaaaa';
+
     const communication = fromJS({
-      video: 'fezlkjjl',
-      redirection: '098312',
+      campaign: {
+        company_name: companyName,
+        name,
+      },
+      video,
+      redirection,
     });
     const mockedState = fromJS({
       loaderPage: {
@@ -34,8 +43,10 @@ describe('makeSelectCommunication', () => {
     const expectedResponse = fromJS({
       type: 'C',
       communication: {
-        video: communication.get('video'),
-        phone_number: communication.get('redirection'),
+        company_name: companyName,
+        name,
+        video,
+        phone_number: redirection,
       },
     });
     expect(communicationSelector(mockedState)).toEqual(expectedResponse);
@@ -214,9 +225,18 @@ describe('makeSelectCustomerService', () => {
 describe('makeSelectJourney', () => {
   const journeySelector = makeSelectJourney();
 
+  const video = 'rtiu';
+  const redirection = 'kjfezjg';
+  const companyName = 'lkjak';
+  const name = 'jlljkaaaa';
+
   const communication = fromJS({
-    video: 'OLKJEAF',
-    phone_number: '12098302193',
+    campaign: {
+      company_name: companyName,
+      name,
+    },
+    video,
+    phone_number: redirection,
   });
   const discount = fromJS({
     rank: 1,
