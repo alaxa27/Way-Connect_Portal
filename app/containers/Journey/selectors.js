@@ -64,14 +64,41 @@ const questionSamples = [
     type: 'Q',
     question: {
       id: 4,
-      type: 'VALUE',
-      text: 'Quel note donneriez vous à cet établissement?',
-      min: 0, // may be null
-      max: 10, // may be null
-      step: 1, // may be null
+      type: 'CHOICE',
+      text: 'Êtes-vous ?',
+      multiple: false,
+      choices: [
+        {
+          id: 1,
+          text: 'Étudiant',
+        },
+        {
+          id: 2,
+          text: 'Employé',
+        },
+        {
+          id: 3,
+          text: 'Patron',
+        },
+        {
+          id: 4,
+          text: 'Chômeur',
+        },
+      ],
       defaultAnswers: [],
     },
   },
+  // {
+  //   type: 'Q',
+  //   question: {
+  //     id: 4,
+  //     type: 'VALUE',
+  //     text: 'Quel note donneriez vous à cet établissement?',
+  //     min: 0, // may be null
+  //     max: 10, // may be null
+  //     step: 1, // may be null
+  //     defaultAnswers: [],
+  //   },
 ];
 const generateQuestion = question => question;
 
