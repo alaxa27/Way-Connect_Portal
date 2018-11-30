@@ -10,9 +10,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import Footer from 'components/Footer';
-import Question from 'components/Question';
-import Fidelity from 'components/Fidelity';
+import Footer from 'components/Footer/Loadable';
+import Question from 'components/Question/Loadable';
+import Fidelity from 'components/Fidelity/Loadable';
 import Communication from 'components/Communication/Loadable';
 import CustomerService from 'components/CustomerService/Loadable';
 import Banner from 'components/Banner/Loadable';
