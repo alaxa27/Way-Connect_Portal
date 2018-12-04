@@ -3,7 +3,6 @@ import loaderPageReducer from '../reducer';
 import {
   establishmentLoaded,
   connectionPosted,
-  promotionLevelsLoaded,
   discountLoaded,
   discountLoadingError,
 } from '../actions';
@@ -23,149 +22,40 @@ describe('loaderPageReducer', () => {
 
   it('should handle the establishmentLoaded action properly', () => {
     const establishmentName = 'foo';
-    const establishmentPicture = 'bar';
-    const expectedResult = state
-      .set('establishmentName', establishmentName)
-      .set('establishmentPicture', establishmentPicture);
+    const expectedResult = state.set('establishmentName', establishmentName);
 
     expect(
-      loaderPageReducer(
-        state,
-        establishmentLoaded(establishmentName, establishmentPicture),
-      ),
+      loaderPageReducer(state, establishmentLoaded(establishmentName)),
     ).toEqual(expectedResult);
   });
 
   it('should handle the connectionPosted when there is a video', () => {
-    const communication = fromJS({
-      foo: 'bar',
-      baz: 'foo',
-    });
-
-    const expectedResult = state.set('communication', communication);
-    expect(
-      loaderPageReducer(state, connectionPosted({ communication })),
-    ).toEqual(expectedResult);
-  });
-
-  it('should handle the connectionPosted when there is no video', () => {
-    const expectedResult = state.set('communication', null);
-    expect(
-      loaderPageReducer(state, connectionPosted({ communication: null })),
-    ).toEqual(expectedResult);
-  });
-
-  it('should handle the promotionLevelsLoaded action properly', () => {
-    const promotionLevelsObject = [
+    const connection = [
       {
-        rank: 1,
-        required_views: 0,
-        reward: '0',
-        reward_currency: '',
-        text: '',
-      },
-      {
-        rank: 2,
-        required_views: 0,
-        reward: '0',
-        reward_currency: '',
-        text: '',
+        type: 'F',
+        fidelity: {
+          foo: 'bar',
+        },
       },
     ];
 
-    const expectedResult = state
-      .set('promotionLevels', fromJS(promotionLevelsObject))
-      .set('bannerText', '')
-      .set('claimPhoneNumber', '');
-
-    expect(
-      loaderPageReducer(state, promotionLevelsLoaded(promotionLevelsObject)),
-    ).toEqual(expectedResult);
-  });
-
-  it('should handle the bannerText if promotionLevel has rank 101', () => {
-    const bannerText = 'Banner placeholder';
-    const promotionLevelsObject = [
-      {
-        rank: 1,
-        required_views: 0,
-        reward: '0',
-        reward_currency: '',
-        text: '',
-      },
-    ];
-
-    const promotionLevelsServerResponse = [
-      ...promotionLevelsObject,
-      {
-        rank: 101,
-        required_views: 0,
-        reward: '0',
-        reward_currency: '',
-        text: bannerText,
-      },
-    ];
-
-    const expectedResult = state
-      .set('promotionLevels', fromJS(promotionLevelsObject))
-      .set('bannerText', bannerText)
-      .set('claimPhoneNumber', '');
-
-    expect(
-      loaderPageReducer(
-        state,
-        promotionLevelsLoaded(promotionLevelsServerResponse),
-      ),
-    ).toEqual(expectedResult);
-  });
-
-  it('should get the claimPhoneNumber if promotionLevels has rank 102', () => {
-    const claimPhoneNumber = '91823091';
-    const promotionLevelsObject = [
-      {
-        rank: 1,
-        required_views: 0,
-        reward: '0',
-        reward_currency: '',
-        text: '',
-      },
-    ];
-
-    const promotionLevelsServerResponse = [
-      ...promotionLevelsObject,
-      {
-        rank: 102,
-        required_views: 0,
-        reward: '0',
-        reward_currency: '',
-        text: claimPhoneNumber,
-      },
-    ];
-
-    const expectedResult = state
-      .set('promotionLevels', fromJS(promotionLevelsObject))
-      .set('claimPhoneNumber', claimPhoneNumber)
-      .set('bannerText', '');
-
-    expect(
-      loaderPageReducer(
-        state,
-        promotionLevelsLoaded(promotionLevelsServerResponse),
-      ),
-    ).toEqual(expectedResult);
+    const expectedResult = state.set('connection', fromJS(connection));
+    expect(loaderPageReducer(state, connectionPosted(connection))).toEqual(
+      expectedResult,
+    );
   });
 
   it('should handle the discountLoaded action properly', () => {
     const expectedResult = state
-      .setIn(['discount', 'current_views'], 1)
-      .setIn(['discount', 'rank'], 1);
+      .setIn(['currentFidelityLevel', 'current_views'], 2)
+      .setIn(['currentFidelityLevel', 'current_rank'], 5);
 
     expect(
       loaderPageReducer(
         state,
         discountLoaded({
-          promotion_level: { rank: 1 },
-          current_views: 1,
+          current_rank: 5,
+          current_views: 2,
         }),
       ),
     ).toEqual(expectedResult);
@@ -173,8 +63,8 @@ describe('loaderPageReducer', () => {
 
   it('should handle the discountLoadingError action properly', () => {
     const expectedResult = state
-      .setIn(['discount', 'current_views'], 1)
-      .setIn(['discount', 'rank'], 1);
+      .setIn(['currentFidelityLevel', 'current_views'], 1)
+      .setIn(['currentFidelityLevel', 'current_rank'], 1);
 
     expect(loaderPageReducer(state, discountLoadingError())).toEqual(
       expectedResult,

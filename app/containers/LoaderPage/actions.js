@@ -12,9 +12,6 @@ import {
   POST_CONNECTION,
   POST_CONNECTION_SUCCESS,
   POST_CONNECTION_ERROR,
-  GET_PROMOTION_LEVELS,
-  GET_PROMOTION_LEVELS_SUCCESS,
-  GET_PROMOTION_LEVELS_ERROR,
   RETRIEVE_DISCOUNT,
   RETRIEVE_DISCOUNT_SUCCESS,
   RETRIEVE_DISCOUNT_ERROR,
@@ -32,11 +29,10 @@ export function loadEstablishment() {
   };
 }
 
-export function establishmentLoaded(name, picture) {
+export function establishmentLoaded(name) {
   return {
     type: GET_ESTABLISHMENT_SUCCESS,
     name,
-    picture,
   };
 }
 
@@ -56,45 +52,13 @@ export function postConnection() {
 export function connectionPosted(connection) {
   return {
     type: POST_CONNECTION_SUCCESS,
-    communication: connection.communication,
+    connection,
   };
 }
 
 export function connectionPostingError() {
   return {
     type: POST_CONNECTION_ERROR,
-  };
-}
-
-export function loadPromotionLevels() {
-  return {
-    type: GET_PROMOTION_LEVELS,
-  };
-}
-
-export function promotionLevelsLoaded(promotionLevels) {
-  const removeAndGetText = (rank, levelsArray) => {
-    const index = levelsArray.findIndex(level => level.rank === rank);
-    if (index > -1) {
-      const res = levelsArray[index].text;
-      levelsArray.splice(index, 1);
-      return res;
-    }
-    return '';
-  };
-  const bannerText = removeAndGetText(101, promotionLevels);
-  const claimPhoneNumber = removeAndGetText(102, promotionLevels);
-  return {
-    type: GET_PROMOTION_LEVELS_SUCCESS,
-    promotionLevels,
-    bannerText,
-    claimPhoneNumber,
-  };
-}
-
-export function promotionLevelsLoadingError() {
-  return {
-    type: GET_PROMOTION_LEVELS_ERROR,
   };
 }
 

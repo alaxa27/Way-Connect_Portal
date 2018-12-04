@@ -2,12 +2,8 @@ import { fromJS } from 'immutable';
 import {
   selectLoaderPageDomain,
   makeSelectEstablishmentName,
-  makeSelectEstablishmentPicture,
-  makeSelectVideoCommunication,
-  makeSelectDiscount,
-  makeSelectPromotionLevels,
-  makeSelectBannerText,
-  makeSelectClaimPhoneNumber,
+  makeSelectCurrentFidelityLevel,
+  makeSelectConnection,
 } from '../selectors';
 
 describe('selectLoaderPageDomain', () => {
@@ -35,211 +31,39 @@ describe('makeSelectEstablishmentName', () => {
   });
 });
 
-describe('makeSelectEstablishmentPicture', () => {
-  const establishmentPictureSelector = makeSelectEstablishmentPicture();
-  it('should select the establishmentPicture', () => {
-    const establishmentPicture = 'picutreMOCK';
-
+describe('makeSelectConnection', () => {
+  const connectionSelector = makeSelectConnection();
+  it('should select connection', () => {
+    const connection = [
+      {
+        type: 'F',
+        foo: {
+          bar: 'baz',
+        },
+      },
+    ];
     const mockedState = fromJS({
       loaderPage: {
-        establishmentPicture,
+        connection,
       },
     });
-    expect(establishmentPictureSelector(mockedState)).toEqual(
-      establishmentPicture,
-    );
-  });
-
-  it('should return null if no establishmentPicture', () => {
-    const mockedState = fromJS({
-      loaderPage: {},
-    });
-    expect(establishmentPictureSelector(mockedState)).toEqual(null);
+    expect(connectionSelector(mockedState)).toEqual(fromJS(connection));
   });
 });
 
-describe('makeSelectVideoCommunication', () => {
-  const videoCommunicationSelector = makeSelectVideoCommunication();
-  it('should select the videoCommunication', () => {
-    const companyName = 'foo';
-    const name = 'barab';
-    const video = 'OIUOI';
-    const phoneNumber = '09218309213';
-    const communication = fromJS({
-      campaign: {
-        company_name: companyName,
-        name,
-      },
-      video,
-      redirection: phoneNumber,
-    });
-    const mockedState = fromJS({
-      loaderPage: {
-        communication,
-      },
-    });
-    const expectedResponse = fromJS({
-      company_name: companyName,
-      name,
-      video,
-      phone_number: phoneNumber,
-    });
-    expect(videoCommunicationSelector(mockedState)).toEqual(expectedResponse);
-  });
-
-  it('should return null if the videoCommunication is null', () => {
-    const mockedState = fromJS({
-      loaderPage: {
-        communication: null,
-      },
-    });
-    const expectedResponse = null;
-    expect(videoCommunicationSelector(mockedState)).toEqual(expectedResponse);
-  });
-});
-
-describe('makeSelectDiscount', () => {
-  const discountSelector = makeSelectDiscount();
-  it('should select the discount', () => {
-    const discount = fromJS({
+describe('makeSelectCurrentFidelityLevel', () => {
+  const currentFidelityLevelSelector = makeSelectCurrentFidelityLevel();
+  it('should select the currentFidelityLevel', () => {
+    const currentFidelityLevel = fromJS({
       data: true,
     });
     const mockedState = fromJS({
       loaderPage: {
-        discount,
+        currentFidelityLevel,
       },
     });
-    expect(discountSelector(mockedState)).toEqual(discount);
-  });
-});
-
-describe('makeSelectPromotionLevels', () => {
-  const promotionLevelsSelector = makeSelectPromotionLevels();
-  it('should select the promotion levels and make the text as offer', () => {
-    const promotionLevels = [
-      {
-        rank: 1,
-        required_views: 0,
-        reward: '',
-        reward_currency: '',
-        text: 'a',
-      },
-      {
-        rank: 2,
-        required_views: 0,
-        reward: '',
-        reward_currency: '',
-        text: 'b',
-      },
-    ];
-
-    const mockedState = fromJS({
-      loaderPage: {
-        promotionLevels,
-      },
-    });
-
-    const expectedResponse = fromJS([
-      {
-        rank: 1,
-        required_views: 0,
-        reward: '',
-        reward_currency: '',
-        offer: 'a',
-      },
-      {
-        rank: 2,
-        required_views: 0,
-        reward: '',
-        reward_currency: '',
-        offer: 'b',
-      },
-    ]);
-    expect(promotionLevelsSelector(mockedState)).toEqual(expectedResponse);
-  });
-  it('should generate the offer based on reward if no text', () => {
-    const promotionLevels = [
-      {
-        rank: 1,
-        required_views: 0,
-        reward: '1.00',
-        reward_currency: 'EUR',
-        text: '',
-      },
-      {
-        rank: 2,
-        required_views: 0,
-        reward: '2.00',
-        reward_currency: 'EUR',
-        text: null,
-      },
-    ];
-
-    const mockedState = fromJS({
-      loaderPage: {
-        promotionLevels,
-      },
-    });
-
-    const expectedResponse = fromJS([
-      {
-        rank: 1,
-        required_views: 0,
-        reward: '1.00',
-        reward_currency: 'EUR',
-        offer: '1.00 EUR',
-      },
-      {
-        rank: 2,
-        required_views: 0,
-        reward: '2.00',
-        reward_currency: 'EUR',
-        offer: '2.00 EUR',
-      },
-    ]);
-    expect(promotionLevelsSelector(mockedState)).toEqual(expectedResponse);
-  });
-});
-
-describe('makeSelectBannerText', () => {
-  const bannerTextSelector = makeSelectBannerText();
-  it('should select the bannerText', () => {
-    const bannerText = 'BANNER';
-
-    const mockedState = fromJS({
-      loaderPage: {
-        bannerText,
-      },
-    });
-    expect(bannerTextSelector(mockedState)).toEqual(bannerText);
-  });
-
-  it('should return null if there is no bannerText', () => {
-    const mockedState = fromJS({
-      loaderPage: {},
-    });
-    expect(bannerTextSelector(mockedState)).toEqual(null);
-  });
-});
-
-describe('makeSelectClaimPhoneNumber', () => {
-  const claimPhoneNumberSelector = makeSelectClaimPhoneNumber();
-  it('should select the claimPhoneNumber', () => {
-    const claimPhoneNumber = '01120938109';
-
-    const mockedState = fromJS({
-      loaderPage: {
-        claimPhoneNumber,
-      },
-    });
-    expect(claimPhoneNumberSelector(mockedState)).toEqual(claimPhoneNumber);
-  });
-
-  it('should return null if no claimPhoneNumber', () => {
-    const mockedState = fromJS({
-      loaderPage: {},
-    });
-
-    expect(claimPhoneNumberSelector(mockedState)).toEqual(null);
+    expect(currentFidelityLevelSelector(mockedState)).toEqual(
+      currentFidelityLevel,
+    );
   });
 });

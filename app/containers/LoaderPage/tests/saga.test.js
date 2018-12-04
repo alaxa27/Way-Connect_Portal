@@ -3,9 +3,9 @@
  */
 
 /* eslint-disable redux-saga/yield-effects */
-import { put, take, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
-import { GET_ESTABLISHMENT, GET_PROMOTION_LEVELS_SUCCESS } from '../constants';
+import { GET_ESTABLISHMENT } from '../constants';
 
 import { establishmentLoaded, establishmentLoadingError } from '../actions';
 import loaderPage, { getEstablishmentEffect, fetchAllEffect } from '../saga';
@@ -49,7 +49,5 @@ describe('loaderPageSaga Saga', () => {
     expect(takeLatestDescriptor).toEqual(
       takeLatest(GET_ESTABLISHMENT, fetchAllEffect),
     );
-    const takeDescriptor = loaderPageSaga.next().value;
-    expect(takeDescriptor).toEqual(take(GET_PROMOTION_LEVELS_SUCCESS));
   });
 });
