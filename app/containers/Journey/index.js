@@ -74,7 +74,7 @@ export class Journey extends React.Component {
   }
 
   changeIndex(index) {
-    this.props.changeID(this.state.index);
+    this.props.changeID(index);
     this.setState({
       index: parseInt(index, 10),
     });

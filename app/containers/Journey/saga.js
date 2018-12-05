@@ -1,12 +1,4 @@
-// import { delay } from 'redux-saga';
-import {
-  // takeLatest,
-  takeEvery,
-  call,
-  put,
-  select,
-  all,
-} from 'redux-saga/effects';
+import { takeEvery, call, put, select, all } from 'redux-saga/effects';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
