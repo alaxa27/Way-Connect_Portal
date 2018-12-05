@@ -22,7 +22,7 @@ const Info = styled.div`
 `;
 
 const OpenCard = props => {
-  const { rank, currentViews, requiredViews, offer } = props;
+  const { rank, currentViews, requiredViews, text } = props;
 
   return (
     <PromotionCardWrapper>
@@ -38,7 +38,7 @@ const OpenCard = props => {
       </Info>
       <Info>
         Offre
-        <Label>{offer}</Label>
+        <Label>{text}</Label>
       </Info>
     </PromotionCardWrapper>
   );
@@ -48,7 +48,7 @@ OpenCard.propTypes = {
   rank: PropTypes.number.isRequired,
   currentViews: PropTypes.number.isRequired,
   requiredViews: PropTypes.number.isRequired,
-  offer: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default OpenCard;

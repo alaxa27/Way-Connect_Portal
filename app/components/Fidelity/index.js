@@ -20,51 +20,47 @@ import FidelityWrapper from './FidelityWrapper';
 
 /* eslint-disable react/prefer-stateless-function */
 class Fidelity extends React.Component {
-  renderPromotionCard(discounts, currentLevel) {
-    return _.map(discounts, (discount, key) => {
-      if (discount.rank < currentLevel.rank) {
+  renderPromotionCard(levels, currentLevel) {
+    return _.map(levels, (level, key) => {
+      if (level.rank < currentLevel.current_rank) {
         return (
           <OpenCard
             key={key}
-            {...discount}
-            currentViews={discount.required_views}
-            requiredViews={discount.required_views}
+            {...level}
+            currentViews={level.required_views}
+            requiredViews={level.required_views}
           />
         );
       }
-      if (discount.rank === currentLevel.rank) {
-        if (currentLevel.current_views === discount.required_views) {
+      if (level.rank === currentLevel.current_rank) {
+        if (currentLevel.current_views === level.required_views) {
           return (
             <LockedCard
               key={key}
-              {...discount}
+              {...level}
               active
               onClick={this.props.onActiveClick}
-              requiredViews={discount.required_views}
+              requiredViews={level.required_views}
             />
           );
         }
         return (
           <OpenCard
             key={key}
-            {...discount}
+            {...level}
             currentViews={currentLevel.current_views}
-            requiredViews={discount.required_views}
+            requiredViews={level.required_views}
           />
         );
       }
       return (
-        <LockedCard
-          key={key}
-          {...discount}
-          requiredViews={discount.required_views}
-        />
+        <LockedCard key={key} {...level} requiredViews={level.required_views} />
       );
     });
   }
 
   render() {
-    const { discounts } = this.props;
+    const { levels } = this.props;
     const establishmentName = this.props.establishment_name;
 
     return (
@@ -75,7 +71,7 @@ class Fidelity extends React.Component {
           <EstablishmentName> {establishmentName} </EstablishmentName>
           {'ou accédez directement à Internet.'}
         </SubTitle>
-        {this.renderPromotionCard(discounts, this.props.current_level)}
+        {this.renderPromotionCard(levels, this.props.current_level)}
       </FidelityWrapper>
     );
   }
@@ -83,7 +79,7 @@ class Fidelity extends React.Component {
 
 Fidelity.propTypes = {
   establishment_name: PropTypes.string.isRequired,
-  discounts: PropTypes.array.isRequired,
+  levels: PropTypes.array.isRequired,
   onActiveClick: PropTypes.func.isRequired,
 };
 

@@ -119,29 +119,29 @@ export class Journey extends React.Component {
           fidelity: {
             establishment_name: '180 DEGRES',
             current_level: {
-              rank: 2,
+              current_rank: 2,
               current_views: 4,
             },
-            discounts: [
+            levels: [
               {
                 rank: 1, // Already completed level
                 reward: '15.00',
                 reward_currency: 'EUR',
-                offer: 'Coffee',
+                text: 'Coffee',
                 required_views: 2,
               },
               {
                 rank: 2, // Ongoing level 2
                 reward: '19.00',
                 reward_currency: 'EUR',
-                offer: 'Breakfast',
+                text: 'Breakfast',
                 required_views: 4,
               },
               {
                 rank: 3, // Locked levels
                 reward: '23.00',
                 reward_currency: 'EUR',
-                offer: 'Lunch',
+                text: 'Lunch',
                 required_views: 5,
               },
             ],

@@ -22,7 +22,7 @@ const Text = styled.p`
 `;
 
 const LockedCard = props => {
-  const { rank, offer, active, onClick } = props;
+  const { rank, text, active, onClick } = props;
   const activeText = `Tapez ici pour obtenir l'offre suivante`;
   const notActiveText = `Vous devez finir le palier précédent pour accéder à cette offre`;
 
@@ -34,7 +34,7 @@ const LockedCard = props => {
         {rank}
       </Title>
       <Text>{active ? activeText : notActiveText}</Text>
-      <Offer>{offer}</Offer>
+      <Offer>{text}</Offer>
     </PromotionCardWrapper>
   );
 };
@@ -46,7 +46,7 @@ LockedCard.defaultProps = {
 
 LockedCard.propTypes = {
   rank: PropTypes.number.isRequired,
-  offer: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   active: PropTypes.bool,
   onClick: PropTypes.func,
 };
