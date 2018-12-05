@@ -44,135 +44,7 @@ export class Journey extends React.Component {
       index: -1,
       footerActive: false,
       countDown: 0,
-      journey: [
-        {
-          type: 'Q',
-          question: {
-            id: 32,
-            type: 'CHOICE',
-            text: 'FOOBARBAZ ????',
-            multiple: false,
-            choices: [
-              {
-                id: 1,
-                text: 'foo',
-              },
-              {
-                id: 2,
-                text: 'bar',
-              },
-              {
-                id: 3,
-                text: 'baz',
-              },
-            ],
-            defaultAnswers: [],
-          },
-        },
-        {
-          type: 'Q',
-          question: {
-            id: 2,
-            type: 'CHOICE',
-            text: 'Multiple foobarbaz ?????',
-            multiple: true,
-            choices: [
-              {
-                id: 1,
-                text: 'foo',
-              },
-              {
-                id: 2,
-                text: 'bar',
-              },
-              {
-                id: 3,
-                text: 'baz',
-              },
-            ],
-            defaultAnswers: [],
-          },
-        },
-        {
-          type: 'Q',
-          question: {
-            id: 4,
-            type: 'VALUE',
-            text: 'How much?',
-            min: 0, // may be null
-            max: 10, // may be null
-            step: 1, // may be null
-            defaultAnswers: [],
-          },
-        },
-        {
-          type: 'Q',
-          question: {
-            id: 445,
-            type: 'VALUE_RANGE',
-            text: 'How much?',
-            min: 1, // may be null
-            max: 10, // may be null
-            step: 0.1, // may be null
-            defaultAnswers: [],
-          },
-        },
-        {
-          type: 'F',
-          fidelity: {
-            establishment_name: '180 DEGRES',
-            current_level: {
-              current_rank: 2,
-              current_views: 4,
-            },
-            levels: [
-              {
-                rank: 1, // Already completed level
-                reward: '15.00',
-                reward_currency: 'EUR',
-                text: 'Coffee',
-                required_views: 2,
-              },
-              {
-                rank: 2, // Ongoing level 2
-                reward: '19.00',
-                reward_currency: 'EUR',
-                text: 'Breakfast',
-                required_views: 4,
-              },
-              {
-                rank: 3, // Locked levels
-                reward: '23.00',
-                reward_currency: 'EUR',
-                text: 'Lunch',
-                required_views: 5,
-              },
-            ],
-          },
-        },
-        {
-          type: 'C',
-          communication: {
-            name: 'Parfum Bleu',
-            company_name: 'Channel',
-            video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
-            phone_number: '8231263',
-          },
-        },
-        {
-          type: 'S',
-          customer_service: {
-            phone_number: '+21609178230',
-          },
-        },
-        {
-          type: 'B',
-          banner: {
-            text: 'rejoingez nous dans cette grande aventure!',
-            picture: 'images/banner.png',
-          },
-        },
-      ],
+      journey: [],
     };
 
     this.activateFooter = this.activateFooter.bind(this);
@@ -182,13 +54,19 @@ export class Journey extends React.Component {
   }
 
   componentDidMount() {
-    // this.setState({
-    //   journey: this.props.journey.toJS(),
-    // });
+    this.setState({
+      journey: this.props.journey.toJS(),
+    });
     this.changeIndex(this.props.match.params.id);
   }
 
   componentDidUpdate(prevProps) {
+    if (prevProps.journey !== this.props.journey) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        journey: this.props.journey.toJS(),
+      });
+    }
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.changeIndex(this.props.match.params.id);
       this.deactivateFooter();
@@ -196,7 +74,7 @@ export class Journey extends React.Component {
   }
 
   changeIndex(index) {
-    this.props.changeID(this.state.index, index, this.props.journey.length);
+    this.props.changeID(this.state.index, index, this.state.journey.length);
     this.setState({
       index: parseInt(index, 10),
     });
@@ -211,16 +89,10 @@ export class Journey extends React.Component {
   }
 
   validateAnswer(defaultAnswers) {
-    this.setState(prevState => {
-      const { index } = prevState;
-      const journey = [...prevState.journey];
-      journey[index].question.defaultAnswers = defaultAnswers;
-      return { journey };
-    });
     // eslint-disable-next-line prefer-destructuring
     const index = this.state.index;
     // eslint-disable-next-line prefer-destructuring
-    const question = this.props.journey[index].question;
+    const question = this.state.journey[index].question;
     this.props.changeDefaultAnswersList(defaultAnswers, question.id);
     this.activateFooter();
   }
@@ -263,7 +135,9 @@ export class Journey extends React.Component {
   }
 
   render() {
-    const { index, journey, footerActive } = this.state;
+    const { index, footerActive, journey } = this.state;
+    console.log(journey);
+
     return (
       <JourneyWrapper>
         <JourneyItem>{this.renderJourneyItem(journey[index])}</JourneyItem>
@@ -284,7 +158,7 @@ Journey.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  journey: makeSelectJourney().toJS(),
+  journey: makeSelectJourney(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -45,7 +45,7 @@ const makeSelectJourney = () => {
       currentFidelityLevel,
       defaultAnswersList,
     ) => {
-      const journey = connection.map(item => {
+      const journey = connection.get('journey').map(item => {
         switch (item.get('type')) {
           case 'F':
             return item
@@ -61,7 +61,7 @@ const makeSelectJourney = () => {
                 : fromJS([]),
             );
           default:
-            return null;
+            return item;
         }
       });
 

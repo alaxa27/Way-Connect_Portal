@@ -22,6 +22,8 @@ import FidelityWrapper from './FidelityWrapper';
 class Fidelity extends React.Component {
   renderPromotionCard(levels, currentLevel) {
     return _.map(levels, (level, key) => {
+      // eslint-disable-next-line no-param-reassign
+      if (!level.text) level.text = `${level.reward} ${level.reward_currency}`;
       if (level.rank < currentLevel.current_rank) {
         return (
           <OpenCard
