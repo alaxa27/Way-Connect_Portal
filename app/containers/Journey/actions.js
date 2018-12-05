@@ -6,6 +6,10 @@
 
 import {
   DEFAULT_ACTION,
+  JOURNEY_ID_OUTOFRANGE,
+  JOURNEY_ID_INCREASED,
+  JOURNEY_ID_DECREASED,
+  CHANGE_DEFAULT_ANSWERS_LIST,
   ACKNOWLEDGE_COMMUNICATION,
   ACKNOWLEDGE_COMMUNICATION_SUCCESS,
   ACKNOWLEDGE_COMMUNICATION_ERROR,
@@ -18,9 +22,6 @@ import {
   ANSWER_QUESTION,
   ANSWER_QUESTION_SUCCESS,
   ANSWER_QUESTION_ERROR,
-  JOURNEY_ID_OUTOFRANGE,
-  JOURNEY_ID_INCREASED,
-  JOURNEY_ID_DECREASED,
 } from './constants';
 
 export function defaultAction() {
@@ -30,14 +31,24 @@ export function defaultAction() {
 }
 
 export function changeID(prevID, currentID, length) {
-  if (currentID >= length) return { type: JOURNEY_ID_OUTOFRANGE };
+  if (currentID >= length) return { type: JOURNEY_ID_OUTOFRANGE, currentID };
   if (prevID < currentID) {
     return {
       type: JOURNEY_ID_INCREASED,
+      currentID,
     };
   }
   return {
     type: JOURNEY_ID_DECREASED,
+    currentID,
+  };
+}
+
+export function changeDefaultAnswersList(defaultAnswers, questionID) {
+  return {
+    type: CHANGE_DEFAULT_ANSWERS_LIST,
+    defaultAnswers,
+    questionID,
   };
 }
 

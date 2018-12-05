@@ -60,6 +60,9 @@ export function* answerQuestionEffect(id, type, answers) {
 
   switch (type) {
     case 'VALUE':
+      // eslint-disable-next-line no-case-declarations
+      const value1 = answers[0];
+      answer.value = value1;
       break;
     case 'CHOICE':
       answer.choices = answers;

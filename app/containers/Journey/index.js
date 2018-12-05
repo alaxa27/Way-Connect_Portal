@@ -26,7 +26,7 @@ import saga from './saga';
 import JourneyWrapper from './JourneyWrapper';
 import JourneyItem from './JourneyItem';
 
-import { skipVideo, authenticate } from './actions';
+import { skipVideo, authenticate, changeID } from './actions';
 
 const timeBeforeSkip = 5; // Skip the ad available after 5sec
 
@@ -35,10 +35,8 @@ export class Journey extends React.Component {
   constructor(props) {
     super(props);
 
-    const { id } = props.match.params;
-
     this.state = {
-      index: parseInt(id, 10),
+      index: -1,
       footerActive: false,
       countDown: 0,
       journey: [
@@ -179,33 +177,21 @@ export class Journey extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      journey: this.props.journey.toJS(),
-    });
+    // this.setState({
+    //   journey: this.props.journey.toJS(),
+    // });
+    this.changeIndex(this.props.match.params.id);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.changeIndex(this.props.match.params.id);
       this.deactivateFooter();
-
-      if (
-        parseInt(this.props.match.params.id, 10) === this.state.journey.length
-      ) {
-        this.props.authenticate();
-      }
-
-      if (
-        parseInt(this.props.match.params.id, 10) < this.state.journey.length
-      ) {
-        if (this.state.journey[this.props.match.params.id].type === 'C') {
-          this.props.skipVideo();
-        }
-      }
     }
   }
 
   changeIndex(index) {
+    this.props.changeID(this.state.index, index, this.props.journey.length);
     this.setState({
       index: parseInt(index, 10),
     });
@@ -288,13 +274,14 @@ Journey.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  journey: makeSelectJourney(),
+  journey: makeSelectJourney().toJS(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     skipVideo: () => dispatch(skipVideo()),
     authenticate: () => dispatch(authenticate()),
+    changeID: () => dispatch(changeID()),
   };
 }
 
