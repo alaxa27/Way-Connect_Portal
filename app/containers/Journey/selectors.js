@@ -21,10 +21,29 @@ const makeSelectDefaultAnswersList = () =>
     journeyState.get('defaultAnswersList'),
   );
 
+const makeSelectPreviousID = () =>
+  createSelector(selectJourneyDomain, journeyState =>
+    journeyState.get('previousID'),
+  );
+
 const makeSelectCurrentID = () =>
   createSelector(selectJourneyDomain, journeyState =>
     journeyState.get('currentID'),
   );
+
+const makeSelectJourneyItem = id => {
+  const journeySelector = makeSelectJourney();
+  return createSelector(journeySelector, journey => {
+    if (id < 0 || id > journey.size) {
+      return fromJS({ type: 'OUT_OF_RANGE' });
+    }
+    if (id === journey.size) {
+      return fromJS({ type: 'END' });
+    }
+    return journey.get(id);
+  });
+};
+
 /**
  * Default selector used by Journey
  */
@@ -71,4 +90,9 @@ const makeSelectJourney = () => {
 };
 
 export default makeSelectJourney;
-export { selectJourneyDomain, makeSelectCurrentID };
+export {
+  selectJourneyDomain,
+  makeSelectJourneyItem,
+  makeSelectPreviousID,
+  makeSelectCurrentID,
+};

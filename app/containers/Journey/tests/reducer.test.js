@@ -7,6 +7,7 @@ describe('journeyReducer', () => {
   beforeEach(() => {
     state = fromJS({
       defaultAnswersList: {},
+      previousID: -2,
       currentID: -1,
     });
   });
@@ -17,9 +18,14 @@ describe('journeyReducer', () => {
   });
 
   it('should handle changeID action properly', () => {
-    const expectedResult = state.set('currentID', 1);
+    const expectedResult = state.set('currentID', 32).set('previousID', 23);
 
-    expect(journeyReducer(state, changeID(-1, 1, 3))).toEqual(expectedResult);
+    expect(
+      journeyReducer(
+        state.set('currentID', 23).set('previousID', 12),
+        changeID(32),
+      ),
+    ).toEqual(expectedResult);
   });
 
   it('should handle the changeDefaultAnswersList if the questionID is already present', () => {

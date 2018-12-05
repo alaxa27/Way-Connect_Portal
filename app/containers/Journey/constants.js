@@ -6,9 +6,7 @@
 
 export const DEFAULT_ACTION = 'app/Journey/DEFAULT_ACTION';
 
-export const JOURNEY_ID_INCREASED = 'app/Journey/JOURNEY_ID_INCREASED';
-export const JOURNEY_ID_DECREASED = 'app/Journey/JOURNEY_ID_DECREASED';
-export const JOURNEY_ID_OUTOFRANGE = 'app/Journey/JOURNEY_ID_OUTOFRANGE';
+export const JOURNEY_ID_CHANGED = 'app/Journey/JOURNEY_ID_CHANGED';
 
 export const CHANGE_DEFAULT_ANSWERS_LIST =
   'app/Journey/CHANGE_DEFAULT_ANSWERS_LIST';

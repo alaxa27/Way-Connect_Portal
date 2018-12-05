@@ -1,5 +1,8 @@
 import { fromJS } from 'immutable';
-import makeSelectJourney, { selectJourneyDomain } from '../selectors';
+import makeSelectJourney, {
+  selectJourneyDomain,
+  makeSelectJourneyItem,
+} from '../selectors';
 
 describe('selectJourneyDomain', () => {
   it('sould select the journey domain', () => {
@@ -10,6 +13,51 @@ describe('selectJourneyDomain', () => {
       journey: journeyState,
     });
     expect(selectJourneyDomain(mockedState)).toEqual(journeyState);
+  });
+});
+
+describe('makeSelectJourneyItem', () => {
+  const mockedState = fromJS({
+    loaderPage: {
+      connection: {
+        journey: [{ a: 1 }, { b: 2 }, { c: 3 }],
+      },
+    },
+    journey: {
+      currentID: 2,
+      previousID: 0,
+    },
+  });
+
+  it('should select the right item when ID is >= 0 && < length', () => {
+    const journeyItemSelector = makeSelectJourneyItem(1);
+    const expectedResult = fromJS({
+      b: 2,
+    });
+    const journeyItem = journeyItemSelector(mockedState);
+    expect(journeyItem).toEqual(expectedResult);
+  });
+
+  it('should select the END item when ID is == length', () => {
+    const journeyItemSelector = makeSelectJourneyItem(3);
+
+    const expectedResult = fromJS({ type: 'END' });
+
+    const journeyItem = journeyItemSelector(mockedState);
+    expect(journeyItem).toEqual(expectedResult);
+  });
+
+  it('should select the OUT_OF_RANGE item when ID is < 0 or > length', () => {
+    const expectedResult = fromJS({ type: 'OUT_OF_RANGE' });
+
+    const lowerJourneyItemSelector = makeSelectJourneyItem(-3);
+    const lowerJourneyItem = lowerJourneyItemSelector(mockedState);
+
+    const greaterJourneyItemSelector = makeSelectJourneyItem(10);
+    const greaterJourneyItem = greaterJourneyItemSelector(mockedState);
+
+    expect(lowerJourneyItem).toEqual(expectedResult);
+    expect(greaterJourneyItem).toEqual(expectedResult);
   });
 });
 
@@ -27,7 +75,9 @@ describe('makeSelectJourney', () => {
       loaderPage: {
         establishmentName,
         currentFidelityLevel,
-        connection: [],
+        connection: {
+          journey: [],
+        },
       },
     });
     const journey = journeySelector(mockedState);
@@ -35,20 +85,22 @@ describe('makeSelectJourney', () => {
   });
 
   it('should generate a journey with the right default answers', () => {
-    const connection = fromJS([
-      {
-        type: 'Q',
-        question: {
-          id: 'a3f32a',
+    const connection = fromJS({
+      journey: [
+        {
+          type: 'Q',
+          question: {
+            id: 'a3f32a',
+          },
         },
-      },
-      {
-        type: 'Q',
-        question: {
-          id: '098',
+        {
+          type: 'Q',
+          question: {
+            id: '098',
+          },
         },
-      },
-    ]);
+      ],
+    });
 
     const mockedState = fromJS({
       loaderPage: {
@@ -67,20 +119,23 @@ describe('makeSelectJourney', () => {
     const journey = journeySelector(mockedState);
     expect(journey).toEqual(
       connection
+        .get('journey')
         .setIn([0, 'question', 'defaultAnswers'], fromJS([1]))
         .setIn([1, 'question', 'defaultAnswers'], fromJS([])),
     );
   });
 
   it('should generate a journey with the current_level if fidelity is found', () => {
-    const connection = fromJS([
-      {
-        type: 'F',
-        fidelity: {
-          levels: 'foo',
+    const connection = fromJS({
+      journey: [
+        {
+          type: 'F',
+          fidelity: {
+            levels: 'foo',
+          },
         },
-      },
-    ]);
+      ],
+    });
 
     const mockedState = fromJS({
       loaderPage: {
@@ -93,6 +148,7 @@ describe('makeSelectJourney', () => {
     const journey = journeySelector(mockedState);
     expect(journey).toEqual(
       connection
+        .get('journey')
         .setIn([0, 'fidelity', 'current_level'], currentFidelityLevel)
         .setIn([0, 'fidelity', 'establishment_name'], establishmentName),
     );

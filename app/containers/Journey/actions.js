@@ -6,9 +6,7 @@
 
 import {
   DEFAULT_ACTION,
-  JOURNEY_ID_OUTOFRANGE,
-  JOURNEY_ID_INCREASED,
-  JOURNEY_ID_DECREASED,
+  JOURNEY_ID_CHANGED,
   CHANGE_DEFAULT_ANSWERS_LIST,
   ACKNOWLEDGE_COMMUNICATION,
   ACKNOWLEDGE_COMMUNICATION_SUCCESS,
@@ -33,16 +31,9 @@ export function defaultAction() {
   };
 }
 
-export function changeID(prevID, currentID, length) {
-  if (currentID >= length) return { type: JOURNEY_ID_OUTOFRANGE, currentID };
-  if (prevID < currentID) {
-    return {
-      type: JOURNEY_ID_INCREASED,
-      currentID,
-    };
-  }
+export function changeID(currentID) {
   return {
-    type: JOURNEY_ID_DECREASED,
+    type: JOURNEY_ID_CHANGED,
     currentID,
   };
 }

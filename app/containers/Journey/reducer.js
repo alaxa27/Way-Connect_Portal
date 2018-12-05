@@ -8,14 +8,13 @@ import { fromJS } from 'immutable';
 import {
   DEFAULT_ACTION,
   SKIP_VIDEO,
-  JOURNEY_ID_INCREASED,
-  JOURNEY_ID_DECREASED,
-  JOURNEY_ID_OUTOFRANGE,
+  JOURNEY_ID_CHANGED,
   CHANGE_DEFAULT_ANSWERS_LIST,
 } from './constants';
 
 export const initialState = fromJS({
   defaultAnswersList: {},
+  previousID: -2,
   currentID: -1,
 });
 
@@ -25,12 +24,10 @@ function journeyReducer(state = initialState, action) {
       return state;
     case SKIP_VIDEO:
       return state;
-    case JOURNEY_ID_INCREASED:
-      return state.set('currentID', action.currentID);
-    case JOURNEY_ID_DECREASED:
-      return state.set('currentID', action.currentID);
-    case JOURNEY_ID_OUTOFRANGE:
-      return state.set('currentID', action.currentID);
+    case JOURNEY_ID_CHANGED:
+      return state
+        .set('previousID', state.get('currentID'))
+        .set('currentID', parseInt(action.currentID, 10));
     case CHANGE_DEFAULT_ANSWERS_LIST:
       return state.setIn(
         ['defaultAnswersList', action.questionID],

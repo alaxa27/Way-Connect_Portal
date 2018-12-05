@@ -1,9 +1,7 @@
 import { defaultAction, changeID, changeDefaultAnswersList } from '../actions';
 import {
   DEFAULT_ACTION,
-  JOURNEY_ID_INCREASED,
-  JOURNEY_ID_DECREASED,
-  JOURNEY_ID_OUTOFRANGE,
+  JOURNEY_ID_CHANGED,
   CHANGE_DEFAULT_ANSWERS_LIST,
 } from '../constants';
 
@@ -18,31 +16,13 @@ describe('Journey actions', () => {
   });
 
   describe('changeID action', () => {
-    it('should dispatch JOURNEY_ID_INCREASED when we switch to greater ID', () => {
+    it('should dispatch JOURNEY_ID_CHANGED when we switch ID', () => {
       const expectedResult = {
-        type: JOURNEY_ID_INCREASED,
+        type: JOURNEY_ID_CHANGED,
         currentID: 2,
       };
 
-      expect(changeID(1, 2, 3)).toEqual(expectedResult);
-    });
-
-    it('should dispatch JOURNEY_ID_DECREASED when we switch to lower ID', () => {
-      const expectedResult = {
-        type: JOURNEY_ID_DECREASED,
-        currentID: 1,
-      };
-
-      expect(changeID(2, 1, 3)).toEqual(expectedResult);
-    });
-
-    it('should dispatch JOURNEY_ID_OUTOFRANGE when we ID is greater or equal to length', () => {
-      const expectedResult = {
-        type: JOURNEY_ID_OUTOFRANGE,
-        currentID: 2,
-      };
-
-      expect(changeID(1, 2, 1)).toEqual(expectedResult);
+      expect(changeID(2)).toEqual(expectedResult);
     });
   });
 

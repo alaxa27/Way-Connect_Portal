@@ -54,27 +54,27 @@ export class Journey extends React.Component {
   }
 
   componentDidMount() {
+    this.changeIndex(this.props.match.params.id);
     this.setState({
       journey: this.props.journey.toJS(),
     });
-    this.changeIndex(this.props.match.params.id);
   }
 
   componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.changeIndex(this.props.match.params.id);
+      this.deactivateFooter();
+    }
     if (prevProps.journey !== this.props.journey) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         journey: this.props.journey.toJS(),
       });
     }
-    if (prevProps.match.params.id !== this.props.match.params.id) {
-      this.changeIndex(this.props.match.params.id);
-      this.deactivateFooter();
-    }
   }
 
   changeIndex(index) {
-    this.props.changeID(this.state.index, index, this.state.journey.length);
+    this.props.changeID(this.state.index);
     this.setState({
       index: parseInt(index, 10),
     });
@@ -163,7 +163,7 @@ function mapDispatchToProps(dispatch) {
   return {
     skipVideo: () => dispatch(skipVideo()),
     authenticate: () => dispatch(authenticate()),
-    changeID: (prevID, curID, len) => dispatch(changeID(prevID, curID, len)),
+    changeID: curID => dispatch(changeID(curID)),
     changeDefaultAnswersList: (defAns, id) =>
       dispatch(changeDefaultAnswersList(defAns, id)),
   };

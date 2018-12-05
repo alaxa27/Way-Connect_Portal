@@ -1,4 +1,12 @@
-import { takeLatest, call, put, fork, select, all } from 'redux-saga/effects';
+// import { delay } from 'redux-saga';
+import {
+  // takeLatest,
+  takeEvery,
+  call,
+  put,
+  select,
+  all,
+} from 'redux-saga/effects';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
@@ -11,8 +19,12 @@ import {
   questionAnswered,
   answeringQuestionError,
 } from './actions';
-import makeSelectJourney, { makeSelectCurrentID } from './selectors';
-import { JOURNEY_ID_INCREASED, JOURNEY_ID_OUTOFRANGE } from './constants';
+import {
+  makeSelectJourneyItem,
+  makeSelectPreviousID,
+  makeSelectCurrentID,
+} from './selectors';
+import { JOURNEY_ID_CHANGED } from './constants';
 
 function completeJourneyRequest() {
   return axiosInstance({
@@ -117,6 +129,7 @@ export function* acknowledgeCommunicationEffect() {
 }
 
 export function* handleCurrentEffect(journeyItem) {
+  console.log('current', journeyItem.toJS());
   switch (journeyItem.type) {
     case 'C':
       yield call(acknowledgeCommunicationEffect);
@@ -132,6 +145,7 @@ export function* handleCurrentEffect(journeyItem) {
 }
 
 export function* handlePreviousEffect(journeyItem) {
+  console.log('previous', journeyItem.toJS());
   switch (journeyItem.type) {
     case 'Q':
       yield call(
@@ -147,37 +161,28 @@ export function* handlePreviousEffect(journeyItem) {
   return null;
 }
 
-export function* journeyIDIncreasedEffect() {
-  const journeySelector = makeSelectJourney();
+export function* journeyIDChangedEffect() {
+  const previousIDSelector = makeSelectPreviousID();
   const currentIDSelector = makeSelectCurrentID();
 
-  const journey = yield select(journeySelector);
+  const previousID = yield select(previousIDSelector);
   const currentID = yield select(currentIDSelector);
+  console.log(previousID);
+  console.log(currentID);
 
-  const currentJourneyItem = journey.get(currentID);
-  yield fork(handleCurrentEffect, currentJourneyItem.toJS());
-  if (currentID > 0) {
-    const previousJourneyItem = journey.get(currentID - 1);
-    yield fork(handlePreviousEffect, previousJourneyItem.toJS());
-  }
-}
+  const previousJourneyItemSelector = makeSelectJourneyItem(previousID);
+  const currentJourneyItemSelector = makeSelectJourneyItem(currentID);
 
-export function* journeyIDOutOfRangeEffect() {
-  const journeySelector = makeSelectJourney();
-  const currentIDSelector = makeSelectCurrentID();
+  const currentJourneyItem = yield select(currentJourneyItemSelector);
+  const previousJourneyItem = yield select(previousJourneyItemSelector);
 
-  const journey = yield select(journeySelector);
-  const currentID = yield select(currentIDSelector);
-
-  if (currentID > 0) {
-    const previousJourneyItem = journey.get(currentID - 1);
-    yield call(handlePreviousEffect, previousJourneyItem.toJS());
-    yield call(handleCurrentEffect, { type: 'END' });
-  }
+  yield all([
+    call(handlePreviousEffect, previousJourneyItem),
+    call(handleCurrentEffect, currentJourneyItem),
+  ]);
 }
 
 // Individual exports for testing
 export default function* journeySaga() {
-  yield takeLatest(JOURNEY_ID_INCREASED, journeyIDIncreasedEffect);
-  yield takeLatest(JOURNEY_ID_OUTOFRANGE, journeyIDOutOfRangeEffect);
+  yield takeEvery(JOURNEY_ID_CHANGED, journeyIDChangedEffect);
 }
