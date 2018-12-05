@@ -24,6 +24,10 @@ export const SKIP_VIDEO = 'app/Journey/SKIP_VIDEO';
 export const SKIP_VIDEO_SUCCESS = 'app/Journey/SKIP_VIDEO_SUCCESS';
 export const SKIP_VIDEO_ERROR = 'app/Journey/SKIP_VIDEO_ERROR';
 
+export const COMPLETE_JOURNEY = 'app/Journey/COMPLETE_JOURNEY';
+export const COMPLETE_JOURNEY_SUCCESS = 'app/Journey/COMPLETE_JOURNEY_SUCCESS';
+export const COMPLETE_JOURNEY_ERROR = 'app/Journey/COMPLETE_JOURNEY_ERROR';
+
 export const AUTHENTICATE = 'app/Journey/AUTHENTICATE';
 export const AUTHENTICATE_SUCCESS = 'app/Journey/AUTHENTICATE_SUCCESS';
 export const AUTHENTICATE_ERROR = 'app/Journey/AUTHENTICATE_ERROR';

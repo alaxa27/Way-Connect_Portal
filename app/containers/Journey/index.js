@@ -136,8 +136,6 @@ export class Journey extends React.Component {
 
   render() {
     const { index, footerActive, journey } = this.state;
-    console.log(journey);
-
     return (
       <JourneyWrapper>
         <JourneyItem>{this.renderJourneyItem(journey[index])}</JourneyItem>

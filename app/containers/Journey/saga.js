@@ -1,7 +1,9 @@
-import { takeLatest, call, put, take, fork, select } from 'redux-saga/effects';
+import { takeLatest, call, put, fork, select, all } from 'redux-saga/effects';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
+  journeyCompleted,
+  journeyCompletionError,
   communicationAcknowledged,
   acknowledgingCommunicationError,
   authenticated,
@@ -11,6 +13,13 @@ import {
 } from './actions';
 import makeSelectJourney, { makeSelectCurrentID } from './selectors';
 import { JOURNEY_ID_INCREASED, JOURNEY_ID_OUTOFRANGE } from './constants';
+
+function completeJourneyRequest() {
+  return axiosInstance({
+    method: 'post',
+    url: '/customers/complete/',
+  });
+}
 
 function authenticateRequest() {
   return axiosInstance({
@@ -44,6 +53,15 @@ function answerQuestionRequest(data) {
 // export function* redirectEffect() {
 //   window.location.href = 'http://google.com/';
 // }
+
+export function* completeJourneyEffect() {
+  try {
+    const { data } = yield call(completeJourneyRequest);
+    yield put(journeyCompleted(data));
+  } catch (err) {
+    yield put(journeyCompletionError(err));
+  }
+}
 
 export function* authenticateEffect() {
   try {
@@ -105,11 +123,12 @@ export function* handleCurrentEffect(journeyItem) {
       yield call(getDiscountEffect);
       break;
     case 'END':
-      yield call(authenticateEffect);
+      yield all([call(authenticateEffect), call(completeJourneyEffect)]);
       break;
     default:
       break;
   }
+  return null;
 }
 
 export function* handlePreviousEffect(journeyItem) {
@@ -125,6 +144,7 @@ export function* handlePreviousEffect(journeyItem) {
     default:
       break;
   }
+  return null;
 }
 
 export function* journeyIDIncreasedEffect() {
@@ -135,10 +155,10 @@ export function* journeyIDIncreasedEffect() {
   const currentID = yield select(currentIDSelector);
 
   const currentJourneyItem = journey.get(currentID);
-  yield fork(handleCurrentEffect, currentJourneyItem);
+  yield fork(handleCurrentEffect, currentJourneyItem.toJS());
   if (currentID > 0) {
     const previousJourneyItem = journey.get(currentID - 1);
-    yield fork(handlePreviousEffect, previousJourneyItem);
+    yield fork(handlePreviousEffect, previousJourneyItem.toJS());
   }
 }
 
@@ -151,9 +171,9 @@ export function* journeyIDOutOfRangeEffect() {
 
   if (currentID > 0) {
     const previousJourneyItem = journey.get(currentID - 1);
-    yield take(handlePreviousEffect, previousJourneyItem);
+    yield call(handlePreviousEffect, previousJourneyItem.toJS());
+    yield call(handleCurrentEffect, { type: 'END' });
   }
-  yield call(handleCurrentEffect, { type: 'END' });
 }
 
 // Individual exports for testing

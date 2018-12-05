@@ -16,6 +16,9 @@ import {
   SKIP_VIDEO,
   SKIP_VIDEO_SUCCESS,
   SKIP_VIDEO_ERROR,
+  COMPLETE_JOURNEY,
+  COMPLETE_JOURNEY_SUCCESS,
+  COMPLETE_JOURNEY_ERROR,
   AUTHENTICATE,
   AUTHENTICATE_SUCCESS,
   AUTHENTICATE_ERROR,
@@ -85,6 +88,25 @@ export function videoSkipped() {
 export function skippingVideoError() {
   return {
     type: SKIP_VIDEO_ERROR,
+  };
+}
+
+export function completeJourney() {
+  return {
+    type: COMPLETE_JOURNEY,
+  };
+}
+
+export function journeyCompleted(data) {
+  window.location.href = data.url;
+  return {
+    type: COMPLETE_JOURNEY_SUCCESS,
+  };
+}
+
+export function journeyCompletionError() {
+  return {
+    type: COMPLETE_JOURNEY_ERROR,
   };
 }
 
