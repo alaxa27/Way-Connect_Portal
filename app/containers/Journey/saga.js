@@ -1,4 +1,4 @@
-import { takeLatest, call, put, take, fork } from 'redux-saga/effects';
+import { takeLatest, call, put, take, fork, select } from 'redux-saga/effects';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
@@ -9,6 +9,7 @@ import {
   questionAnswered,
   answeringQuestionError,
 } from './actions';
+import makeSelectJourney, { makeSelectCurrentID } from './selectors';
 import { JOURNEY_ID_INCREASED, JOURNEY_ID_OUTOFRANGE } from './constants';
 
 function authenticateRequest() {
@@ -127,12 +128,31 @@ export function* handlePreviousEffect(journeyItem) {
 }
 
 export function* journeyIDIncreasedEffect() {
-  yield fork(handleCurrentEffect);
-  yield fork(handlePreviousEffect);
+  const journeySelector = makeSelectJourney();
+  const currentIDSelector = makeSelectCurrentID();
+
+  const journey = yield select(journeySelector);
+  const currentID = yield select(currentIDSelector);
+
+  const currentJourneyItem = journey.get(currentID);
+  yield fork(handleCurrentEffect, currentJourneyItem);
+  if (currentID > 0) {
+    const previousJourneyItem = journey.get(currentID - 1);
+    yield fork(handlePreviousEffect, previousJourneyItem);
+  }
 }
 
 export function* journeyIDOutOfRangeEffect() {
-  yield take(handlePreviousEffect);
+  const journeySelector = makeSelectJourney();
+  const currentIDSelector = makeSelectCurrentID();
+
+  const journey = yield select(journeySelector);
+  const currentID = yield select(currentIDSelector);
+
+  if (currentID > 0) {
+    const previousJourneyItem = journey.get(currentID - 1);
+    yield take(handlePreviousEffect, previousJourneyItem);
+  }
   yield call(handleCurrentEffect, { type: 'END' });
 }
 

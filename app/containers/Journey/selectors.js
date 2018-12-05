@@ -21,6 +21,10 @@ const makeSelectDefaultAnswersList = () =>
     journeyState.get('defaultAnswersList'),
   );
 
+const makeSelectCurrentID = () =>
+  createSelector(selectJourneyDomain, journeyState =>
+    journeyState.get('currentID'),
+  );
 /**
  * Default selector used by Journey
  */
@@ -67,4 +71,4 @@ const makeSelectJourney = () => {
 };
 
 export default makeSelectJourney;
-export { selectJourneyDomain };
+export { selectJourneyDomain, makeSelectCurrentID };

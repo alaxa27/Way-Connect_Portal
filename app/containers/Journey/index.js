@@ -26,7 +26,12 @@ import saga from './saga';
 import JourneyWrapper from './JourneyWrapper';
 import JourneyItem from './JourneyItem';
 
-import { skipVideo, authenticate, changeID } from './actions';
+import {
+  skipVideo,
+  authenticate,
+  changeID,
+  changeDefaultAnswersList,
+} from './actions';
 
 const timeBeforeSkip = 5; // Skip the ad available after 5sec
 
@@ -212,6 +217,11 @@ export class Journey extends React.Component {
       journey[index].question.defaultAnswers = defaultAnswers;
       return { journey };
     });
+    // eslint-disable-next-line prefer-destructuring
+    const index = this.state.index;
+    // eslint-disable-next-line prefer-destructuring
+    const question = this.props.journey[index].question;
+    this.props.changeDefaultAnswersList(defaultAnswers, question.id);
     this.activateFooter();
   }
 
@@ -281,7 +291,9 @@ function mapDispatchToProps(dispatch) {
   return {
     skipVideo: () => dispatch(skipVideo()),
     authenticate: () => dispatch(authenticate()),
-    changeID: () => dispatch(changeID()),
+    changeID: (prevID, curID, len) => dispatch(changeID(prevID, curID, len)),
+    changeDefaultAnswersList: (defAns, id) =>
+      dispatch(changeDefaultAnswersList(defAns, id)),
   };
 }
 
