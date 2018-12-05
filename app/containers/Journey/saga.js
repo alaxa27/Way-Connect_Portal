@@ -121,7 +121,6 @@ export function* acknowledgeCommunicationEffect() {
 }
 
 export function* handleCurrentEffect(journeyItem) {
-  console.log('current', journeyItem.toJS());
   switch (journeyItem.type) {
     case 'C':
       yield call(acknowledgeCommunicationEffect);
@@ -137,7 +136,6 @@ export function* handleCurrentEffect(journeyItem) {
 }
 
 export function* handlePreviousEffect(journeyItem) {
-  console.log('previous', journeyItem.toJS());
   switch (journeyItem.type) {
     case 'Q':
       yield call(
@@ -159,8 +157,6 @@ export function* journeyIDChangedEffect() {
 
   const previousID = yield select(previousIDSelector);
   const currentID = yield select(currentIDSelector);
-  console.log(previousID);
-  console.log(currentID);
 
   const previousJourneyItemSelector = makeSelectJourneyItem(previousID);
   const currentJourneyItemSelector = makeSelectJourneyItem(currentID);
@@ -169,8 +165,8 @@ export function* journeyIDChangedEffect() {
   const previousJourneyItem = yield select(previousJourneyItemSelector);
 
   yield all([
-    call(handlePreviousEffect, previousJourneyItem),
-    call(handleCurrentEffect, currentJourneyItem),
+    call(handlePreviousEffect, previousJourneyItem.toJS()),
+    call(handleCurrentEffect, currentJourneyItem.toJS()),
   ]);
 }
 

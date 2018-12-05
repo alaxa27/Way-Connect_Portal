@@ -26,10 +26,11 @@ class Communication extends React.Component {
   }
 
   render() {
+    const { campaign } = this.props;
     return (
       <CommunicationWrapper>
-        <CommunicationTitle>{`${this.props.company_name} | ${
-          this.props.name
+        <CommunicationTitle>{`${campaign.company_name} | ${
+          campaign.name
         }`}</CommunicationTitle>
         {this.renderPhoneNumber(this.props.phone_number)}
         <VideoPlayer {...this.props} />
