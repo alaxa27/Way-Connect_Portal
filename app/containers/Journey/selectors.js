@@ -218,11 +218,11 @@ const makeSelectJourney = () => {
           },
         ]);
       }
-      const question = generateQuestion(
+      generateQuestion(
         questionSamples[Math.floor(Math.random() * questionSamples.length)],
       );
 
-      journey = journey.push(question);
+      // journey = journey.push(question);
       if (communication) journey = journey.push(communication);
       if (fidelity) journey = journey.push(fidelity);
       if (customerService) journey = journey.push(customerService);
