@@ -10,8 +10,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import LoaderPage from 'containers/LoaderPage/Loadable';
-import Journey from 'containers/Journey/Loadable';
+import LoaderPage from 'containers/LoaderPage';
+import Journey from 'containers/Journey';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
