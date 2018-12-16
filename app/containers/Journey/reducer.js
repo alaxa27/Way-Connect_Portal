@@ -9,6 +9,7 @@ import {
   DEFAULT_ACTION,
   SKIP_VIDEO,
   JOURNEY_ID_CHANGED,
+  CURRENT_JOURNEY_ITEM_CHANGED,
   CHANGE_DEFAULT_ANSWERS_LIST,
 } from './constants';
 
@@ -16,6 +17,7 @@ export const initialState = fromJS({
   defaultAnswersList: {},
   previousID: -2,
   currentID: -1,
+  currentJourneyItem: {},
 });
 
 function journeyReducer(state = initialState, action) {
@@ -28,6 +30,8 @@ function journeyReducer(state = initialState, action) {
       return state
         .set('previousID', state.get('currentID'))
         .set('currentID', parseInt(action.currentID, 10));
+    case CURRENT_JOURNEY_ITEM_CHANGED:
+      return state.set('currentJourneyItem', action.currentJourneyItem);
     case CHANGE_DEFAULT_ANSWERS_LIST:
       return state.setIn(
         ['defaultAnswersList', action.questionID],

@@ -1,8 +1,14 @@
-import { defaultAction, changeID, changeDefaultAnswersList } from '../actions';
+import {
+  defaultAction,
+  changeID,
+  changeCurrentJourneyItem,
+  changeDefaultAnswersList,
+} from '../actions';
 import {
   DEFAULT_ACTION,
   JOURNEY_ID_CHANGED,
   CHANGE_DEFAULT_ANSWERS_LIST,
+  CURRENT_JOURNEY_ITEM_CHANGED,
 } from '../constants';
 
 describe('Journey actions', () => {
@@ -23,6 +29,17 @@ describe('Journey actions', () => {
       };
 
       expect(changeID(2)).toEqual(expectedResult);
+    });
+  });
+
+  describe('changeCurrentJourneyItem action', () => {
+    it('should dispatch CURRENT_JOURNEY_ITEM_CHANGED when we change currentID', () => {
+      const expectedResult = {
+        type: CURRENT_JOURNEY_ITEM_CHANGED,
+        currentJourneyItem: { a: 3 },
+      };
+
+      expect(changeCurrentJourneyItem({ a: 3 })).toEqual(expectedResult);
     });
   });
 

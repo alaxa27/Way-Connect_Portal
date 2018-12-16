@@ -1,7 +1,9 @@
 import { fromJS } from 'immutable';
 import makeSelectJourney, {
   selectJourneyDomain,
+  makeSelectJourneySize,
   makeSelectJourneyItem,
+  makeSelectCurrentJourneyItem,
 } from '../selectors';
 
 describe('selectJourneyDomain', () => {
@@ -13,6 +15,21 @@ describe('selectJourneyDomain', () => {
       journey: journeyState,
     });
     expect(selectJourneyDomain(mockedState)).toEqual(journeyState);
+  });
+});
+
+describe('makeSelectJourneySize', () => {
+  const mockedState = fromJS({
+    loaderPage: {
+      connection: {
+        journey: [{ a: 1 }, { b: 2 }, { c: 3 }],
+      },
+    },
+  });
+  it('should give the correct size', () => {
+    const journeySizeSelector = makeSelectJourneySize();
+    const expectedResult = 3;
+    expect(journeySizeSelector(mockedState)).toEqual(expectedResult);
   });
 });
 
@@ -58,6 +75,21 @@ describe('makeSelectJourneyItem', () => {
 
     expect(lowerJourneyItem).toEqual(expectedResult);
     expect(greaterJourneyItem).toEqual(expectedResult);
+  });
+});
+
+describe('makeSelectCurrentJourneyItem', () => {
+  const currentJourneyItemSelector = makeSelectCurrentJourneyItem();
+  const mockedState = fromJS({
+    journey: {
+      currentJourneyItem: { a: 2 },
+    },
+  });
+
+  it('should return the right item from the journey', () => {
+    const expectedResult = fromJS({ a: 2 });
+    const currentJourneyItem = currentJourneyItemSelector(mockedState);
+    expect(currentJourneyItem).toEqual(expectedResult);
   });
 });
 

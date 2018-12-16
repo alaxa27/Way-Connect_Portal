@@ -1,6 +1,10 @@
 import { fromJS } from 'immutable';
 import journeyReducer from '../reducer';
-import { changeID, changeDefaultAnswersList } from '../actions';
+import {
+  changeID,
+  changeCurrentJourneyItem,
+  changeDefaultAnswersList,
+} from '../actions';
 
 describe('journeyReducer', () => {
   let state;
@@ -9,6 +13,7 @@ describe('journeyReducer', () => {
       defaultAnswersList: {},
       previousID: -2,
       currentID: -1,
+      currentJourneyItem: {},
     });
   });
 
@@ -26,6 +31,14 @@ describe('journeyReducer', () => {
         changeID(32),
       ),
     ).toEqual(expectedResult);
+  });
+
+  it('should handle changeCurrentJourneyItem properly', () => {
+    const expectedResult = state.set('currentJourneyItem', { a: 4 });
+
+    expect(journeyReducer(state, changeCurrentJourneyItem({ a: 4 }))).toEqual(
+      expectedResult,
+    );
   });
 
   it('should handle the changeDefaultAnswersList if the questionID is already present', () => {

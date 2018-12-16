@@ -8,6 +8,9 @@ export const DEFAULT_ACTION = 'app/Journey/DEFAULT_ACTION';
 
 export const JOURNEY_ID_CHANGED = 'app/Journey/JOURNEY_ID_CHANGED';
 
+export const CURRENT_JOURNEY_ITEM_CHANGED =
+  'app/Journey/CURRENT_JOURNEY_ITEM_CHANGED';
+
 export const CHANGE_DEFAULT_ANSWERS_LIST =
   'app/Journey/CHANGE_DEFAULT_ANSWERS_LIST';
 

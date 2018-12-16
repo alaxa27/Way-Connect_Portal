@@ -10,6 +10,7 @@ import {
   authenticationError,
   questionAnswered,
   answeringQuestionError,
+  changeCurrentJourneyItem,
 } from './actions';
 import {
   makeSelectJourneyItem,
@@ -164,6 +165,7 @@ export function* journeyIDChangedEffect() {
   const currentJourneyItem = yield select(currentJourneyItemSelector);
   const previousJourneyItem = yield select(previousJourneyItemSelector);
 
+  yield put(changeCurrentJourneyItem(currentJourneyItem));
   yield all([
     call(handlePreviousEffect, previousJourneyItem.toJS()),
     call(handleCurrentEffect, currentJourneyItem.toJS()),

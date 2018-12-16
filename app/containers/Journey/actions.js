@@ -7,6 +7,7 @@
 import {
   DEFAULT_ACTION,
   JOURNEY_ID_CHANGED,
+  CURRENT_JOURNEY_ITEM_CHANGED,
   CHANGE_DEFAULT_ANSWERS_LIST,
   ACKNOWLEDGE_COMMUNICATION,
   ACKNOWLEDGE_COMMUNICATION_SUCCESS,
@@ -35,6 +36,13 @@ export function changeID(currentID) {
   return {
     type: JOURNEY_ID_CHANGED,
     currentID,
+  };
+}
+
+export function changeCurrentJourneyItem(currentJourneyItem) {
+  return {
+    type: CURRENT_JOURNEY_ITEM_CHANGED,
+    currentJourneyItem,
   };
 }
 

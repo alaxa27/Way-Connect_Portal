@@ -10,16 +10,20 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import Footer from 'components/Footer/Loadable';
+import Loading from 'components/Loading';
+import Footer from 'components/Footer';
 import Question from 'components/Question/Loadable';
 import Fidelity from 'components/Fidelity/Loadable';
-import Communication from 'components/Communication';
+import Communication from 'components/Communication/Loadable';
 import CustomerService from 'components/CustomerService/Loadable';
 import Banner from 'components/Banner/Loadable';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectJourney from './selectors';
+import {
+  makeSelectCurrentJourneyItem,
+  makeSelectJourneySize,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -44,7 +48,6 @@ export class Journey extends React.Component {
       index: -1,
       footerActive: false,
       countDown: 0,
-      journey: [],
     };
 
     this.activateFooter = this.activateFooter.bind(this);
@@ -55,21 +58,12 @@ export class Journey extends React.Component {
 
   componentDidMount() {
     this.changeIndex(this.props.match.params.id);
-    this.setState({
-      journey: this.props.journey.toJS(),
-    });
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.changeIndex(this.props.match.params.id);
       this.deactivateFooter();
-    }
-    if (prevProps.journey !== this.props.journey) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({
-        journey: this.props.journey.toJS(),
-      });
     }
   }
 
@@ -89,11 +83,8 @@ export class Journey extends React.Component {
   }
 
   validateAnswer(defaultAnswers) {
-    // eslint-disable-next-line prefer-destructuring
-    const index = this.state.index;
-    // eslint-disable-next-line prefer-destructuring
-    const question = this.state.journey[index].question;
-    this.props.changeDefaultAnswersList(defaultAnswers, question.id);
+    const question = this.props.currentJourneyItem.get('question');
+    this.props.changeDefaultAnswersList(defaultAnswers, question.get('id'));
     this.activateFooter();
   }
 
@@ -127,6 +118,8 @@ export class Journey extends React.Component {
         case 'B':
           if (!this.state.footerActive) this.activateFooter();
           return <Banner {...item.banner} />;
+        case 'END':
+          return <Loading />;
         default:
           return null;
       }
@@ -135,14 +128,17 @@ export class Journey extends React.Component {
   }
 
   render() {
-    const { index, footerActive, journey } = this.state;
+    const { index, footerActive } = this.state;
+    const { currentJourneyItem, journeySize } = this.props;
     return (
       <JourneyWrapper>
-        <JourneyItem>{this.renderJourneyItem(journey[index])}</JourneyItem>
+        <JourneyItem>
+          {this.renderJourneyItem(currentJourneyItem.toJS())}
+        </JourneyItem>
         <Footer
           active={footerActive}
           index={index}
-          number={journey.length}
+          number={journeySize}
           countDown={this.state.countDown}
         />
       </JourneyWrapper>
@@ -156,7 +152,8 @@ Journey.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  journey: makeSelectJourney(),
+  currentJourneyItem: makeSelectCurrentJourneyItem(),
+  journeySize: makeSelectJourneySize(),
 });
 
 function mapDispatchToProps(dispatch) {
