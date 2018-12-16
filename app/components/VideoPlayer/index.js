@@ -34,20 +34,12 @@ class VideoPlayer extends React.Component {
 
   componentDidMount() {
     this.playerRef.current.subscribeToStateChange(this.handleStateChange);
-    this.playVideo();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.playing !== this.props.playing) {
-      if (this.props.playing) {
-        this.playVideo();
-      } else {
-        console.error('Player error.');
-      }
-    }
   }
 
   handleStateChange(state, prevState) {
+    if (state.paused && !state.ended) {
+      this.playVideo();
+    }
     if (state.seeking && !prevState.seeking) {
       this.playerRef.current.seek(prevState.currentTime);
     }
@@ -66,7 +58,7 @@ class VideoPlayer extends React.Component {
 
     return (
       <VideoPlayerWrapper>
-        <Player playsInline preload="auto" ref={this.playerRef}>
+        <Player playsInline autoplay preload="auto" ref={this.playerRef}>
           <source src={video} />
           <ControlBar disabled />
           <Shortcut clickable={false} shortcuts={playerShortcuts} />
@@ -76,12 +68,9 @@ class VideoPlayer extends React.Component {
   }
 }
 
-VideoPlayer.defaultProps = {
-  playing: false,
-};
+VideoPlayer.defaultProps = {};
 
 VideoPlayer.propTypes = {
-  playing: PropTypes.bool,
   video: PropTypes.string.isRequired,
   onProgress: PropTypes.func,
 };
