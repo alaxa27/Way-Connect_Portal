@@ -6,4 +6,8 @@
 
 import loadable from 'loadable-components';
 
-export default loadable(() => import('./index'));
+import Loading from 'components/Loading';
+
+export default loadable(() => import('./index'), {
+  LoadingComponent: Loading,
+});
