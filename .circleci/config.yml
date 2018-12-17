@@ -18,8 +18,8 @@ jobs:
           name:       Lint code
           command:    npm run lint
       - run:          #  Test run
-          name:       Test code
-          command:    npm run test
+          name:       Test code with no coverage for now.
+          command:    npm run test:no-coverage
   build:
     docker:
       - image:        circleci/node:9.11.1
