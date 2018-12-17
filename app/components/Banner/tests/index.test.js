@@ -12,7 +12,7 @@ describe('<Banner />', () => {
   const renderComponent = (props = {}) => mount(<Banner {...props} />);
   const passedProps = {
     text: 'foo',
-    image: 'images/test.png',
+    picture: banner,
   };
   let renderedComponent;
   beforeEach(() => {
@@ -25,6 +25,6 @@ describe('<Banner />', () => {
 
   it('should display the correct image', () => {
     const bannerCardComponent = renderedComponent.find(BannerCard);
-    expect(bannerCardComponent.prop('src')).toBe(banner);
+    expect(bannerCardComponent.find('img').prop('src')).toEqual(banner);
   });
 });
