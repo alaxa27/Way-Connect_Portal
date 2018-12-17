@@ -61,8 +61,8 @@ function answerQuestionRequest(data) {
 
 export function* completeJourneyEffect() {
   try {
-    const { data } = yield call(completeJourneyRequest);
-    yield put(journeyCompleted(data));
+    yield call(completeJourneyRequest);
+    yield put(journeyCompleted());
   } catch (err) {
     yield put(journeyCompletionError(err));
   }

@@ -96,8 +96,7 @@ export function completeJourney() {
   };
 }
 
-export function journeyCompleted(data) {
-  window.location.href = data.url;
+export function journeyCompleted() {
   return {
     type: COMPLETE_JOURNEY_SUCCESS,
   };
