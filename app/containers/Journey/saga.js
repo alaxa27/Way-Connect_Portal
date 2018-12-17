@@ -128,7 +128,8 @@ export function* handleCurrentEffect(journeyItem) {
       yield call(getDiscountEffect);
       break;
     case 'END':
-      yield all([call(authenticateEffect), call(completeJourneyEffect)]);
+      yield call(completeJourneyEffect);
+      yield call(authenticateEffect);
       break;
     default:
       break;
