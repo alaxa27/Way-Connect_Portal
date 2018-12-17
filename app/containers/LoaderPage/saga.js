@@ -44,6 +44,7 @@ function getDiscountRequest() {
   return axiosInstance({
     method: 'get',
     url: `/customers/discount/`,
+    timeout: 2000,
   });
 }
 

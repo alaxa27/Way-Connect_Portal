@@ -1,5 +1,5 @@
 import { takeEvery, call, put, select, all } from 'redux-saga/effects';
-// import { getDiscountEffect } from 'containers/LoaderPage/saga';
+import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
   journeyCompleted,
@@ -125,7 +125,7 @@ export function* handleCurrentEffect(journeyItem) {
   switch (journeyItem.type) {
     case 'C':
       yield call(acknowledgeCommunicationEffect);
-      // yield call(getDiscountEffect);
+      yield call(getDiscountEffect);
       break;
     case 'END':
       yield call(completeJourneyEffect);
