@@ -1,22 +1,8 @@
-import {
-  all,
-  call,
-  put,
-  takeLatest,
-  take,
-  race,
-  fork,
-} from 'redux-saga/effects';
+import { call, put, takeLatest, take, fork } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axiosInstance from '../../apiConfig';
 
-import {
-  GET_ESTABLISHMENT,
-  RETRIEVE_DISCOUNT_ERROR,
-  RETRIEVE_DISCOUNT_SUCCESS,
-  POST_CONNECTION_SUCCESS,
-  GET_ESTABLISHMENT_SUCCESS,
-} from './constants';
+import { GET_ESTABLISHMENT, POST_CONNECTION_SUCCESS } from './constants';
 import {
   establishmentLoaded,
   establishmentLoadingError,
@@ -44,7 +30,6 @@ function getDiscountRequest() {
   return axiosInstance({
     method: 'get',
     url: `/customers/discount/`,
-    timeout: 5000,
   });
 }
 
@@ -84,10 +69,6 @@ export function* fetchAllEffect() {
 // Individual exports for testing
 export default function* loaderPageSaga() {
   yield takeLatest(GET_ESTABLISHMENT, fetchAllEffect);
-  yield all([
-    take(GET_ESTABLISHMENT_SUCCESS),
-    take(POST_CONNECTION_SUCCESS),
-    race([take(RETRIEVE_DISCOUNT_ERROR), take(RETRIEVE_DISCOUNT_SUCCESS)]),
-  ]);
+  yield take(POST_CONNECTION_SUCCESS);
   yield put(push('/journey/0'));
 }

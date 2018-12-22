@@ -2,7 +2,6 @@
  * Test sagas
  */
 
-/* eslint-disable redux-saga/yield-effects */
 import { put, takeLatest } from 'redux-saga/effects';
 
 import { GET_ESTABLISHMENT } from '../constants';
