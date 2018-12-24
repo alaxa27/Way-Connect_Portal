@@ -34,6 +34,7 @@ class VideoPlayer extends React.Component {
 
   componentDidMount() {
     this.playerRef.current.subscribeToStateChange(this.handleStateChange);
+    this.playVideo();
   }
 
   handleStateChange(state, prevState) {
@@ -58,7 +59,7 @@ class VideoPlayer extends React.Component {
 
     return (
       <VideoPlayerWrapper>
-        <Player playsInline autoplay preload="auto" ref={this.playerRef}>
+        <Player playsInline preload="auto" ref={this.playerRef}>
           <source src={video} />
           <ControlBar disabled />
           <Shortcut clickable={false} shortcuts={playerShortcuts} />
