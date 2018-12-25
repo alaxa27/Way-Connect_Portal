@@ -14,7 +14,7 @@ const StyledInput = styled.div`
   justify-content: center;
   width: 16px;
   height: 16px;
-  background-color: ${props => (props.active ? '#cccccc' : '#666666')};
+  background-color: ${props => (props.active ? '#dbdbdb' : '#999999')};
   border-radius: ${props => (!props.multiple ? '16px' : 'none')};
 `;
 const ChoiceInput = props => (

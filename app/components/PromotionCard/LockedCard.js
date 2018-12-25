@@ -13,7 +13,7 @@ const Lock = styled.img`
 `;
 
 const Offer = styled.div`
-  color: #cccccc;
+  color: #dbdbdb;
   font-weight: bold;
 `;
 

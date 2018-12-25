@@ -8,7 +8,7 @@ const StyledChoice = styled.div`
   height: 40px;
   margin-top: 5px;
   cursor: pointer;
-  color: ${props => (props.active ? '#CCCCCC' : '#666666')};
+  color: ${props => (props.active ? '#dbdbdb' : '#999999')};
 `;
 
 const Choice = props => (

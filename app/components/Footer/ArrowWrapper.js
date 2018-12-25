@@ -17,7 +17,7 @@ const ArrowWrapper = styled.div`
     return '#6D6D6D';
   }};
   border-radius: 45px;
-  color: ${props => (props.transparent ? '#666666' : '#313131')};
+  color: ${props => (props.transparent ? '#999999' : '#313131')};
 `;
 
 ArrowWrapper.defaultProps = {

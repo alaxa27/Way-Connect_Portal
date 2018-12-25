@@ -16,7 +16,7 @@ const SliderWrapper = styled.div`
   height: 55px;
   padding: ${props => props.padding}px;
   border-radius: 55px;
-  color: #666666;
+  color: #999999;
 `;
 
 export default SliderWrapper;

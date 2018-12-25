@@ -6,7 +6,7 @@ const Knob = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 16px;
-  background-color: #666666;
+  background-color: #999999;
 `;
 
 export default Knob;

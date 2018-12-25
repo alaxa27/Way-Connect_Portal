@@ -11,7 +11,7 @@ const PromotionCardWrapper = styled.div`
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   font-size: 0.75rem;
   font-weight: lighter;
-  color: ${props => (props.locked && !props.active ? '#666666' : '#cccccc')};
+  color: ${props => (props.locked && !props.active ? '#999999' : '#dbdbdb')};
 `;
 
 export default PromotionCardWrapper;
