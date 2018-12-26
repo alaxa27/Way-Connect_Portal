@@ -6,7 +6,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
-import { Player, ControlBar, Shortcut } from 'video-react';
+import { Player, ControlBar, Shortcut, BigPlayButton } from 'video-react';
 import 'video-react/dist/video-react.css'; // import css
 
 import VideoPlayerWrapper from './VideoPlayerWrapper';
@@ -61,6 +61,7 @@ class VideoPlayer extends React.Component {
       <VideoPlayerWrapper>
         <Player playsInline preload="auto" ref={this.playerRef}>
           <source src={video} />
+          <BigPlayButton position="center" />
           <ControlBar disabled />
           <Shortcut clickable={false} shortcuts={playerShortcuts} />
         </Player>
