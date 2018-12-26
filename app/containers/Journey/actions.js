@@ -8,6 +8,7 @@ import {
   DEFAULT_ACTION,
   JOURNEY_ID_CHANGED,
   CURRENT_JOURNEY_ITEM_CHANGED,
+  CURRENT_JOURNEY_ITEM_INCREMENTED,
   CHANGE_DEFAULT_ANSWERS_LIST,
   ACKNOWLEDGE_COMMUNICATION,
   ACKNOWLEDGE_COMMUNICATION_SUCCESS,
@@ -51,6 +52,12 @@ export function changeDefaultAnswersList(defaultAnswers, questionID) {
     type: CHANGE_DEFAULT_ANSWERS_LIST,
     defaultAnswers,
     questionID,
+  };
+}
+
+export function goToNextJourneyItem() {
+  return {
+    type: CURRENT_JOURNEY_ITEM_INCREMENTED,
   };
 }
 

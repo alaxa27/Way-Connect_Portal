@@ -1,4 +1,5 @@
 import { takeEvery, call, put, select, all } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
@@ -11,13 +12,17 @@ import {
   questionAnswered,
   answeringQuestionError,
   changeCurrentJourneyItem,
+  changeID,
 } from './actions';
 import {
   makeSelectJourneyItem,
   makeSelectPreviousID,
   makeSelectCurrentID,
 } from './selectors';
-import { JOURNEY_ID_CHANGED } from './constants';
+import {
+  JOURNEY_ID_CHANGED,
+  CURRENT_JOURNEY_ITEM_INCREMENTED,
+} from './constants';
 
 function completeJourneyRequest() {
   return axiosInstance({
@@ -173,7 +178,17 @@ export function* journeyIDChangedEffect() {
   ]);
 }
 
+export function* goToNextJourneyItemEffect() {
+  const currentIDSelector = makeSelectCurrentID();
+
+  const currentID = yield select(currentIDSelector);
+  const nextID = currentID + 1;
+
+  yield all([put(changeID(nextID)), put(push(`/journey/${nextID}`))]);
+}
+
 // Individual exports for testing
 export default function* journeySaga() {
   yield takeEvery(JOURNEY_ID_CHANGED, journeyIDChangedEffect);
+  yield takeEvery(CURRENT_JOURNEY_ITEM_INCREMENTED, goToNextJourneyItemEffect);
 }

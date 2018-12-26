@@ -31,10 +31,11 @@ import JourneyWrapper from './JourneyWrapper';
 import JourneyItem from './JourneyItem';
 
 import {
-  skipVideo,
   authenticate,
   changeID,
   changeDefaultAnswersList,
+  goToNextJourneyItem,
+  skipVideo,
 } from './actions';
 
 const timeBeforeSkip = 5; // Skip the ad available after 5sec
@@ -82,6 +83,12 @@ export class Journey extends React.Component {
     this.setState({ footerActive: false, countDown: 0 });
   }
 
+  goToNextJourneyItem(timeout) {
+    setTimeout(() => {
+      this.props.goToNextJourneyItem();
+    }, timeout * 1000);
+  }
+
   validateAnswer(defaultAnswers) {
     const question = this.props.currentJourneyItem.get('question');
     this.props.changeDefaultAnswersList(defaultAnswers, question.get('id'));
@@ -113,10 +120,14 @@ export class Journey extends React.Component {
             />
           );
         case 'S':
+          // Go to the next journeyItem after n secs
+          this.goToNextJourneyItem(5);
           if (!this.state.footerActive) this.activateFooter();
           return <CustomerService {...item.customer_service} />;
         case 'B':
           if (!this.state.footerActive) this.activateFooter();
+          // Go to the next journeyItem after n secs
+          this.goToNextJourneyItem(5);
           return <Banner {...item.banner} />;
         case 'END':
           return <Loading />;
@@ -163,6 +174,7 @@ function mapDispatchToProps(dispatch) {
     changeID: curID => dispatch(changeID(curID)),
     changeDefaultAnswersList: (defAns, id) =>
       dispatch(changeDefaultAnswersList(defAns, id)),
+    goToNextJourneyItem: () => dispatch(goToNextJourneyItem()),
   };
 }
 
