@@ -60,8 +60,8 @@ class VideoPlayer extends React.Component {
     return (
       <VideoPlayerWrapper>
         <Player playsInline preload="auto" ref={this.playerRef}>
-          <source src={video} />
           <BigPlayButton position="center" />
+          <source src={video} />
           <ControlBar disabled />
           <Shortcut clickable={false} shortcuts={playerShortcuts} />
         </Player>

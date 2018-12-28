@@ -101,6 +101,10 @@ export class Journey extends React.Component {
     if (countDown === 0) {
       this.activateFooter();
     }
+
+    if (progress === 1) {
+      this.goToNextJourneyItem(0);
+    }
   }
 
   renderJourneyItem(item) {
