@@ -5,6 +5,7 @@ import {
   put,
   select,
   all,
+  race,
 } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
@@ -157,7 +158,7 @@ export function* handleCurrentEffect(journeyItem) {
       yield call(getDiscountEffect);
       break;
     case 'END':
-      yield all([call(completeJourneyEffect), call(authenticateEffect)]);
+      yield race([call(completeJourneyEffect), call(authenticateEffect)]);
       break;
     default:
       break;
