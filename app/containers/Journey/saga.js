@@ -157,8 +157,7 @@ export function* handleCurrentEffect(journeyItem) {
       yield call(getDiscountEffect);
       break;
     case 'END':
-      yield call(completeJourneyEffect);
-      yield call(authenticateEffect);
+      yield all([call(completeJourneyEffect), call(authenticateEffect)]);
       break;
     default:
       break;
@@ -196,13 +195,16 @@ export function* redirectionClickedEffect() {
     'communication',
     'redirection',
   ]);
-  yield call(clickRequest);
+  try {
+    yield call(clickRequest);
+  } catch (err) {
+    console.error(err);
+  }
 
   const tempLink = document.createElement('a');
   tempLink.style.display = 'none';
   tempLink.href = `tel:${phoneNumber}`;
   tempLink.click();
-  document.body.removeChild(tempLink);
   // Link click simulation
 }
 
@@ -210,7 +212,11 @@ export function* skipEffect() {
   const watchedSecondsSelector = makeSelectWatchedSeconds();
   const watchedSeconds = yield select(watchedSecondsSelector);
 
-  yield call(skipRequest, watchedSeconds);
+  try {
+    yield call(skipRequest, watchedSeconds);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export function* journeyIDChangedEffect() {

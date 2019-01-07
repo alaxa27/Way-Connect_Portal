@@ -19,6 +19,7 @@ export const initialState = fromJS({
   previousID: -2,
   currentID: -1,
   currentJourneyItem: {},
+  watchedSeconds: 0,
 });
 
 function journeyReducer(state = initialState, action) {

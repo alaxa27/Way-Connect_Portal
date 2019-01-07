@@ -11,15 +11,10 @@ import PhoneNumberWrapper from './PhoneNumberWrapper';
 
 /* eslint-disable react/prefer-stateless-function */
 class PhoneNumber extends React.Component {
-  redirectTo() {
-    const { redirection, onRedirectionClick } = this.props;
-    onRedirectionClick(redirection);
-  }
-
   render() {
-    const { children } = this.props;
+    const { children, onRedirectionClick } = this.props;
     return (
-      <PhoneNumberWrapper href="#" onClick={this.redirectTo}>
+      <PhoneNumberWrapper href="#" onClick={onRedirectionClick}>
         {children}
       </PhoneNumberWrapper>
     );
@@ -33,7 +28,6 @@ PhoneNumber.propTypes = {
     PropTypes.string,
   ]).isRequired,
   onRedirectionClick: PropTypes.func,
-  redirection: PropTypes.string,
 };
 
 export default PhoneNumber;

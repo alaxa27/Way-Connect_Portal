@@ -104,9 +104,7 @@ export class Journey extends React.Component {
       this.activateFooter();
     }
 
-    if (currentTime % 1 === 0) {
-      this.props.changeWatchedSeconds(currentTime);
-    }
+    this.props.changeWatchedSeconds(Math.floor(currentTime));
 
     if (progress === 1) {
       this.goToNextJourneyItem(0);
