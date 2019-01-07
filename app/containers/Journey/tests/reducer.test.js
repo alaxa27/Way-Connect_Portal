@@ -4,6 +4,7 @@ import {
   changeID,
   changeCurrentJourneyItem,
   changeDefaultAnswersList,
+  changeWatchedSeconds,
 } from '../actions';
 
 describe('journeyReducer', () => {
@@ -62,5 +63,13 @@ describe('journeyReducer', () => {
     expect(
       journeyReducer(state, changeDefaultAnswersList([1, 2], 'a2a')),
     ).toEqual(expectedResult);
+  });
+
+  it('should handle the changeWatchedSeconds action properly', () => {
+    const expectedResult = state.set('watchedSeconds', 3);
+
+    expect(journeyReducer(state, changeWatchedSeconds(3))).toEqual(
+      expectedResult,
+    );
   });
 });

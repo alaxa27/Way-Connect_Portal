@@ -11,6 +11,7 @@ import {
   JOURNEY_ID_CHANGED,
   CURRENT_JOURNEY_ITEM_CHANGED,
   CHANGE_DEFAULT_ANSWERS_LIST,
+  CHANGE_WATCHED_SECONDS,
 } from './constants';
 
 export const initialState = fromJS({
@@ -37,6 +38,8 @@ function journeyReducer(state = initialState, action) {
         ['defaultAnswersList', action.questionID],
         fromJS(action.defaultAnswers),
       );
+    case CHANGE_WATCHED_SECONDS:
+      return state.set('watchedSeconds', action.seconds);
     default:
       return state;
   }

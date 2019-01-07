@@ -187,7 +187,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(changeDefaultAnswersList(defAns, id)),
     changeWatchedSeconds: s => dispatch(changeWatchedSeconds(s)),
     goToNextJourneyItem: () => dispatch(goToNextJourneyItem()),
-    onRedirectionClick: r => dispatch(onRedirectionClick(r)),
+    onRedirectionClick: () => dispatch(onRedirectionClick()),
   };
 }
 

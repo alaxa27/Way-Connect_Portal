@@ -54,6 +54,10 @@ const makeSelectCurrentJourneyItem = () =>
     journeyState.get('currentJourneyItem'),
   );
 
+const makeSelectWatchedSeconds = () =>
+  createSelector(selectJourneyDomain, journeyState =>
+    journeyState.get('watchedSeconds'),
+  );
 /**
  * Default selector used by Journey
  */
@@ -107,4 +111,5 @@ export {
   makeSelectJourneyItem,
   makeSelectPreviousID,
   makeSelectCurrentID,
+  makeSelectWatchedSeconds,
 };

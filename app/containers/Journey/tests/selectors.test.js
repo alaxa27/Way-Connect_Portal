@@ -4,6 +4,7 @@ import makeSelectJourney, {
   makeSelectJourneySize,
   makeSelectJourneyItem,
   makeSelectCurrentJourneyItem,
+  makeSelectWatchedSeconds,
 } from '../selectors';
 
 describe('selectJourneyDomain', () => {
@@ -184,5 +185,17 @@ describe('makeSelectJourney', () => {
         .setIn([0, 'fidelity', 'current_level'], currentFidelityLevel)
         .setIn([0, 'fidelity', 'establishment_name'], establishmentName),
     );
+  });
+  it('should return watch time in seconds and make sure its an INT', () => {
+    const watchedSecondsSelector = makeSelectWatchedSeconds();
+    const sec = 3;
+
+    const mockedState = fromJS({
+      journey: {
+        watchedSeconds: sec,
+      },
+    });
+    const watchedSeconds = watchedSecondsSelector(mockedState);
+    expect(watchedSeconds).toEqual(3);
   });
 });

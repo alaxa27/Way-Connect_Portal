@@ -10,6 +10,7 @@ import {
   CURRENT_JOURNEY_ITEM_CHANGED,
   CURRENT_JOURNEY_ITEM_INCREMENTED,
   CHANGE_DEFAULT_ANSWERS_LIST,
+  CHANGE_WATCHED_SECONDS,
   ACKNOWLEDGE_COMMUNICATION,
   ACKNOWLEDGE_COMMUNICATION_SUCCESS,
   ACKNOWLEDGE_COMMUNICATION_ERROR,
@@ -25,6 +26,7 @@ import {
   ANSWER_QUESTION,
   ANSWER_QUESTION_SUCCESS,
   ANSWER_QUESTION_ERROR,
+  REDIRECTION_CLICKED,
 } from './constants';
 
 export function defaultAction() {
@@ -52,6 +54,19 @@ export function changeDefaultAnswersList(defaultAnswers, questionID) {
     type: CHANGE_DEFAULT_ANSWERS_LIST,
     defaultAnswers,
     questionID,
+  };
+}
+
+export function changeWatchedSeconds(seconds) {
+  return {
+    type: CHANGE_WATCHED_SECONDS,
+    seconds,
+  };
+}
+
+export function onRedirectionClick() {
+  return {
+    type: REDIRECTION_CLICKED,
   };
 }
 

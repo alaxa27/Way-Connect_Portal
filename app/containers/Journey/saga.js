@@ -1,4 +1,11 @@
-import { takeEvery, call, put, select, all } from 'redux-saga/effects';
+import {
+  takeEvery,
+  takeLatest,
+  call,
+  put,
+  select,
+  all,
+} from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
@@ -18,16 +25,25 @@ import {
   makeSelectJourneyItem,
   makeSelectPreviousID,
   makeSelectCurrentID,
+  makeSelectWatchedSeconds,
 } from './selectors';
 import {
   JOURNEY_ID_CHANGED,
   CURRENT_JOURNEY_ITEM_INCREMENTED,
+  REDIRECTION_CLICKED,
 } from './constants';
 
 function completeJourneyRequest() {
   return axiosInstance({
     method: 'post',
     url: '/customers/complete/',
+  });
+}
+
+function clickRequest() {
+  return axiosInstance({
+    method: 'post',
+    url: '/campaigns/communications/videos/click/',
   });
 }
 
@@ -50,6 +66,14 @@ function answerQuestionRequest(data) {
     method: 'post',
     url: '/questions/answers/',
     data,
+  });
+}
+
+function skipRequest(seconds) {
+  return axiosInstance({
+    method: 'post',
+    url: '/campaigns/communications/videos/skip/',
+    data: { seconds },
   });
 }
 
@@ -152,10 +176,41 @@ export function* handlePreviousEffect(journeyItem) {
         journeyItem.question.defaultAnswers,
       );
       break;
+    case 'C':
+      yield call(skipEffect);
+      break;
     default:
       break;
   }
   return null;
+}
+
+export function* redirectionClickedEffect() {
+  const currentIDSelector = makeSelectCurrentID();
+  const currentID = yield select(currentIDSelector);
+
+  const currentJourneyItemSelector = makeSelectJourneyItem(currentID);
+  const currentJourneyItem = yield select(currentJourneyItemSelector);
+
+  const phoneNumber = currentJourneyItem.getIn([
+    'communication',
+    'redirection',
+  ]);
+  yield call(clickRequest);
+
+  const tempLink = document.createElement('a');
+  tempLink.style.display = 'none';
+  tempLink.href = `tel:${phoneNumber}`;
+  tempLink.click();
+  document.body.removeChild(tempLink);
+  // Link click simulation
+}
+
+export function* skipEffect() {
+  const watchedSecondsSelector = makeSelectWatchedSeconds();
+  const watchedSeconds = yield select(watchedSecondsSelector);
+
+  yield call(skipRequest, watchedSeconds);
 }
 
 export function* journeyIDChangedEffect() {
@@ -190,5 +245,6 @@ export function* goToNextJourneyItemEffect() {
 // Individual exports for testing
 export default function* journeySaga() {
   yield takeEvery(JOURNEY_ID_CHANGED, journeyIDChangedEffect);
+  yield takeLatest(REDIRECTION_CLICKED, redirectionClickedEffect);
   yield takeEvery(CURRENT_JOURNEY_ITEM_INCREMENTED, goToNextJourneyItemEffect);
 }
