@@ -17,11 +17,10 @@ import CommunicationTitle from './CommunicationTitle';
 
 /* eslint-disable react/prefer-stateless-function */
 class Communication extends React.Component {
-  renderPhoneNumber(phoneNumber) {
-    if (phoneNumber)
-      return (
-        <PhoneNumber phoneNumber={phoneNumber}>Contact direct</PhoneNumber>
-      );
+  renderPhoneNumber() {
+    const { redirection } = this.props;
+    if (redirection)
+      return <PhoneNumber {...this.props}>Contact direct</PhoneNumber>;
     return null;
   }
 
@@ -32,7 +31,7 @@ class Communication extends React.Component {
         <CommunicationTitle>{`${campaign.company_name} | ${
           campaign.name
         }`}</CommunicationTitle>
-        {this.renderPhoneNumber(this.props.phone_number)}
+        {this.renderPhoneNumber()}
         <VideoPlayer {...this.props} />
       </CommunicationWrapper>
     );
@@ -40,7 +39,10 @@ class Communication extends React.Component {
 }
 
 Communication.propTypes = {
-  phone_number: PropTypes.string,
+  campaign: PropTypes.shape({
+    name: PropTypes.string,
+    company_name: PropTypes.string,
+  }),
 };
 
 export default Communication;

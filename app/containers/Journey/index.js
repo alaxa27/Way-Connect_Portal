@@ -34,7 +34,9 @@ import {
   authenticate,
   changeID,
   changeDefaultAnswersList,
+  changeWatchedSeconds,
   goToNextJourneyItem,
+  onRedirectionClick,
   skipVideo,
 } from './actions';
 
@@ -102,6 +104,10 @@ export class Journey extends React.Component {
       this.activateFooter();
     }
 
+    if (currentTime % 1 === 0) {
+      this.props.changeWatchedSeconds(currentTime);
+    }
+
     if (progress === 1) {
       this.goToNextJourneyItem(0);
     }
@@ -120,6 +126,7 @@ export class Journey extends React.Component {
             <Communication
               {...item.communication}
               onProgress={this.onCommunicationProgress}
+              onRedirectionClick={this.props.onRedirectionClick}
               playing
             />
           );
@@ -178,7 +185,9 @@ function mapDispatchToProps(dispatch) {
     changeID: curID => dispatch(changeID(curID)),
     changeDefaultAnswersList: (defAns, id) =>
       dispatch(changeDefaultAnswersList(defAns, id)),
+    changeWatchedSeconds: s => dispatch(changeWatchedSeconds(s)),
     goToNextJourneyItem: () => dispatch(goToNextJourneyItem()),
+    onRedirectionClick: r => dispatch(onRedirectionClick(r)),
   };
 }
 
