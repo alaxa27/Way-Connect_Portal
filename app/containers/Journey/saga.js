@@ -184,7 +184,15 @@ export function* handlePreviousEffect(journeyItem) {
   return null;
 }
 
-export function* redirectionClickedEffect() {
+export function* clickEffect() {
+  try {
+    yield call(clickRequest);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function* phoneRedirectEffect() {
   const currentIDSelector = makeSelectCurrentID();
   const currentID = yield select(currentIDSelector);
 
@@ -195,17 +203,15 @@ export function* redirectionClickedEffect() {
     'communication',
     'redirection',
   ]);
-  try {
-    yield call(clickRequest);
-  } catch (err) {
-    console.error(err);
-  }
 
   const tempLink = document.createElement('a');
   tempLink.style.display = 'none';
   tempLink.href = `tel:${phoneNumber}`;
   tempLink.click();
-  // Link click simulation
+}
+
+export function* redirectionClickedEffect() {
+  yield all([call(clickEffect), call(phoneRedirectEffect)]);
 }
 
 export function* skipEffect() {
