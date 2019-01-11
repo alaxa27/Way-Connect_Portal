@@ -54,12 +54,12 @@ const makeSelectCurrentJourneyItem = () =>
     journeyState.get('currentJourneyItem'),
   );
 
-const makeSelectRedirection = communication => {
-  return createSelector(() => {
+const makeSelectRedirection = communication =>
+  createSelector(() => {
     const redirection = communication.get('redirection');
 
     if (redirection) {
-      const redirectionArray = redirection.split(':');
+      const redirectionArray = redirection.split(';');
       const result = fromJS({
         type: redirectionArray[0],
         target: redirectionArray[1],
@@ -69,9 +69,11 @@ const makeSelectRedirection = communication => {
       }
       return result;
     }
-    return null;
+    return fromJS({
+      type: null,
+      target: null,
+    });
   });
-};
 
 const makeSelectWatchedSeconds = () =>
   createSelector(selectJourneyDomain, journeyState =>

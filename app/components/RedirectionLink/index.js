@@ -40,6 +40,12 @@ class RedirectionLink extends React.Component {
   }
 }
 
+RedirectionLink.defaultProps = {
+  redirection: {
+    type: null,
+  },
+};
+
 RedirectionLink.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.object,
@@ -49,7 +55,7 @@ RedirectionLink.propTypes = {
   onRedirectionClick: PropTypes.func,
   redirection: PropTypes.shape({
     type: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default RedirectionLink;

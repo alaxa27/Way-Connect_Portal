@@ -102,10 +102,10 @@ export function* authenticateEffect(href) {
   try {
     yield call(authenticateRequest);
     yield put(authenticated());
-    if (href) {
-      window.location.href = href;
-    }
-    window.location.href = 'https://www.google.com/';
+    // if (href) {
+    //   window.location.href = href;
+    // }
+    window.location.href = href || 'https://google.com';
   } catch (err) {
     yield put(authenticationError(err));
   }
@@ -195,24 +195,6 @@ export function* clickEffect() {
   } catch (err) {
     console.error(err);
   }
-}
-
-export function* phoneRedirectEffect() {
-  const currentIDSelector = makeSelectCurrentID();
-  const currentID = yield select(currentIDSelector);
-
-  const currentJourneyItemSelector = makeSelectJourneyItem(currentID);
-  const currentJourneyItem = yield select(currentJourneyItemSelector);
-
-  const phoneNumber = currentJourneyItem.getIn([
-    'communication',
-    'redirection',
-  ]);
-
-  const tempLink = document.createElement('a');
-  tempLink.style.display = 'none';
-  tempLink.href = `tel:${phoneNumber}`;
-  tempLink.click();
 }
 
 export function* redirectionClickedEffect() {

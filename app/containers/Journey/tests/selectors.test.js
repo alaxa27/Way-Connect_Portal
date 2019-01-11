@@ -167,7 +167,7 @@ describe('makeSelectJourney', () => {
             {
               type: 'C',
               communication: {
-                redirection: 'foo:bar',
+                redirection: 'foo;bar',
               },
             },
           ],
@@ -232,7 +232,7 @@ describe('makeSelectRedirection', () => {
   it('should return redirection object based on a redirection string', () => {
     const communication = fromJS({
       foo: 'bar',
-      redirection: 'type:target',
+      redirection: 'type;target',
     });
 
     const redirectionSelector = makeSelectRedirection(communication);
@@ -246,7 +246,7 @@ describe('makeSelectRedirection', () => {
   it('should return the correct link if the redirection is a tel number', () => {
     const communication = fromJS({
       foo: 'bar',
-      redirection: 'tel:phoneNumber',
+      redirection: 'tel;phoneNumber',
     });
 
     const redirectionSelector = makeSelectRedirection(communication);
@@ -254,6 +254,21 @@ describe('makeSelectRedirection', () => {
     const expectedResult = fromJS({
       type: 'tel',
       target: 'tel:phoneNumber',
+    });
+    expect(redirection).toEqual(expectedResult);
+  });
+
+  it('should return the correct type and target even if target has multiple semicolons', () => {
+    const communication = fromJS({
+      foo: 'bar',
+      redirection: 'facebook;https://facebook.com:8000/#/',
+    });
+
+    const redirectionSelector = makeSelectRedirection(communication);
+    const redirection = redirectionSelector();
+    const expectedResult = fromJS({
+      type: 'facebook',
+      target: 'https://facebook.com:8000/#/',
     });
     expect(redirection).toEqual(expectedResult);
   });
@@ -265,7 +280,10 @@ describe('makeSelectRedirection', () => {
 
     const redirectionSelector = makeSelectRedirection(communication);
     const redirection = redirectionSelector();
-    const expectedResult = null;
+    const expectedResult = fromJS({
+      type: null,
+      target: null,
+    });
     expect(redirection).toEqual(expectedResult);
   });
 });

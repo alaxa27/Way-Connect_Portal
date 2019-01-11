@@ -137,7 +137,6 @@ export function authenticate() {
 }
 
 export function authenticated() {
-  window.location.href = 'https://google.com/';
   return {
     type: AUTHENTICATE_SUCCESS,
   };
