@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 // import messages from './messages';
 import Title from 'components/Title';
 import SubTitle from 'components/SubTitle';
-import PhoneNumber from 'components/PhoneNumber';
+import RedirectionLink from 'components/RedirectionLink';
 import CustomerServiceWrapper from './CustomerServiceWrapper';
 import ContactInformations from './ContactInformations';
 
@@ -27,9 +27,9 @@ class CustomerService extends React.Component {
           service ?
         </SubTitle>
         <ContactInformations>
-          <PhoneNumber phoneNumber={this.props.phone_number}>
+          <RedirectionLink phoneNumber={this.props.phone_number}>
             {this.props.phone_number}
-          </PhoneNumber>
+          </RedirectionLink>
         </ContactInformations>
       </CustomerServiceWrapper>
     );

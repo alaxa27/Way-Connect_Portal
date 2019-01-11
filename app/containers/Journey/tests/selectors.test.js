@@ -5,6 +5,7 @@ import makeSelectJourney, {
   makeSelectJourneyItem,
   makeSelectCurrentJourneyItem,
   makeSelectWatchedSeconds,
+  makeSelectRedirection,
 } from '../selectors';
 
 describe('selectJourneyDomain', () => {
@@ -158,6 +159,33 @@ describe('makeSelectJourney', () => {
     );
   });
 
+  it('should generate a journey with the correct redirection object', () => {
+    const mockedState = fromJS({
+      loaderPage: {
+        connection: {
+          journey: [
+            {
+              type: 'C',
+              communication: {
+                redirection: 'foo:bar',
+              },
+            },
+          ],
+        },
+      },
+    });
+    const journey = journeySelector(mockedState);
+
+    expect(journey).toEqual(
+      mockedState
+        .getIn(['loaderPage', 'connection', 'journey'])
+        .setIn(
+          [0, 'communication', 'redirection'],
+          fromJS({ type: 'foo', target: 'bar' }),
+        ),
+    );
+  });
+
   it('should generate a journey with the current_level if fidelity is found', () => {
     const connection = fromJS({
       journey: [
@@ -197,5 +225,47 @@ describe('makeSelectJourney', () => {
     });
     const watchedSeconds = watchedSecondsSelector(mockedState);
     expect(watchedSeconds).toEqual(3);
+  });
+});
+
+describe('makeSelectRedirection', () => {
+  it('should return redirection object based on a redirection string', () => {
+    const communication = fromJS({
+      foo: 'bar',
+      redirection: 'type:target',
+    });
+
+    const redirectionSelector = makeSelectRedirection(communication);
+    const redirection = redirectionSelector();
+    const expectedResult = fromJS({
+      type: 'type',
+      target: 'target',
+    });
+    expect(redirection).toEqual(expectedResult);
+  });
+  it('should return the correct link if the redirection is a tel number', () => {
+    const communication = fromJS({
+      foo: 'bar',
+      redirection: 'tel:phoneNumber',
+    });
+
+    const redirectionSelector = makeSelectRedirection(communication);
+    const redirection = redirectionSelector();
+    const expectedResult = fromJS({
+      type: 'tel',
+      target: 'tel:phoneNumber',
+    });
+    expect(redirection).toEqual(expectedResult);
+  });
+  it('should return null if the string is empty or the object is null', () => {
+    const communication = fromJS({
+      foo: 'bar',
+      redirection: '',
+    });
+
+    const redirectionSelector = makeSelectRedirection(communication);
+    const redirection = redirectionSelector();
+    const expectedResult = null;
+    expect(redirection).toEqual(expectedResult);
   });
 });

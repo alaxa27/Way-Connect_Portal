@@ -11,7 +11,10 @@ import RedirectionLinkWrapper from './RedirectionLinkWrapper';
 
 /* eslint-disable react/prefer-stateless-function */
 class RedirectionLink extends React.Component {
-  displayText(type) {
+  displayText(type, children) {
+    if (children) {
+      return children;
+    }
     switch (type) {
       case 'tel':
         return 'Contactez nous';
@@ -27,17 +30,22 @@ class RedirectionLink extends React.Component {
   }
 
   render() {
-    const { onRedirectionClick, redirection } = this.props;
+    const { onRedirectionClick, redirection, children } = this.props;
     const { type } = redirection;
     return (
       <RedirectionLinkWrapper href="#" onClick={onRedirectionClick}>
-        {this.displayText(type)}
+        {this.displayText(type, children)}
       </RedirectionLinkWrapper>
     );
   }
 }
 
 RedirectionLink.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.array,
+  ]),
   onRedirectionClick: PropTypes.func,
   redirection: PropTypes.shape({
     type: PropTypes.string,

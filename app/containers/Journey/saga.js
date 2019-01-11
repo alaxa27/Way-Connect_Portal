@@ -98,10 +98,14 @@ export function* completeJourneyEffect() {
   }
 }
 
-export function* authenticateEffect() {
+export function* authenticateEffect(href) {
   try {
-    const { data } = yield call(authenticateRequest);
-    yield put(authenticated(data));
+    yield call(authenticateRequest);
+    yield put(authenticated());
+    if (href) {
+      window.location.href = href;
+    }
+    window.location.href = 'https://www.google.com/';
   } catch (err) {
     yield put(authenticationError(err));
   }
@@ -212,7 +216,23 @@ export function* phoneRedirectEffect() {
 }
 
 export function* redirectionClickedEffect() {
-  yield all([call(clickEffect), call(phoneRedirectEffect)]);
+  const currentIDSelector = makeSelectCurrentID();
+  const currentID = yield select(currentIDSelector);
+
+  const currentJourneyItemSelector = makeSelectJourneyItem(currentID);
+  const currentJourneyItem = yield select(currentJourneyItemSelector);
+
+  const link = currentJourneyItem.getIn([
+    'communication',
+    'redirection',
+    'target',
+  ]);
+
+  yield all([
+    call(skipEffect),
+    call(clickEffect),
+    call(authenticateEffect, link),
+  ]);
 }
 
 export function* skipEffect() {

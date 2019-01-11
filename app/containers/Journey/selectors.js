@@ -54,6 +54,25 @@ const makeSelectCurrentJourneyItem = () =>
     journeyState.get('currentJourneyItem'),
   );
 
+const makeSelectRedirection = communication => {
+  return createSelector(() => {
+    const redirection = communication.get('redirection');
+
+    if (redirection) {
+      const redirectionArray = redirection.split(':');
+      const result = fromJS({
+        type: redirectionArray[0],
+        target: redirectionArray[1],
+      });
+      if (result.get('type') === 'tel') {
+        return result.set('target', `tel:${result.get('target')}`);
+      }
+      return result;
+    }
+    return null;
+  });
+};
+
 const makeSelectWatchedSeconds = () =>
   createSelector(selectJourneyDomain, journeyState =>
     journeyState.get('watchedSeconds'),
@@ -93,6 +112,15 @@ const makeSelectJourney = () => {
                 ? defaultAnswersList.get(id)
                 : fromJS([]),
             );
+          case 'C':
+            // eslint-disable-next-line no-case-declarations
+            const redirectionSelector = makeSelectRedirection(
+              item.get('communication'),
+            );
+            return item.setIn(
+              ['communication', 'redirection'],
+              redirectionSelector(),
+            );
           default:
             return item;
         }
@@ -109,7 +137,8 @@ export {
   makeSelectJourneySize,
   makeSelectCurrentJourneyItem,
   makeSelectJourneyItem,
-  makeSelectPreviousID,
   makeSelectCurrentID,
+  makeSelectPreviousID,
+  makeSelectRedirection,
   makeSelectWatchedSeconds,
 };
