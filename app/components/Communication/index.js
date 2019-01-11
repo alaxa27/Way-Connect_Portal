@@ -9,21 +9,15 @@ import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 import VideoPlayer from 'components/VideoPlayer';
-import PhoneNumber from 'components/PhoneNumber';
+
 import CommunicationWrapper from './CommunicationWrapper';
 import CommunicationTitle from './CommunicationTitle';
+import RedirectionLink from '../RedirectionLink';
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 class Communication extends React.Component {
-  renderPhoneNumber() {
-    const { redirection } = this.props;
-    if (redirection)
-      return <PhoneNumber {...this.props}>Contact direct</PhoneNumber>;
-    return null;
-  }
-
   render() {
     const { campaign } = this.props;
     return (
@@ -31,7 +25,7 @@ class Communication extends React.Component {
         <CommunicationTitle>{`${campaign.company_name} | ${
           campaign.name
         }`}</CommunicationTitle>
-        {this.renderPhoneNumber()}
+        <RedirectionLink {...this.props} />
         <VideoPlayer {...this.props} />
       </CommunicationWrapper>
     );
