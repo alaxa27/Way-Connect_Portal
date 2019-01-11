@@ -13,6 +13,7 @@ import VideoPlayer from 'components/VideoPlayer';
 import CommunicationWrapper from './CommunicationWrapper';
 import CommunicationTitle from './CommunicationTitle';
 import RedirectionLink from '../RedirectionLink';
+import GlobalStyle from '../../global-styles';
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
 
@@ -27,6 +28,7 @@ class Communication extends React.Component {
         }`}</CommunicationTitle>
         <RedirectionLink {...this.props} />
         <VideoPlayer {...this.props} />
+        <GlobalStyle videoScreen />
       </CommunicationWrapper>
     );
   }

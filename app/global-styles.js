@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: #313131;
+    background-color: ${props => (props.videoScreen ? '#000000' : '#313131')};
     height: 100%;
     width: 100%;
     min-height: 100%;
