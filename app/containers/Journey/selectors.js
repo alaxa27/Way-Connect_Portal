@@ -60,14 +60,16 @@ const makeSelectRedirection = communication =>
 
     if (redirection) {
       const redirectionArray = redirection.split(';');
-      const result = fromJS({
-        type: redirectionArray[0],
-        target: redirectionArray[1],
-      });
-      if (result.get('type') === 'tel') {
-        return result.set('target', `tel:${result.get('target')}`);
+      if (redirectionArray.length === 2) {
+        const result = fromJS({
+          type: redirectionArray[0],
+          target: redirectionArray[1],
+        });
+        if (result.get('type') === 'tel') {
+          return result.set('target', `tel:${result.get('target')}`);
+        }
+        return result;
       }
-      return result;
     }
     return fromJS({
       type: null,

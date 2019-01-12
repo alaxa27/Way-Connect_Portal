@@ -286,4 +286,34 @@ describe('makeSelectRedirection', () => {
     });
     expect(redirection).toEqual(expectedResult);
   });
+
+  it('should return null if the split doesnt work', () => {
+    const communication = fromJS({
+      redirection: 'zaer:fkez',
+    });
+
+    const redirectionSelector = makeSelectRedirection(communication);
+    const redirection = redirectionSelector();
+    const expectedResult = fromJS({
+      type: null,
+      target: null,
+    });
+
+    expect(redirection).toEqual(expectedResult);
+  });
+
+  it('should return null if the format is not correct', () => {
+    const communication = fromJS({
+      redirection: 'zaer;rt;fkez',
+    });
+
+    const redirectionSelector = makeSelectRedirection(communication);
+    const redirection = redirectionSelector();
+    const expectedResult = fromJS({
+      type: null,
+      target: null,
+    });
+
+    expect(redirection).toEqual(expectedResult);
+  });
 });
