@@ -105,7 +105,8 @@ export function* authenticateEffect(href) {
     // if (href) {
     //   window.location.href = href;
     // }
-    window.location.href = href || 'https://google.com';
+    window.open(href || 'https://www.google.com/', '_system', 'location=yes');
+    // window.location.href = href || 'https://google.com';
   } catch (err) {
     yield put(authenticationError(err));
   }
