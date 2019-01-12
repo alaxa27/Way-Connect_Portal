@@ -105,13 +105,8 @@ export function* authenticateEffect(href) {
     // if (href) {
     //   window.location.href = href;
     // }
-    window.open(href || 'https://www.google.com/', '_blank');
-    // window.location.href = href || 'https://google.com';
-    const tempLink = document.createElement('a');
-    tempLink.style.display = 'none';
-    tempLink.href = `intent://#Intent;package=com.facebook.katana;scheme=\
-    fb://page/588500031483641?referrer=app_link;end`;
-    tempLink.click();
+    window.open(href || 'https://www.google.com/', '_system', 'location=yes');
+    window.location.href = href || 'https://google.com';
   } catch (err) {
     yield put(authenticationError(err));
   }
