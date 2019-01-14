@@ -2,12 +2,15 @@ import {
   takeEvery,
   takeLatest,
   call,
+  cancel,
+  fork,
   put,
   select,
   all,
-  race,
 } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
+import ReactGA from 'react-ga';
+
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
@@ -91,21 +94,29 @@ function skipRequest(seconds) {
 
 export function* completeJourneyEffect() {
   try {
+    yield call(ReactGA.event, {
+      category: 'CompleteJourney',
+      action: 'started',
+    });
     yield call(completeJourneyRequest);
     yield put(journeyCompleted());
+    yield call(ReactGA.event, {
+      category: 'CompleteJourney',
+      action: 'success',
+    });
   } catch (err) {
     yield put(journeyCompletionError(err));
+    yield call(ReactGA.event, {
+      category: 'CompleteJourney',
+      action: 'fail',
+    });
   }
 }
 
-export function* authenticateEffect(href) {
+export function* authenticateEffect() {
   try {
     yield call(authenticateRequest);
     yield put(authenticated());
-    // if (href) {
-    //   window.location.href = href;
-    // }
-    window.location.href = href || 'https://google.com';
   } catch (err) {
     yield put(authenticationError(err));
   }
@@ -162,7 +173,11 @@ export function* handleCurrentEffect(journeyItem) {
       yield call(getDiscountEffect);
       break;
     case 'END':
-      yield race([call(completeJourneyEffect), call(authenticateEffect)]);
+      // eslint-disable-next-line no-case-declarations
+      const completeTask = yield fork(completeJourneyEffect);
+      yield call(authenticateEffect);
+      yield cancel(completeTask);
+      window.location.href = 'https://google.com';
       break;
     default:
       break;
@@ -210,11 +225,11 @@ export function* redirectionClickedEffect() {
     'target',
   ]);
 
-  yield all([
-    call(skipEffect),
-    call(clickEffect),
-    call(authenticateEffect, link),
-  ]);
+  const skipTask = yield fork(skipEffect);
+  const clickTask = yield fork(clickEffect);
+  yield call(authenticateEffect);
+  yield all([cancel(skipTask), cancel(clickTask)]);
+  window.location.href = link;
 }
 
 export function* skipEffect() {

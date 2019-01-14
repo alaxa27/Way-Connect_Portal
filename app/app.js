@@ -11,6 +11,7 @@ import '@babel/polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router/immutable';
 import history from 'utils/history';
@@ -32,6 +33,10 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+
+// Initialize Google Analytics
+ReactGA.initialize('UA-122476296-2', { debug: true });
+history.listen(location => ReactGA.pageview(location.pathname));
 
 // Create redux store with history
 const initialState = {};
