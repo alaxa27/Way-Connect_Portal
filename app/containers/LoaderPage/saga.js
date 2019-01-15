@@ -1,8 +1,9 @@
-import { call, put, takeLatest, take, fork } from 'redux-saga/effects';
+import { call, put, take, fork } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
+import ReactGA from 'react-ga';
 import axiosInstance from '../../apiConfig';
 
-import { GET_ESTABLISHMENT, POST_CONNECTION_SUCCESS } from './constants';
+import { POST_CONNECTION_SUCCESS } from './constants';
 import {
   establishmentLoaded,
   establishmentLoadingError,
@@ -61,14 +62,22 @@ export function* getDiscountEffect() {
 }
 
 export function* fetchAllEffect() {
+  const startTime = Date.now();
   yield fork(getEstablishmentEffect);
-  yield fork(postConnectionEffect);
   yield fork(getDiscountEffect);
+  yield fork(postConnectionEffect);
+  yield take(POST_CONNECTION_SUCCESS);
+  const execDuration = Date.now() - startTime;
+
+  ReactGA.timing({
+    category: 'RequestFetching',
+    variable: 'loaderPage/fetchAll',
+    value: execDuration, // in milliseconds
+  });
 }
 
 // Individual exports for testing
 export default function* loaderPageSaga() {
-  yield takeLatest(GET_ESTABLISHMENT, fetchAllEffect);
-  yield take(POST_CONNECTION_SUCCESS);
+  yield call(fetchAllEffect);
   yield put(push('/journey/0'));
 }

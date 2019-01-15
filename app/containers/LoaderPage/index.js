@@ -28,14 +28,8 @@ import Moto from './Moto';
 import WelcomeMessage from './WelcomeMessage';
 import EstablishmentName from './EstablishmentName';
 
-import { loadEstablishment } from './actions';
-
 /* eslint-disable react/prefer-stateless-function */
 export class LoaderPage extends React.Component {
-  componentDidMount() {
-    this.props.loadEstablishment();
-  }
-
   render() {
     const { establishmentName } = this.props;
 
@@ -56,7 +50,6 @@ export class LoaderPage extends React.Component {
 }
 
 LoaderPage.propTypes = {
-  loadEstablishment: PropTypes.func,
   establishmentName: PropTypes.string,
 };
 
@@ -65,10 +58,8 @@ const mapStateToProps = createStructuredSelector({
   establishmentName: makeSelectEstablishmentName(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadEstablishment: () => dispatch(loadEstablishment()),
-  };
+function mapDispatchToProps() {
+  return {};
 }
 
 const withConnect = connect(
