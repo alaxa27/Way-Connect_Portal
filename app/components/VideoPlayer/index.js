@@ -46,8 +46,9 @@ class VideoPlayer extends React.Component {
     }
     const { currentTime, duration } = state;
     const progress = currentTime / duration;
+    const prevCurrentTime = prevState.currentTime;
 
-    this.props.onProgress(progress, currentTime);
+    this.props.onProgress(progress, currentTime, prevCurrentTime);
   }
 
   playVideo() {

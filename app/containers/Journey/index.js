@@ -7,6 +7,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -60,6 +61,10 @@ export class Journey extends React.Component {
   }
 
   componentDidMount() {
+    ReactGA.event({
+      category: 'Journey',
+      action: 'componentDidMount',
+    });
     this.changeIndex(this.props.match.params.id);
   }
 
@@ -75,6 +80,7 @@ export class Journey extends React.Component {
     this.setState({
       index: parseInt(index, 10),
     });
+    this.initTimer();
   }
 
   activateFooter() {
@@ -82,22 +88,39 @@ export class Journey extends React.Component {
   }
 
   deactivateFooter() {
+    clearTimeout(this.state.goToNextJourneyItemTimer);
     this.setState({ footerActive: false, countDown: 0 });
   }
 
   goToNextJourneyItem(timeout) {
-    setTimeout(() => {
+    const goToNextJourneyItemTimer = setTimeout(() => {
+      ReactGA.event({
+        category: 'Journey',
+        action: 'goToNextJourneyItem/endTimeout',
+        label: `timeout: ${timeout}`,
+      });
       this.props.goToNextJourneyItem();
     }, timeout * 1000);
+    this.setState({ goToNextJourneyItemTimer });
+  }
+
+  initTimer() {
+    this.setState({ journeyItemStartTime: Date.now() });
   }
 
   validateAnswer(defaultAnswers) {
     const question = this.props.currentJourneyItem.get('question');
     this.props.changeDefaultAnswersList(defaultAnswers, question.get('id'));
+    // Google Analytics : Time spent rendering and aswering question
+    ReactGA.timing({
+      category: 'Journey',
+      variable: 'question/timeBeforeAnswered',
+      value: Date.now() - this.state.journeyItemStartTime,
+    });
     this.activateFooter();
   }
 
-  onCommunicationProgress(progress, currentTime) {
+  onCommunicationProgress(progress, currentTime, prevCurrentTime) {
     const countDown = Math.max(timeBeforeSkip - Math.floor(currentTime), 0);
     this.setState({ countDown });
     if (countDown === 0) {
@@ -107,7 +130,22 @@ export class Journey extends React.Component {
     this.props.changeWatchedSeconds(Math.floor(currentTime));
 
     if (progress === 1) {
+      ReactGA.event({
+        category: 'Journey',
+        action: 'communication/watchedEntirely',
+      });
       this.goToNextJourneyItem(0);
+    }
+    if (prevCurrentTime === 0 && currentTime > 0) {
+      ReactGA.event({
+        category: 'Journey',
+        action: 'communication/startPlaying',
+      });
+      ReactGA.timing({
+        category: 'Journey',
+        variable: 'communication/timBeforePlayStart',
+        value: Date.now() - this.state.journeyItemStartTime,
+      });
     }
   }
 
@@ -129,14 +167,18 @@ export class Journey extends React.Component {
             />
           );
         case 'S':
-          // Go to the next journeyItem after n secs
-          this.goToNextJourneyItem(5);
-          if (!this.state.footerActive) this.activateFooter();
+          if (!this.state.footerActive) {
+            this.activateFooter();
+            // Go to the next journeyItem after n secs
+            this.goToNextJourneyItem(5);
+          }
           return <CustomerService {...item.customer_service} />;
         case 'B':
-          if (!this.state.footerActive) this.activateFooter();
-          // Go to the next journeyItem after n secs
-          this.goToNextJourneyItem(5);
+          if (!this.state.footerActive) {
+            this.activateFooter();
+            // Go to the next journeyItem after n secs
+            this.goToNextJourneyItem(5);
+          }
           return <Banner {...item.banner} />;
         case 'END':
           return <Loading />;
