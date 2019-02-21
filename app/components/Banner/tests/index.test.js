@@ -1,15 +1,18 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import 'jest-styled-components';
 // import { enzymeFind } from 'styled-components/test-utils';
 
 import SubTitle from 'components/SubTitle';
 import banner from 'images/banner.png';
+import { theme } from '../../../global-styles';
 
 import BannerCard from '../BannerCard';
 import Banner from '../index';
 
 describe('<Banner />', () => {
-  const renderComponent = (props = {}) => mount(<Banner {...props} />);
+  const renderComponent = (props = {}) =>
+    mount(<Banner {...props} theme={theme} />);
   const passedProps = {
     text: 'foo',
     picture: banner,
