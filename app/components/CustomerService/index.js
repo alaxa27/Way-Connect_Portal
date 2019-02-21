@@ -14,22 +14,25 @@ import Title from 'components/Title';
 import SubTitle from 'components/SubTitle';
 import RedirectionLink from 'components/RedirectionLink';
 import CustomerServiceWrapper from './CustomerServiceWrapper';
-import ContactInformations from './ContactInformations';
+import ContactInformations, {
+  Text as ContactText,
+  Title as ContactTitle,
+} from './ContactInformations';
 
 /* eslint-disable react/prefer-stateless-function */
 class CustomerService extends React.Component {
   render() {
     return (
       <CustomerServiceWrapper>
-        <Title>Réclamation</Title>
+        <Title>Contact direct</Title>
         <SubTitle>
           Vous souhaitez nous faire parvenir avis quant à la qualité de notre
           service ?
         </SubTitle>
         <ContactInformations>
-          <RedirectionLink phoneNumber={this.props.phone_number}>
-            {this.props.phone_number}
-          </RedirectionLink>
+          <ContactTitle>Contact direct</ContactTitle>
+          <ContactText>{this.props.establishment_name}</ContactText>
+          <RedirectionLink {...this.props} />
         </ContactInformations>
       </CustomerServiceWrapper>
     );
@@ -37,7 +40,8 @@ class CustomerService extends React.Component {
 }
 
 CustomerService.propTypes = {
-  phone_number: PropTypes.string.isRequired,
+  redirection: PropTypes.string.isRequired,
+  establishment_name: PropTypes.string.isRequired,
 };
 
 export default CustomerService;
