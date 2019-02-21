@@ -6,12 +6,12 @@ const Dot = styled.div`
   border-radius: 8rem;
   background: ${props => {
     if (props.passed) {
-      return '#808080';
+      return props.theme.colors.active;
     }
     if (props.active) {
-      return 'linear-gradient(to top right, #F1612C, #F58921)';
+      return props.theme.colors.orange;
     }
-    return '#4D4D4D';
+    return props.theme.colors.inactive;
   }};
   margin: 6px;
 `;

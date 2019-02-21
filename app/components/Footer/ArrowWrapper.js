@@ -12,12 +12,13 @@ const ArrowWrapper = styled.div`
       return 'transparent';
     }
     if (props.active) {
-      return 'linear-gradient(to top, #F18F10, #F37327)';
+      return props.theme.colors.orange;
     }
-    return '#6D6D6D';
+    return props.theme.colors.inactive;
   }};
   border-radius: 45px;
-  color: ${props => (props.transparent ? '#999999' : '#313131')};
+  color: ${props =>
+    props.transparent ? props.theme.colors.inactive : props.theme.colors};
 `;
 
 ArrowWrapper.defaultProps = {

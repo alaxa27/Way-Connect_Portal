@@ -8,7 +8,8 @@ const StyledChoice = styled.div`
   height: 40px;
   margin-top: 5px;
   cursor: pointer;
-  color: ${props => (props.active ? '#dbdbdb' : '#999999')};
+  color: ${props =>
+    props.active ? props.theme.colors.text : props.theme.colors.inactive};
 `;
 
 const Choice = props => (

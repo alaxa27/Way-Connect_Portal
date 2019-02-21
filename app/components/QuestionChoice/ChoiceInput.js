@@ -5,7 +5,7 @@ const StyledCheckMark = styled.div`
   width: 8px;
   height: 8px;
   border-radius: ${props => (!props.multiple ? '8px' : 'none')};
-  background-color: #4d4d4d;
+  background-color: ${props => props.theme.colors.inactive};
 `;
 
 const StyledInput = styled.div`
@@ -14,7 +14,8 @@ const StyledInput = styled.div`
   justify-content: center;
   width: 16px;
   height: 16px;
-  background-color: ${props => (props.active ? '#dbdbdb' : '#999999')};
+  background-color: ${props =>
+    props.active ? props.theme.colors.text : props.theme.colors.active};
   border-radius: ${props => (!props.multiple ? '16px' : 'none')};
 `;
 const ChoiceInput = props => (

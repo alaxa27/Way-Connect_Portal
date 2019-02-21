@@ -14,7 +14,7 @@ import LoadingWrapper from './LoadingWrapper';
 function Loading(props) {
   return (
     <LoadingWrapper>
-      <Loader type="Rings" color="#6D6D6D" {...props} />
+      <Loader type="Rings" color={props.theme.colors.active} {...props} />
     </LoadingWrapper>
   );
 }

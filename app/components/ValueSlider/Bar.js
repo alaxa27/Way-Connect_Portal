@@ -6,7 +6,8 @@ const Bar = styled.div.attrs({
     flexGrow,
   }),
 })`
-  height: ${props => (props.selected ? '5px' : '9px')};
+  margin-top: -3px;
+  height: ${props => (props.selected ? '4px' : '10px')};
   background: ${props => (props.transparent ? 'transparent' : '#4d4d4d')};
 `;
 

@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     width: 100%;
-    color: #FFFFFF
+    color: #FFFFFF;
   }
 
   body {
@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: ${props => (props.videoScreen ? '#000000' : '#313131')};
+    background-color: ${props => (props.videoScreen ? '#000000' : '#1A1A1A')};
     height: 100%;
     width: 100%;
     min-height: 100%;
@@ -31,4 +31,14 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const theme = {
+  colors: {
+    text: '#ffffff',
+    active: '#a5a5a5',
+    inactive: '#666666',
+    orange: '#fbb03b',
+  },
+};
+
 export default GlobalStyle;
+export { theme };

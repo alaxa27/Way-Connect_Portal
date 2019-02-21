@@ -9,7 +9,28 @@ import JourneyItem from './JourneyItem';
 
 const sampleData = {
   question: {
-    multiple: {
+    choice_unique: {
+      id: 2,
+      type: 'CHOICE',
+      text: 'Multiple foobarbaz ?????',
+      multiple: false,
+      choices: [
+        {
+          id: 1,
+          text: 'foo',
+        },
+        {
+          id: 2,
+          text: 'bar',
+        },
+        {
+          id: 3,
+          text: 'baz',
+        },
+      ],
+      defaultAnswers: [],
+    },
+    choice_multiple: {
       id: 2,
       type: 'CHOICE',
       text: 'Multiple foobarbaz ?????',
@@ -28,6 +49,24 @@ const sampleData = {
           text: 'baz',
         },
       ],
+      defaultAnswers: [],
+    },
+    value_single: {
+      id: 4,
+      type: 'VALUE',
+      text: 'How much?',
+      min: 0, // may be null
+      max: 10, // may be null
+      step: 1, // may be null
+      defaultAnswers: [],
+    },
+    value_multiple: {
+      id: 445,
+      type: 'VALUE_RANGE',
+      text: 'How much?',
+      min: 1, // may be null
+      max: 10, // may be null
+      step: 0.1, // may be null
       defaultAnswers: [],
     },
   },
