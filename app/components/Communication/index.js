@@ -22,14 +22,16 @@ class Communication extends React.Component {
   render() {
     const { campaign } = this.props;
     return (
-      <CommunicationWrapper>
-        <CommunicationTitle>{`${campaign.company_name} | ${
-          campaign.name
-        }`}</CommunicationTitle>
-        <RedirectionLink {...this.props} />
-        <VideoPlayer {...this.props} />
+      <React.Fragment>
+        <CommunicationWrapper>
+          <VideoPlayer {...this.props} />
+          <RedirectionLink {...this.props} />
+          <CommunicationTitle>{`${campaign.company_name} | ${
+            campaign.name
+          }`}</CommunicationTitle>
+        </CommunicationWrapper>
         <GlobalStyle videoScreen />
-      </CommunicationWrapper>
+      </React.Fragment>
     );
   }
 }

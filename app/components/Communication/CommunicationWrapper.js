@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const CommunicationWrapper = styled.div`
-  dislay: flex;
-  flex-direction: column;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
   flex: 1;
 `;
 

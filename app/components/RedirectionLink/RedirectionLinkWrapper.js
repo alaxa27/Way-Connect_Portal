@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const PhoneNumberWrapper = styled.a`
+const RedirectionLinkWrapper = styled.a`
   cursor: pointer;
   text-decoration: none;
   color: ${props => props.theme.colors.orange};
@@ -8,4 +8,4 @@ const PhoneNumberWrapper = styled.a`
   border-bottom-width: 1px;
 `;
 
-export default PhoneNumberWrapper;
+export default RedirectionLinkWrapper;

@@ -7,7 +7,6 @@ import Instagram from 'images/instagram.png';
 import Phone from 'images/phone.png';
 
 const Icon = styled.img`
-  margin-bottom: 4px;
   margin-right: 4px;
 `;
 

@@ -21,19 +21,17 @@ import GlobalStyle, { theme } from '../../global-styles';
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <React.Fragment>
-        <Switch>
-          <Route exact path="/" component={LoaderPage} />
-          <Route exact path="/journey/:id" component={Journey} />
-          <Route
-            exact
-            path="/mocks/journey/:type/:sample"
-            component={JourneyMock}
-          />
-          <Route component={NotFoundPage} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={LoaderPage} />
+        <Route exact path="/journey/:id" component={Journey} />
+        <Route
+          exact
+          path="/mocks/journey/:type/:sample"
+          component={JourneyMock}
+        />
+        <Route component={NotFoundPage} />
         <GlobalStyle />
-      </React.Fragment>
+      </Switch>
     </ThemeProvider>
   );
 }

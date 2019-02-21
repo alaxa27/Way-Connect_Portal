@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const Dot = styled.div`
-  width: ${props => (props.active ? '12px' : '9px')};
-  height: ${props => (props.active ? '12px' : '9px')};
-  border-radius: 8rem;
+  width: ${props => (props.active ? '12px' : '8px')};
+  height: ${props => (props.active ? '12px' : '8px')};
+  border-radius: 8px;
   background: ${props => {
     if (props.passed) {
       return props.theme.colors.active;

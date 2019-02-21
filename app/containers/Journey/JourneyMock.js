@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Communication from 'components/Communication';
+import CustomerService from 'components/CustomerService';
 import Footer from 'components/Footer';
 import Question from 'components/Question';
 
@@ -70,12 +72,50 @@ const sampleData = {
       defaultAnswers: [],
     },
   },
+  communication: {
+    no_contact: {
+      name: 'Parfum Bleu',
+      company_name: 'Channel',
+      video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+      phone_number: '',
+    },
+    contact: {
+      video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+      campaign: {
+        name: 'Parfum Bleu',
+        company_name: 'Channel',
+      },
+      redirection: {
+        type: 'tel',
+        target: '12345678',
+      },
+    },
+  },
+  customer_service: {
+    phone: {
+      establishment_name: '180° Cafe & Resto - Sousse',
+      redirection: {
+        type: 'tel',
+      },
+    },
+  },
 };
 
 const renderJourneyItem = (type, sample) => {
   switch (type) {
+    case 'communication':
+      return (
+        <Communication
+          {...sampleData.communication[sample]}
+          onProgress={() => {}}
+          onRedirectionClick={() => {}}
+          playing
+        />
+      );
+    case 'customer_service':
+      return <CustomerService {...sampleData.customer_service[sample]} />;
     case 'question':
-      return <Question onValid={() => {}} {...sampleData.question[sample]} />;
+      return <Question {...sampleData.question[sample]} />;
     default:
       return null;
   }
@@ -83,7 +123,6 @@ const renderJourneyItem = (type, sample) => {
 
 const JourneyMock = props => {
   const { type, sample } = props.match.params;
-  console.log('Displaying: ', type, sample);
   return (
     <JourneyWrapper>
       <JourneyItem>{renderJourneyItem(type, sample)}</JourneyItem>
