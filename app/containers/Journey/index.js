@@ -190,8 +190,8 @@ export class Journey extends React.Component {
   }
 
   render() {
-    const { index, footerActive } = this.state;
     const { currentJourneyItem, journeySize } = this.props;
+    const { countDown, footerActive, index } = this.state;
     return (
       <JourneyWrapper>
         <JourneyItem>
@@ -201,7 +201,7 @@ export class Journey extends React.Component {
           active={footerActive}
           index={index}
           number={journeySize}
-          countDown={this.state.countDown}
+          countDown={countDown}
         />
       </JourneyWrapper>
     );
