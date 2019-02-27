@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { Player, ControlBar, Shortcut, BigPlayButton } from 'video-react';
 import 'video-react/dist/video-react.css'; // import css
 
+import GlobalStyle from '../../global-styles';
 import VideoPlayerWrapper from './VideoPlayerWrapper';
 /* eslint-disable react/prefer-stateless-function */
 
@@ -66,6 +67,7 @@ class VideoPlayer extends React.Component {
           <ControlBar disabled />
           <Shortcut clickable={false} shortcuts={playerShortcuts} />
         </Player>
+        <GlobalStyle videoScreen />
       </VideoPlayerWrapper>
     );
   }
