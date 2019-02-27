@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 const VideoPlayerWrapper = styled.div`
   position: fixed;
-  left: 0;
+  left: 50%;
   top: 50%;
   width: 100%;
-  transform: translate(0, -50%);
+  max-width: 500px;
+  transform: translate(-50%, -50%);
 `;
 
 export default VideoPlayerWrapper;

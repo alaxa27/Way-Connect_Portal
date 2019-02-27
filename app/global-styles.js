@@ -9,7 +9,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    background-color: #000000;
     font-family: 'Roboto', sans-serif;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   body.fontLoaded {
@@ -17,11 +21,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: ${props => (props.videoScreen ? '#000000' : '#1A1A1A')};
     height: 100%;
     width: 100%;
+    background-color: ${props => (props.videoScreen ? '#000000' : '#1A1A1A')};
     min-height: 100%;
-    min-width: 100%;
+    max-width: 500px;
     padding: 35px;
   }
 
