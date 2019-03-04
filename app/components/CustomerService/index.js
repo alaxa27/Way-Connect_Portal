@@ -40,7 +40,7 @@ class CustomerService extends React.Component {
 }
 
 CustomerService.propTypes = {
-  redirection: PropTypes.string.isRequired,
+  redirection: PropTypes.object.isRequired,
   establishment_name: PropTypes.string.isRequired,
 };
 
