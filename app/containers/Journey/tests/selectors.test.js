@@ -321,15 +321,13 @@ describe('makeSelectRedirection', () => {
 
 describe('makeSelectCustomerService', () => {
   it('should return the correct object', () => {
-    const mockedState = fromJS({
-      loaderPage: {
-        establishmentName: 'baz',
-      },
-    });
     const customerService = fromJS({
       phone_number: 'bar',
     });
-    const customerServiceSelector = makeSelectCustomerService(customerService);
+    const customerServiceSelector = makeSelectCustomerService(
+      'baz',
+      customerService,
+    );
 
     const expectedResult = fromJS({
       establishment_name: 'baz',
@@ -338,6 +336,6 @@ describe('makeSelectCustomerService', () => {
         target: 'bar',
       },
     });
-    expect(customerServiceSelector(mockedState)).toEqual(expectedResult);
+    expect(customerServiceSelector()).toEqual(expectedResult);
   });
 });

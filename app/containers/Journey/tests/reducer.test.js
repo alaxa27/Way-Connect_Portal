@@ -16,6 +16,7 @@ describe('journeyReducer', () => {
       previousID: -2,
       currentID: -1,
       currentJourneyItem: {},
+      surveyResult: [],
       watchedSeconds: 0,
     });
   });
