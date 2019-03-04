@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import JourneyWrapper from 'containers/Journey/JourneyWrapper';
+import JourneyItem from 'containers/Journey/JourneyItem';
+
 import Communication from 'components/Communication';
 import CustomerService from 'components/CustomerService';
 import Footer from 'components/Footer';
 import Question from 'components/Question';
-
-import JourneyWrapper from './JourneyWrapper';
-import JourneyItem from './JourneyItem';
 
 const sampleData = {
   question: {
@@ -197,7 +197,7 @@ const renderJourneyItem = (type, sample) => {
   }
 };
 
-const JourneyMock = props => {
+const JourneyMocks = props => {
   const { type, sample } = props.match.params;
   return (
     <JourneyWrapper>
@@ -207,10 +207,10 @@ const JourneyMock = props => {
   );
 };
 
-JourneyMock.propTypes = {
+JourneyMocks.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object,
   }),
 };
 
-export default JourneyMock;
+export default JourneyMocks;

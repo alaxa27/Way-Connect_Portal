@@ -177,7 +177,7 @@ export class Journey extends React.Component {
           if (!this.state.footerActive) {
             this.activateFooter();
             // Go to the next journeyItem after n secs
-            // this.goToNextJourneyItem(5);
+            this.goToNextJourneyItem(5);
           }
           return <CustomerService {...item.customer_service} />;
         case 'B':
