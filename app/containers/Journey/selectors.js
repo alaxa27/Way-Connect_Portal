@@ -54,6 +54,18 @@ const makeSelectCurrentJourneyItem = () =>
     journeyState.get('currentJourneyItem'),
   );
 
+const makeSelectCustomerService = (establishmentName, customerService) =>
+  createSelector(() => {
+    const target = customerService.get('phone_number');
+    return fromJS({
+      establishment_name: establishmentName,
+      redirection: {
+        type: 'tel',
+        target,
+      },
+    });
+  });
+
 const makeSelectRedirection = communication =>
   createSelector(() => {
     const redirection = communication.get('redirection');
@@ -76,6 +88,11 @@ const makeSelectRedirection = communication =>
       target: null,
     });
   });
+
+const makeSelectSurveyResult = () =>
+  createSelector(selectJourneyDomain, journeyState =>
+    journeyState.get('surveyResult'),
+  );
 
 const makeSelectWatchedSeconds = () =>
   createSelector(selectJourneyDomain, journeyState =>
@@ -125,6 +142,13 @@ const makeSelectJourney = () => {
               ['communication', 'redirection'],
               redirectionSelector(),
             );
+          case 'S':
+            // eslint-disable-next-line no-case-declarations
+            const customerServiceSelector = makeSelectCustomerService(
+              establishmentName,
+              item.get('customer_service'),
+            );
+            return item.set('customer_service', customerServiceSelector());
           default:
             return item;
         }
@@ -140,9 +164,11 @@ export {
   selectJourneyDomain,
   makeSelectJourneySize,
   makeSelectCurrentJourneyItem,
+  makeSelectCustomerService,
   makeSelectJourneyItem,
   makeSelectCurrentID,
   makeSelectPreviousID,
   makeSelectRedirection,
+  makeSelectSurveyResult,
   makeSelectWatchedSeconds,
 };
