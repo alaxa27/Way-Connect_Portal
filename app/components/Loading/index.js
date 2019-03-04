@@ -6,10 +6,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withTheme } from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import LoadingWrapper from './LoadingWrapper';
-// import styled from 'styled-components';
 
 function Loading(props) {
   return (
@@ -29,4 +29,4 @@ Loading.propTypes = {
   width: PropTypes.string,
 };
 
-export default Loading;
+export default withTheme(Loading);
