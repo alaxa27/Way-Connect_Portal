@@ -42,3 +42,5 @@ export const AUTHENTICATE_ERROR = 'app/Journey/AUTHENTICATE_ERROR';
 export const ANSWER_QUESTION = 'app/Journey/ANSWER_QUESTION';
 export const ANSWER_QUESTION_SUCCESS = 'app/Journey/ANSWER_QUESTION_SUCCESS';
 export const ANSWER_QUESTION_ERROR = 'app/Journey/ANSWER_QUESTION_ERROR';
+
+export const SURVEY_COMPLETED = 'app/Journey/SURVEY_COMPLETED';

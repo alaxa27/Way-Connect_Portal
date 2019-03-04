@@ -5,6 +5,7 @@ import {
   changeCurrentJourneyItem,
   changeDefaultAnswersList,
   changeWatchedSeconds,
+  submitSurveyResult,
 } from '../actions';
 
 describe('journeyReducer', () => {
@@ -70,6 +71,13 @@ describe('journeyReducer', () => {
     const expectedResult = state.set('watchedSeconds', 3);
 
     expect(journeyReducer(state, changeWatchedSeconds(3))).toEqual(
+      expectedResult,
+    );
+  });
+
+  it('should handle the submitSurveyResult action properly', () => {
+    const expectedResult = state.set('surveyResult', [1, 2, 3]);
+    expect(journeyReducer(state, submitSurveyResult([1, 2, 3]))).toEqual(
       expectedResult,
     );
   });

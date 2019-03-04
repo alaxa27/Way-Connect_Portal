@@ -27,6 +27,7 @@ import {
   ANSWER_QUESTION_SUCCESS,
   ANSWER_QUESTION_ERROR,
   REDIRECTION_CLICKED,
+  SURVEY_COMPLETED,
 } from './constants';
 
 export function defaultAction() {
@@ -163,5 +164,12 @@ export function questionAnswered() {
 export function answeringQuestionError() {
   return {
     type: ANSWER_QUESTION_ERROR,
+  };
+}
+
+export function submitSurveyResult(result) {
+  return {
+    type: SURVEY_COMPLETED,
+    result,
   };
 }

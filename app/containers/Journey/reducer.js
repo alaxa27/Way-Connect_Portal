@@ -12,6 +12,7 @@ import {
   CURRENT_JOURNEY_ITEM_CHANGED,
   CHANGE_DEFAULT_ANSWERS_LIST,
   CHANGE_WATCHED_SECONDS,
+  SURVEY_COMPLETED,
 } from './constants';
 
 export const initialState = fromJS({
@@ -19,6 +20,7 @@ export const initialState = fromJS({
   previousID: -2,
   currentID: -1,
   currentJourneyItem: {},
+  surveyResult: [],
   watchedSeconds: 0,
 });
 
@@ -41,6 +43,8 @@ function journeyReducer(state = initialState, action) {
       );
     case CHANGE_WATCHED_SECONDS:
       return state.set('watchedSeconds', action.seconds);
+    case SURVEY_COMPLETED:
+      return state.set('surveyResult', action.result);
     default:
       return state;
   }

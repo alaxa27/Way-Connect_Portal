@@ -29,6 +29,7 @@ import {
   makeSelectJourneyItem,
   makeSelectPreviousID,
   makeSelectCurrentID,
+  makeSelectSurveyResult,
   makeSelectWatchedSeconds,
 } from './selectors';
 import {
@@ -122,6 +123,14 @@ export function* authenticateEffect() {
   }
 }
 
+export function* answerSurveyEffect() {
+  const surveyResultSelector = makeSelectSurveyResult();
+  const result = surveyResultSelector();
+  yield all(
+    result.map(res => call(answerQuestionEffect, res.id, res.type, res.answer)),
+  );
+}
+
 export function* answerQuestionEffect(id, type, answers) {
   const answer = {
     question: id,
@@ -196,7 +205,16 @@ export function* handlePreviousEffect(journeyItem) {
       );
       break;
     case 'C':
-      yield call(skipEffect);
+      switch (journeyItem.communication.type) {
+        case 'VIDEO':
+          yield call(skipEffect);
+          break;
+        case 'SURVEY':
+          yield call(answerSurveyEffect);
+          break;
+        default:
+          break;
+      }
       break;
     default:
       break;
