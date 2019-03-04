@@ -39,6 +39,7 @@ import {
   goToNextJourneyItem,
   onRedirectionClick,
   skipVideo,
+  submitSurveyResult,
 } from './actions';
 
 const timeBeforeSkip = 5; // Skip the ad available after 5sec
@@ -120,6 +121,11 @@ export class Journey extends React.Component {
     this.activateFooter();
   }
 
+  onSurveyLastAnswer(result) {
+    this.props.submitSurveyResult(result);
+    this.activateFooter();
+  }
+
   onCommunicationProgress(progress, currentTime, prevCurrentTime) {
     const countDown = Math.max(timeBeforeSkip - Math.floor(currentTime), 0);
     this.setState({ countDown });
@@ -162,6 +168,7 @@ export class Journey extends React.Component {
             <Communication
               {...item.communication}
               onProgress={this.onCommunicationProgress}
+              onLastAnswer={this.onSurveyLastAnswer}
               onRedirectionClick={this.props.onRedirectionClick}
               playing
             />
@@ -170,7 +177,7 @@ export class Journey extends React.Component {
           if (!this.state.footerActive) {
             this.activateFooter();
             // Go to the next journeyItem after n secs
-            this.goToNextJourneyItem(5);
+            // this.goToNextJourneyItem(5);
           }
           return <CustomerService {...item.customer_service} />;
         case 'B':
@@ -228,6 +235,7 @@ function mapDispatchToProps(dispatch) {
     changeWatchedSeconds: s => dispatch(changeWatchedSeconds(s)),
     goToNextJourneyItem: () => dispatch(goToNextJourneyItem()),
     onRedirectionClick: () => dispatch(onRedirectionClick()),
+    submitSurveyResult: res => dispatch(submitSurveyResult(res)),
   };
 }
 
