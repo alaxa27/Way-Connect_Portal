@@ -6,6 +6,7 @@ import makeSelectJourney, {
   makeSelectCurrentJourneyItem,
   makeSelectWatchedSeconds,
   makeSelectRedirection,
+  makeSelectCustomerService,
 } from '../selectors';
 
 describe('selectJourneyDomain', () => {
@@ -315,5 +316,28 @@ describe('makeSelectRedirection', () => {
     });
 
     expect(redirection).toEqual(expectedResult);
+  });
+});
+
+describe('makeSelectCustomerService', () => {
+  it('should return the correct object', () => {
+    const mockedState = fromJS({
+      loaderPage: {
+        establishmentName: 'baz',
+      },
+    });
+    const customerService = fromJS({
+      phone_number: 'bar',
+    });
+    const customerServiceSelector = makeSelectCustomerService(customerService);
+
+    const expectedResult = fromJS({
+      establishment_name: 'baz',
+      redirection: {
+        type: 'tel',
+        target: 'bar',
+      },
+    });
+    expect(customerServiceSelector(mockedState)).toEqual(expectedResult);
   });
 });
