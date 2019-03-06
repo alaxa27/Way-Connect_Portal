@@ -19,13 +19,14 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import GlobalStyle, { theme } from '../../global-styles';
 
 export default function App() {
+  const production = process.env.NODE_ENV === 'production';
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/" component={LoaderPage} />
           <Route exact path="/journey/:id" component={Journey} />
-          <Route path="/mocks" component={Mocks} />
+          {production ? null : <Route path="/mocks" component={Mocks} />}
           <Route component={NotFoundPage} />
         </Switch>
       </ThemeProvider>
