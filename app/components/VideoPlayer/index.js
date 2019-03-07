@@ -6,7 +6,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
-import { Player, ControlBar, Shortcut, BigPlayButton } from 'video-react';
+import { BigPlayButton, ControlBar, Player, Shortcut } from 'video-react';
 import 'video-react/dist/video-react.css'; // import css
 
 import GlobalStyle from '../../global-styles';
