@@ -2,19 +2,17 @@
  * Test sagas
  */
 
-import { call, fork, put, take } from 'redux-saga/effects';
+import { all, call, put, take } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
 import sinon from 'sinon';
 import ReactGA from 'react-ga';
 
 import { establishmentLoaded, establishmentLoadingError } from '../actions';
-import loaderPage, {
-  getEstablishmentEffect,
-  fetchAllEffect,
-  getDiscountEffect,
-  postConnectionEffect,
-} from '../saga';
-import { POST_CONNECTION_SUCCESS } from '../constants';
+import loaderPage, { getEstablishmentEffect, fetchAllEffect } from '../saga';
+import {
+  POST_CONNECTION_SUCCESS,
+  LOADERPAGE_ANIMATIONS_SUCCESS,
+} from '../constants';
 
 // const generator = loaderPageSaga();
 
@@ -52,45 +50,16 @@ describe('loaderPageSaga Saga', () => {
 
   it('should call fetchAllEffect', () => {
     const callDescriptor = loaderPageSagaGen.next().value;
-    const expectedResult = call(fetchAllEffect);
+    const expectedResult = all([
+      take(LOADERPAGE_ANIMATIONS_SUCCESS),
+      call(fetchAllEffect),
+    ]);
     expect(callDescriptor).toEqual(expectedResult);
   });
   describe('fetchAllEffect', () => {
     const fetchAllEffectGen = cloneableGenerator(fetchAllEffect)();
     sinon.stub(ReactGA);
-    it('should fork getEstablishmentEffect', () => {
-      const descriptor = fetchAllEffectGen.next().value;
-      const expectedResult = fork(getEstablishmentEffect);
-      expect(descriptor).toEqual(expectedResult);
-    });
-    describe('getEstablishmentEffect', () => {
-      // const getEstablishmentEffectGen = cloneableGenerator(
-      // getEstablishmentEffect,
-      // )();
-      it('should call getEstablishmentRequest', () => {});
-      it('should put establishmentLoaded if request is successful', () => {});
-      it('should put establishmentLoadingError if request failed', () => {});
-    });
-    it('should fork getDiscountEffect', () => {
-      const descriptor = fetchAllEffectGen.next().value;
-      const expectedResult = fork(getDiscountEffect);
-      expect(descriptor).toEqual(expectedResult);
-    });
-    describe('getDiscountEffect', () => {
-      it('should call getDiscountRequest', () => {});
-      it('should put discountLoaded if request is successful', () => {});
-      it('should put discountLoadingError if request failed', () => {});
-    });
-    it('should fork postConnectionEffect', () => {
-      const descriptor = fetchAllEffectGen.next().value;
-      const expectedResult = fork(postConnectionEffect);
-      expect(descriptor).toEqual(expectedResult);
-    });
-    describe('postConnectionEffect', () => {
-      it('should call postConnectionRequest', () => {});
-      it('should put connectionPosted if request is successful', () => {});
-      it('should put connectionPostingError if request failed', () => {});
-    });
+    fetchAllEffectGen.next();
     it('should wait for POST_CONNECTION_SUCCESS', () => {
       const descriptor = fetchAllEffectGen.next().value;
       const expectedResult = take(POST_CONNECTION_SUCCESS);
