@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import JourneyMocks from './JourneyMocks';
+import LoaderPageMock from './LoaderPageMock';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Mocks extends React.Component {
@@ -22,6 +23,7 @@ export class Mocks extends React.Component {
           path="/mocks/journey/:type/:sample"
           component={JourneyMocks}
         />
+        <Route exact path="/mocks/loaderpage" component={LoaderPageMock} />
       </React.Fragment>
     );
   }

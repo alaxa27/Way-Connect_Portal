@@ -9,6 +9,7 @@ import {
   GET_ESTABLISHMENT,
   GET_ESTABLISHMENT_SUCCESS,
   GET_ESTABLISHMENT_ERROR,
+  LOADERPAGE_ANIMATIONS_SUCCESS,
   POST_CONNECTION,
   POST_CONNECTION_SUCCESS,
   POST_CONNECTION_ERROR,
@@ -26,6 +27,12 @@ export function defaultAction() {
 export function loadEstablishment() {
   return {
     type: GET_ESTABLISHMENT,
+  };
+}
+
+export function animationsCompleted() {
+  return {
+    type: LOADERPAGE_ANIMATIONS_SUCCESS,
   };
 }
 
