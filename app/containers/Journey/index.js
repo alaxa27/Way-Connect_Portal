@@ -74,6 +74,25 @@ export class Journey extends React.Component {
       this.changeIndex(this.props.match.params.id);
       this.deactivateFooter();
     }
+    if (prevProps.currentJourneyItem !== this.props.currentJourneyItem) {
+      switch (this.props.currentJourneyItem.toJS().type) {
+        case 'F':
+          this.activateFooter();
+          break;
+        case 'S':
+          // Go to the next journeyItem after n secs
+          this.goToNextJourneyItem(5);
+          this.activateFooter();
+          break;
+        case 'B':
+          // Go to the next journeyItem after n secs
+          this.goToNextJourneyItem(5);
+          this.activateFooter();
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   changeIndex(index) {
@@ -161,7 +180,6 @@ export class Journey extends React.Component {
         case 'Q':
           return <Question onValid={this.validateAnswer} {...item.question} />;
         case 'F':
-          if (!this.state.footerActive) this.activateFooter();
           return <Fidelity {...item.fidelity} onActiveClick={() => {}} />;
         case 'C':
           return (
@@ -174,18 +192,8 @@ export class Journey extends React.Component {
             />
           );
         case 'S':
-          if (!this.state.footerActive) {
-            this.activateFooter();
-            // Go to the next journeyItem after n secs
-            this.goToNextJourneyItem(5);
-          }
           return <CustomerService {...item.customer_service} />;
         case 'B':
-          if (!this.state.footerActive) {
-            this.activateFooter();
-            // Go to the next journeyItem after n secs
-            this.goToNextJourneyItem(5);
-          }
           return <Banner {...item.banner} />;
         case 'END':
           return <Loading />;

@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import _ from 'underscore';
 
-import { BounceIn, RotateIn, SlideInUp } from 'components/Animations';
+import { RotateIn, SlideInUp, ZoomIn } from 'components/Animations';
 import rightArrow from 'images/right-arrow_footer.png';
 import leftArrow from 'images/left-arrow_footer.png';
 
@@ -29,6 +29,7 @@ class Footer extends React.Component {
 
     this.state = {
       pageEntered: false,
+      zoomInEntered: false,
     };
 
     this.showNextDot = this.showNextDot.bind(this);
@@ -48,15 +49,12 @@ class Footer extends React.Component {
 
   renderBack() {
     const { index } = this.props;
-    const { pageEntered } = this.state;
 
     if (index !== 0) {
       return (
         <Link to={`/journey/${index - 1}`}>
           <ArrowWrapper transparent>
-            <RotateIn direction="left" in={pageEntered}>
-              <Arrow src={leftArrow} />
-            </RotateIn>
+            <Arrow src={leftArrow} />
           </ArrowWrapper>
         </Link>
       );
@@ -66,25 +64,39 @@ class Footer extends React.Component {
 
   renderNext() {
     const { index, number, active, countDown } = this.props;
-    const { pageEntered, showDot } = this.state;
+    const { pageEntered, showDot, zoomInEntered } = this.state;
 
     return (
       <React.Fragment>
         <DotsWrapper>
           {_.times(number, i => (
-            <SlideInUp in={showDot >= i} key={i}>
+            <SlideInUp
+              in={showDot >= i}
+              key={i}
+              timeout={1000}
+              style={{ opacity: showDot < i ? '0' : null }}
+            >
               <Dot key={i} passed={i < index} active={i === index} />
             </SlideInUp>
           ))}
         </DotsWrapper>
-        <ActivableLink active={active} to={`/journey/${index + 1}`}>
-          <BounceIn in={pageEntered}>
+        <ActivableLink
+          active={active && zoomInEntered}
+          to={`/journey/${index + 1}`}
+        >
+          <ZoomIn
+            in={pageEntered}
+            onEntered={() => {
+              this.setState({ zoomInEntered: true });
+            }}
+            timeout={1000}
+          >
             <ArrowWrapper active={active}>
-              <RotateIn in={pageEntered}>
+              <RotateIn in={pageEntered} timeout={1000}>
                 {this.renderCountDown(countDown) || <Arrow src={rightArrow} />}
               </RotateIn>
             </ArrowWrapper>
-          </BounceIn>
+          </ZoomIn>
         </ActivableLink>
       </React.Fragment>
     );
@@ -98,9 +110,12 @@ class Footer extends React.Component {
   }
 
   render() {
+    const { index } = this.props;
     return (
       <FooterWrapper>
-        {this.renderBack()}
+        <RotateIn direction="left" in={index === 1} timeout={1000}>
+          {this.renderBack()}
+        </RotateIn>
         {this.renderNext()}
       </FooterWrapper>
     );

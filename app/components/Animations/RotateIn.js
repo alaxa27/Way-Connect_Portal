@@ -32,7 +32,7 @@ const RotateIn = transition.div`
   animation: ${props =>
     props.direction === 'left'
       ? RotateInAnimationLeft
-      : RotateInAnimationRight} 1s forward;
+      : RotateInAnimationRight} 1s forwards;
 }
 `;
 

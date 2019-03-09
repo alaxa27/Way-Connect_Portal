@@ -35,7 +35,7 @@ import configureStore from './configureStore';
 import { translationMessages } from './i18n';
 
 // Initialize Google Analytics
-ReactGA.initialize('UA-122476296-2', { debug: true });
+ReactGA.initialize('UA-122476296-2', { debug: false });
 history.listen(location => ReactGA.pageview(location.pathname));
 
 // Create redux store with history

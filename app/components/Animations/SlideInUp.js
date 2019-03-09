@@ -15,7 +15,6 @@ const slideInUpAnimation = keyframes`
 `;
 
 const SlideInUp = transition.div`
-  opacity: 0.01;
   &:enter { 
     animation: ${slideInUpAnimation} 1s forwards;
   }

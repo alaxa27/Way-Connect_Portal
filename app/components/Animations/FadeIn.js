@@ -1,11 +1,9 @@
-// import { keyframes } from 'styled-components';
+import React from 'react';
+// import styled, { keyframes } from 'styled-components';
 // import PropTypes from 'prop-types';
 import transition from 'styled-transition-group';
 
-const FadeIn = transition.div.attrs({
-  timeout: 1000,
-})`
-  opacity: 0;
+const FadeIn = transition.div`
   &:enter { 
     opacity: 0.01;
   }
@@ -14,7 +12,10 @@ const FadeIn = transition.div.attrs({
     transition: opacity 1s ease-in;
   }
 `;
+const FadeInTimeout = props => (
+  <FadeIn {...props} timeout={1000} style={{ opacity: props.in ? null : '0' }}>
+    {props.children}
+  </FadeIn>
+);
 
-FadeIn.propTypes = {};
-
-export default FadeIn;
+export default FadeInTimeout;

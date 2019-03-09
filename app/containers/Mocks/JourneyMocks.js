@@ -202,7 +202,7 @@ const JourneyMocks = props => {
   return (
     <JourneyWrapper>
       <JourneyItem>{renderJourneyItem(type, sample)}</JourneyItem>
-      <Footer index={1} number={4} countDown={0} />
+      <Footer active index={0} number={4} countDown={0} />
     </JourneyWrapper>
   );
 };

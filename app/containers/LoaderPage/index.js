@@ -73,7 +73,7 @@ export class LoaderPage extends React.Component {
         </WayConnectWrapper>
         <FadeIn
           in={showIndex > 3 && establishmentName.length > 0}
-          timeout={1000}
+          timeout={100}
           onEntered={this.props.animationsCompleted}
         >
           <WelcomeMessage>
