@@ -1,3 +1,5 @@
+const esModules = ['video-react'].join('|');
+
 module.exports = {
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',
@@ -24,5 +26,6 @@ module.exports = {
   setupTestFrameworkScriptFile: '<rootDir>/internals/testing/test-bundler.js',
   setupFiles: ['raf/polyfill', '<rootDir>/internals/testing/enzyme-setup.js'],
   testRegex: 'tests/.*\\.test\\.js$',
+  transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };
