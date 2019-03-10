@@ -7,6 +7,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 import { createStructuredSelector } from 'reselect';
@@ -207,17 +208,16 @@ export class Journey extends React.Component {
   }
 
   render() {
-    const { currentJourneyItem, journeySize } = this.props;
+    const { currentJourneyItem, journeySize, location } = this.props;
     const { countDown, footerActive, index } = this.state;
     return (
       <JourneyWrapper>
         <JourneyItem>
           <TransitionGroup>
             <PageSlide
-              unmountOnExit
               key={index}
               in={footerActive}
-              timeout={1000}
+              backwards={location.state ? location.state.prev : false}
             >
               {this.renderJourneyItem(currentJourneyItem.toJS())}
             </PageSlide>
@@ -270,4 +270,5 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
+  withRouter,
 )(Journey);

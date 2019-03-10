@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100%;
     max-width: 500px;
     padding: 35px;
+    overflow-x: hidden;
   }
 
   p,

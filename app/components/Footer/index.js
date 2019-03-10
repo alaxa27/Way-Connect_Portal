@@ -52,7 +52,7 @@ class Footer extends React.Component {
 
     if (index !== 0) {
       return (
-        <Link to={`/journey/${index - 1}`}>
+        <Link to={{ pathname: `/journey/${index - 1}`, state: { prev: true } }}>
           <ArrowWrapper transparent>
             <Arrow src={leftArrow} />
           </ArrowWrapper>
