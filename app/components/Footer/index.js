@@ -113,7 +113,7 @@ class Footer extends React.Component {
     const { index } = this.props;
     return (
       <FooterWrapper>
-        <RotateIn direction="left" in={index === 1} timeout={1000}>
+        <RotateIn direction="left" in={index > 0} timeout={1000}>
           {this.renderBack()}
         </RotateIn>
         {this.renderNext()}

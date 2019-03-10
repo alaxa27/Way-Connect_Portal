@@ -6,11 +6,13 @@
 
 import React from 'react';
 // import PropTypes from 'prop-types';
+import { TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import { PageSlide } from 'components/Animations';
 import Loading from 'components/Loading';
 import Footer from 'components/Footer';
 import Question from 'components/Question/Loadable';
@@ -210,7 +212,16 @@ export class Journey extends React.Component {
     return (
       <JourneyWrapper>
         <JourneyItem>
-          {this.renderJourneyItem(currentJourneyItem.toJS())}
+          <TransitionGroup>
+            <PageSlide
+              unmountOnExit
+              key={index}
+              in={footerActive}
+              timeout={1000}
+            >
+              {this.renderJourneyItem(currentJourneyItem.toJS())}
+            </PageSlide>
+          </TransitionGroup>
         </JourneyItem>
         <Footer
           active={footerActive}
