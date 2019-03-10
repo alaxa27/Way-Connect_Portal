@@ -216,7 +216,8 @@ export class Journey extends React.Component {
           <TransitionGroup>
             <PageSlide
               key={index}
-              in={footerActive}
+              unmountOnExit
+              mountOnEnter
               backwards={location.state ? location.state.prev : false}
             >
               {this.renderJourneyItem(currentJourneyItem.toJS())}

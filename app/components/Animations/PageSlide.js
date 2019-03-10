@@ -8,6 +8,7 @@ import { SlideInRightAnimation } from './SlideInRight';
 import { SlideOutRightAnimation } from './SlideOutRight';
 
 const PageSlideBackward = transition.div`
+  position: absolute;
   &:enter {
     animation: ${SlideInLeftAnimation} 1s forwards;
   }
@@ -18,6 +19,7 @@ const PageSlideBackward = transition.div`
 `;
 
 const PageSlideForward = transition.div`
+  position: absolute;
   &:enter {
     animation: ${SlideInRightAnimation} 1s forwards;
   }

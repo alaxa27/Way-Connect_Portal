@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 const JourneyItem = styled.div`
-  display: flex;
+  display: inline-block;
+  position: relative;
   flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export default JourneyItem;

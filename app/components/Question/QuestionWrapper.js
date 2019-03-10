@@ -7,7 +7,6 @@ const QuestionWrapper = styled.div`
   > :last-child {
     flex-grow: 1;
     margin-top: 8vh;
-    overflow-y: auto;
   }
 `;
 

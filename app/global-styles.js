@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     background-color: ${props => (props.videoScreen ? '#000000' : '#1A1A1A')};
     min-height: 100%;
-    max-width: 500px;
+    // max-width: 500px;
     padding: 35px;
     overflow-x: hidden;
   }
