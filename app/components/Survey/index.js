@@ -6,9 +6,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TransitionGroup } from 'react-transition-group';
 // import styled from 'styled-components';
 
+import { ModuleSlide } from 'components/Animations';
 import Question from 'components/Question';
+import SurveyWrapper from './SurveyWrapper';
 
 /* eslint-disable react/prefer-stateless-function */
 class Survey extends React.Component {
@@ -18,6 +21,10 @@ class Survey extends React.Component {
     this.state = {
       surveyResult: [],
     };
+
+    this.changeCurrentQuestion = this.changeCurrentQuestion.bind(this);
+    this.goToNextQuestion = this.goToNextQuestion.bind(this);
+    this.validateAnswer = this.validateAnswer.bind(this);
   }
 
   componentDidMount() {
@@ -50,13 +57,24 @@ class Survey extends React.Component {
     if (currentQuestion.children.length > 0) {
       this.goToNextQuestion(answerList);
     } else {
-      this.onLastAnswer(surveyResult);
+      this.props.onLastAnswer(surveyResult);
     }
   }
 
   render() {
     const { currentQuestion } = this.state;
-    return <Question onValid={this.validateAnswer} {...currentQuestion} />;
+    if (currentQuestion) {
+      return (
+        <SurveyWrapper>
+          <TransitionGroup>
+            <ModuleSlide key={currentQuestion.id} unmountOnExit mountEnter>
+              <Question onValid={this.validateAnswer} {...currentQuestion} />
+            </ModuleSlide>
+          </TransitionGroup>
+        </SurveyWrapper>
+      );
+    }
+    return null;
   }
 }
 

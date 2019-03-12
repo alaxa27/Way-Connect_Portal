@@ -6,6 +6,7 @@
 
 import BounceIn from './BounceIn';
 import FadeIn from './FadeIn';
+import ModuleSlide from './ModuleSlide';
 import PageSlide from './PageSlide';
 import RotateIn from './RotateIn';
 import RotateOut from './RotateOut';
@@ -16,6 +17,7 @@ import ZoomIn from './ZoomIn';
 export {
   BounceIn,
   FadeIn,
+  ModuleSlide,
   PageSlide,
   RotateIn,
   RotateOut,

@@ -35,11 +35,11 @@ class Communication extends React.Component {
     return (
       <React.Fragment>
         <CommunicationWrapper>
-          {this.renderCommunication(type)}
           <CommunicationTitle>{`${campaign.company_name} | ${
             campaign.name
           }`}</CommunicationTitle>
           <RedirectionLink {...this.props} />
+          {this.renderCommunication(type)}
         </CommunicationWrapper>
       </React.Fragment>
     );

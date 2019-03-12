@@ -23,14 +23,16 @@ export default function App() {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <Switch>
-          <Route exact path="/" component={LoaderPage} />
-          <Route exact path="/journey/:id" component={Journey} />
-          {production ? null : <Route path="/mocks" component={Mocks} />}
-          <Route component={NotFoundPage} />
-        </Switch>
+        <React.Fragment>
+          <Switch>
+            <Route exact path="/" component={LoaderPage} />
+            <Route exact path="/journey/:id" component={Journey} />
+            {production ? null : <Route path="/mocks" component={Mocks} />}
+            <Route component={NotFoundPage} />
+          </Switch>
+          <GlobalStyle />
+        </React.Fragment>
       </ThemeProvider>
-      <GlobalStyle />
     </React.Fragment>
   );
 }

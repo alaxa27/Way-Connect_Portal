@@ -60,15 +60,17 @@ class VideoPlayer extends React.Component {
     const { video } = this.props;
 
     return (
-      <VideoPlayerWrapper>
-        <Player playsInline preload="auto" ref={this.playerRef}>
-          <BigPlayButton position="center" />
-          <source src={video} />
-          <ControlBar disabled />
-          <Shortcut clickable={false} shortcuts={playerShortcuts} />
-        </Player>
+      <React.Fragment>
+        <VideoPlayerWrapper>
+          <Player playsInline preload="auto" ref={this.playerRef}>
+            <BigPlayButton position="center" />
+            <source src={video} />
+            <ControlBar disabled />
+            <Shortcut clickable={false} shortcuts={playerShortcuts} />
+          </Player>
+        </VideoPlayerWrapper>
         <GlobalStyle videoScreen />
-      </VideoPlayerWrapper>
+      </React.Fragment>
     );
   }
 }

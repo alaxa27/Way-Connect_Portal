@@ -1,4 +1,5 @@
 import { createGlobalStyle, css, keyframes } from 'styled-components';
+import PropTypes from 'prop-types';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -23,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
   #app {
     height: 100%;
     width: 100%;
-    background-color: ${props => (props.videoScreen ? '#000000' : '#1A1A1A')};
+    background-color: ${props => (props.videoScreen ? '#000000' : '#1a1a1a')};
     min-height: 100%;
     // max-width: 500px;
     padding: 35px;
@@ -35,6 +36,14 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5em;
   }
 `;
+
+GlobalStyle.defaultProps = {
+  videoScreen: false,
+};
+
+GlobalStyle.propTypes = {
+  videoScreen: PropTypes.bool,
+};
 
 const theme = {
   transitions: {

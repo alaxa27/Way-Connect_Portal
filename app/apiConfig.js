@@ -7,6 +7,9 @@ if (process.env.NODE_ENV === 'production') {
 
 const axiosInstance = axios.create({
   baseURL: `${backendHost}/portal`,
+  headers: {
+    'X-Customer-Cache': '22:33:44:55:66:77',
+  },
 });
 
 export default axiosInstance;
