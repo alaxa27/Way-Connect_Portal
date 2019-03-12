@@ -20,9 +20,7 @@ describe('<Survey />', () => {
     const currentQuestion = {
       children: [
         {
-          question: {
-            parent_choices: [1, 2],
-          },
+          parent_choices: [1, 2],
         },
       ],
     };
@@ -47,13 +45,14 @@ describe('<Survey />', () => {
   describe('validateAnswer', () => {
     beforeEach(() => {
       instance.goToNextQuestion = jest.fn();
-      instance.onLastAnswer = jest.fn();
     });
     it('should call goToNextQuestion with the correct answerList if not on the last question', () => {
       const currentQuestion = {
-        type: 'A',
-        id: 'b',
         children: [0],
+        question: {
+          type: 'A',
+          id: 'b',
+        },
       };
       wrapper.setState({ currentQuestion });
       instance.validateAnswer([0]);
@@ -62,10 +61,14 @@ describe('<Survey />', () => {
       expect(instance.goToNextQuestion).toBeCalledWith(expectedResponse);
     });
     it('should call onLastAnswer method correctly when on the last question', () => {
+      const onLastAnswerMock = jest.fn();
+      wrapper.setProps({ onLastAnswer: onLastAnswerMock });
       const currentQuestion = {
-        type: 'A',
-        id: 'b',
         children: [],
+        question: {
+          type: 'A',
+          id: 'b',
+        },
       };
       wrapper.setState({ currentQuestion });
       instance.validateAnswer([0]);
@@ -76,7 +79,7 @@ describe('<Survey />', () => {
           answer: [0],
         },
       ];
-      expect(instance.onLastAnswer).toBeCalledWith(expectedResponse);
+      expect(onLastAnswerMock).toBeCalledWith(expectedResponse);
     });
   });
 });

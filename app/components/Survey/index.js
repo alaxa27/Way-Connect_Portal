@@ -20,6 +20,7 @@ class Survey extends React.Component {
 
     this.state = {
       surveyResult: [],
+      currentQuestion: {},
     };
 
     this.changeCurrentQuestion = this.changeCurrentQuestion.bind(this);
@@ -28,8 +29,7 @@ class Survey extends React.Component {
   }
 
   componentDidMount() {
-    const { question } = this.props.survey;
-    this.changeCurrentQuestion(question);
+    this.changeCurrentQuestion(this.props.survey);
   }
 
   changeCurrentQuestion(currentQuestion) {
@@ -40,17 +40,16 @@ class Survey extends React.Component {
     const { children } = this.state.currentQuestion;
     const answer = answerList[0];
     for (let i = 0; i < children.length; i += 1) {
-      const { question } = children[i];
-      if (question.parent_choices.includes(answer))
-        this.changeCurrentQuestion(question);
+      if (children[i].parent_choices.includes(answer))
+        this.changeCurrentQuestion(children[i]);
     }
   }
 
   validateAnswer(answerList) {
     const { currentQuestion, surveyResult } = this.state;
     surveyResult.push({
-      type: currentQuestion.type,
-      id: currentQuestion.id,
+      type: currentQuestion.question.type,
+      id: currentQuestion.question.id,
       answer: answerList,
     });
     this.setState({ surveyResult });
@@ -62,13 +61,13 @@ class Survey extends React.Component {
   }
 
   render() {
-    const { currentQuestion } = this.state;
-    if (currentQuestion) {
+    const { question } = this.state.currentQuestion;
+    if (question) {
       return (
         <SurveyWrapper>
           <TransitionGroup>
-            <ModuleSlide key={currentQuestion.id} unmountOnExit mountEnter>
-              <Question onValid={this.validateAnswer} {...currentQuestion} />
+            <ModuleSlide key={question.id} unmountOnExit mountEnter>
+              <Question onValid={this.validateAnswer} {...question} />
             </ModuleSlide>
           </TransitionGroup>
         </SurveyWrapper>

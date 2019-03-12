@@ -106,64 +106,61 @@ const sampleData = {
           type: 'CHOICE',
           text: 'What is your gender?',
           choices: [{ id: 1, text: 'Male' }, { id: 2, text: 'Female' }],
-          parent_choices: [],
-          children: [
-            {
-              question: {
-                id: '84ab0cb60d7e47fab16fe28f53e3d149',
-                type: 'CHOICE',
-                text: 'What is your favorite color?',
-                choices: [
-                  { id: 3, text: 'Red' },
-                  { id: 4, text: 'Blue' },
-                  { id: 5, text: 'Green' },
-                ],
-                parent_choices: [1], // question only aimed at males
-                children: [
-                  {
-                    question: {
-                      id: 'd685096836104dabab9e796c1e5823af',
-                      type: 'CHOICE',
-                      text: "Don't you like red?",
-                      choices: [
-                        { id: 6, text: 'Yes I do' },
-                        { id: 7, text: 'No' },
-                      ],
-                      // question only aimed at males whose favorite color is either blue or green
-                      parent_choices: [4, 5],
-                      children: [], // this was the last question
-                    },
-                  },
-                ],
-              },
-            },
-            {
-              question: {
-                id: '2b375b4cc4a54ca78af6ac8709396449',
-                type: 'CHOICE',
-                text: 'Are you a student?',
-                choices: [{ id: 8, text: 'Yes' }, { id: 9, text: 'No' }],
-                parent_choices: [2], // question only aimed at females
-                children: [
-                  {
-                    question: {
-                      id: '1b0a900a77e64efaa44bbeac4aa2311a',
-                      type: 'CHOICE',
-                      text: 'which school are you studying at?',
-                      choices: [
-                        { id: 10, text: 'Harvard' },
-                        { id: 11, text: 'MIT' },
-                        { id: 12, text: 'Stanford' },
-                      ],
-                      parent_choices: [8], // question only aimed at female students
-                      children: [], // this was the last question
-                    },
-                  },
-                ],
-              },
-            },
-          ],
         },
+        parent_choices: [],
+        children: [
+          {
+            question: {
+              id: '84ab0cb60d7e47fab16fe28f53e3d149',
+              type: 'CHOICE',
+              text: 'What is your favorite color?',
+              choices: [
+                { id: 3, text: 'Red' },
+                { id: 4, text: 'Blue' },
+                { id: 5, text: 'Green' },
+              ],
+            },
+            parent_choices: [1], // question only aimed at males
+            children: [
+              {
+                question: {
+                  id: 'd685096836104dabab9e796c1e5823af',
+                  type: 'CHOICE',
+                  text: "Don't you like red?",
+                  choices: [{ id: 6, text: 'Yes I do' }, { id: 7, text: 'No' }],
+                },
+                // question only aimed at males whose favorite color is either blue or green
+                parent_choices: [4, 5],
+                children: [], // this was the last question
+              },
+            ],
+          },
+          {
+            question: {
+              id: '2b375b4cc4a54ca78af6ac8709396449',
+              type: 'CHOICE',
+              text: 'Are you a student?',
+              choices: [{ id: 8, text: 'Yes' }, { id: 9, text: 'No' }],
+            },
+            parent_choices: [2], // question only aimed at females
+            children: [
+              {
+                question: {
+                  id: '1b0a900a77e64efaa44bbeac4aa2311a',
+                  type: 'CHOICE',
+                  text: 'which school are you studying at?',
+                  choices: [
+                    { id: 10, text: 'Harvard' },
+                    { id: 11, text: 'MIT' },
+                    { id: 12, text: 'Stanford' },
+                  ],
+                },
+                parent_choices: [8], // question only aimed at female students
+                children: [], // this was the last question
+              },
+            ],
+          },
+        ],
       },
     },
   },

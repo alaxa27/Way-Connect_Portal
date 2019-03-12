@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 import transition from 'styled-transition-group';
 
@@ -8,7 +9,6 @@ import { SlideInRightAnimation } from './SlideInRight';
 import { SlideOutRightAnimation } from './SlideOutRight';
 
 const PageSlideBackward = transition.div`
-  position: absolute;
   &:enter {
     animation: ${SlideInLeftAnimation} 1s forwards;
   }
@@ -19,7 +19,6 @@ const PageSlideBackward = transition.div`
 `;
 
 const PageSlideForward = transition.div`
-  position: absolute;
   &:enter {
     animation: ${SlideInRightAnimation} 1s forwards;
   }
@@ -40,4 +39,9 @@ const PageSlide = props =>
     </PageSlideForward>
   );
 
-export default PageSlide;
+const PageSlideStyled = styled(PageSlide)`
+  width: 100%;
+  position: absolute;
+`;
+
+export default PageSlideStyled;

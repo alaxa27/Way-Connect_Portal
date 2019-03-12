@@ -125,7 +125,7 @@ export function* authenticateEffect() {
 
 export function* answerSurveyEffect() {
   const surveyResultSelector = makeSelectSurveyResult();
-  const result = surveyResultSelector();
+  const result = yield select(surveyResultSelector);
   yield all(
     result.map(res => call(answerQuestionEffect, res.id, res.type, res.answer)),
   );

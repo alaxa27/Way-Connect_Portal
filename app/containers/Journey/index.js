@@ -62,6 +62,7 @@ export class Journey extends React.Component {
     this.deactivateFooter = this.deactivateFooter.bind(this);
     this.validateAnswer = this.validateAnswer.bind(this);
     this.onCommunicationProgress = this.onCommunicationProgress.bind(this);
+    this.onSurveyLastAnswer = this.onSurveyLastAnswer.bind(this);
   }
 
   componentDidMount() {

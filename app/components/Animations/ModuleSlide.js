@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 import transition from 'styled-transition-group';
 
@@ -8,8 +9,6 @@ import { SlideInUpAnimation } from './SlideInUp';
 import { SlideOutUpAnimation } from './SlideOutUp';
 
 const ModuleSlideBackward = transition.div`
-  position: absolute;
-  width: 100%;
   &:enter {
     animation: ${SlideInUpAnimation} 1s forwards;
   }
@@ -20,8 +19,6 @@ const ModuleSlideBackward = transition.div`
 `;
 
 const ModuleSlideForward = transition.div`
-  position: absolute;
-  width: 100%;
   &:enter {
     animation: ${SlideInDownAnimation} 1s forwards;
   }
@@ -42,4 +39,9 @@ const ModuleSlide = props =>
     </ModuleSlideForward>
   );
 
-export default ModuleSlide;
+const ModuleSlideStyled = styled(ModuleSlide)`
+  width: 100%;
+  position: absolute;
+`;
+
+export default ModuleSlideStyled;
