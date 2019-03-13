@@ -14,6 +14,7 @@ import ReactGA from 'react-ga';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
+  changeID,
   journeyCompleted,
   journeyCompletionError,
   communicationAcknowledged,
@@ -285,7 +286,8 @@ export function* goToNextJourneyItemEffect() {
   const currentID = yield select(currentIDSelector);
   const nextID = currentID + 1;
 
-  yield put(push(`/journey/${nextID}`));
+  yield all([put(push(`/journey/${nextID}`)), put(changeID(nextID))]);
+  // yield put(push(`/journey/${nextID}`));
 }
 
 // Individual exports for testing

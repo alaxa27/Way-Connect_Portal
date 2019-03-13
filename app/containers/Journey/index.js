@@ -6,14 +6,12 @@
 
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { TransitionGroup } from 'react-transition-group';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import { PageSlide } from 'components/Animations';
 import Loading from 'components/Loading';
 import Footer from 'components/Footer';
 import Question from 'components/Question/Loadable';
@@ -208,20 +206,12 @@ export class Journey extends React.Component {
   }
 
   render() {
-    const { currentJourneyItem, journeySize, location } = this.props;
+    const { currentJourneyItem, journeySize } = this.props;
     const { countDown, footerActive, index } = this.state;
     return (
       <JourneyWrapper>
         <JourneyItem>
-          <TransitionGroup>
-            <PageSlide
-              key={index}
-              unmountOnExit
-              backwards={location.state ? location.state.prev : false}
-            >
-              {this.renderJourneyItem(currentJourneyItem.toJS())}
-            </PageSlide>
-          </TransitionGroup>
+          {this.renderJourneyItem(currentJourneyItem.toJS())}
         </JourneyItem>
         <Footer
           active={footerActive}
