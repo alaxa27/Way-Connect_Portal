@@ -36,7 +36,8 @@ class QuestionChoice extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.answers !== this.state.answers) {
       if (this.isValid()) {
-        this.props.onValid(this.state.answers);
+        const { id } = this.props;
+        this.props.onValid(this.state.answers, id);
       }
     }
   }
@@ -124,6 +125,7 @@ QuestionChoice.defaultProps = {
 };
 
 QuestionChoice.propTypes = {
+  id: PropTypes.string.isRequired,
   multiple: PropTypes.bool,
   defaultAnswers: PropTypes.array,
   choices: PropTypes.array.isRequired,

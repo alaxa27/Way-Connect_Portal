@@ -11,7 +11,6 @@ import {
 import { push } from 'connected-react-router';
 import ReactGA from 'react-ga';
 
-import { makeSelectPrev } from 'containers/App/selectors';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
@@ -24,7 +23,6 @@ import {
   questionAnswered,
   answeringQuestionError,
   changeCurrentJourneyItem,
-  changeID,
 } from './actions';
 import {
   makeSelectJourneyItem,
@@ -196,11 +194,6 @@ export function* handleCurrentEffect(journeyItem) {
 }
 
 export function* handlePreviousEffect(journeyItem) {
-  // Quit if going back
-  const prevSelector = makeSelectPrev();
-  const prev = yield select(prevSelector);
-  if (prev) return null;
-
   switch (journeyItem.type) {
     case 'Q':
       yield call(
@@ -281,10 +274,9 @@ export function* journeyIDChangedEffect() {
   const previousJourneyItem = yield select(previousJourneyItemSelector);
 
   yield put(changeCurrentJourneyItem(currentJourneyItem));
-  yield all([
-    call(handlePreviousEffect, previousJourneyItem.toJS()),
-    call(handleCurrentEffect, currentJourneyItem.toJS()),
-  ]);
+  if (previousID < currentID)
+    yield fork(handlePreviousEffect, previousJourneyItem.toJS());
+  yield fork(handleCurrentEffect, currentJourneyItem.toJS());
 }
 
 export function* goToNextJourneyItemEffect() {
@@ -293,7 +285,7 @@ export function* goToNextJourneyItemEffect() {
   const currentID = yield select(currentIDSelector);
   const nextID = currentID + 1;
 
-  yield all([put(changeID(nextID)), put(push(`/journey/${nextID}`))]);
+  yield put(push(`/journey/${nextID}`));
 }
 
 // Individual exports for testing

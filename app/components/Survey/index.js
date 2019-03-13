@@ -67,7 +67,11 @@ class Survey extends React.Component {
         <SurveyWrapper>
           <TransitionGroup>
             <ModuleSlide key={question.id} unmountOnExit mountEnter>
-              <Question onValid={this.validateAnswer} {...question} />
+              <Question
+                key={question.id}
+                onValid={this.validateAnswer}
+                {...question}
+              />
             </ModuleSlide>
           </TransitionGroup>
         </SurveyWrapper>

@@ -132,9 +132,8 @@ export class Journey extends React.Component {
     this.setState({ journeyItemStartTime: Date.now() });
   }
 
-  validateAnswer(defaultAnswers) {
-    const question = this.props.currentJourneyItem.get('question');
-    this.props.changeDefaultAnswersList(defaultAnswers, question.get('id'));
+  validateAnswer(defaultAnswers, id) {
+    this.props.changeDefaultAnswersList(defaultAnswers, id);
     // Google Analytics : Time spent rendering and aswering question
     ReactGA.timing({
       category: 'Journey',
@@ -218,7 +217,6 @@ export class Journey extends React.Component {
             <PageSlide
               key={index}
               unmountOnExit
-              mountOnEnter
               backwards={location.state ? location.state.prev : false}
             >
               {this.renderJourneyItem(currentJourneyItem.toJS())}
