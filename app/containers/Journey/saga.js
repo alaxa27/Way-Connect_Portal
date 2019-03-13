@@ -11,6 +11,7 @@ import {
 import { push } from 'connected-react-router';
 import ReactGA from 'react-ga';
 
+import { makeSelectPrev } from 'containers/App/selectors';
 import { getDiscountEffect } from 'containers/LoaderPage/saga';
 import axiosInstance from '../../apiConfig';
 import {
@@ -195,6 +196,11 @@ export function* handleCurrentEffect(journeyItem) {
 }
 
 export function* handlePreviousEffect(journeyItem) {
+  // Quit if going back
+  const prevSelector = makeSelectPrev();
+  const prev = yield select(prevSelector);
+  if (prev) return null;
+
   switch (journeyItem.type) {
     case 'Q':
       yield call(

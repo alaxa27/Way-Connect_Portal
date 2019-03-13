@@ -7,4 +7,12 @@ const makeSelectLocation = () =>
     routerState.get('location').toJS(),
   );
 
-export { makeSelectLocation };
+const makeSelectPrev = () => {
+  const locationSelector = makeSelectLocation();
+  return createSelector(
+    locationSelector,
+    location => (location.state ? location.state.prev : false),
+  );
+};
+
+export { makeSelectLocation, makeSelectPrev };
