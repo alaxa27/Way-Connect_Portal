@@ -40,9 +40,12 @@ class Survey extends React.Component {
     const { children } = this.state.currentQuestion;
     const answer = answerList[0];
     for (let i = 0; i < children.length; i += 1) {
-      if (children[i].parent_choices.includes(answer))
+      if (children[i].parent_choices.includes(answer)) {
         this.changeCurrentQuestion(children[i]);
+        return true;
+      }
     }
+    return false;
   }
 
   validateAnswer(answerList) {
@@ -54,9 +57,8 @@ class Survey extends React.Component {
     });
     this.setState({ surveyResult });
     if (currentQuestion.children.length > 0) {
-      this.goToNextQuestion(answerList);
-    } else {
-      this.props.onLastAnswer(surveyResult);
+      if (!this.goToNextQuestion(answerList))
+        this.props.onLastAnswer(surveyResult);
     }
   }
 

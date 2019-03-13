@@ -43,8 +43,10 @@ describe('<Survey />', () => {
   });
 
   describe('validateAnswer', () => {
+    const onLastAnswerMock = jest.fn();
     beforeEach(() => {
       instance.goToNextQuestion = jest.fn();
+      wrapper.setProps({ onLastAnswer: onLastAnswerMock });
     });
     it('should call goToNextQuestion with the correct answerList if not on the last question', () => {
       const currentQuestion = {
@@ -61,10 +63,12 @@ describe('<Survey />', () => {
       expect(instance.goToNextQuestion).toBeCalledWith(expectedResponse);
     });
     it('should call onLastAnswer method correctly when on the last question', () => {
-      const onLastAnswerMock = jest.fn();
-      wrapper.setProps({ onLastAnswer: onLastAnswerMock });
       const currentQuestion = {
-        children: [],
+        children: [
+          {
+            parent_choices: [1, 2],
+          },
+        ],
         question: {
           type: 'A',
           id: 'b',
