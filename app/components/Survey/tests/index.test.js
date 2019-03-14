@@ -43,8 +43,10 @@ describe('<Survey />', () => {
   });
 
   describe('validateAnswer', () => {
-    const onLastAnswerMock = jest.fn();
+    let onLastAnswerMock;
+
     beforeEach(() => {
+      onLastAnswerMock = jest.fn();
       instance.goToNextQuestion = jest.fn();
       wrapper.setProps({ onLastAnswer: onLastAnswerMock });
     });
@@ -83,6 +85,27 @@ describe('<Survey />', () => {
           answer: [0],
         },
       ];
+      expect(onLastAnswerMock).toBeCalledWith(expectedResponse);
+    });
+    it('should call onLastAnswer method if the question has no children', () => {
+      const currentQuestion = {
+        children: [],
+        question: {
+          type: 'A',
+          id: 'a',
+        },
+      };
+
+      wrapper.setState({ currentQuestion });
+      instance.validateAnswer([0]);
+      const expectedResponse = [
+        {
+          type: 'A',
+          id: 'a',
+          answer: [0],
+        },
+      ];
+
       expect(onLastAnswerMock).toBeCalledWith(expectedResponse);
     });
   });

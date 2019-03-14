@@ -56,10 +56,8 @@ class Survey extends React.Component {
       answer: answerList,
     });
     this.setState({ surveyResult });
-    if (currentQuestion.children.length > 0) {
-      if (!this.goToNextQuestion(answerList))
-        this.props.onLastAnswer(surveyResult);
-    }
+    if (!this.goToNextQuestion(answerList))
+      this.props.onLastAnswer(surveyResult);
   }
 
   render() {
