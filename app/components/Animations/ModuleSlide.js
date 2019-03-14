@@ -20,11 +20,23 @@ const ModuleSlideBackward = transition.div`
 
 const ModuleSlideForward = transition.div`
   &:enter {
+    opacity: 0.01;
     animation: ${SlideInDownAnimation} 1s forwards;
+  }
+
+  &:enter-active {
+    opacity: 1;
+    transition: opacity 1s ease-in;
   }
   
   &:exit {
+    opacity: 1;
     animation: ${SlideOutDownAnimation} 1s forwards;
+  }
+
+  &:exit-active {
+    opacity: 0.01;
+    transition: opacity 1s ease-out;
   }
 `;
 

@@ -7,7 +7,7 @@ const SlideOutDownAnimation = keyframes`
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(0, 100vh, 0);
+    transform: translate3d(0, 100%, 0);
     visibility: hidden;
   }
 `;

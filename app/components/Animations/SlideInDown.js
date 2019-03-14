@@ -4,7 +4,7 @@ import transition from 'styled-transition-group';
 
 const SlideInDownAnimation = keyframes`
   from {
-      transform: translate3d(0, -100vh, 0);
+      transform: translate3d(0, -100%, 0);
       visibility: visible;
    }
    to {
