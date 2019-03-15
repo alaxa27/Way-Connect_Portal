@@ -12,13 +12,13 @@ const SlideInDownAnimation = keyframes`
    }
 `;
 
-const SlideInUp = transition.div`
+const SlideInDown = transition.div`
   &:enter { 
     animation: ${SlideInDownAnimation} 1s forwards;
   }
 `;
 
-SlideInUp.propTypes = {};
+SlideInDown.propTypes = {};
 
-export default SlideInUp;
+export default SlideInDown;
 export { SlideInDownAnimation };
