@@ -12,7 +12,7 @@ import Question from 'components/Question';
 const sampleData = {
   question: {
     choice_unique: {
-      id: 2,
+      id: '123',
       type: 'CHOICE',
       text: 'Multiple foobarbaz ?????',
       multiple: false,
@@ -33,7 +33,7 @@ const sampleData = {
       defaultAnswers: [],
     },
     choice_multiple: {
-      id: 2,
+      id: '123',
       type: 'CHOICE',
       text: 'Multiple foobarbaz ?????',
       multiple: true,
@@ -54,7 +54,7 @@ const sampleData = {
       defaultAnswers: [],
     },
     value_single: {
-      id: 4,
+      id: '123',
       type: 'VALUE',
       text: 'How much?',
       min: 0, // may be null
@@ -63,7 +63,7 @@ const sampleData = {
       defaultAnswers: [],
     },
     value_multiple: {
-      id: 445,
+      id: '123',
       type: 'VALUE_RANGE',
       text: 'How much?',
       min: 1, // may be null
@@ -188,7 +188,7 @@ const renderJourneyItem = (type, sample) => {
     case 'customer_service':
       return <CustomerService {...sampleData.customer_service[sample]} />;
     case 'question':
-      return <Question {...sampleData.question[sample]} />;
+      return <Question {...sampleData.question[sample]} onValid={() => {}} />;
     default:
       return null;
   }

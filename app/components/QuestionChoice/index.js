@@ -9,17 +9,21 @@ import _ from 'underscore';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
-import QuestionChoiceWrapper from './QuestionChoiceWrapper';
+import { FadeIn } from 'components/Animations';
+
 import Choice from './Choice';
 import ChoiceInput from './ChoiceInput';
 import ChoiceLabel from './ChoiceLabel';
+import QuestionChoiceWrapper from './QuestionChoiceWrapper';
 
 /* eslint-disable react/prefer-stateless-function */
 class QuestionChoice extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      showIndex: -1,
+    };
 
     this.initializeAnswers = this.initializeAnswers.bind(this);
     this.answer = this.answer.bind(this);
@@ -31,6 +35,7 @@ class QuestionChoice extends React.Component {
 
   componentDidMount() {
     this.initializeAnswers(this.props.defaultAnswers);
+    this.showNextElement(500, this.props.choices.length);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -91,21 +96,32 @@ class QuestionChoice extends React.Component {
   }
 
   renderChoices(choices, multiple) {
+    const { showIndex } = this.state;
     return _.map(choices, (choice, key) => {
       const active = this.isActive(choice.id);
       return (
-        <Choice
-          active={active}
-          multiple={multiple}
-          key={key}
-          id={choice.id}
-          onChoiceClick={this.answer}
-        >
-          <ChoiceInput active={active} multiple={multiple} />
-          <ChoiceLabel active={active}>{choice.text}</ChoiceLabel>
-        </Choice>
+        <FadeIn key={key} in={showIndex > key} timeout={100}>
+          <Choice
+            active={active}
+            multiple={multiple}
+            key={key}
+            id={choice.id}
+            onChoiceClick={this.answer}
+          >
+            <ChoiceInput active={active} multiple={multiple} />
+            <ChoiceLabel active={active}>{choice.text}</ChoiceLabel>
+          </Choice>
+        </FadeIn>
       );
     });
+  }
+
+  showNextElement(timeout, numElements) {
+    setTimeout(() => {
+      this.setState(prevState => ({ showIndex: prevState.showIndex + 1 }));
+      if (this.state.showIndex < numElements)
+        this.showNextElement(timeout, numElements);
+    }, timeout);
   }
 
   render() {
