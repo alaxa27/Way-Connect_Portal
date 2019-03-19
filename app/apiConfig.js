@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 const axiosInstance = axios.create({
   baseURL: `${backendHost}/portal`,
   headers: {
-    'X-Customer-Mac': '11:11:11:11:FF:FF',
+    'X-Customer-Mac': '11:F1:11:13:FF:FF',
   },
 });
 

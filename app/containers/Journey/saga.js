@@ -127,7 +127,9 @@ export function* answerSurveyEffect() {
   const surveyResultSelector = makeSelectSurveyResult();
   const result = yield select(surveyResultSelector);
   yield all(
-    result.map(res => call(answerQuestionEffect, res.id, res.type, res.answer)),
+    Object.keys(result).map(id =>
+      call(answerQuestionEffect, id, result[id].type, result[id].answer),
+    ),
   );
 }
 

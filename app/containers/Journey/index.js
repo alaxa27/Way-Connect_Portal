@@ -188,6 +188,7 @@ export class Journey extends React.Component {
               {...item.communication}
               onProgress={this.onCommunicationProgress}
               onLastAnswer={this.onSurveyLastAnswer}
+              onNewQuestion={this.deactivateFooter}
               onRedirectionClick={this.props.onRedirectionClick}
               playing
             />

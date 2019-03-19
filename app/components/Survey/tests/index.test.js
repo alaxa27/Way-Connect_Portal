@@ -9,6 +9,7 @@ describe('<Survey />', () => {
     survey: {
       question: {},
     },
+    onNewQuestion: () => {},
   };
   let wrapper;
   let instance;
@@ -78,13 +79,13 @@ describe('<Survey />', () => {
       };
       wrapper.setState({ currentQuestion });
       instance.validateAnswer([0]);
-      const expectedResponse = [
-        {
+      const expectedResponse = {
+        b: {
           type: 'A',
-          id: 'b',
           answer: [0],
         },
-      ];
+      };
+
       expect(onLastAnswerMock).toBeCalledWith(expectedResponse);
     });
     it('should call onLastAnswer method if the question has no children', () => {
@@ -98,13 +99,12 @@ describe('<Survey />', () => {
 
       wrapper.setState({ currentQuestion });
       instance.validateAnswer([0]);
-      const expectedResponse = [
-        {
+      const expectedResponse = {
+        a: {
           type: 'A',
-          id: 'a',
           answer: [0],
         },
-      ];
+      };
 
       expect(onLastAnswerMock).toBeCalledWith(expectedResponse);
     });

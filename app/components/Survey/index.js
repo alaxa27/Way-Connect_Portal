@@ -19,7 +19,7 @@ class Survey extends React.Component {
     super(props);
 
     this.state = {
-      surveyResult: [],
+      surveyResult: {},
       currentQuestion: {},
     };
 
@@ -33,6 +33,7 @@ class Survey extends React.Component {
   }
 
   changeCurrentQuestion(currentQuestion) {
+    this.props.onNewQuestion();
     this.setState({ currentQuestion });
   }
 
@@ -50,11 +51,10 @@ class Survey extends React.Component {
 
   validateAnswer(answerList) {
     const { currentQuestion, surveyResult } = this.state;
-    surveyResult.push({
+    surveyResult[currentQuestion.question.id] = {
       type: currentQuestion.question.type,
-      id: currentQuestion.question.id,
       answer: answerList,
-    });
+    };
     this.setState({ surveyResult });
     if (!this.goToNextQuestion(answerList))
       this.props.onLastAnswer(surveyResult);
@@ -82,10 +82,11 @@ class Survey extends React.Component {
 }
 
 Survey.propTypes = {
+  onNewQuestion: PropTypes.func,
+  onLastAnswer: PropTypes.func,
   survey: PropTypes.shape({
     question: PropTypes.object,
   }),
-  onLastAnswer: PropTypes.func,
 };
 
 export default Survey;
